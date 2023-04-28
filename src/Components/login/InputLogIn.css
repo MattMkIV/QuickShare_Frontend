@@ -5,21 +5,21 @@
 
 /*-------------------  ------------------*/
 .header {
-    color: #007BD4;
     width: 100%;
-    text-align: center;
-    padding-top: 1rem;
+    color: #007BD4;
     font-size: 40px;
+    padding-top: 1rem;
+    text-align: center;
 }
 
 
 .username,
 .password {
+    width: 60%;
     display: flex;
     align-items: flex-end;
-    width: 60%;
-    margin: 20px 20% 0 20% !important;
     color: darkgrey !important;
+    margin: 20px 20% 0 20% !important;
 }
 
 
@@ -27,68 +27,68 @@
 .inputStyle {
     width: 80%;
     margin-left: 10% !important;
-    margin-right: 10% !important;
     margin-top: 20px !important;
+    margin-right: 10% !important;
 }
 
 /*------------------- Forgot password link ------------------*/
 .forgotLink {
-    text-decoration: none;
+    width: 60%;
+    color: #EBDCD4;
     font-size: 15px;
     font-weight: lighter;
-    color: #EBDCD4;
-    width: 60%;
+    text-decoration: none;
+    margin-top: 4px !important;
     margin-left: 10% !important;
     margin-right: 10% !important;
-    margin-top: 4px !important;
 }
 
 .forgotLink:hover {
-    text-decoration: none;
     color: #dac9c3;
+    text-decoration: none;
 }
 
 /*------------------- Create account link ------------------*/
 .createAccountLink {
-    text-decoration: none;
     width: 60%;
     color: #009CF0;
     font-size: 20px;
+    text-decoration: none;
     margin-left: 10% !important;
-    margin-right: 10% !important;
     margin-top: 30px !important;
+    margin-right: 10% !important;
 }
 
 .createAccountLink:hover {
-    text-decoration: none;
     color: #018ad3;
+    text-decoration: none;
 }
 
 /*------------------- Button ------------------*/
 .buttonSubmit {
+    width: 60%;
     font-family: Manrope;
     color: #EBDCD5 !important;
-    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
     font-size: 15px !important;
     font-weight: bold !important;
-    width: 60%;
-    margin: 30px 30% 5% 20% !important;
     padding-top: 15px !important;
-    padding-bottom: 15px !important;
     border-radius: 12px !important;
+    padding-bottom: 15px !important;
+    margin: 30px 30% 5% 20% !important;
     background-color: #10587F !important;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
 }
 
 .buttonGuest {
+    width: 60%;
     font-family: Manrope;
     color: #4F4F4F !important;
-    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
     font-size: 15px !important;
     font-weight: bold !important;
-    width: 60%;
-    margin: 30px 30% 0 20% !important;
     padding-top: 15px !important;
-    padding-bottom: 15px !important;
     border-radius: 12px !important;
+    padding-bottom: 15px !important;
+    margin: 30px 30% 0 20% !important;
     background-color: #EBDCD4 !important;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
 }
