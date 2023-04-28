@@ -46,10 +46,10 @@ function Bar() {
                     ),}}/>
                 </Grid>
                 <Grid item xs={0.5}>
-                    <SettingsIcon className='settingIcon'/>
+                    <SettingsIcon className='settingIcon w3-cell-middle'/>
                 </Grid>
                 <Grid item xs={0.5}>
-                    <Avatar className='avatar'>H</Avatar>
+                    <Avatar className='avatar w3-cell-middle' sx={{backgroundColor: '#FF9636'}}>H</Avatar>
                 </Grid>
             </Grid>
         </>

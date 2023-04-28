@@ -19,7 +19,7 @@ interface Props {
 }
   
 
-function Input (this: any, {firstLabel, secondLabel}: Props) {
+function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
 
       //Variable declaration
       const navigate = useNavigate();
@@ -28,26 +28,26 @@ function Input (this: any, {firstLabel, secondLabel}: Props) {
 
       const CssTextField = styled(TextField)({
           '& label.Mui-focused': {
-            color: '#007BD4',
+            color: '#FF9636',
           },
           '& label': {
-              color: '#007BD4',
+              color: '#FF9636',
           },
           '& .MuiInput-underline': {
-              borderBottomColor: '#007BD4',
+              borderBottomColor: '#FF9636',
           },
           '& .MuiInput-underline:after': {
             borderBottomColor: '#007BD4',
           },
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: '#3b3b3b',
+              borderColor: '#FF9636',
             },
             '&:hover fieldset': {
-              borderColor: 'blue',
+              borderColor: 'darkgrey',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#007BD4',
+              borderColor: '#FF9636',
             },
           },
       });
@@ -63,25 +63,31 @@ function Input (this: any, {firstLabel, secondLabel}: Props) {
           console.log("Username: "+username);
           console.log("Password: "+password);
 
-          if(!isErrorInput) navigate("/");
+          if(!isErrorInput) navigate("/homepage");
           else setErrorInput(true);
       }
 
       return(
           <>
             <Box component="form" onSubmit={handleSubmit}>
-              <Box className="username">
-                  <PersonIcon sx={{ color: '#007BD4', fontSize:50, mr: 1, my: 0.5 }}/>
-                  <CssTextField error={ErrorInput} name="username" fullWidth sx={{input: {color: 'darkgrey'}}} label={firstLabel} variant="outlined"/>
-              </Box>
-              <Box className="password">
-                  <LockIcon sx={{ color: '#007BD4', fontSize:50, mr: 1, my: 0.5 }}/>
-                  <CssTextField error={ErrorInput} name="password" fullWidth type='password' sx={{input: {color: 'darkgrey'}}} label={secondLabel} variant="outlined"/>
-              </Box>
-              <Button className='button' type="submit" variant="contained">Login</Button>
+              <CssTextField className="inputStyle" error={ErrorInput} name="username" sx={{input: {color: 'darkgrey'}}} label={firstLabel} variant="outlined"/>
+             
+              <CssTextField className="inputStyle" error={ErrorInput} name="password" type='password' sx={{input: {color: 'darkgrey'}}} label={secondLabel} variant="outlined"/>
+              <p><a className='forgotLink'>Forgot your password?</a></p>
+              <div className='w3-row'>
+                <div className='w3-col l6'>
+                  <Button className='buttonGuest' type="submit" variant="contained">guest</Button>
+                </div>
+                <div className='w3-col l6'>
+                  <Button className='buttonSubmit' type="submit" variant="contained">Login</Button>
+                </div>
+              </div>
+              
+              
+              <p><a className='createAccountLink'>Create a new account</a></p>
             </Box>
           </>    
       );
 }
 
-export default Input;
+export default InputLogin;

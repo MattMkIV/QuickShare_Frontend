@@ -1,3 +1,4 @@
+/*-------------------  ------------------*/
 .header {
     color: #007BD4;
     width: 100%;
@@ -16,7 +17,57 @@
     color: darkgrey !important;
 }
 
-.button {
-    width: 40%;
+
+
+.inputStyle {
+    width: 60%;
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+    margin-top: 20px !important;
+}
+
+/*------------------- Forgot password link ------------------*/
+.forgotLink {
+    text-decoration: none;
+    color: white;
+    width: 60%;
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+    margin-top: 20px !important;
+}
+
+.forgotLink:hover {
+    text-decoration: none;
+    color: #FF9636;
+}
+
+/*------------------- Create account link ------------------*/
+.createAccountLink {
+    text-decoration: none;
+    color: #009CF0;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px !important;
+}
+
+.createAccountLink:hover {
+    text-decoration: none;
+    color: white;
+}
+
+/*------------------- Button ------------------*/
+.buttonSubmit {
+    width: 60%;
     margin: 30px 30% 0 30% !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    background-color: #10587F !important;
+}
+
+.buttonGuest {
+    width: 60%;
+    margin: 30px 30% 0 30% !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    background-color: #EBDCD4 !important;
 }
