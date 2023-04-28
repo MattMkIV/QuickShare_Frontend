@@ -1,0 +1,25 @@
+.logo {
+    width: 100%;
+}
+
+
+/*------------------- Icon -----------------------*/
+.menuIcon,
+.settingIcon {
+    color: white;
+    font-size: 30px;
+}
+
+.menuIcon {
+    margin-left: 30px;
+}
+
+
+
+/*------------------- SearchBar -----------------------*/
+.searchBar {
+    border-color: white !important;
+    background-color: #525355;
+    color: #C0C0C0 !important;
+    border-radius: 22px !important;
+}

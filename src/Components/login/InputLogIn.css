@@ -1,0 +1,22 @@
+.header {
+    color: #007BD4;
+    width: 100%;
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 40px;
+}
+
+
+.username,
+.password {
+    display: flex;
+    align-items: flex-end;
+    width: 60%;
+    margin: 20px 20% 0 20% !important;
+    color: darkgrey !important;
+}
+
+.button {
+    width: 40%;
+    margin: 30px 30% 0 30% !important;
+}

@@ -1,0 +1,16 @@
+.bottonNew {
+    background-color: #FF9636 !important;
+    padding: 15px 30px 15px 30px !important;
+    width: 80%;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.noPaddingTopBottom {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
