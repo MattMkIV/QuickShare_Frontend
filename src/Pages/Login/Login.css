@@ -2,7 +2,6 @@
 .container_login {
     width: 30rem;
     height: 39rem;
-    /* From https://css.glass */
     border-radius: 22px;
     backdrop-filter: blur(11px);
     background: rgba(14, 14, 14, 0.43);
