@@ -68,6 +68,7 @@
 .buttonSubmit {
     font-family: Manrope;
     color: #EBDCD5 !important;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
     font-size: 15px;
     font-weight: bold;
     width: 60%;
@@ -81,6 +82,7 @@
 .buttonGuest {
     font-family: Manrope;
     color: #4F4F4F !important;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
     font-size: 15px;
     font-weight: bold;
     width: 60%;
