@@ -1,4 +1,4 @@
-.bottonNew {
+.buttonNew {
     background-color: #FF9636 !important;
     padding: 15px 30px 15px 30px !important;
     width: 80%;
@@ -11,6 +11,6 @@
 }
 
 .noPaddingTopBottom {
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
 }

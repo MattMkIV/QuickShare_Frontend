@@ -20,7 +20,7 @@ import { useState } from "react";
 function LeftBar() {
     return(
         <>
-            <Button variant="contained" startIcon={<AddIcon />} className='bottonNew'>
+            <Button variant="contained" startIcon={<AddIcon />} className='buttonNew'>
                 New
             </Button>
             <List sx={{ width: '100%', color:'white', padding: '0px'}}>

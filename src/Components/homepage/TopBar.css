@@ -1,7 +1,8 @@
 .logo {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 175px;
+    margin-left: 15px;
+    margin-right: 5px;
+    margin-top: 11px;
 }
 
 
@@ -10,6 +11,7 @@
 .settingIcon {
     color: white;
     font-size: 30px !important;
+    margin-top: 15px !important;
 }
 
 .menuIcon {
@@ -21,7 +23,7 @@
 /*------------------- SearchBar -----------------------*/
 .searchBar {
     border-color: white !important;
-    background-color: #525355;
+    background-color: #525355 !important;
     color: #C0C0C0 !important;
     border-radius: 22px !important;
 }

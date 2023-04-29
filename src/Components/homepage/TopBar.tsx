@@ -26,7 +26,7 @@ function Bar() {
                 <Grid item xs={0.5}>
                     <MenuIcon sx={{color:'white', fontSize: '30px'}} className='menuIcon' onClick={openMenu}/>
                 </Grid>
-                <Grid item xs={2.5}>
+                <Grid item xs={2}>
                     <img src="logo.png" className="logo"/>
                 </Grid>
                 <Grid item xs={8}>
@@ -37,7 +37,7 @@ function Bar() {
                     className='searchBar'
                     value={searchTerm}
                     onClick={handleChange}
-                    sx={{ width: 600 , color: 'white'}}
+                    sx={{ width: 600}}
                     InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
@@ -49,7 +49,7 @@ function Bar() {
                     <SettingsIcon className='settingIcon w3-cell-middle'/>
                 </Grid>
                 <Grid item xs={0.5}>
-                    <Avatar className='avatar w3-cell-middle' sx={{backgroundColor: '#FF9636'}}>H</Avatar>
+                    <Avatar className='avatar w3-cell-middle' sx={{backgroundColor: '#008fdb'}}>M</Avatar>
                 </Grid>
             </Grid>
         </>
