@@ -1,15 +1,13 @@
 //MUI
 //Componenti
-import InputLogin from '../../Components/login/InputLogIn';
 //CSS
-import './Login.css'
 //JS
 //Other
 import { useNavigate } from "react-router-dom";
 
 
 
-function Login() {
+function ForgotPassword() {
     //Variable declaration
     const navigate = useNavigate();
 
@@ -18,12 +16,11 @@ function Login() {
             <div className="container_login w3-display-middle">
                 <img src="logo.png" className='logoLogin'/>
                 <hr className='line'></hr>
-                <h1 className='title'>Login</h1>
-                <InputLogin firstLabel={"Username"} secondLabel={"Password"}/>
-                <p><a className='createAccountLink' onClick={() => navigate("/signUp")}>Create a new account</a></p>
+                <h1 className='title'>Forgot your password?</h1>
+                <p><a className='registrationLink' onClick={() => navigate("/")}>Return to Login</a></p>
             </div>
         </>
     );
 }
 
-export default Login;
+export default ForgotPassword;

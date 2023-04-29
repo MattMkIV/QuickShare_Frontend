@@ -11,8 +11,10 @@ import './TopBar.css';
 import { useState } from "react";
 
 function Bar() {
+    //Variable declaration
     const [searchTerm, setSearchTerm] = useState("");
 
+    //Functions
     const openMenu = () => {
         alert("Te lo buco sto pallone");
     };
@@ -30,20 +32,14 @@ function Bar() {
                     <img src="logo.png" className="logo"/>
                 </Grid>
                 <Grid item xs={8}>
-                    <TextField
-                    id="search"
-                    type="search"
-                    label="Search"
-                    className='searchBar'
-                    value={searchTerm}
-                    onClick={handleChange}
-                    sx={{ width: 600}}
+                    <TextField id="search" type="search" label="Search" className='searchBar' value={searchTerm} onClick={handleChange} sx={{ width: 600}} 
                     InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="end">
-                        <SearchIcon />
-                        </InputAdornment>
-                    ),}}/>
+                        endAdornment: (
+                            <InputAdornment position="end">
+                            <SearchIcon />
+                            </InputAdornment>
+                        ),
+                    }}/>
                 </Grid>
                 <Grid item xs={0.5}>
                     <SettingsIcon className='settingIcon w3-cell-middle'/>

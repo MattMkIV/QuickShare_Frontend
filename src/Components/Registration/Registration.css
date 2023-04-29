@@ -1,8 +1,3 @@
-@font-face {
-    font-family: Manrope;
-    src: url(Manrope-VariableFont_wght.ttf);
-}
-
 /*------------------- Header ------------------*/
 .header {
     width: 100%;
@@ -12,8 +7,7 @@
     text-align: center;
 }
 
-/*------------------- Input Username e Password ------------------*/
-
+/*------------------- Input ------------------*/
 .username,
 .password {
     width: 60%;
@@ -35,6 +29,20 @@ textarea {
     margin-left: 10% !important;
     margin-top: 20px !important;
     margin-right: 10% !important;
+}
+
+.inputStyleName,
+.inputStyleSurname {
+    width: 95%;
+    margin-top: 20px !important;
+}
+
+.inputStyleName {
+    margin-right: 5% !important;
+}
+
+.inputStyleSurname {
+    margin-left: 5% !important;
 }
 
 /*------------------- Forgot password link ------------------*/

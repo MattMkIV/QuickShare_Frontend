@@ -1,5 +1,4 @@
 //MUI
-import Grid from '@mui/material/Grid';
 //Componenti
 import Bar from '../../Components/homepage/TopBar';
 import LeftBar from '../../Components/homepage/LeftBar';
@@ -8,13 +7,10 @@ import './Homepage.css'
 //JS
 //Other
 
-
-
 function Homepage() {
 
     return(
         <>  
-            
             <div className='w3-row topRow'>
                 <Bar />
             </div>

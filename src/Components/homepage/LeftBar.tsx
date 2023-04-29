@@ -15,7 +15,6 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 //CSS
 import './LeftBar.css';
 //Other
-import { useState } from "react";
 
 function LeftBar() {
     return(
