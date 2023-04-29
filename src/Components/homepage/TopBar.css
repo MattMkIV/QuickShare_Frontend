@@ -1,9 +1,21 @@
 /*------------------- Logo Quickshare -----------------------*/
 .logo {
-    width: 175px;
+    width: 30px;
+    position: absolute;
     margin-left: 15px;
     margin-right: 5px;
-    margin-top: 11px;
+    margin-top: 16.5px;
+}
+
+.siteNameHome {
+    color: #FF5C4D;
+    font-size:25px;
+    margin-top: 12px;
+    text-align: left;
+    margin-left: 53px;
+    font-family: NeonSans;
+    margin-bottom: 1px !important;
+    text-shadow: 0 0 5px #FF5C4DFF !important;
 }
 
 
@@ -21,8 +33,9 @@
 
 /*------------------- SearchBar -----------------------*/
 .searchBar {
-    border-color: white !important;
     background-color: #525355 !important;
     color: #C0C0C0 !important;
     border-radius: 22px !important;
+    margin-left: -20px !important;
+    margin-top: 2px !important;
 }

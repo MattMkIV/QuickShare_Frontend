@@ -8,9 +8,19 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*background-color: #202124;*/
   font-family: 'Manrope';
   background-image: url('../public/backgroundLogin.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Manrope';
+  background-color: #202124;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -29,10 +29,11 @@ function Bar() {
                     <MenuIcon sx={{color:'white', fontSize: '30px'}} className='menuIcon' onClick={openMenu}/>
                 </Grid>
                 <Grid item xs={2}>
-                    <img src="logo.png" className="logo"/>
+                    <img src='LogoHighRes.png' className='logo'/>
+                    <h1 className='siteNameHome'>QUICK.SHARE</h1>
                 </Grid>
                 <Grid item xs={8}>
-                    <TextField id="search" type="search" label="Search" className='searchBar' value={searchTerm} onClick={handleChange} sx={{ width: 600}} 
+                    <TextField id="search" type="search" label="Search" className='searchBar' value={searchTerm} onClick={handleChange} sx={{ width: 600}}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

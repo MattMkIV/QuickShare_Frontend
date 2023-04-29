@@ -9,31 +9,28 @@
     box-shadow: 0 0 50px 13px rgba(0, 0, 0, 0.34);
 }
 
-/*------------------- Logo ------------------*/
-.logoLogin {
-    width: 80%;
-    margin-top: 15px;
-    margin-left: 10%;
-    margin-right: 10%;
+/*------------------- Site Name ------------------*/
+.logoLoginRegistration {
+    position: absolute;
+    width:14% !important;
+    margin-top: 19px !important;
+    margin-left: 35px !important;
 }
 
-.line {
-    width: 80%;
-    margin-top: 1px;
-    margin-left: 10%;
-    margin-right: 10%;
-    border-color: #FF9636;
+.siteNameRegistration {
+    color: #FF5C4D;
+    font-size:50px;
+    margin-top: 12px;
+    text-align: right;
+    font-family: NeonSans;
+    margin-right: 35px !important;
+    margin-bottom: 1px !important;
+    text-shadow: 0 0 5px #FF5C4DFF !important;
 }
 
-/*------------------- Title ------------------*/
-.title {
-    color: white;
-    font-size: 25px;
-    margin-top: 40px;
-    text-align: center;
-    font-weight: bolder;
-    margin-bottom: 10px;
-    font-family: Manrope;
+.logoLoginRegistration,
+.siteNameRegistration:hover {
+    cursor: pointer !important;
 }
 
 /*------------------- Create account link ------------------*/

@@ -19,9 +19,7 @@ import './LeftBar.css';
 function LeftBar() {
     return(
         <>
-            <Button variant="contained" startIcon={<AddIcon />} className='buttonNew'>
-                New
-            </Button>
+            <Button variant="contained" startIcon={<AddIcon />} className='buttonNew'>New</Button>
             <List sx={{ width: '100%', color:'white', padding: '0px'}}>
                 <ListItem className='noPaddingTopBottom'>
                     <ListItemButton>

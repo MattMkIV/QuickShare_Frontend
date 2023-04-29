@@ -3,15 +3,6 @@
     src: url(Manrope-VariableFont_wght.ttf);
 }
 
-/*------------------- Header ------------------*/
-.header {
-    width: 100%;
-    color: #007BD4;
-    font-size: 40px;
-    padding-top: 1rem;
-    text-align: center;
-}
-
 /*------------------- Input Username e Password ------------------*/
 
 .username,
@@ -52,6 +43,7 @@ textarea {
 .forgotLink:hover {
     color: #dac9c3;
     text-decoration: none;
+    cursor: pointer;
 }
 
 /*------------------- Button ------------------*/
@@ -65,7 +57,7 @@ textarea {
     border-radius: 12px !important;
     padding-bottom: 15px !important;
     margin: 10% 10% 20% 20% !important;
-    background-color: #10587F !important;
+    background-color: #ff5c4d !important;
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
 }
 

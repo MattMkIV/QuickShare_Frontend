@@ -7,7 +7,6 @@ import './SignUp.css';
 //Other
 import { useNavigate } from "react-router-dom";
 
-
 function SignUp() {
     //Variable declaration
     const navigate = useNavigate();
@@ -15,11 +14,11 @@ function SignUp() {
     return(
         <>
             <div className="container_login w3-display-middle">
-                <img src="logo.png" className='logoLogin'/>
+                <img onClick={() => navigate("/")} src='LogoHighRes.png' className='logoLoginRegistration'/>
+                <h1 onClick={() => navigate("/")} className='siteNameRegistration'>QUICK.SHARE</h1>
                 <hr className='line'></hr>
-                <h1 className='title'>Create your account</h1>
+                <h1 className='titleBox'>Create your account</h1>
                 <Registration firstLabel={"Name"} secondLabel={"Surname"} thirdLabel={"Email"} fourthLabel={"Password"} fifthLabel={"Confirm Password"}/>
-                <p><a className='registrationLink' onClick={() => navigate("/")}>Return to Login</a></p>
             </div>
         </>
     );

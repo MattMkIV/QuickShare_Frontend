@@ -19,7 +19,7 @@ function Homepage() {
                     <LeftBar/>
                 </div>
                 <div className='w3-col l10 containerCenter'>
-                    <h1 style={{color:'white', textAlign: 'center'}}>Welcome</h1>
+                    <h1 className='mostRecent'>Most recent:</h1>
                 </div>
             </div>
         </>

@@ -79,9 +79,8 @@ function Registration (this: any, {firstLabel, secondLabel, thirdLabel, fourthLa
                   </div>
                   <CssTextField className="inputStyle" type="mail" error={ErrorInput} name="email" sx={{input: {color: 'darkgrey'}}} label={thirdLabel} variant="outlined"/>
                   <CssTextField className="inputStyle" error={ErrorInput} name="password" type='password' sx={{input: {color: 'darkgrey'}}} label={fourthLabel} variant="outlined"/>
-                  <CssTextField className="inputStyle" error={ErrorInput} name="confirmPassword" type='password' sx={{input: {color: 'darkgrey'}}} label={fifthLabel} variant="outlined"/>
 
-                  <Button className='buttonSubmit' type="submit" variant="contained">Register</Button>
+                  <Button className='buttonSignup' type="submit" variant="contained">Signup</Button>
               </Box>
           </>    
       );
