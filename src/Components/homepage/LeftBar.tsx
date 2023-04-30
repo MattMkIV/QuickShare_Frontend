@@ -20,7 +20,7 @@ function LeftBar() {
     return(
         <>
             <Button variant="contained" startIcon={<AddIcon />} className='buttonNew'>New</Button>
-            <List sx={{ width: '100%', color:'white', padding: '0px'}}>
+            <List sx={{ width: '100%', color:'white'}}>
                 <ListItem className='noPaddingTopBottom'>
                     <ListItemButton>
                         <HomeIcon className='icon'/>

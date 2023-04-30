@@ -12,11 +12,12 @@
 }
 
 .containerCenter {
-    height: 100% !important;
-    background-color: #3B3B3B !important;
-    border-radius: 22px 1px 1px 1px;
-    position: absolute !important;
+    height: 92.5% !important;
+    width: 79.5% !important;
     margin-left: 19.8%;
+    background-color: #3B3B3B !important;
+    border-radius: 22px 22px 0 0;
+    position: absolute !important;
 }
 
 .mostRecent {

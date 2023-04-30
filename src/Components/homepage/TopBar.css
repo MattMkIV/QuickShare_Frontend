@@ -10,12 +10,17 @@
 .siteNameHome {
     color: #FF5C4D;
     font-size:25px;
-    margin-top: 12px;
+    margin-top: 13px;
     text-align: left;
-    margin-left: 53px;
+    margin-left: 50px;
     font-family: NeonSans;
     margin-bottom: 1px !important;
     text-shadow: 0 0 5px #FF5C4DFF !important;
+}
+
+.logo:hover,
+.siteNameHome:hover {
+    cursor: pointer;
 }
 
 
@@ -28,14 +33,38 @@
 }
 
 .menuIcon {
-    margin-left: 30px;
+    margin-left: 35px;
+}
+
+/* TODO: sitemare il tasto menù che nel lato destro non è cliccaabile*/
+.menuIcon:hover,
+.settingIcon:hover {
+    cursor: pointer !important;
 }
 
 /*------------------- SearchBar -----------------------*/
+/* TODO: rimuovere il bordo che rimane visibile */
 .searchBar {
     background-color: #525355 !important;
     color: #C0C0C0 !important;
     border-radius: 22px !important;
-    margin-left: -20px !important;
+    margin-left: -17px !important;
     margin-top: 2px !important;
+    border: transparent !important;
+}
+
+/*TODO: rendere l'icona rettangolare con bordi arrotondati*/
+.avatarIcon {
+    margin-top: 10px !important;
+}
+
+.avatarIcon:hover {
+    cursor: pointer;
+}
+
+.lineHomepage {
+    width: 100%;
+    border-color: #545454;
+    position: absolute !important;
+    margin-top: 72px !important;
 }

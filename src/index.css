@@ -4,7 +4,7 @@ body,
   height: 100%;
 }
 
-body {
+/*body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -13,7 +13,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+}*/
 
 body {
   margin: 0;
@@ -24,6 +24,11 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  -moz-user-select: none; /* Firefox */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* Internet Explorer */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 code {
