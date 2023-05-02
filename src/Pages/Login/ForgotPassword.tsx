@@ -50,7 +50,7 @@ function ForgotPassword() {
                 <img onClick={() => navigate("/")} src='LogoHighRes.png' className='logoLoginRegistration'/>
                 <h1 onClick={() => navigate("/")} className='siteNameRegistration'>QUICK.SHARE</h1>
                 <hr className='line'></hr>
-                <h1 className='titleBox'>Enter your Email o username</h1>
+                <h1 className='titleBox'>Enter your Email</h1>
                 <CssTextField className="inputStyle" type="mail" error={ErrorInput} name="email" sx={{input: {color: 'darkgrey'}}} label='Email' variant="outlined"/>
 
                 <Button className='buttonForgotPassword' type="submit" variant="contained">Send Email</Button>
