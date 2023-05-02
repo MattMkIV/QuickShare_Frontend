@@ -16,7 +16,7 @@ function ForgotPassword() {
     //Variable declaration
     const navigate = useNavigate();
     const [ErrorInput, setErrorInput] = useState(false);
-      const CssTextField = styled(TextField)({
+    const CssTextField = styled(TextField)({
           '& label.Mui-focused': {
             color: '#FF9636',
           },
@@ -40,7 +40,9 @@ function ForgotPassword() {
               borderColor: '#FF9636',
             },
           },
-      });
+    });
+
+    document.body.style.backgroundImage = 'url("backgroundLogin.png")';
 
     return(
         <>

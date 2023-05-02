@@ -25,10 +25,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 
-  -moz-user-select: none; /* Firefox */
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* Internet Explorer */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+  -moz-user-select: none;
+  /* Firefox */
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* Internet Explorer */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 code {

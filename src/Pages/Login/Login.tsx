@@ -13,6 +13,12 @@ function Login() {
     //Variable declaration
     const navigate = useNavigate();
 
+    //Function
+
+    //Style
+    //-------- Imposto background --------
+    document.body.style.backgroundImage = 'url("backgroundLogin.png")';
+
     return(
         <>
             <div className="container_login w3-display-middle">

@@ -5,13 +5,15 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from '@mui/icons-material/Settings';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
+//Component
+import Logo from '../logo/Logo';
 //CSS
 import './TopBar.css';
 //Other
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 
-function Bar() {
+function TopBar() {
     //Variable declaration
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
@@ -32,8 +34,9 @@ function Bar() {
                     <MenuIcon sx={{color:'white', fontSize: '30px'}} className='menuIcon' onClick={openMenu}/>
                 </Grid>
                 <Grid item xs={2.1}>
-                    <img src='LogoHighRes.png' className='logo' onClick={() => navigate("/homepage")}/>
-                    <h1 className='siteNameHome' onClick={() => navigate("/homepage")}>QUICK.SHARE</h1>
+                    {/* <img src='LogoHighRes.png' className='logo' onClick={() => navigate("/homepage")}/>
+                    <h1 className='siteNameHome' onClick={() => navigate("/homepage")}>QUICK.SHARE</h1> */}
+                    <Logo navigateHome={true}/>
                 </Grid>
                 <Grid item xs={8.4}>
                     <TextField id="search" type="search" label="Search" className='searchBar' value={searchTerm} onClick={handleChange} sx={{ width: 600}}
@@ -56,4 +59,4 @@ function Bar() {
     );
 }
 
-export default Bar;
+export default TopBar;

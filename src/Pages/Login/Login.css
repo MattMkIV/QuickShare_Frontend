@@ -3,6 +3,17 @@
     src: url(NeonSans.ttf);
 }
 
+/*------------------- Sfondo ------------------*/
+.Sfondo {
+    width: 100% !important;
+    height: 100% !important;
+    background-image: url("../../../public/backgroundLogin.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 /*------------------- Central container ------------------*/
 .container_login {
     width: 30rem;
@@ -17,14 +28,14 @@
 /*------------------- Site Name ------------------*/
 .logoLogin {
     position: absolute;
-    width:14% !important;
+    width: 14% !important;
     margin-top: 19px !important;
     margin-left: 35px !important;
 }
 
 .siteName {
     color: #FF5C4D;
-    font-size:50px;
+    font-size: 50px;
     margin-top: 12px;
     text-align: right;
     font-family: NeonSans;
