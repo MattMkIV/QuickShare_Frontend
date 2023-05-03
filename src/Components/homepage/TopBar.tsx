@@ -29,30 +29,28 @@ function TopBar() {
     return(
         <>
             <hr className='lineHomepage'></hr>
-            <Grid container spacing={0}>
-                <Grid item xs={0.5}>
+            <Grid container>
+                <Grid item>
                     <MenuIcon sx={{color:'white', fontSize: '30px'}} className='menuIcon' onClick={openMenu}/>
                 </Grid>
-                <Grid item xs={2.1}>
-                    {/* <img src='LogoHighRes.png' className='logo' onClick={() => navigate("/homepage")}/>
-                    <h1 className='siteNameHome' onClick={() => navigate("/homepage")}>QUICK.SHARE</h1> */}
+                <Grid item>
                     <Logo navigateHome={true}/>
                 </Grid>
-                <Grid item xs={8.4}>
-                    <TextField id="search" type="search" label="Search" className='searchBar' value={searchTerm} onClick={handleChange} sx={{ width: 600}}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                            <SearchIcon />
-                            </InputAdornment>
-                        ),
-                    }}/>
+                <Grid item xs>
+                    <TextField id="search" type="search" label="Search" className='searchBar' value={searchTerm} onClick={handleChange}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }}/>
                 </Grid>
-                <Grid item xs={0.5}>
+                <Grid item>
                     <SettingsIcon className='settingIcon w3-cell-middle' sx={{color: 'white'}}/>
                 </Grid>
-                <Grid item xs={0.5} className='avatarIcon'>
-                    <Avatar className='avatar w3-cell-middle' sx={{backgroundColor: '#008fdb'}}>M</Avatar>
+                <Grid item>
+                    <Avatar className='avatarIcon w3-display-middle' sx={{backgroundColor: '#008fdb'}}>M</Avatar>
                 </Grid>
             </Grid>
         </>

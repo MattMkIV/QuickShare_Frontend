@@ -14,56 +14,63 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 //CSS
 import './LeftBar.css';
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 //Other
 
 function LeftBar() {
     return(
         <>
-            <Button variant="contained" startIcon={<AddIcon />} className='buttonNew'>New</Button>
-            <List sx={{ width: '100%', color:'white'}}>
-                <ListItem className='noPaddingTopBottom'>
-                    <ListItemButton>
-                        <HomeIcon className='icon'/>
-                        <ListItemText primary="Home" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem className='noPaddingTopBottom'>
-                    <ListItemButton>
-                        <FormatListBulletedIcon className='icon'/>
-                        <ListItemText primary="Lists" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem className='noPaddingTopBottom'>
-                    <ListItemButton>
-                        <ChatIcon className='icon'/>
-                        <ListItemText primary="Chat" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem className='noPaddingTopBottom'>
-                    <ListItemButton>
-                            <AssignmentIcon className='icon'/>
-                        <ListItemText primary="Notes" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem className='noPaddingTopBottom'>
-                    <ListItemButton>
-                            <DateRangeIcon className='icon'/>
-                        <ListItemText primary="Calendar " />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem className='noPaddingTopBottom'>
-                    <ListItemButton>
-                            <UploadFileIcon className='icon'/>
-                        <ListItemText primary="Upload photo" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem className='noPaddingTopBottom'>
-                    <ListItemButton>
-                            <AccountBalanceWalletIcon className='icon'/>
-                        <ListItemText primary="Account balance" />
-                    </ListItemButton>
-                </ListItem>
-            </List>
+            <Grid item className='newButtonGrid'>
+                <Button className='buttonNew' variant="contained" startIcon={<AddIcon />} style={{justifyContent: "flex-start"}}>New</Button>
+            </Grid>
+
+            <Grid container className = 'listClass'>
+                <List sx={{ width: '100%', color:'white'}}>
+                    <ListItem className='noPaddingTopBottom'>
+                        <ListItemButton>
+                            <HomeIcon className='icon'/>
+                            <ListItemText primary="Home" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem className='noPaddingTopBottom'>
+                        <ListItemButton>
+                            <FormatListBulletedIcon className='icon'/>
+                            <ListItemText primary="Lists" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem className='noPaddingTopBottom'>
+                        <ListItemButton>
+                            <ChatIcon className='icon'/>
+                            <ListItemText primary="Chat" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem className='noPaddingTopBottom'>
+                        <ListItemButton>
+                                <AssignmentIcon className='icon'/>
+                            <ListItemText primary="Notes" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem className='noPaddingTopBottom'>
+                        <ListItemButton>
+                                <DateRangeIcon className='icon'/>
+                            <ListItemText primary="Calendar " />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem className='noPaddingTopBottom'>
+                        <ListItemButton>
+                                <UploadFileIcon className='icon'/>
+                            <ListItemText primary="Upload photo" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem className='noPaddingTopBottom'>
+                        <ListItemButton>
+                                <AccountBalanceWalletIcon className='icon'/>
+                            <ListItemText primary="Account balance" />
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+            </Grid>
         </>
     );
 }

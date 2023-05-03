@@ -2,11 +2,14 @@
 //Componenti
 import TopBar from '../../Components/homepage/TopBar';
 import LeftBar from '../../Components/homepage/LeftBar';
+import Paper from "@mui/material/Paper";
 //CSS
 import './Homepage.css'
 //JS
 //Other
 import { useState } from 'react';
+import Grid from "@mui/material/Grid";
+import classes from "*.module.css";
 
 function Homepage() {
 
@@ -21,15 +24,15 @@ function Homepage() {
                 <TopBar/>
             </div>
             <div className='w3-row bottomRow'>
-                <div className='w3-col l2'>
-                    <LeftBar/>
-                </div>
-                <div className='w3-col l10 containerCenter'>
-                    <h1 className='mostRecent'>Most recent:</h1>
-                    <iframe>
-                        
-                    </iframe>
-                </div>
+                <Grid container>
+                    <Grid item>
+                        <LeftBar/>
+                    </Grid>
+
+                    <Grid item xs>
+                        <Paper className='containerCenter'></Paper>
+                    </Grid>
+                </Grid>
             </div>
         </>
     );

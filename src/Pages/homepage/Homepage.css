@@ -7,19 +7,6 @@
     height: 90%;
 }
 
-.prova {
-    height: 100% !important;
-}
-
-.containerCenter {
-    height: 92.5% !important;
-    width: 79.5% !important;
-    margin-left: 19.8%;
-    background-color: #3B3B3B !important;
-    border-radius: 22px 22px 0 0;
-    position: absolute !important;
-}
-
 .mostRecent {
     color: white;
     font-size: 30px;
@@ -28,4 +15,12 @@
     margin-left: 30px;
     font-weight: bolder;
     font-family: Manrope;
+}
+
+.containerCenter {
+    border-radius: 22px;
+    width: 97% !important;
+    height: 200% !important;
+    margin-left: 24px !important;
+    background-color: #3B3B3B !important;
 }

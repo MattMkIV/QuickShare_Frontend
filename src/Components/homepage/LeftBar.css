@@ -1,17 +1,14 @@
 /*----------------- Button insert new element --------------------*/
-/*TODO: posizione il logo e la scritta nella parte sinistra e centrare tutte le icone in verticale*/
 .buttonNew {
-    width: 102% !important;
-    height: 65px;
     font-family: Manrope;
+    width: 93% !important;
+    height: 65px !important;
     font-size: 18px !important;
-    margin-left: 20px !important;
     text-align: left !important;
-    margin-right: 10% !important;
+    margin-left: 20px !important;
     border-radius: 22px !important;
     font-weight: bolder !important;
     background-color: #FF9636 !important;
-
 }
 
 .buttonNew svg {
@@ -19,10 +16,13 @@
     height: 33px;
 }
 
-/*----------------- Other --------------------*/
+.newButtonGrid {
+    width: 273px;
+}
+/*----------------- List --------------------*/
 .icon {
-    margin-left: 1px;
-    margin-right: 10px;
+    margin-left: 6px;
+    margin-right: 13px;
 }
 
 .noPaddingTopBottom {
@@ -30,6 +30,6 @@
     padding-bottom: 1px !important;
 }
 
-.MuiListItemButton-root {
-    background-color: transparent !important;
+.listClass {
+    width: 100%;
 }
