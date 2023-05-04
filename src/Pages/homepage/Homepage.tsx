@@ -13,10 +13,44 @@ import classes from "*.module.css";
 
 function Homepage() {
 
+    //Variable declaration
     const [page, setPage] = useState("Recenti");
+    let content = null;
+    const [selectedItem, setSelectedItem] = useState('');
 
     //Style
     document.body.style.backgroundImage = '';
+
+    //Function
+    const handleSelectItem = (item: any) => {
+        setSelectedItem(item);
+    };
+    
+    switch (selectedItem) {
+        case 'Home':
+                content = <p>Home.</p>;
+                break;
+        case 'Lists':
+                content = <p>Lists</p>;
+                break;
+        case 'Chat':
+                content = <p>Chat</p>;
+                break;
+        case 'Notes':
+            content = <p>Notes</p>;
+            break;
+        case 'Calendar':
+            content = <p>Calendar</p>;
+            break;
+        case 'UploadPhoto':
+            content = <p>UploadPhoto</p>;
+            break;
+        case 'AccountBalance':
+            content = <p>Account Balance</p>;
+            break;
+        default:
+            content = <p>Home.</p>;
+    }
 
     return(
         <>  
@@ -26,11 +60,11 @@ function Homepage() {
             <div className='w3-row bottomRow'>
                 <Grid container>
                     <Grid item>
-                        <LeftBar/>
+                        <LeftBar onSelect={handleSelectItem}/>
                     </Grid>
 
                     <Grid item xs>
-                        <Paper className='containerCenter'></Paper>
+                        <Paper className='containerCenter'>{content}</Paper>
                     </Grid>
                 </Grid>
             </div>
