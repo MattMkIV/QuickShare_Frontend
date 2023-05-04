@@ -15,8 +15,6 @@ import classes from "*.module.css";
 function Homepage() {
 
     //Variable declaration
-    const [page, setPage] = useState("Recenti");
-    let content = null;
     const [selectedItem, setSelectedItem] = useState(Home);
 
     //Style

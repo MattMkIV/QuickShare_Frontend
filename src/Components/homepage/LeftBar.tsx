@@ -14,7 +14,9 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 //Components
 import Home from '../../Pages/view/home/Home';
-
+import Lists from '../../Pages/view/list/Lists';
+import AccountBalance from '../../Pages/view/accountBalance/AccountBalance';
+import Calendar from '../../Pages/view/calendar/Calendar';
 //CSS
 import './LeftBar.css';
 import Grid from "@mui/material/Grid";
