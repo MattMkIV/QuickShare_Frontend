@@ -12,22 +12,18 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+//Components
+import Home from '../../Pages/view/home/Home';
+
 //CSS
 import './LeftBar.css';
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 //Other
-import { useState } from 'react';
 
 function LeftBar({onSelect}: any) {
     //Variable declaration
-    const [selectedItem, setSelectedItem] = useState('');
-
     //Function
-    const handleItemClick = (item: any) => {
-        setSelectedItem(item);
-        onSelect(item);
-    };
 
     return(
         <>
@@ -37,43 +33,43 @@ function LeftBar({onSelect}: any) {
 
             <Grid container className = 'listClass'>
                 <List sx={{ width: '100%', color:'white'}}>
-                    <ListItem className='noPaddingTopBottom' onClick={() => handleItemClick('Home')}>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Home)}>
                         <ListItemButton>
                             <HomeIcon className='icon'/>
                             <ListItemText primary="Home" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => handleItemClick('Lists')}>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Lists')}>
                         <ListItemButton>
                             <FormatListBulletedIcon className='icon'/>
                             <ListItemText primary="Lists" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => handleItemClick('Chat')}>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Chat')}>
                         <ListItemButton>
                             <ChatIcon className='icon'/>
                             <ListItemText primary="Chat" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => handleItemClick('Notes')}>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Notes')}>
                         <ListItemButton>
                                 <AssignmentIcon className='icon'/>
                             <ListItemText primary="Notes" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => handleItemClick('Calendar')}>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Calendar')}>
                         <ListItemButton>
                                 <DateRangeIcon className='icon'/>
                             <ListItemText primary="Calendar " />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => handleItemClick('UploadPhoto')}>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('UploadPhoto')}>
                         <ListItemButton>
                                 <UploadFileIcon className='icon'/>
                             <ListItemText primary="Upload photo" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => handleItemClick('AccountBalance')}>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('AccountBalance')}>
                         <ListItemButton>
                                 <AccountBalanceWalletIcon className='icon'/>
                             <ListItemText primary="Account balance" />

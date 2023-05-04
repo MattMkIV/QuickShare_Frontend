@@ -3,6 +3,7 @@
 import TopBar from '../../Components/homepage/TopBar';
 import LeftBar from '../../Components/homepage/LeftBar';
 import Paper from "@mui/material/Paper";
+import Home from '../view/home/Home';
 //CSS
 import './Homepage.css'
 //JS
@@ -16,7 +17,7 @@ function Homepage() {
     //Variable declaration
     const [page, setPage] = useState("Recenti");
     let content = null;
-    const [selectedItem, setSelectedItem] = useState('');
+    const [selectedItem, setSelectedItem] = useState(Home);
 
     //Style
     document.body.style.backgroundImage = '';
@@ -25,33 +26,8 @@ function Homepage() {
     const handleSelectItem = (item: any) => {
         setSelectedItem(item);
     };
-    
-    switch (selectedItem) {
-        case 'Home':
-                content = <p>Home.</p>;
-                break;
-        case 'Lists':
-                content = <p>Lists</p>;
-                break;
-        case 'Chat':
-                content = <p>Chat</p>;
-                break;
-        case 'Notes':
-            content = <p>Notes</p>;
-            break;
-        case 'Calendar':
-            content = <p>Calendar</p>;
-            break;
-        case 'UploadPhoto':
-            content = <p>UploadPhoto</p>;
-            break;
-        case 'AccountBalance':
-            content = <p>Account Balance</p>;
-            break;
-        default:
-            content = <p>Home.</p>;
-    }
 
+    //Render
     return(
         <>  
             <div className='w3-row topRow'>
@@ -62,9 +38,10 @@ function Homepage() {
                     <Grid item>
                         <LeftBar onSelect={handleSelectItem}/>
                     </Grid>
-
                     <Grid item xs>
-                        <Paper className='containerCenter'>{content}</Paper>
+                        <Paper className='containerCenter'>  
+                            {selectedItem}
+                        </Paper>
                     </Grid>
                 </Grid>
             </div>
