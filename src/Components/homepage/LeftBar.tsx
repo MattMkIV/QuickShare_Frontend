@@ -10,17 +10,14 @@ import HomeIcon from '@mui/icons-material/Home';
 import ChatIcon from '@mui/icons-material/Chat';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import DateRangeIcon from '@mui/icons-material/DateRange';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 //Components
 import Home from '../../Pages/View/home/Home';
-import Lists from '../../Pages/View/list/Lists';
-import AccountBalance from '../../Pages/View/accountBalance/AccountBalance';
-import Calendar from '../../Pages/View/calendar/Calendar';
 //CSS
 import './LeftBar.css';
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
+import { AddPhotoAlternate } from '@mui/icons-material';
+
 //Other
 
 function LeftBar({onSelect}: any) {
@@ -59,16 +56,16 @@ function LeftBar({onSelect}: any) {
                             <ListItemText primary="Notes" />
                         </ListItemButton>
                     </ListItem>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('UploadPhoto')}>
+                        <ListItemButton>
+                                <AddPhotoAlternate className='icon'/>
+                            <ListItemText primary="Photos" />
+                        </ListItemButton>
+                    </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Calendar')}>
                         <ListItemButton>
                                 <DateRangeIcon className='icon'/>
                             <ListItemText primary="Calendar " />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('UploadPhoto')}>
-                        <ListItemButton>
-                                <UploadFileIcon className='icon'/>
-                            <ListItemText primary="Upload photo" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('AccountBalance')}>

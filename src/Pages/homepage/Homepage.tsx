@@ -2,7 +2,6 @@
 //Componenti
 import TopBar from '../../Components/homepage/TopBar';
 import LeftBar from '../../Components/homepage/LeftBar';
-import Paper from "@mui/material/Paper";
 import Home from '../View/home/Home';
 //CSS
 import './Homepage.css'

@@ -1,15 +1,13 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
 
 import './Home.css'
 import Grid from "@mui/material/Grid";
-import {Box, CardContent, Stack, Typography} from "@mui/material";
-import classes from "*.module.css";
+import {Stack} from "@mui/material";
 import Cards from "../../../Components/homepage/Card";
 
 function Home() {
     //Render
-    return(
+    return (
         <>
             <Grid container>
                 <h1 className='titleSection'>Most Recent:</h1>
@@ -53,7 +51,6 @@ function Home() {
                     <Cards></Cards>
                 </Stack>
             </Grid>
-
         </>
     );
 }
