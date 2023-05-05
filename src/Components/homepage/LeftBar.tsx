@@ -13,10 +13,10 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 //Components
-import Home from '../../Pages/view/home/Home';
-import Lists from '../../Pages/view/list/Lists';
-import AccountBalance from '../../Pages/view/accountBalance/AccountBalance';
-import Calendar from '../../Pages/view/calendar/Calendar';
+import Home from '../../Pages/View/home/Home';
+import Lists from '../../Pages/View/list/Lists';
+import AccountBalance from '../../Pages/View/accountBalance/AccountBalance';
+import Calendar from '../../Pages/View/calendar/Calendar';
 //CSS
 import './LeftBar.css';
 import Grid from "@mui/material/Grid";

@@ -1,0 +1,40 @@
+.cards {
+    width: 220px;
+    height: 320px;
+    margin-bottom: 20px !important;
+    margin-top: 10px !important;
+    border-radius: 12px !important;
+    background-color: #DEDEDE !important;
+    box-shadow: 8px 6px 10px 4px rgba(0, 0, 0, 0.22) !important;
+}
+
+.cardTitle {
+    font-family: Manrope;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    color: rgba(36, 36, 36, 0.88);
+}
+
+.cardLine {
+    border-color: #A5A5A5;
+    margin-top: 0;
+}
+
+.infoCard {
+    background-color: #FF5C4D !important;
+    width: 100% !important;
+    height: 60px;
+    margin-top: 211px;
+    border-radius: 12px !important;
+    box-shadow: 3px 3px 7px 2px rgba(0, 0, 0, 0.34) !important;
+}
+
+.infoText {
+    font-size: 12px !important;
+}
+
+.infoTextContent {
+    font-size: 12px !important;
+    font-weight: bold !important;
+    margin-left: 5px !important;
+}

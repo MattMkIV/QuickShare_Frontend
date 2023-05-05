@@ -3,14 +3,14 @@
 import TopBar from '../../Components/homepage/TopBar';
 import LeftBar from '../../Components/homepage/LeftBar';
 import Paper from "@mui/material/Paper";
-import Home from '../view/home/Home';
+import Home from '../View/home/Home';
 //CSS
 import './Homepage.css'
 //JS
 //Other
 import { useState } from 'react';
 import Grid from "@mui/material/Grid";
-import classes from "*.module.css";
+import {Container} from "@mui/material";
 
 function Homepage() {
 
@@ -27,22 +27,20 @@ function Homepage() {
 
     //Render
     return(
-        <>  
-            <div className='w3-row topRow'>
+        <>
+            <Grid container>
                 <TopBar/>
-            </div>
-            <div className='w3-row bottomRow'>
-                <Grid container>
-                    <Grid item>
-                        <LeftBar onSelect={handleSelectItem}/>
-                    </Grid>
-                    <Grid item xs>
-                        <Paper className='containerCenter'>  
-                            {selectedItem}
-                        </Paper>
-                    </Grid>
+            </Grid>
+            <Grid container className='homeGrid'>
+                <Grid item>
+                    <LeftBar onSelect={handleSelectItem}/>
                 </Grid>
-            </div>
+                <Grid item xs>
+                    <Container className='containerCenter' sx={{ overflowY: "scroll", maxHeight : '800px'}}>
+                        {selectedItem}
+                    </Container>
+                </Grid>
+            </Grid>
         </>
     );
 }
