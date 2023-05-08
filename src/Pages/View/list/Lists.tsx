@@ -1,11 +1,15 @@
+import Grid from "@mui/material/Grid";
+import * as React from "react";
+
 function List() {
 
 
     //Render
     return(
-        <>  
-            <h1>List</h1>
-            <p>sehserhhserthsetseteshserhserhserh</p>
+        <>
+            <Grid container>
+                <h1 className='titleSection'>Lists:</h1>
+            </Grid>
         </>
     );
 }

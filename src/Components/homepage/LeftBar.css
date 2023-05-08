@@ -19,6 +19,7 @@
 .newButtonGrid {
     width: 273px;
 }
+
 /*----------------- List --------------------*/
 .icon {
     margin-left: 6px;
@@ -30,6 +31,19 @@
     padding-bottom: 1px !important;
 }
 
+.noPaddingTopBottom:hover {
+    background-color: transparent;
+}
+
 .listClass {
-    width: 100%;
+    width: 100% !important;
+}
+
+.bottoneLeftBar {
+    position: absolute;
+    width: 100% !important;
+    height: 90% !important;
+    background-color: #3C3C3C;
+    border-radius: 0 22px 22px 0;
+    margin-left: -16px !important;
 }

@@ -13,65 +13,69 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 //Components
 import Home from '../../Pages/View/home/Home';
+import Lists from "../../Pages/View/list/Lists";
 //CSS
 import './LeftBar.css';
 import Grid from "@mui/material/Grid";
-import { AddPhotoAlternate } from '@mui/icons-material';
+import {AddPhotoAlternate} from '@mui/icons-material';
+import {Container} from "@mui/material";
 
 //Other
+
 
 function LeftBar({onSelect}: any) {
     //Variable declaration
     //Function
 
-    return(
+    return (
         <>
             <Grid item className='newButtonGrid'>
-                <Button className='buttonNew' variant="contained" startIcon={<AddIcon />} style={{justifyContent: "flex-start"}}>New</Button>
+                <Button className='buttonNew' variant="contained" startIcon={<AddIcon/>}
+                        style={{justifyContent: "flex-start"}}>New</Button>
             </Grid>
-
-            <Grid container className = 'listClass'>
-                <List sx={{ width: '100%', color:'white'}}>
+            <Grid container className='listClass'>
+                <List sx={{width: '100%', color: 'white'}}>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Home)}>
-                        <ListItemButton>
+                        <Container className='bottoneLeftBar'></Container>
+                        <ListItemButton disableRipple>
                             <HomeIcon className='icon'/>
-                            <ListItemText primary="Home" />
+                            <ListItemText primary="Home"/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Lists')}>
-                        <ListItemButton>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Lists)}>
+                        <ListItemButton disableRipple>
                             <FormatListBulletedIcon className='icon'/>
-                            <ListItemText primary="Lists" />
+                            <ListItemText primary="Lists"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Chat')}>
-                        <ListItemButton>
+                        <ListItemButton disableRipple>
                             <ChatIcon className='icon'/>
-                            <ListItemText primary="Chat" />
+                            <ListItemText primary="Chat"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Notes')}>
-                        <ListItemButton>
-                                <AssignmentIcon className='icon'/>
-                            <ListItemText primary="Notes" />
+                        <ListItemButton disableRipple>
+                            <AssignmentIcon className='icon'/>
+                            <ListItemText primary="Notes"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('UploadPhoto')}>
-                        <ListItemButton>
-                                <AddPhotoAlternate className='icon'/>
-                            <ListItemText primary="Photos" />
+                        <ListItemButton disableRipple>
+                            <AddPhotoAlternate className='icon'/>
+                            <ListItemText primary="Photos"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Calendar')}>
-                        <ListItemButton>
-                                <DateRangeIcon className='icon'/>
-                            <ListItemText primary="Calendar " />
+                        <ListItemButton disableRipple>
+                            <DateRangeIcon className='icon'/>
+                            <ListItemText primary="Calendar "/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('AccountBalance')}>
-                        <ListItemButton>
-                                <AccountBalanceWalletIcon className='icon'/>
-                            <ListItemText primary="Account balance" />
+                        <ListItemButton disableRipple>
+                            <AccountBalanceWalletIcon className='icon'/>
+                            <ListItemText primary="Account balance"/>
                         </ListItemButton>
                     </ListItem>
                 </List>

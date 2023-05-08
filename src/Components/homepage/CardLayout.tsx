@@ -3,17 +3,17 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import * as React from "react";
 
-import './Card.css'
+import './CardLayout.css'
 
-function Cards() {
+function CardLayout() {
     return (
         <>
-            <Card className='cards'>
+            <Card className='cardsLayout'>
                 <CardContent sx={{ m: -1 }}>
                     <Typography noWrap className='cardTitle'>
-                        Numero di Andrea
+                        Prova titolo molto lungo
                     </Typography>
-                    <hr className='cardLine'></hr>
+                    <hr className='inCardLine'></hr>
 
                     <Card className='infoCard'>
                         <CardContent sx={{ m: -0.4 }}>
@@ -22,6 +22,7 @@ function Cards() {
                                     Category:
                                 </Typography>
 
+                                {/* Implementare il settaggio dinamico della categoria*/}
                                 <Typography noWrap className='infoTextContent'>
                                     Note
                                 </Typography>
@@ -31,6 +32,7 @@ function Cards() {
                                     Creation date:
                                 </Typography>
 
+                                {/* Implementare il settaggio dinamico della data*/}
                                 <Typography noWrap className='infoTextContent'>
                                     10 / 04 / 2023
                                 </Typography>
@@ -43,4 +45,4 @@ function Cards() {
     );
 }
 
-export default Cards;
+export default CardLayout;

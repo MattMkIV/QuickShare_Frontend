@@ -11,17 +11,13 @@ import Logo from '../logo/Logo';
 import './TopBar.css';
 //Other
 import { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import ReducedHome from '../homepage/ReducedHome'
 
 function TopBar() {
     //Variable declaration
-    const [searchTerm, setSearchTerm] = useState("");
-    const navigate = useNavigate();
+    const [searchTerm] = useState("");
 
     //Functions
-    const openMenu = () => {
-        alert("Te lo buco sto pallone");
-    };
 
     const handleChange = () => {
     };
@@ -31,7 +27,7 @@ function TopBar() {
             <hr className='lineHomepage'></hr>
             <Grid container>
                 <Grid item>
-                    <MenuIcon sx={{color:'white', fontSize: '30px'}} className='menuIcon' onClick={openMenu}/>
+                    <MenuIcon sx={{color:'white', fontSize: '30px'}} className='menuIcon' onClick={ReducedHome}/>
                 </Grid>
                 <Grid item>
                     <Logo navigateHome={true}/>
