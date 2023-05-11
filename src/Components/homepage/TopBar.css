@@ -39,9 +39,9 @@
 /* TODO: rimuovere il bordo che rimane visibile */
 .searchBar {
     width: 80%;
-    color: #C0C0C0 !important;
+    font-family: Manrope;
     margin-left: 22px !important;
-    border-radius: 22px !important;
+    border-radius: 12px !important;
     background-color: #525355 !important;
 }
 

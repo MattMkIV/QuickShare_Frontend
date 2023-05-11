@@ -1,0 +1,28 @@
+.masonryPhotoStyle {
+    border-radius: 12px !important;
+}
+
+.photoPageTitle {
+    color: white;
+    margin-left: 2px;
+    font-size: 30px;
+    margin-top: 18px !important;
+    font-weight: bolder;
+    font-family: Manrope;
+}
+
+.imageListPadding {
+    margin-top: 20px !important;
+}
+
+.uploadButton {
+    font-family: Manrope;
+    width: 140px !important;
+    height: 50px !important;
+    font-size: 18px !important;
+    text-align: left !important;
+    border-radius: 12px !important;
+    font-weight: bolder !important;
+    margin-top: 16px !important;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
+}

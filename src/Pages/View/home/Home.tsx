@@ -14,7 +14,7 @@ function Home() {
             <Grid container>
                 <h1 className='titleSection'>Most Recent:</h1>
             </Grid>
-            {/*Componente che genera le cards "Most Recent"*/}
+
             <Grid item className='cardSlider'>
                 <Stack direction="row" spacing={5}>
                     <CardLayout></CardLayout>
@@ -30,7 +30,7 @@ function Home() {
             <Grid container>
                 <h1 className='titleSection'>Lists:</h1>
             </Grid>
-            {/*Componente che genera le cards "List"*/}
+
             <Grid className='cardSlider'>
                 <Stack direction="row" spacing={5}>
                     <CardLayout></CardLayout>
@@ -46,7 +46,7 @@ function Home() {
             <Grid container>
                 <h1 className='titleSection'>Chats:</h1>
             </Grid>
-            {/*Componente che genera le cards "Chat"*/}
+
             <Grid className='cardSlider'>
                 <Stack direction="row" spacing={5}>
                     <ChatCard></ChatCard>
@@ -63,7 +63,7 @@ function Home() {
             <Grid container>
                 <h1 className='titleSection'>Notes:</h1>
             </Grid>
-            {/*Componente che genera le cards "Notes"*/}
+
             <Grid className='cardSlider'>
                 <Stack direction="row" spacing={5}>
                     <CardLayout></CardLayout>

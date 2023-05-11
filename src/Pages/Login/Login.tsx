@@ -17,7 +17,7 @@ function Login() {
 
     //Style
     //-------- Imposto background --------
-    document.body.style.backgroundImage = 'url("backgroundLogin.png")';
+    document.body.style.backgroundImage = 'url("backgroundBello.png")';
 
     return(
         <>

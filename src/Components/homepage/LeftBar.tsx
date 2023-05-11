@@ -14,6 +14,7 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 //Components
 import Home from '../../Pages/View/home/Home';
 import Lists from "../../Pages/View/list/Lists";
+import UploadPhoto from '../../Pages/View/uploadPhoto/UploadPhoto';
 //CSS
 import './LeftBar.css';
 import Grid from "@mui/material/Grid";
@@ -30,8 +31,8 @@ function LeftBar({onSelect}: any) {
     return (
         <>
             <Grid item className='newButtonGrid'>
-                <Button className='buttonNew' variant="contained" startIcon={<AddIcon/>}
-                        style={{justifyContent: "flex-start"}}>New</Button>
+                <Button className='buttonNew' style={{background: 'linear-gradient(45deg, #067572 20%, #9BE84B 90%)', justifyContent: "flex-start"}} variant="contained" startIcon={<AddIcon/>}
+                        >New</Button>
             </Grid>
             <Grid container className='listClass'>
                 <List sx={{width: '100%', color: 'white'}}>
@@ -60,7 +61,7 @@ function LeftBar({onSelect}: any) {
                             <ListItemText primary="Notes"/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('UploadPhoto')}>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect(UploadPhoto)}>
                         <ListItemButton disableRipple>
                             <AddPhotoAlternate className='icon'/>
                             <ListItemText primary="Photos"/>

@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 function ForgotPassword() {
     //Variable declaration
     const navigate = useNavigate();
-    const [ErrorInput, setErrorInput] = useState(false);
+    const [ErrorInput] = useState(false);
     const CssTextField = styled(TextField)({
           '& label.Mui-focused': {
             color: '#FF9636',
@@ -42,7 +42,7 @@ function ForgotPassword() {
           },
     });
 
-    document.body.style.backgroundImage = 'url("backgroundLogin.png")';
+    document.body.style.backgroundImage = 'url("backgroundBello.png")';
 
     return(
         <>

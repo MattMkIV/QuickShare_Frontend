@@ -15,7 +15,7 @@ function CardLayout() {
                     </Typography>
                     <hr className='inCardLine'></hr>
 
-                    <Card className='infoCard'>
+                    <Card className='infoCard' style={{background: 'linear-gradient(45deg, #FF5C4D 30%, #ff8e53 90%)'}}>
                         <CardContent sx={{ m: -0.4 }}>
                             <Grid container>
                                 <Typography noWrap className='infoText'>

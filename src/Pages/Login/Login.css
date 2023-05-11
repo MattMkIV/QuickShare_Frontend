@@ -3,17 +3,6 @@
     src: url(NeonSans.ttf);
 }
 
-/*------------------- Sfondo ------------------*/
-.Sfondo {
-    width: 100% !important;
-    height: 100% !important;
-    background-image: url("../../../public/backgroundLogin.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-
 /*------------------- Central container ------------------*/
 .container_login {
     width: 30rem;
