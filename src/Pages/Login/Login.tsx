@@ -1,5 +1,5 @@
 //MUI
-//Componenti
+//Component
 import InputLogin from '../../Components/login/InputLogIn';
 //CSS
 import './Login.css'
@@ -16,13 +16,12 @@ function Login() {
     //Function
 
     //Style
-    //-------- Imposto background --------
-    document.body.style.backgroundImage = 'url("backgroundBello.png")';
+    document.body.style.backgroundImage = 'url("LoginBackground.png")';
 
     return(
         <>
             <div className="container_login w3-display-middle">
-                <img src='LogoHighRes.png' className='logoLogin'/>
+                <img src='LogoHighRes.png' alt='Logo img' className='logoLogin'/>
                 <h1 className='siteName'>QUICK.SHARE</h1>
                 <hr className='line'></hr>
                 <h1 className='titleBox'>Login</h1>

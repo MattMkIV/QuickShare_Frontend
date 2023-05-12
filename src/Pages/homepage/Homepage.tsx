@@ -1,5 +1,5 @@
 //MUI
-//Componenti
+//Component
 import TopBar from '../../Components/homepage/TopBar';
 import LeftBar from '../../Components/homepage/LeftBar';
 import Home from '../View/home/Home';
@@ -10,6 +10,7 @@ import './Homepage.css'
 import {useState} from 'react';
 import Grid from "@mui/material/Grid";
 import {Container} from "@mui/material";
+import Box from "@mui/material/Box";
 
 function Homepage() {
 
@@ -35,7 +36,7 @@ function Homepage() {
                     <LeftBar onSelect={handleSelectItem}/>
                 </Grid>
                 <Grid item xs>
-                    <Container className='containerCenter' sx={{overflowY: "scroll", maxHeight: '800px'}}>
+                    <Container className='containerCenter' sx={{overflowY: "scroll"}}>
                         {selectedItem}
                     </Container>
                 </Grid>

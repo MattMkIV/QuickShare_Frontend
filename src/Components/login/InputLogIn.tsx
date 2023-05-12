@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 //CSS
 import "./InputLogIn.css";
 //Other
-import { useState } from 'react';
+import React, { useState } from 'react';
 //Axios
 import { useNavigate } from 'react-router-dom';
 

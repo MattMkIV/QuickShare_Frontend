@@ -43,6 +43,12 @@ function LeftBar({onSelect}: any) {
                             <ListItemText primary="Home"/>
                         </ListItemButton>
                     </ListItem>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Notes')}>
+                        <ListItemButton disableRipple>
+                            <AssignmentIcon className='icon'/>
+                            <ListItemText primary="Notes"/>
+                        </ListItemButton>
+                    </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Lists)}>
                         <ListItemButton disableRipple>
                             <FormatListBulletedIcon className='icon'/>
@@ -53,12 +59,6 @@ function LeftBar({onSelect}: any) {
                         <ListItemButton disableRipple>
                             <ChatIcon className='icon'/>
                             <ListItemText primary="Chat"/>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Notes')}>
-                        <ListItemButton disableRipple>
-                            <AssignmentIcon className='icon'/>
-                            <ListItemText primary="Notes"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(UploadPhoto)}>

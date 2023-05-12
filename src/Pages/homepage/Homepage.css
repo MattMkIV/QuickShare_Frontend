@@ -15,9 +15,9 @@
 
 .containerCenter {
     width: 78.5% !important;
-    height: 87% !important;
+    height: 85.8% !important;
     position: fixed !important;
     margin-left: 24px !important;
     background-color: #3B3B3B !important;
-    border-radius: 22px 22px 0 0 !important;
+    border-radius: 22px 22px 22px 22px !important;
 }

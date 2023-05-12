@@ -1,5 +1,5 @@
 //MUI
-//Componenti
+//Component
 import Registration from '../../Components/Registration/Registration';
 //CSS
 import './SignUp.css';
@@ -12,13 +12,12 @@ function SignUp() {
     const navigate = useNavigate();
 
     //Style
-    //-------- Imposto background --------
-    document.body.style.backgroundImage = 'url("backgroundBello.png")';
+    document.body.style.backgroundImage = 'url("LoginBackground.png")';
 
     return(
         <>
             <div className="container_login w3-display-middle">
-                <img onClick={() => navigate("/")} src='LogoHighRes.png' className='logoLoginRegistration'/>
+                <img onClick={() => navigate("/")} src='LogoHighRes.png' alt='Logo img' className='logoLoginRegistration'/>
                 <h1 onClick={() => navigate("/")} className='siteNameRegistration'>QUICK.SHARE</h1>
                 <hr className='line'></hr>
                 <h1 className='titleBox'>Create your account</h1>
