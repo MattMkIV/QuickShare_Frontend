@@ -37,7 +37,7 @@ function LeftBar({onSelect}: any) {
                 <List sx={{width: '100%', color: 'white'}}>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Home)}>
                         <Container className='bottoneLeftBar'></Container>
-                        <ListItemButton className='clickAnimation' disableRipple>
+                        <ListItemButton autoFocus={true} className='clickAnimation' disableRipple>
                             <HomeIcon className='icon'/>
                             <ListItemText primary="Home"/>
                         </ListItemButton>
