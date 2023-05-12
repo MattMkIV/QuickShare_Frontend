@@ -19,10 +19,9 @@ import UploadPhoto from '../../Pages/View/uploadPhoto/UploadPhoto';
 import './LeftBar.css';
 import Grid from "@mui/material/Grid";
 import {AddPhotoAlternate} from '@mui/icons-material';
-import {Container} from "@mui/material";
+import {Container, makeStyles, withStyles} from "@mui/material";
 
 //Other
-
 
 function LeftBar({onSelect}: any) {
     //Variable declaration
@@ -38,43 +37,43 @@ function LeftBar({onSelect}: any) {
                 <List sx={{width: '100%', color: 'white'}}>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Home)}>
                         <Container className='bottoneLeftBar'></Container>
-                        <ListItemButton disableRipple>
+                        <ListItemButton className='clickAnimation' disableRipple>
                             <HomeIcon className='icon'/>
                             <ListItemText primary="Home"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Notes')}>
-                        <ListItemButton disableRipple>
+                        <ListItemButton className='clickAnimation' disableRipple>
                             <AssignmentIcon className='icon'/>
                             <ListItemText primary="Notes"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Lists)}>
-                        <ListItemButton disableRipple>
+                        <ListItemButton className='clickAnimation' disableRipple>
                             <FormatListBulletedIcon className='icon'/>
                             <ListItemText primary="Lists"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Chat')}>
-                        <ListItemButton disableRipple>
+                        <ListItemButton className='clickAnimation' disableRipple>
                             <ChatIcon className='icon'/>
                             <ListItemText primary="Chat"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(UploadPhoto)}>
-                        <ListItemButton disableRipple>
+                        <ListItemButton className='clickAnimation' disableRipple>
                             <AddPhotoAlternate className='icon'/>
                             <ListItemText primary="Photos"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Calendar')}>
-                        <ListItemButton disableRipple>
+                        <ListItemButton className='clickAnimation' disableRipple>
                             <DateRangeIcon className='icon'/>
                             <ListItemText primary="Calendar "/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('AccountBalance')}>
-                        <ListItemButton disableRipple>
+                        <ListItemButton className='clickAnimation' disableRipple>
                             <AccountBalanceWalletIcon className='icon'/>
                             <ListItemText primary="Account balance"/>
                         </ListItemButton>

@@ -21,7 +21,7 @@
 
 /*----------------- List --------------------*/
 .icon {
-    margin-left: 6px;
+    margin-left: 18px;
     margin-right: 13px;
 }
 
@@ -40,9 +40,15 @@
 
 .bottoneLeftBar {
     position: absolute;
-    width: 100% !important;
-    height: 90% !important;
-    background-color: #3C3C3C;
-    border-radius: 0 22px 22px 0;
-    margin-left: -16px !important;
+}
+
+
+.clickAnimation {
+    margin-left: -13px !important;
+    border-radius: 0 22px 22px 0 !important;
+    margin-right: -20px !important;
+}
+
+.clickAnimation:focus {
+    background-color: #3C3C3C !important;
 }
