@@ -19,7 +19,7 @@ import UploadPhoto from '../../Pages/View/uploadPhoto/UploadPhoto';
 import './LeftBar.css';
 import Grid from "@mui/material/Grid";
 import {AddPhotoAlternate} from '@mui/icons-material';
-import {Container, makeStyles, withStyles} from "@mui/material";
+import {Container} from "@mui/material";
 
 //Other
 

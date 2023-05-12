@@ -1,6 +1,6 @@
 //MUI
 import MenuIcon from '@mui/icons-material/Menu';
-import {Container, IconButton, InputAdornment, Menu, MenuItem, TextField, Typography} from "@mui/material";
+import {Container, IconButton, InputAdornment, Menu, TextField, Typography} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from '@mui/icons-material/Settings';
 import Avatar from '@mui/material/Avatar';
