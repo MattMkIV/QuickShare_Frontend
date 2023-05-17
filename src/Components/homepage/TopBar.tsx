@@ -12,15 +12,16 @@ import Logo from '../logo/Logo';
 //CSS
 import './TopBar.css';
 //Other
-import { useState } from "react";
-import {styled} from "@mui/material/styles";
 import React from 'react';
 import Box from "@mui/material/Box";
+import {styled} from "@mui/material/styles";
 
 function TopBar() {
     //Variable declaration
-    const [searchTerm] = useState("");
     const CssTextField = styled(TextField)({
+        '& .MuiOutlinedInput-notchedOutline': {
+            border: 'none',
+        },
         '& label.Mui-focused': {
             color: '#57bb7e',
         },
@@ -31,20 +32,16 @@ function TopBar() {
             color: '#57bb7e',
         },
         '& .MuiInput-underline:after': {
-            borderBottomColor: '#57bb7e',
             borderRadius: 12,
         },
         '& .MuiOutlinedInput-root': {
             '&:hover fieldset': {
-                borderColor: '#57bb7e',
                 borderRadius: 12,
             },
             '&.Mui-focused fieldset': {
-                borderColor: '#57bb7e',
                 borderWidth: 2,
                 borderRadius: 12,
             },
-
         },
     });
 
@@ -57,14 +54,11 @@ function TopBar() {
         setAnchorEl(null);
     };
 
-
     //Functions
 
     const handleChange = () => {
     };
 
-    // @ts-ignore
-    // @ts-ignore
     return(
         <>
             <React.Fragment>
@@ -76,7 +70,7 @@ function TopBar() {
                         <Logo navigateHome={true}/>
                     </Grid>
                     <Grid item xs>
-                        <CssTextField id="search" type="search" label="Search" className='searchBar' value={searchTerm} onClick={handleChange}
+                        <CssTextField id="search" type="search" label="Search" className='searchBar' onClick={handleChange}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">

@@ -3,10 +3,10 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import * as React from "react";
 
-import './CardLayout.css'
+import '../../../Components/homepage/InfoBoxSectionCard.css'
 import {styled} from "@mui/material/styles";
 
-function CardLayout() {
+function NotesCardLayout() {
     const CssTextField = styled(TextField)({
         '& .MuiOutlinedInput-notchedOutline': {
             border: 'none',
@@ -34,28 +34,17 @@ function CardLayout() {
                     <CssTextField
                         multiline
                         className='textField'
-                        rows={8}
+                        rows={8.5}
                     />
 
-                    <Card className='infoCard' style={{background: 'linear-gradient(45deg, #FF5C4D 30%, #ff8e53 90%)'}}>
-                        <CardContent sx={{ m: -0.4 }}>
+                    <Card className='sectionsInfoCard' style={{background: 'linear-gradient(45deg, #FF5C4D 30%, #ff8e53 90%)'}}>
+                        <CardContent>
                             <Grid container>
-                                <Typography noWrap className='infoText'>
-                                    Category:
-                                </Typography>
-
-                                {/* Implementare il settaggio dinamico della categoria*/}
-                                <Typography noWrap className='infoTextContent'>
-                                    Note
-                                </Typography>
-                            </Grid>
-                            <Grid container>
-                                <Typography noWrap className='infoText'>
+                                <Typography noWrap className='sectionsInfoText'>
                                     Creation date:
                                 </Typography>
 
-                                {/* Implementare il settaggio dinamico della data*/}
-                                <Typography noWrap className='infoTextContent'>
+                                <Typography noWrap className='sectionsInfoTextContent'>
                                     10 / 04 / 2023
                                 </Typography>
                             </Grid>
@@ -67,4 +56,4 @@ function CardLayout() {
     );
 }
 
-export default CardLayout;
+export default NotesCardLayout;

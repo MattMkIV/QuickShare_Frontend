@@ -10,7 +10,6 @@ import './Homepage.css'
 import {useState} from 'react';
 import Grid from "@mui/material/Grid";
 import {Container} from "@mui/material";
-import Box from "@mui/material/Box";
 
 function Homepage() {
 

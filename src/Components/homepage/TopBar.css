@@ -8,7 +8,7 @@
 .siteNameHome {
     color: #FF5C4D;
     font-size: 25px;
-    margin-left: 55px;
+    margin-left: 54px;
     margin-top: 11px;
     font-family: NeonSans;
     margin-bottom: 1px !important;
@@ -32,7 +32,7 @@
 }
 
 .menuIcon {
-    margin-left: 33px;
+    margin-left: 34px;
 }
 
 /*------------------- SearchBar -----------------------*/
@@ -40,7 +40,7 @@
 .searchBar {
     width: 80%;
     font-family: Manrope;
-    margin-left: 22px !important;
+    margin-left: 24px !important;
     border-radius: 12px !important;
     background-color: #525355 !important;
 }

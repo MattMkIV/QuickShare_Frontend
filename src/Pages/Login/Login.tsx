@@ -7,8 +7,6 @@ import './Login.css'
 //Other
 import { useNavigate } from "react-router-dom";
 
-
-
 function Login() {
     //Variable declaration
     const navigate = useNavigate();

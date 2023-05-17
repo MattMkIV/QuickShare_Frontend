@@ -3,7 +3,7 @@ import * as React from 'react';
 import './Home.css'
 import Grid from "@mui/material/Grid";
 import {Stack} from "@mui/material";
-import CardLayout from "../../../Components/homepage/CardLayout";
+import CardLayout from '../../../Components/homepage/CardLayout'
 
 function Home() {
     //Render
@@ -15,6 +15,7 @@ function Home() {
 
             <Grid item className='cardSlider'>
                 <Stack direction="row" spacing={5}>
+                    <CardLayout></CardLayout>
                     <CardLayout></CardLayout>
                     <CardLayout></CardLayout>
                     <CardLayout></CardLayout>
@@ -36,6 +37,7 @@ function Home() {
                     <CardLayout></CardLayout>
                     <CardLayout></CardLayout>
                     <CardLayout></CardLayout>
+                    <CardLayout></CardLayout>
                 </Stack>
             </Grid>
 
@@ -47,6 +49,7 @@ function Home() {
 
             <Grid className='cardSlider'>
                 <Stack direction="row" spacing={5}>
+                    <CardLayout></CardLayout>
                     <CardLayout></CardLayout>
                     <CardLayout></CardLayout>
                     <CardLayout></CardLayout>
