@@ -17,7 +17,7 @@ const customTheme = createTheme({
             main: '#FF5C4D',
         },
         secondary: {
-            main: '#FD9B2F',
+            main: '#ff910c',
         }
     },
 });

@@ -19,7 +19,7 @@ import UploadPhoto from '../../Pages/View/uploadPhoto/UploadPhoto';
 import Chat from '../../Pages/View/chat/Chat'
 //CSS
 import './LeftBar.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from "@mui/material/Grid";
 import {AddPhotoAlternate, ArrowBack, ArrowForward} from '@mui/icons-material';
 import {Box, Dialog, DialogTitle, Stack} from "@mui/material";
@@ -83,25 +83,25 @@ function LeftBar({onSelect}: any) {
 
                 <List sx={{width: '100%', color: 'white'}}>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Home)}>
-                        <ListItemButton autoFocus className='clickAnimation' disableRipple>
+                        <ListItemButton autoFocus className='clickAnimation'>
                             <HomeIcon className='icon'/>
                             <ListItemText primary="Home"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Notes)}>
-                        <ListItemButton className='clickAnimation' disableRipple>
+                        <ListItemButton className='clickAnimation'>
                             <AssignmentIcon className='icon'/>
                             <ListItemText primary="Notes"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Lists)}>
-                        <ListItemButton className='clickAnimation' disableRipple>
+                        <ListItemButton className='clickAnimation'>
                             <FormatListBulletedIcon className='icon'/>
                             <ListItemText primary="Lists"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Chat)}>
-                        <ListItemButton className='clickAnimation' disableRipple>
+                        <ListItemButton className='clickAnimation'>
                             <ChatIcon className='icon'/>
                             <ListItemText primary="Chat"/>
                         </ListItemButton>
