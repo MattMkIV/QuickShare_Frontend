@@ -63,71 +63,26 @@ function TopBar() {
         <>
             <React.Fragment>
                 <hr className='lineHomepage'></hr>
-                    <Grid item>
+
+                <Grid container wrap='nowrap'>
+                    <Grid lg={0.6} md={0.6} sx={{minWidth : '65px'}}>
                         <MenuIcon className='menuIcon'/>
                     </Grid>
-                    <Grid item>
+                    <Grid lg={1} md={1} sx={{ display:{xs : 'none' , md : 'block'}, minWidth : '210px'}}>
                         <Logo navigateHome={true}/>
                     </Grid>
-                    <Grid item xs>
-                        <CssTextField id="search" type="search" label="Search" className='searchBar' onClick={handleChange}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                    <SearchIcon />
-                                    </InputAdornment>
-                                ),
-                            }}/>
-                    </Grid>
-                    <Grid item>
-                        <SettingsIcon className='settingIcon w3-cell-middle' sx={{color: 'white'}}/>
-                    </Grid>
-                    <Grid item>
-                        <IconButton
-                            className='avatarIconClickAnimation'
-                            onClick={handleClick}
-                            sx={{ ml: 2 }}
-                            aria-controls={open ? 'account-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}
-                            >
-                            <Avatar sx={{backgroundColor: '#008fdb'}}>M</Avatar>
-                        </IconButton>
-                        <Menu
-                            id="basic-menu"
-                            PaperProps={{ elevation: 0, style: { backgroundColor: "transparent" } }}
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button',
-                            }}
-                        >
-                            <Container className='f'>
-                                <Grid className='f'>
-                                    <Box className='l'>
-                                        <Grid container style={{justifyContent: "start"}}>
-                                            <Avatar className='w' sx={{backgroundColor: '#008fdb'}}>M</Avatar>
-                                            <Grid>
-                                                <Typography className='s'>Carlo</Typography>
-                                                <Typography className='d'>carlolzr1@gmail.com</Typography>
-                                            </Grid>
-                                            <Box className='exitBox'>
-                                                <LogoutIcon className='exitIcon'></LogoutIcon>
-                                            </Box>
-                                        </Grid>
-                                    </Box>
-                                    <Box className='r'>
-                                        <Grid container xs>
-                                            <LoginIcon className='loginIcon'></LoginIcon>
-                                            <Typography className='loginText'>Log-In with another account</Typography>
-                                        </Grid>
-                                    </Box>
-                                </Grid>
 
-                            </Container>
-                        </Menu>
+                    <Grid lg={7} md={7} xs={8}>
+                        <CssTextField id="search" type="search" label="Search" className='searchBar' onClick={handleChange}
+                                      InputProps={{
+                                          endAdornment: (
+                                              <InputAdornment position="end">
+                                                  <SearchIcon />
+                                              </InputAdornment>
+                                          ),
+                                      }}/>
                     </Grid>
+                </Grid>
             </React.Fragment>
         </>
     );

@@ -13,11 +13,13 @@
     font-family: Manrope, serif;
     font-size: 25px !important;
     font-weight: bold !important;
+    margin-top: 0 !important;
     color: rgba(36, 36, 36, 0.88);
 }
 
 .separationLine {
-    margin-top: 0;
+    margin-top: 0 !important;
+    margin-bottom: 5px !important;
     border-color: #A5A5A5;
 }
 
@@ -25,8 +27,7 @@
 .textField {
     font-family: Manrope, serif;
     width: 100% !important;
-    margin-top: -10px !important;
-    margin-bottom: 10px !important;
+    height: 218px !important;
     border-radius: 22px !important;
 }
 
@@ -34,7 +35,7 @@
 .infoCard {
     height: 60px;
     width: 100%;
-    margin-top: 3px!important;
+    margin-top: 5px !important;
     border-radius: 12px !important;
     background-color: #FF5C4D !important;
     box-shadow: 3px 3px 7px 2px rgba(0, 0, 0, 0.34) !important;

@@ -1,12 +1,15 @@
 .titleSection {
     color: white;
-    margin-left: 2px;
+    margin-left: 25px;
+    margin-top: 15px;
     font-size: 30px;
     font-weight: bolder;
-    font-family: Manrope;
+    font-family: Manrope, serif;
 }
 
 .cardSlider {
+    margin-left: 25px !important;
+    margin-right: 25px !important;
     display: flex !important;
     overflow-x: scroll !important;
 }
@@ -16,4 +19,10 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-color: #FD9B2F;
+}
+
+.homeBox {
+    background-color: #3B3B3B;
+    border-radius: 22px !important;
+    width: 100% !important;
 }

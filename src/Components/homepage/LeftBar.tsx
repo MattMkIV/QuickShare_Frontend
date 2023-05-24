@@ -16,12 +16,14 @@ import Home from '../../Pages/View/home/Home';
 import Lists from "../../Pages/View/list/Lists";
 import Notes from "../../Pages/View/notes/Notes";
 import UploadPhoto from '../../Pages/View/uploadPhoto/UploadPhoto';
+import Chat from '../../Pages/View/chat/Chat'
 //CSS
 import './LeftBar.css';
 import React from 'react';
 import Grid from "@mui/material/Grid";
-import {AddPhotoAlternate} from '@mui/icons-material';
-import {Dialog, DialogTitle} from "@mui/material";
+import {AddPhotoAlternate, ArrowBack, ArrowForward} from '@mui/icons-material';
+import {Box, Dialog, DialogTitle, Stack} from "@mui/material";
+
 
 //Other
 
@@ -32,9 +34,10 @@ export interface SimpleDialogProps {
     selectedValue: string;
     onClose: (value: string) => void;
 }
+
 function SimpleDialog(props: SimpleDialogProps) {
 
-    const { onClose, selectedValue, open } = props;
+    const {onClose, selectedValue, open} = props;
     const handleClose = () => {
         onClose(selectedValue);
 
@@ -42,7 +45,8 @@ function SimpleDialog(props: SimpleDialogProps) {
 
     return (
         <Dialog onClose={handleClose} open={open}>
-            <DialogTitle>Set backup account</DialogTitle>
+            <Box sx={{width: '600px', height: '700px'}} bgcolor='orange'>
+            </Box>
         </Dialog>
     );
 }
@@ -64,17 +68,19 @@ function LeftBar({onSelect}: any) {
 
     return (
         <>
-            <Grid item className='newButtonGrid'>
-                <Button className='buttonNew' style={{background: 'linear-gradient(45deg, #067572 20%, #9BE84B 90%)',
-                    justifyContent: "flex-start"}} variant="contained" startIcon={<AddIcon/>} onClick={handleClickOpen}
-                >New</Button>
-            </Grid>
             <SimpleDialog
                 selectedValue={selectedValue}
                 open={open}
                 onClose={handleClose}
             />
-            <Grid container className='listClass'>
+
+            <Grid sx={{display: {xs: 'none', md: 'block'}}} className='leftBarGrid'>
+                <Button className='buttonNew' style={{
+                    background: 'linear-gradient(45deg, #067572 20%, #9BE84B 90%)',
+                    justifyContent: "flex-start"
+                }} variant="contained" startIcon={<AddIcon/>}
+                        onClick={handleClickOpen}>New</Button>
+
                 <List sx={{width: '100%', color: 'white'}}>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Home)}>
                         <ListItemButton autoFocus className='clickAnimation' disableRipple>
@@ -94,7 +100,7 @@ function LeftBar({onSelect}: any) {
                             <ListItemText primary="Lists"/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Chat')}>
+                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Chat)}>
                         <ListItemButton className='clickAnimation' disableRipple>
                             <ChatIcon className='icon'/>
                             <ListItemText primary="Chat"/>

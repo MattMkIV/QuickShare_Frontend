@@ -1,7 +1,7 @@
-import {CardContent, TextField, Typography} from "@mui/material";
+import * as React from "react";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import * as React from "react";
+import {CardContent, TextField, Typography} from "@mui/material";
 
 import '../../../Components/homepage/InfoBoxSectionCard.css'
 import {styled} from "@mui/material/styles";
@@ -24,7 +24,7 @@ function NotesCardLayout() {
     return (
         <>
             <Card className='cardsLayout'>
-                <CardContent sx={{ m: -1 }}>
+                <CardContent sx={{  m: -1.2 }}>
                     <Typography noWrap className='cardTitle'>
                         Prova titolo molto lungo
                     </Typography>
@@ -33,8 +33,13 @@ function NotesCardLayout() {
 
                     <CssTextField
                         multiline
-                        className='textField'
-                        rows={8.5}
+                        className='textFieldCategoryLayout'
+                        rows={9.5}
+                        inputProps={{
+                            sx: {
+                                color: 'black !important',
+                            },
+                        }}
                     />
 
                     <Card className='sectionsInfoCard' style={{background: 'linear-gradient(45deg, #FF5C4D 30%, #ff8e53 90%)'}}>

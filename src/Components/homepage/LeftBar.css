@@ -1,11 +1,16 @@
+.leftBarGrid {
+    margin-top: 30px !important;
+    margin-right: 20px !important;
+}
+
 /*----------------- Button insert new element --------------------*/
 .buttonNew {
     font-family: Manrope;
-    width: 93% !important;
-    height: 65px !important;
-    font-size: 18px !important;
+    height: 70px !important;
+    width: 96% !important;
+    margin-left: 10px !important;
+    font-size: 19px !important;
     text-align: left !important;
-    margin-left: 20px !important;
     border-radius: 22px !important;
     font-weight: bolder !important;
 }
@@ -15,13 +20,9 @@
     height: 33px;
 }
 
-.newButtonGrid {
-    width: 273px;
-}
-
 /*----------------- List --------------------*/
 .icon {
-    margin-left: 21px;
+    margin-left: 10px;
     margin-right: 13px;
 }
 
@@ -41,7 +42,7 @@
 .clickAnimation {
     margin-left: -16px !important;
     border-radius: 0 22px 22px 0 !important;
-    margin-right: -20px !important;
+    margin-right: -16px !important;
 }
 
 .clickAnimation:focus {

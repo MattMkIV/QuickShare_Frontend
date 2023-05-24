@@ -2,10 +2,17 @@
 .sectionsInfoCard {
     height: 50px;
     width: 100%;
-    margin-top: 2px !important;
+    margin-top: 5px !important;
     border-radius: 12px !important;
     background-color: #FF5C4D !important;
     box-shadow: 3px 3px 7px 2px rgba(0, 0, 0, 0.34) !important;
+}
+
+.textFieldCategoryLayout {
+    font-family: Manrope, serif;
+    width: 100% !important;
+    height: 228px !important;
+    border-radius: 22px !important;
 }
 
 .sectionsInfoText {
@@ -18,3 +25,4 @@
     margin-left: 5px !important;
     font-weight: bold !important;
 }
+

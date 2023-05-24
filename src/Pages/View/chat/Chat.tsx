@@ -1,11 +1,14 @@
-function Chat() {
+import Box from "@mui/material/Box";
+import * as React from "react";
 
+function Chat() {
 
     //Render
     return(
-        <>  
-            <h1>Chat</h1>
-            <p>sehserhhserthsetseteshserhserhserh</p>
+        <>
+            <Box className='homeBox'>
+
+            </Box>
         </>
     );
 }
