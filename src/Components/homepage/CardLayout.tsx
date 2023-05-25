@@ -5,7 +5,6 @@ import * as React from "react";
 
 import './CardLayout.css'
 import {styled} from "@mui/material/styles";
-import {red} from "@mui/material/colors";
 
 function CardLayout() {
     const CssTextField = styled(TextField)({
@@ -25,7 +24,7 @@ function CardLayout() {
     return (
         <>
             <Card className='cardsLayout'>
-                <CardContent sx={{ m: -1.2 }}>
+                <CardContent sx={{ m: -1 }}>
                     <Typography noWrap className='cardTitle'>
                         Prova titolo molto lungo
                     </Typography>
@@ -43,7 +42,7 @@ function CardLayout() {
                         }}
                     />
 
-                    <Box className='infoCard' style={{background: 'linear-gradient(45deg, #FF5C4D 30%, #ff8e53 90%)'}}>
+                    <Box className='infoCard' style={{background: '#fcdfa6', color: '#261a00'}}>
                         <CardContent>
                             <Grid container>
                                 <Typography noWrap className='infoText'>

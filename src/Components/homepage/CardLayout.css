@@ -4,30 +4,32 @@
     margin-top: 10px !important;
     margin-bottom: 20px !important;
     border-radius: 12px !important;
-    background-color: #DEDEDE !important;
+    background-color: #ede0de !important;
     box-shadow: 8px 8px 10px 4px rgba(0, 0, 0, 0.22) !important;
 }
 
 /*------------------------------ Title of the card ------------------------------*/
 .cardTitle {
-    font-family: Manrope, serif;
-    font-size: 25px !important;
-    font-weight: bold !important;
+    color: #574419;
     margin-top: 0 !important;
+    font-size: 29px !important;
+    font-weight: bold !important;
+    letter-spacing: -0.2px !important;
     color: rgba(36, 36, 36, 0.88);
+    font-family: "Roboto Bold", serif !important;
 }
 
 .separationLine {
     margin-top: 0 !important;
     margin-bottom: 5px !important;
-    border-color: #A5A5A5;
+    border-color: #a08c8a;
 }
 
 /*------------------------------ Card text content ------------------------------*/
 .textField {
-    font-family: Manrope, serif;
+    font-family: "Roboto Regular", serif !important;
     width: 100% !important;
-    height: 218px !important;
+    height: 210px !important;
     border-radius: 22px !important;
 }
 
@@ -37,16 +39,19 @@
     width: 100%;
     margin-top: 5px !important;
     border-radius: 12px !important;
-    background-color: #FF5C4D !important;
     box-shadow: 3px 3px 7px 2px rgba(0, 0, 0, 0.34) !important;
+    font-family: "Roboto Regular", serif !important;
 }
 
 .infoText {
+    margin-top: -3px !important;
+    margin-bottom: 2px !important;
     font-size: 12px !important;
 }
 
 .infoTextContent {
+    margin-top: -3px !important;
     font-size: 12px !important;
     margin-left: 5px !important;
-    font-weight: bold !important;
+    font-family: "Roboto Black" !important;
 }

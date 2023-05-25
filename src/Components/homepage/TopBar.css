@@ -37,11 +37,9 @@
 
 /*------------------- SearchBar -----------------------*/
 .searchBar {
-    width: 105%;
-    margin-left: 15px !important;
-    font-family: Manrope;
-    border-radius: 12px !important;
-    background-color: #525355 !important;
+    width: 100%;
+    margin-left: 45px !important;
+    font-family: "Roboto Light", serif;
 }
 
 .avatarIcon {

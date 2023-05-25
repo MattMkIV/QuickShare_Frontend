@@ -3,7 +3,6 @@
 import './Logo.css';
 //Other
 import {useNavigate} from "react-router-dom";
-import Grid from "@mui/material/Grid";
 
 //Props
 interface props {

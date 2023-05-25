@@ -1,8 +1,3 @@
-@font-face {
-    font-family: NeonSans;
-    src: url(NeonSans.ttf);
-}
-
 /*------------------- Central container ------------------*/
 .container_login {
     width: 30rem;

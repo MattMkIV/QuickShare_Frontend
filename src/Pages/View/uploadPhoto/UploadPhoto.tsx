@@ -42,7 +42,7 @@ function UploadPhoto() {
         <>
             <Box className='homeBox'>
                 <Grid container>
-                    <h1 className='titleSection'>Most Recent:</h1>
+                    <h1 className='titleSection'>Photos:</h1>
                 </Grid>
 
             <hr className='lineCentralContent'></hr>

@@ -42,7 +42,7 @@ function NotesCardLayout() {
                         }}
                     />
 
-                    <Card className='sectionsInfoCard' style={{background: 'linear-gradient(45deg, #FF5C4D 30%, #ff8e53 90%)'}}>
+                    <Card className='sectionsInfoCard' style={{background: '#fcdfa6', color: '#261a00'}}>
                         <CardContent>
                             <Grid container>
                                 <Typography noWrap className='sectionsInfoText'>

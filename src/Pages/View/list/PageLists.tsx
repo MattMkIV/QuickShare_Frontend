@@ -1,10 +1,10 @@
 //MUI
 //Component
-import TopBar from '../../Components/homepage/TopBar';
-import LeftBar from '../../Components/homepage/LeftBar';
-import Home from '../View/home/Home';
+import LeftBar from '../../../Components/homepage/LeftBar'
+import TopBar from '../../../Components/homepage/TopBar'
+import Home from '../../../Pages/View/home/Home';
 //CSS
-import './Homepage.css'
+import '../../homepage/Homepage.css'
 //JS
 //Other
 import React, {useState} from 'react';
@@ -13,7 +13,8 @@ import {Box, IconButton, Menu, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import Lists from "./Lists";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 function Homepage() {
 
@@ -64,7 +65,7 @@ function Homepage() {
                 </Grid>
 
                 <Grid container className='homepageBoxBackground' lg={9.5} md={9.5} xs={12}>
-                    <Home/>
+                    <Lists/>
                 </Grid>
             </Grid>
 
@@ -87,7 +88,7 @@ function Homepage() {
                                 <Typography className='avatarPopUpMail'>carlolzr1@gmail.com</Typography>
                             </Grid>
                             <Box className='exitBox'>
-                                <LogoutIcon className='exitIcon' sx={{color : '#ffdad6'}}></LogoutIcon>
+                                <LogoutIcon className='exitIcon'></LogoutIcon>
                             </Box>
                         </Grid>
                     </Box>

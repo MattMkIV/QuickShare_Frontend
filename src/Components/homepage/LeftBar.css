@@ -46,5 +46,6 @@
 }
 
 .clickAnimation:focus {
-    background-color: #3C3C3C !important;
+    background-color: #e7bdb7 !important;
+    color: #690003 !important;
 }

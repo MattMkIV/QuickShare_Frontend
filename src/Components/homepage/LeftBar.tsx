@@ -4,25 +4,20 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import ListItem from '@mui/material/ListItem';
 import HomeIcon from '@mui/icons-material/Home';
-import ChatIcon from '@mui/icons-material/Chat';
 import ListItemText from '@mui/material/ListItemText';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import ListItemButton from '@mui/material/ListItemButton';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-//Components
-import Home from '../../Pages/View/home/Home';
-import Lists from "../../Pages/View/list/Lists";
-import Notes from "../../Pages/View/notes/Notes";
-import UploadPhoto from '../../Pages/View/uploadPhoto/UploadPhoto';
-import Chat from '../../Pages/View/chat/Chat'
 //CSS
 import './LeftBar.css';
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from "@mui/material/Grid";
-import {AddPhotoAlternate, ArrowBack, ArrowForward} from '@mui/icons-material';
-import {Box, Dialog, DialogTitle, Stack} from "@mui/material";
+import {AddPhotoAlternate} from '@mui/icons-material';
+import {Box, Dialog} from "@mui/material";
+import {useNavigate} from "react-router-dom";
+import Homepage from "../../Pages/homepage/Homepage";
 
 
 //Other
@@ -64,6 +59,9 @@ function LeftBar({onSelect}: any) {
         setOpen(false);
         setSelectedValue(value);
     };
+
+    const navigate = useNavigate();
+
     //Function
 
     return (
@@ -76,50 +74,45 @@ function LeftBar({onSelect}: any) {
 
             <Grid sx={{display: {xs: 'none', md: 'block'}}} className='leftBarGrid'>
                 <Button className='buttonNew' style={{
-                    background: 'linear-gradient(45deg, #067572 20%, #9BE84B 90%)',
-                    justifyContent: "flex-start"
+                    background: '#920609',
+                    justifyContent: "flex-start",
+                    color: '#ffdad5',
                 }} variant="contained" startIcon={<AddIcon/>}
                         onClick={handleClickOpen}>New</Button>
 
                 <List sx={{width: '100%', color: 'white'}}>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Home)}>
-                        <ListItemButton autoFocus className='clickAnimation'>
+                    <ListItem className='noPaddingTopBottom' onClick={() => navigate("/homepage")}>
+                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation'>
                             <HomeIcon className='icon'/>
                             <ListItemText primary="Home"/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Notes)}>
-                        <ListItemButton className='clickAnimation'>
+                    <ListItem className='noPaddingTopBottom' onClick={() => navigate("/homepage/notes")}>
+                        <ListItemButton style={{color: '#ffb4aa', fontWeight : 'bolder'}} className='clickAnimation'>
                             <AssignmentIcon className='icon'/>
                             <ListItemText primary="Notes"/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Lists)}>
-                        <ListItemButton className='clickAnimation'>
+                    <ListItem className='noPaddingTopBottom' onClick={() => navigate("/homepage/lists")}>
+                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation'>
                             <FormatListBulletedIcon className='icon'/>
                             <ListItemText primary="Lists"/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect(Chat)}>
-                        <ListItemButton className='clickAnimation'>
-                            <ChatIcon className='icon'/>
-                            <ListItemText primary="Chat"/>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect(UploadPhoto)}>
-                        <ListItemButton className='clickAnimation' disableRipple>
+                    <ListItem className='noPaddingTopBottom' onClick={() => navigate("/homepage/photo")}>
+                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation' disableRipple>
                             <AddPhotoAlternate className='icon'/>
                             <ListItemText primary="Photos"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Calendar')}>
-                        <ListItemButton className='clickAnimation' disableRipple>
+                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation' disableRipple>
                             <DateRangeIcon className='icon'/>
                             <ListItemText primary="Calendar "/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('AccountBalance')}>
-                        <ListItemButton className='clickAnimation' disableRipple>
+                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation' disableRipple>
                             <AccountBalanceWalletIcon className='icon'/>
                             <ListItemText primary="Account balance"/>
                         </ListItemButton>
