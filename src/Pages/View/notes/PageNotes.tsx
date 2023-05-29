@@ -3,6 +3,7 @@
 import LeftBar from '../../../Components/homepage/LeftBar'
 import TopBar from '../../../Components/homepage/TopBar'
 import Home from '../../../Pages/View/home/Home';
+import Notes from "./Notes";
 //CSS
 import '../../homepage/Homepage.css'
 //JS
@@ -13,7 +14,6 @@ import {Box, IconButton, Menu, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
-import Notes from "./Notes";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 function PageNotes() {

@@ -1,11 +1,5 @@
-.masonryPhotoStyle {
+.masonryImageStyle {
     border-radius: 22px !important;
-}
-
-.imageListPadding {
-    margin-top: 20px !important;
-    margin-left: 25px !important;
-    margin-right: 25px !important;
 }
 
 .uploadButton {
@@ -17,4 +11,9 @@
     width: 27px !important;
     height: 27px !important;
     margin-left: 10px !important;
+}
+
+.deleteButton:hover {
+    background-color: #ffa59a !important;
+    cursor: pointer;
 }
