@@ -1,7 +1,7 @@
 //MUI
 //Componenti
-//CSS
 import './ForgotPassword.css'
+//CSS
 //JS
 //Other
 import { useNavigate } from "react-router-dom";
@@ -17,32 +17,30 @@ function ForgotPassword() {
     const navigate = useNavigate();
     const [ErrorInput] = useState(false);
     const CssTextField = styled(TextField)({
-          '& label.Mui-focused': {
-            color: '#FF9636',
-          },
-          '& label': {
-              color: '#FF9636',
-          },
-          '& .MuiInput-underline': {
-              borderBottomColor: '#FF9636',
-          },
-          '& .MuiInput-underline:after': {
-            borderBottomColor: '#007BD4',
-          },
-          '& .MuiOutlinedInput-root': {
+        '& label.Mui-focused': {
+            color: 'c',
+        },
+        '& label': {
+            color: '#F4B7AD',
+        },
+        '& .MuiInput-underline': {
+            borderBottomColor: '#F4B7AD',
+        },
+        '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: '#FF9636',
+                borderColor: '#9D8D8B',
+                borderRadius : '22px',
             },
             '&:hover fieldset': {
-              borderColor: 'darkgrey',
+                borderColor: '#9D8D8B',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#FF9636',
+                borderColor: '#F4B7AD',
             },
-          },
+        },
     });
 
-    document.body.style.backgroundImage = 'url("LoginBackground.png")';
+    //document.body.style.backgroundImage = 'url("LoginBackground.png")';
 
     return(
         <>
@@ -51,9 +49,13 @@ function ForgotPassword() {
                 <h1 onClick={() => navigate("/")} className='siteNameRegistration'>QUICK.SHARE</h1>
                 <hr className='line'></hr>
                 <h1 className='titleBox'>Enter your Email</h1>
-                <CssTextField className="inputStyle" type="mail" error={ErrorInput} name="email" sx={{input: {color: 'darkgrey'}}} label='Email' variant="outlined"/>
+                <CssTextField className="inputStyle" type="mail" error={ErrorInput} name="email" label='Email' variant="outlined"/>
 
-                <Button className='buttonForgotPassword' type="submit" variant="contained">Send Email</Button>
+                <Button className='sendEmailButton'
+                    sx={{width : '90%', height : '60px', fontFamily : 'Roboto Black', color : '#ffdad5', fontSize : '17px',
+                        borderRadius : '18px', boxShadow : '0 0 20px 5px rgba(0, 0, 0, 0.13)',
+                        backgroundColor : '#920609', marginTop : '250px', marginLeft : '21px' }}
+                    type="submit">Send Email</Button>
             </div>
         </>
     );

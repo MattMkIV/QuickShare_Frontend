@@ -26,7 +26,7 @@ textarea {
 /*------------------- Forgot password link ------------------*/
 .forgotLink {
     width: 60%;
-    color: #EBDCD4;
+    color: #E9DEDC;
     font-size: 15px;
     font-weight: lighter;
     text-decoration: none;
@@ -44,28 +44,30 @@ textarea {
 /*------------------- Button ------------------*/
 .buttonSubmit {
     width: 60%;
-    font-family: Manrope;
-    color: #EBDCD5 !important;
-    font-size: 15px !important;
+    height: 60px ;
+    font-family: "Roboto Black";
+    color: #ffdad5 !important;
+    font-size: 16px !important;
     font-weight: bold !important;
     padding-top: 15px !important;
-    border-radius: 12px !important;
+    border-radius: 18px !important;
     padding-bottom: 15px !important;
     margin: 10% 10% 20% 20% !important;
-    background-color: #ff5c4d !important;
+    background-color: #920609 !important;
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
 }
 
 .buttonGuest {
     width: 60%;
-    font-family: Manrope;
-    color: #4F4F4F !important;
-    font-size: 15px !important;
+    height: 60px;
+    font-family: "Roboto Black";
+    color: #442926 !important;
+    font-size: 16px !important;
     font-weight: bold !important;
     padding-top: 15px !important;
-    border-radius: 12px !important;
+    border-radius: 18px !important;
     padding-bottom: 15px !important;
     margin: 10% 10% 20% 20% !important;
-    background-color: #EBDCD4 !important;
+    background-color: #e7bdb7 !important;
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.13) !important;
 }

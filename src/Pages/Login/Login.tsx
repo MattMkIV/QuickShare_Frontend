@@ -6,6 +6,7 @@ import './Login.css'
 //JS
 //Other
 import { useNavigate } from "react-router-dom";
+import {Typography} from "@mui/material";
 
 function Login() {
     //Variable declaration
@@ -14,7 +15,7 @@ function Login() {
     //Function
 
     //Style
-    document.body.style.backgroundImage = 'url("LoginBackground.png")';
+    //document.body.style.backgroundImage = 'url("LoginBackground.png")';
 
     return(
         <>
@@ -24,7 +25,10 @@ function Login() {
                 <hr className='line'></hr>
                 <h1 className='titleBox'>Login</h1>
                 <InputLogin firstLabel={"Username"} secondLabel={"Password"}/>
-                <p><a className='createAccountLink' onClick={() => navigate("/signUp")}>Create a new account</a></p>
+                <Typography className='createAccount'
+                    sx={{color : '#dfc38c', width : '60%', fontFamily : 'Roboto Light', fontSize : '20px',
+                        marginLeft : '10%', marginTop : '20px', marginRight : '10%'}}
+                    onClick={() => navigate("/signUp")}>Create a new account</Typography>
             </div>
         </>
     );
