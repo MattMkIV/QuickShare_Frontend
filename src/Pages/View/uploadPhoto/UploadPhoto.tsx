@@ -9,15 +9,16 @@ import Button from "@mui/material/Button";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import {createTheme, ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
+import {useState} from "react";
 
 
 const customTheme = createTheme({
     palette: {
         primary: {
-            main: '#FF5C4D',
+            main: '#ba1a1a',
         },
         secondary: {
-            main: '#ff910c',
+            main: '#715c2e',
         }
     },
 });
@@ -37,6 +38,16 @@ const StyledButton = styled(Button)`
 `;
 
 function UploadPhoto() {
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseOver = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseOut = () => {
+        setIsHovering(false);
+    };
+
     //Render
     return(
         <>
@@ -50,7 +61,8 @@ function UploadPhoto() {
                 <Box sx={{ width: '100%'}}>
                     <ImageList variant="masonry" cols={3} gap={8} className='imageListPadding'>
                         {itemData.map((item) => (
-                            <ImageListItem key={item.img}>
+                            <ImageListItem key={item.img} onMouseOver={handleMouseOver}
+                                           onMouseOut={handleMouseOut}>
                                 <img
                                     loading="lazy"
                                     alt={item.title}
@@ -58,13 +70,22 @@ function UploadPhoto() {
                                     src={`${item.img}?w=248&fit=crop&auto=format`}
                                     srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                 />
+                                {isHovering && (
+                                    <div>
+                                        <h2>Only visible when hovering div</h2>
+                                        <h2>bobbyhadz.com</h2>
+                                    </div>
+                                )}
                             </ImageListItem>
                         ))}
                     </ImageList>
                     <ThemeProvider theme={customTheme}>
                         <StyledButton className='uploadButton' style={{width: '70px', height: '70px'}} type="submit"
                                       variant="contained" startIcon={<FileUploadIcon/>}
-                                      sx={{position: 'fixed', bottom: 45, right: 45}}></StyledButton>
+                                      sx={{position: 'fixed', bottom: 45, right: 45}}>
+
+                            <input type="file" hidden/>
+                        </StyledButton>
                     </ThemeProvider>
                 </Box>
             </Box>

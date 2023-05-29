@@ -1,6 +1,6 @@
 ::-webkit-scrollbar {
-    width: 8px;
-    height:8px;
+    width: 0;
+    height: 0;
 
 }
 
@@ -18,8 +18,7 @@
     color: #E9DEDC;
     margin-left: 25px;
     margin-top: 15px;
-    font-size: 40px;
-    font-weight: bolder;
+    font-size: 43px;
     font-family: "Roboto Light", serif;
 }
 

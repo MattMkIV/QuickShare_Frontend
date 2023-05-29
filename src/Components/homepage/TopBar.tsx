@@ -48,7 +48,7 @@ function TopBar() {
 
                 <Grid container wrap='nowrap'>
                     <Grid lg={0.6} md={0.6} sx={{minWidth : '65px'}}>
-                        <MenuIcon className='menuIcon'/>
+                        <MenuIcon sx={{color : '#ffb4aa'}} className='menuIcon'/>
                     </Grid>
                     <Grid lg={1} md={1} sx={{ display:{xs : 'none' , md : 'block'}, minWidth : '210px'}}>
                         <Logo navigateHome={true}/>

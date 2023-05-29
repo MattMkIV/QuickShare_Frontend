@@ -82,37 +82,37 @@ function LeftBar({onSelect}: any) {
 
                 <List sx={{width: '100%', color: 'white'}}>
                     <ListItem className='noPaddingTopBottom' onClick={() => navigate("/homepage")}>
-                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation'>
+                        <ListItemButton style={{color : '#ffb4aa'}} className='clickAnimation'>
                             <HomeIcon className='icon'/>
                             <ListItemText primary="Home"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => navigate("/homepage/notes")}>
-                        <ListItemButton style={{color: '#ffb4aa', fontWeight : 'bolder'}} className='clickAnimation'>
+                        <ListItemButton style={{color : '#ffb4aa'}} className='clickAnimation'>
                             <AssignmentIcon className='icon'/>
                             <ListItemText primary="Notes"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => navigate("/homepage/lists")}>
-                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation'>
+                        <ListItemButton style={{color : '#ffb4aa'}} className='clickAnimation'>
                             <FormatListBulletedIcon className='icon'/>
                             <ListItemText primary="Lists"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => navigate("/homepage/photo")}>
-                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation' disableRipple>
+                        <ListItemButton style={{color : '#ffb4aa'}} className='clickAnimation'>
                             <AddPhotoAlternate className='icon'/>
                             <ListItemText primary="Photos"/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('Calendar')}>
-                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation' disableRipple>
+                        <ListItemButton style={{color : '#ffb4aa'}} className='clickAnimation'>
                             <DateRangeIcon className='icon'/>
                             <ListItemText primary="Calendar "/>
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={() => onSelect('AccountBalance')}>
-                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation' disableRipple>
+                        <ListItemButton style={{color : '#ffb4aa'}} className='clickAnimation'>
                             <AccountBalanceWalletIcon className='icon'/>
                             <ListItemText primary="Account balance"/>
                         </ListItemButton>

@@ -19,7 +19,7 @@ function CardLayout() {
                 borderRadius: 12,
             },
         },
-    })
+    });
 
     return (
         <>
@@ -37,7 +37,7 @@ function CardLayout() {
                         rows={9}
                         inputProps={{
                             sx: {
-                                color: 'black !important',
+                                color: '#574419 !important',
                             },
                         }}
                     />

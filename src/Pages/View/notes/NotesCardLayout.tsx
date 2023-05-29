@@ -24,7 +24,7 @@ function NotesCardLayout() {
     return (
         <>
             <Card className='cardsLayout'>
-                <CardContent sx={{  m: -1.2 }}>
+                <CardContent sx={{ m: -1 }}>
                     <Typography noWrap className='cardTitle'>
                         Prova titolo molto lungo
                     </Typography>

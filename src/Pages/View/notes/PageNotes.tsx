@@ -16,7 +16,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import Notes from "./Notes";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
-function Homepage() {
+function PageNotes() {
 
     //Variable declaration
     const [selectedItem, setSelectedItem] = useState(Home);
@@ -104,4 +104,4 @@ function Homepage() {
     );
 }
 
-export default Homepage;
+export default PageNotes;

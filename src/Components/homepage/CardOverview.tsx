@@ -37,7 +37,7 @@ function CardLayout() {
                         rows={8}
                     />
 
-                    <Card className='infoCard' style={{background: 'linear-gradient(45deg, #FF5C4D 30%, #ff8e53 90%)'}}>
+                    <Card className='infoCard'>
                         <CardContent sx={{ m: -0.4 }}>
                             <Grid container>
                                 <Typography noWrap className='infoText'>

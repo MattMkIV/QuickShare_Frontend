@@ -5,6 +5,11 @@ body,
 }
 
 @font-face {
+  font-family: "Logo Font";
+  src: local("Logo Font"), url("./Fonts/NeonSans.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "Roboto Regular";
   src: local("Roboto Regular"), url("./Fonts/Roboto-Regular.ttf") format("truetype");
 }

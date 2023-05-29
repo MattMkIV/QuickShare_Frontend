@@ -26,7 +26,6 @@
 /*------------------- Menu Icon and Setting Icon -----------------------*/
 .menuIcon,
 .settingIcon {
-    color: white;
     margin-top: 13px;
     font-size: 30px !important;
 }
@@ -38,7 +37,7 @@
 /*------------------- SearchBar -----------------------*/
 .searchBar {
     width: 100%;
-    margin-left: 45px !important;
+    margin-left: 25px !important;
     font-family: "Roboto Light", serif;
 }
 
@@ -53,38 +52,6 @@
     margin-top: 71px !important;
 }
 
-
-
-{/* Avatar menù UI settings*/}
-.MuiMenu-root ul{
-    background-color: #5b5a5a;
-    border-radius: 22px !important;
-    margin-top: 10px !important;
-    width: 350px !important;
-    height: 120px !important;
-}
-
 .exitBox:hover {
     cursor: pointer;
-}
-
-.exitIcon {
-    color: white;
-    margin-top: 10px;
-    font-size: 25px !important;
-    margin-left: 12px !important;
-}
-
-.loginIcon {
-    color: white;
-    margin-top: 5px !important;
-    margin-left: 18px !important;
-}
-
-.loginText {
-    color: white;
-    font-family: Manrope;
-    font-size: 15px;
-    margin-top: 6px !important;
-    margin-left: 10px !important;
 }
