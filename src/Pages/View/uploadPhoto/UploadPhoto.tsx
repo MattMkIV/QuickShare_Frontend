@@ -7,7 +7,7 @@ import * as React from "react";
 import './UploadPhoto.css'
 import Button from "@mui/material/Button";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import {createTheme, IconButton, makeStyles, Slide, ThemeProvider} from "@mui/material";
+import {createTheme, Slide, ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {useState} from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -40,16 +40,6 @@ const StyledButton = styled(Button)`
 
 
 function UploadPhoto() {
-    const [isHovering, setIsHovering] = useState(false);
-
-    const handleMouseOver = () => {
-        setIsHovering(true);
-    };
-
-    const handleMouseOut = () => {
-        setIsHovering(false);
-    };
-
     const [hoveredIndex, setHoveredIndex] = useState(-1);
 
     const handleMouseEnter = (index: number) => {
