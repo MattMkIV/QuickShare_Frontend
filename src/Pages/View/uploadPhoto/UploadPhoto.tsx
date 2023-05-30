@@ -7,10 +7,12 @@ import * as React from "react";
 import './UploadPhoto.css'
 import Button from "@mui/material/Button";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import {createTheme, Slide, ThemeProvider} from "@mui/material";
+import {createTheme, Fab, Slide, ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {useState} from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
+import InfoIcon from "@mui/icons-material/Info";
+import ShareIcon from "@mui/icons-material/Share";
 
 
 const customTheme = createTheme({
@@ -75,15 +77,32 @@ function UploadPhoto() {
                                         srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                     />
                                 <Slide direction="up" in={hoveredIndex === index} mountOnEnter unmountOnExit>
-                                        <Button className='deleteButton'
-                                            sx={{position : 'absolute', bottom : '15px', right : '15px',
-                                            height : '60px', transform : 'translate(-50%, -50%)', opacity : '100%',
-                                            transition : 'opacity 0.3s ease', backgroundColor : '#ffb4aa',
-                                            borderRadius : '22px'}}>
 
-                                            <DeleteIcon sx={{color : '#690003', width : '25px', height : '25px'}}></DeleteIcon>
-                                        </Button>
+                                    <Fab sx={{position : 'absolute', bottom : '15px', right : '15px',
+                                        transform : 'translate(-50%, -50%)', opacity : '100%',
+                                        transition : 'opacity 0.3s ease', backgroundColor : '#ffb4aa'}}>
+                                        <DeleteIcon sx={{color : '#690003'}} />
+                                    </Fab>
                                 </Slide>
+
+                                <Slide direction="up" in={hoveredIndex === index} mountOnEnter unmountOnExit>
+                                    <Fab sx={{position : 'absolute', bottom : '15px', right : '90px',
+                                        transform : 'translate(-50%, -50%)', transition : 'opacity 0.3s ease',
+                                        backgroundColor : '#e7bdb7',
+                                        ':hover' : {backgroundColor : '#e3ada5'}}}>
+                                        <ShareIcon sx={{color : '#442926'}} />
+                                    </Fab>
+                                </Slide>
+
+                                <Slide direction="up" in={hoveredIndex === index} mountOnEnter unmountOnExit>
+                                    <Fab sx={{position : 'absolute', bottom : '15px', right : '165px',
+                                        transform : 'translate(-50%, -50%)', transition : 'opacity 0.3s ease',
+                                        backgroundColor : '#dfc38c',
+                                        ':hover' : {backgroundColor : '#deba7b'} }}>
+                                        <InfoIcon sx={{color : '#3f2e04'}} />
+                                    </Fab>
+                                </Slide>
+
                             </ImageListItem>
                         ))}
                     </ImageList>
