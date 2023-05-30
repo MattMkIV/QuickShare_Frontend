@@ -18,7 +18,7 @@ function ForgotPassword() {
     const [ErrorInput] = useState(false);
     const CssTextField = styled(TextField)({
         '& label.Mui-focused': {
-            color: 'c',
+            color: '#F4B7AD',
         },
         '& label': {
             color: '#F4B7AD',

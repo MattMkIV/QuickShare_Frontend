@@ -73,11 +73,8 @@ function LeftBar({onSelect}: any) {
             />
 
             <Grid sx={{display: {xs: 'none', md: 'block'}}} className='leftBarGrid'>
-                <Button className='buttonNew' style={{
-                    background: '#920609',
-                    justifyContent: "flex-start",
-                    color: '#ffdad5',
-                }} variant="contained" startIcon={<AddIcon/>}
+                <Button className='buttonNew' style={{background: '#920609', justifyContent: "flex-start",
+                    color: '#ffdad5'}} variant="contained" startIcon={<AddIcon/>}
                         onClick={handleClickOpen}>New</Button>
 
                 <List sx={{width: '100%', color: 'white'}}>

@@ -37,14 +37,14 @@
     background-color: #a08c8a;
     border-radius: 22px !important;
     margin-top: 10px !important;
-    margin-right: 25px !important;
+    margin-right: 20px !important;
     width: 350px !important;
     height: 120px !important;
 }
 
 .MuiMenu-paper.notification ul {
     margin-top: 0 !important;
-    margin-right: 100px !important;
+    margin-right: 95px !important;
     height: 600px !important;
     width: 410px !important;
 }
