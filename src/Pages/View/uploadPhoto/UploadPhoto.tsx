@@ -3,13 +3,13 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Grid from "@mui/material/Grid";
 import * as React from "react";
+import {useState} from "react";
 
 import './UploadPhoto.css'
 import Button from "@mui/material/Button";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import {createTheme, Fab, Slide, ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
-import {useState} from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from "@mui/icons-material/Info";
 import ShareIcon from "@mui/icons-material/Share";

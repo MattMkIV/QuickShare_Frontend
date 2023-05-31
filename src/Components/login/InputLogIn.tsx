@@ -1,14 +1,14 @@
 //MUI
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 //CSS
 import "./InputLogIn.css";
 //Other
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 //Axios
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 //Props
 interface Props {

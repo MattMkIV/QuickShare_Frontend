@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, Fab, Slide, Typography } from '@mui/material';
+import {Box, Card, CardContent, Fab, Slide, Typography} from '@mui/material';
 import ListsCheckBoxComponent from './ListsCheckBoxComponent'
 import InfoIcon from "@mui/icons-material/Info";
 import ShareIcon from "@mui/icons-material/Share";
