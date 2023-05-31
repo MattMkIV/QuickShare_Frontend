@@ -4,16 +4,6 @@
 }
 
 /*----------------- Button insert new element --------------------*/
-.buttonNew {
-    font-family: "Roboto Bold", serif !important;
-    height: 70px !important;
-    width: 96% !important;
-    margin-left: 10px !important;
-    font-size: 20px !important;
-    text-align: left !important;
-    border-radius: 22px !important;
-}
-
 .buttonNew svg {
     width: 33px;
     height: 33px;
@@ -34,12 +24,13 @@
     background-color: transparent;
 }
 
-.listClass {
-    width: 100% !important;
-}
-
 .clickAnimation {
     margin-left: -16px !important;
     border-radius: 0 22px 22px 0 !important;
     margin-right: -16px !important;
+}
+
+.selected {
+    background-color: #e7bdb7 !important;
+    color: #442926 !important;
 }
