@@ -48,7 +48,7 @@ function ListCardLayout() {
                         <ListsCheckBoxComponent></ListsCheckBoxComponent>
                     </Box>
 
-                    <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit>
+                    <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={100}>
                         <Fab sx={{
                             backgroundColor: '#dfc38c', marginLeft: '27px', marginRight: '25px',
                             ':hover': {backgroundColor: '#deba7b'}
@@ -57,17 +57,16 @@ function ListCardLayout() {
                         </Fab>
                     </Slide>
 
-                    <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit>
+                    <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={200}>
                         <Fab sx={{
-                            backgroundColor: '#e7bdb7',
-                            marginRight: '25px',
+                            backgroundColor: '#e7bdb7', marginRight: '25px',
                             ':hover': {backgroundColor: '#e3ada5'}
                         }}>
                             <ShareIcon sx={{color: '#442926'}}/>
                         </Fab>
                     </Slide>
 
-                    <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit>
+                    <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={400}>
                         <Fab sx={{backgroundColor: '#ffb4aa', ':hover': {backgroundColor: '#fda498'}}}>
                             <DeleteIcon sx={{color: '#690003'}}/>
                         </Fab>

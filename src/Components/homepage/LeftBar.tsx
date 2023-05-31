@@ -81,10 +81,10 @@ function LeftBar({onSelect}: any) {
                 <Button
                     sx={{
                         fontFamily: 'Roboto Bold', height: '70px', width: '96%', marginLeft: '10px',
-                        fontSize: '20px', textAlign: 'left', borderRadius: '22px'
+                        fontSize: '21px', textAlign: 'left', borderRadius: '22px', alignContent : 'center',
+                        background: '#920609', justifyContent : 'flex-start', color: '#ffdad5', ':hover' : {backgroundColor : '#a4070a'}
                     }}
-                    style={{background: '#920609', justifyContent: "flex-start", color: '#ffdad5'}}
-                    variant="contained" startIcon={<AddIcon/>}
+                    variant="contained" startIcon={<AddIcon sx={{height : '26px', width : '26px'}}/>}
                     onClick={handleClickOpen}>New</Button>
 
                 <List sx={{width: '100%', color: 'white'}}>

@@ -8,7 +8,7 @@ import {useState} from "react";
 import './UploadPhoto.css'
 import Button from "@mui/material/Button";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import {createTheme, Fab, Slide, ThemeProvider} from "@mui/material";
+import {createTheme, Fab, Grow, ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from "@mui/icons-material/Info";
@@ -27,12 +27,12 @@ const customTheme = createTheme({
 });
 
 const StyledButton = styled(Button)`
-  ${({ theme }) => `
+  ${({theme}) => `
   cursor: pointer;
   background-color: ${theme.palette.primary.main};
   transition: ${theme.transitions.create(['background-color', 'transform'], {
     duration: theme.transitions.duration.standard,
-})};
+  })};
   &:hover {
     background-color: ${theme.palette.secondary.main};
     transform: scale(1.2);
@@ -52,67 +52,74 @@ function UploadPhoto() {
     };
 
     //Render
-    return(
+    return (
         <>
             <Box className='homeBox'>
                 <Grid container>
                     <h1 className='titleSection'>Photos:</h1>
                 </Grid>
 
-            <hr className='lineCentralContent'></hr>
+                <hr className='lineCentralContent'></hr>
 
-                <Box sx={{ width: '100%'}}>
-                    <ImageList variant="masonry" cols={3} gap={8} sx={{marginTop : '20px', marginLeft : '25px',
-                        marginRight : '25px'}}>
-                        {itemData.map((item,index) => (
+                <Box sx={{width: '100%'}}>
+                    <ImageList
+                        variant="masonry"
+                        cols={3}
+                        gap={8}
+                        sx={{marginTop: '20px', marginLeft: '25px', marginRight: '25px', alignItems: 'center'}}>
+                        {itemData.map((item, index) => (
                             <ImageListItem
                                 key={index}
                                 onMouseEnter={() => handleMouseEnter(index)}
                                 onMouseLeave={handleMouseLeave}>
-                                    <img
-                                        loading="lazy"
-                                        alt={item.title}
-                                        className='masonryImageStyle'
-                                        src={`${item.img}?w=248&fit=crop&auto=format`}
-                                        srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                    />
-                                <Slide direction="up" in={hoveredIndex === index} mountOnEnter unmountOnExit>
-
-                                    <Fab sx={{position : 'absolute', bottom : '15px', right : '15px',
-                                        transform : 'translate(-50%, -50%)', opacity : '100%',
-                                        transition : 'opacity 0.3s ease', backgroundColor : '#ffb4aa'}}>
-                                        <DeleteIcon sx={{color : '#690003'}} />
+                                <img
+                                    loading="lazy"
+                                    alt={item.title}
+                                    className='masonryImageStyle'
+                                    src={`${item.img}?w=248&fit=crop&auto=format`}
+                                    srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                />
+                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={100}>
+                                    <Fab sx={{
+                                        position: 'absolute', bottom: '15px', right: '15px', backgroundColor: '#ffb4aa',
+                                        ':hover': {backgroundColor: '#fda498'}
+                                    }}>
+                                        <DeleteIcon sx={{color: '#690003'}}/>
                                     </Fab>
-                                </Slide>
+                                </Grow>
 
-                                <Slide direction="up" in={hoveredIndex === index} mountOnEnter unmountOnExit>
-                                    <Fab sx={{position : 'absolute', bottom : '15px', right : '90px',
-                                        transform : 'translate(-50%, -50%)', transition : 'opacity 0.3s ease',
-                                        backgroundColor : '#e7bdb7',
-                                        ':hover' : {backgroundColor : '#e3ada5'}}}>
-                                        <ShareIcon sx={{color : '#442926'}} />
+                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={200}>
+                                    <Fab sx={{
+                                        position: 'absolute', bottom: '15px', right: '90px', backgroundColor: '#e7bdb7',
+                                        ':hover': {backgroundColor: '#e3ada5'}
+                                    }}>
+                                        <ShareIcon sx={{color: '#442926'}}/>
                                     </Fab>
-                                </Slide>
+                                </Grow>
 
-                                <Slide direction="up" in={hoveredIndex === index} mountOnEnter unmountOnExit>
-                                    <Fab sx={{position : 'absolute', bottom : '15px', right : '165px',
-                                        transform : 'translate(-50%, -50%)', transition : 'opacity 0.3s ease',
-                                        backgroundColor : '#dfc38c',
-                                        ':hover' : {backgroundColor : '#deba7b'} }}>
-                                        <InfoIcon sx={{color : '#3f2e04'}} />
+                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={400}>
+                                    <Fab sx={{
+                                        position: 'absolute',
+                                        bottom: '15px',
+                                        right: '165px',
+                                        backgroundColor: '#dfc38c',
+                                        ':hover': {backgroundColor: '#deba7b'}
+                                    }}>
+                                        <InfoIcon sx={{color: '#3f2e04'}}/>
                                     </Fab>
-                                </Slide>
+                                </Grow>
 
                             </ImageListItem>
                         ))}
                     </ImageList>
+
                     <ThemeProvider theme={customTheme}>
                         <StyledButton className='uploadButton'
-                              style={{width: '70px', height: '70px'}}
-                              type="submit"
-                              variant="contained"
-                              startIcon={<FileUploadIcon/>}
-                              sx={{position: 'fixed', bottom: 45, right: 45}}>
+                                      style={{width: '70px', height: '70px'}}
+                                      type="submit"
+                                      variant="contained"
+                                      startIcon={<FileUploadIcon/>}
+                                      sx={{position: 'fixed', bottom: 45, right: 45}}>
 
                             <input type="file" hidden/>
                         </StyledButton>
