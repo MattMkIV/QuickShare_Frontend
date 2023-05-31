@@ -1,27 +1,19 @@
 import {
     Box,
-    CardActionArea,
     CardContent,
     Fab,
     Slide,
-    SpeedDial,
-    SpeedDialAction,
-    SpeedDialIcon,
     TextField,
     Typography
 } from "@mui/material";
 import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
 import * as React from "react";
 import InfoIcon from '@mui/icons-material/Info';
 import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import EditIcon from '@mui/icons-material/Edit';
 
 import './CardLayout.css'
 import {styled} from "@mui/material/styles";
-import {useState} from "react";
 
 function CardLayout() {
     const CssTextField = styled(TextField)({
@@ -60,19 +52,18 @@ function CardLayout() {
 
                     <hr className='separationLine'></hr>
 
-                    <CssTextField
-                        multiline
-                        sx={{fontFamily : 'Roboto Regular',
-                            borderRadius : '22px',
-                            width : '100%',
-                            height : '290px'}}
-                        rows={12}
-                        inputProps={{
-                            sx: {
-                                color: '#574419 !important',
-                            },
-                        }}
-                    />
+                    <Box sx={{height: '290px', overflowY : 'scroll'}}>
+                        <CssTextField
+                            multiline
+                            sx={{fontFamily : 'Roboto Regular', width : '100%', height : '290px'}}
+                            rows={12}
+                            inputProps={{
+                                sx: {
+                                    color: '#574419 !important',
+                                },
+                            }}
+                        />
+                    </Box>
 
                     <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit>
                         <Fab sx={{backgroundColor : '#dfc38c', marginLeft : '27px', marginRight : '25px',

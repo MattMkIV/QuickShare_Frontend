@@ -3,6 +3,7 @@ import './Home.css'
 import Grid from "@mui/material/Grid";
 import {Box, Stack} from "@mui/material";
 import CardLayout from '../../../Components/homepage/CardLayout'
+import ListCardLayout from '../../../Components/homepage/ListsCardLayout'
 
 function Home() {
     //Render
@@ -16,6 +17,7 @@ function Home() {
                 <Grid item className='cardSliderHomePage'>
                     <Stack spacing={5} direction="row">
                         <CardLayout></CardLayout>
+                        <ListCardLayout></ListCardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
