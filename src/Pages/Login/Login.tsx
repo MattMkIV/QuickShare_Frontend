@@ -13,6 +13,7 @@ function Login() {
     const navigate = useNavigate();
 
     //Function
+    
 
     //Style
     //document.body.style.backgroundImage = 'url("LoginBackground.png")';

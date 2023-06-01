@@ -21,7 +21,7 @@ function SignUp() {
                 <h1 onClick={() => navigate("/")} className='siteNameRegistration'>QUICK.SHARE</h1>
                 <hr className='line'></hr>
                 <h1 className='titleBox'>Create your account</h1>
-                <Registration firstLabel={"Name"} secondLabel={"Surname"} thirdLabel={"Email"} fourthLabel={"Password"} fifthLabel={"Confirm Password"}/>
+                <Registration/>
             </div>
         </>
     );

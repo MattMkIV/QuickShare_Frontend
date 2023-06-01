@@ -7,19 +7,13 @@ import Button from '@mui/material/Button';
 import './Registration.css'
 //Other
 import { useState } from 'react';
+import { registerNewUser } from '../../Utils/AuthService';
 //Axios
 import { useNavigate } from 'react-router-dom';
 
 //Props
-interface Props {
-    firstLabel: string,
-    secondLabel: string,
-    thirdLabel: string, 
-    fourthLabel: string, 
-    fifthLabel: string;
-}
 
-function Registration (this: any, {firstLabel, secondLabel, thirdLabel, fourthLabel, fifthLabel}: Props) {
+function Registration (this: any) {
 
       //Variable declaration
       const navigate = useNavigate();
@@ -51,17 +45,38 @@ function Registration (this: any, {firstLabel, secondLabel, thirdLabel, fourthLa
 
       //Functions
       const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-          event.preventDefault();
-          const data = new FormData(event.currentTarget);
-          //Take Value
-          let username = data.get('username');
-          let password = data.get('password');
+            event.preventDefault();
+            let isError = false;
+            const data = new FormData(event.currentTarget);
+            //Take Value
+            let nome = data.get('nome');
+            let cognome = data.get('cognome');
+            let username = data.get('username');
+            let email = data.get('email');
+            let password = data.get('password');
+            let confirmPassword = data.get('confirmPassword');
+            
+            console.log("Nome: "+nome);
+            console.log("Cognome: "+cognome);
+            console.log("username: "+username);
+            console.log("email: "+email);
+            console.log("password: "+password);
+            console.log("confirmPassword : "+confirmPassword);
 
-          console.log("Username: "+username);
-          console.log("Password: "+password);
+            var userInfo = {
+                Nome: nome,
+                Cognome: cognome,
+                Username: username,
+                Email: email,
+                Password: password,
+                ConfirmPassword: confirmPassword
+            };
 
-          if(!isErrorInput) navigate("/homepage");
-          else setErrorInput(true);
+            isError = await registerNewUser(userInfo);
+
+            if(!isError) navigate("/");
+            else setErrorInput(true);
+
       }
 
     document.body.style.backgroundImage = '';
@@ -69,22 +84,25 @@ function Registration (this: any, {firstLabel, secondLabel, thirdLabel, fourthLa
       return(
           <>
               <Box component="form" onSubmit={handleSubmit}>
-                  <div className='w3-row inputStyle'>
-                      <div className='w3-col l6'>
-                          <CssTextField className="inputStyleName" error={ErrorInput} name="nome" label={firstLabel} variant="outlined"/>
-                      </div>
-                      <div className='w3-col l6'>
-                          <CssTextField className="inputStyleSurname" error={ErrorInput} name="cognome" label={secondLabel} variant="outlined"/>
-                      </div>
-                  </div>
-                  <CssTextField className="inputStyle" type="mail" error={ErrorInput} name="email" label={thirdLabel} variant="outlined"/>
-                  <CssTextField className="inputStyle" error={ErrorInput} name="password" type='password' label={fourthLabel} variant="outlined"/>
+                    <div className='w3-row inputStyle'>
+                        <div className='w3-col l6'>
+                            <CssTextField className="inputStyleName" error={ErrorInput} name="nome" label="Nome" variant="outlined"/>
+                        </div>
+                        <div className='w3-col l6'>
+                            <CssTextField className="inputStyleSurname" error={ErrorInput} name="cognome" label="Cognome" variant="outlined"/>
+                        </div>
+                    </div>
+                    <CssTextField className="inputStyle" type="text" error={ErrorInput} name="username" label="Username" variant="outlined"/>
 
-                  <Button className='buttonSignup'
-                      sx={{width : '90%', height : '60px', fontFamily : 'Roboto Black', color : '#ffdad5',
-                          fontSize : '17px', borderRadius : '18px', boxShadow : '0 0 20px 5px rgba(0, 0, 0, 0.13)',
-                          backgroundColor : '#920609', marginTop : '88px', marginLeft : '21px' }}
-                      type="submit">Signup</Button>
+                    <CssTextField className="inputStyle" type="email" error={ErrorInput} name="email" label="Email" variant="outlined"/>
+                    <CssTextField className="inputStyle" error={ErrorInput} name="password" type='password' label="Password" variant="outlined"/>
+                    <CssTextField className="inputStyle" error={ErrorInput} name="confirmPassword" type='password' label="Confirm Password" variant="outlined"/>
+
+                    <Button className='buttonSignup'
+                        sx={{width : '90%', height : '60px', fontFamily : 'Roboto Black', color : '#ffdad5',
+                            fontSize : '17px', borderRadius : '18px', boxShadow : '0 0 20px 5px rgba(0, 0, 0, 0.13)',
+                            backgroundColor : '#920609', marginTop : '88px', marginLeft : '21px' }}
+                        type="submit">Signup</Button>
               </Box>
           </>    
       );

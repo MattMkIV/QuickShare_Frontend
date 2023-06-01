@@ -9,6 +9,7 @@ import "./InputLogIn.css";
 import React, {useState} from 'react';
 //Axios
 import {useNavigate} from 'react-router-dom';
+import { doLogin } from '../../Utils/AuthService';
 
 //Props
 interface Props {
@@ -16,7 +17,6 @@ interface Props {
     secondLabel: string;
 }
   
-
 function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
 
       //Variable declaration
@@ -50,18 +50,22 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
 
       //Functions
       const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-          event.preventDefault();
-          const data = new FormData(event.currentTarget);
-          //Take Value
-          let username = data.get('username');
-          let password = data.get('password');
+            event.preventDefault();
+            let isError = false;
+            const data = new FormData(event.currentTarget);
+            //Take Value
+            let username = data.get('username');
+            let password = data.get('password');
+            
+            console.log("username: "+username);
+            console.log("password: "+password);
 
-          console.log("Username: "+username);
-          console.log("Password: "+password);
+            isError = await doLogin(username, password);
 
-          if(!isErrorInput) navigate("/homepage");
-          else setErrorInput(true);
-      }
+            if(!isError) navigate("/");
+            else setErrorInput(true);
+
+        }
 
       return(
           <>
