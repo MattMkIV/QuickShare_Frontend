@@ -1,0 +1,50 @@
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background-color: #3B3B3B;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #6c6c6c;
+}
+
+.titleSection {
+    color: #E9DEDC;
+    margin-left: 25px;
+    margin-top: 15px;
+    font-size: 43px;
+    font-family: "Roboto Light", serif;
+}
+
+.cardSliderHomePage {
+    margin-left: 25px !important;
+    margin-right: 25px !important;
+    display: flex !important;
+    overflow-x: scroll !important;
+}
+
+.cardSlider {
+    margin-left: 25px !important;
+    margin-right: 25px !important;
+    display: flex !important;
+    overflow: hidden !important;
+}
+
+.lineCentralContent {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-color: #dfc38c;
+}
+
+.homeBox {
+    background-color: #292221;
+    border-radius: 22px !important;
+    width: 100% !important;
+}

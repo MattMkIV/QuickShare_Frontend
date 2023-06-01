@@ -27,27 +27,25 @@ function Registration (this: any, {firstLabel, secondLabel, thirdLabel, fourthLa
       const [ErrorInput, setErrorInput] = useState(false);
       const CssTextField = styled(TextField)({
           '& label.Mui-focused': {
-            color: '#FF9636',
+              color: '#F4B7AD',
           },
           '& label': {
-              color: '#FF9636',
+              color: '#F4B7AD',
           },
           '& .MuiInput-underline': {
-              borderBottomColor: '#FF9636',
-          },
-          '& .MuiInput-underline:after': {
-            borderBottomColor: '#007BD4',
+              borderBottomColor: '#F4B7AD',
           },
           '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: '#FF9636',
-            },
-            '&:hover fieldset': {
-              borderColor: 'darkgrey',
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: '#FF9636',
-            },
+              '& fieldset': {
+                  borderColor: '#9D8D8B',
+                  borderRadius : '22px',
+              },
+              '&:hover fieldset': {
+                  borderColor: '#9D8D8B',
+              },
+              '&.Mui-focused fieldset': {
+                  borderColor: '#F4B7AD',
+              },
           },
       });
 
@@ -66,21 +64,27 @@ function Registration (this: any, {firstLabel, secondLabel, thirdLabel, fourthLa
           else setErrorInput(true);
       }
 
+    document.body.style.backgroundImage = '';
+
       return(
           <>
               <Box component="form" onSubmit={handleSubmit}>
                   <div className='w3-row inputStyle'>
                       <div className='w3-col l6'>
-                          <CssTextField className="inputStyleName" error={ErrorInput} name="nome" sx={{input: {color: 'darkgrey'}}} label={firstLabel} variant="outlined"/>
+                          <CssTextField className="inputStyleName" error={ErrorInput} name="nome" label={firstLabel} variant="outlined"/>
                       </div>
                       <div className='w3-col l6'>
-                          <CssTextField className="inputStyleSurname" error={ErrorInput} name="cognome" sx={{input: {color: 'darkgrey'}}} label={secondLabel} variant="outlined"/>
+                          <CssTextField className="inputStyleSurname" error={ErrorInput} name="cognome" label={secondLabel} variant="outlined"/>
                       </div>
                   </div>
-                  <CssTextField className="inputStyle" type="mail" error={ErrorInput} name="email" sx={{input: {color: 'darkgrey'}}} label={thirdLabel} variant="outlined"/>
-                  <CssTextField className="inputStyle" error={ErrorInput} name="password" type='password' sx={{input: {color: 'darkgrey'}}} label={fourthLabel} variant="outlined"/>
+                  <CssTextField className="inputStyle" type="mail" error={ErrorInput} name="email" label={thirdLabel} variant="outlined"/>
+                  <CssTextField className="inputStyle" error={ErrorInput} name="password" type='password' label={fourthLabel} variant="outlined"/>
 
-                  <Button className='buttonSignup' type="submit" variant="contained">Signup</Button>
+                  <Button className='buttonSignup'
+                      sx={{width : '90%', height : '60px', fontFamily : 'Roboto Black', color : '#ffdad5',
+                          fontSize : '17px', borderRadius : '18px', boxShadow : '0 0 20px 5px rgba(0, 0, 0, 0.13)',
+                          backgroundColor : '#920609', marginTop : '88px', marginLeft : '21px' }}
+                      type="submit">Signup</Button>
               </Box>
           </>    
       );

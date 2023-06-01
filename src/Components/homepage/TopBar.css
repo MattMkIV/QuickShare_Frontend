@@ -1,15 +1,15 @@
 /*------------------- Logo Quickshare -----------------------*/
 .logo {
-    width: 30px;
-    margin-left: 20px !important;
+    width: 35px;
+    margin-left: 0 !important;
     margin-top: 3px !important;
 }
 
 .siteNameHome {
     color: #FF5C4D;
-    font-size: 25px;
-    margin-left: 55px;
-    margin-top: 11px;
+    font-size: 26px;
+    margin-left: 40px;
+    margin-top: 8px;
     font-family: NeonSans;
     margin-bottom: 1px !important;
     text-shadow: 0 0 5px #FF5C4DFF !important;
@@ -26,28 +26,23 @@
 /*------------------- Menu Icon and Setting Icon -----------------------*/
 .menuIcon,
 .settingIcon {
-    color: white;
-    font-size: 30px !important;
     margin-top: 13px;
+    font-size: 30px !important;
 }
 
 .menuIcon {
-    margin-left: 33px;
+    margin-left: 25px;
 }
 
 /*------------------- SearchBar -----------------------*/
-/* TODO: rimuovere il bordo che rimane visibile */
 .searchBar {
-    width: 80%;
-    color: #C0C0C0 !important;
-    margin-left: 22px !important;
-    border-radius: 22px !important;
-    background-color: #525355 !important;
+    width: 100%;
+    margin-left: 25px !important;
+    font-family: "Roboto Light", serif;
 }
 
 .avatarIcon {
-    margin-right: 40px !important;
-    border-radius: 14px !important;
+    border-radius: 16px !important;
 }
 
 .lineHomepage {
@@ -55,4 +50,8 @@
     border-color: #545454;
     position: absolute !important;
     margin-top: 71px !important;
+}
+
+.exitBox:hover {
+    cursor: pointer;
 }

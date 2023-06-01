@@ -1,14 +1,14 @@
 //MUI
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 //CSS
 import "./InputLogIn.css";
 //Other
-import { useState } from 'react';
+import React, {useState} from 'react';
 //Axios
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 //Props
 interface Props {
@@ -26,26 +26,24 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
 
       const CssTextField = styled(TextField)({
           '& label.Mui-focused': {
-            color: '#FF9636',
+            color: '#F4B7AD',
           },
           '& label': {
-              color: '#FF9636',
+              color: '#F4B7AD',
           },
           '& .MuiInput-underline': {
-              borderBottomColor: '#FF9636',
-          },
-          '& .MuiInput-underline:after': {
-            borderBottomColor: '#007BD4',
+              borderBottomColor: '#F4B7AD',
           },
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: '#FF9636',
+                borderColor: '#9D8D8B',
+                borderRadius : '22px',
             },
             '&:hover fieldset': {
-              borderColor: 'darkgrey',
+                borderColor: '#9D8D8B',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#FF9636',
+                borderColor: '#F4B7AD',
             },
           },
       });
@@ -77,7 +75,7 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
                   <Button className='buttonGuest' type="submit" variant="contained">guest</Button>
                 </div>
                 <div className='w3-col l6'>
-                  <Button className='buttonSubmit' type="submit" variant="contained">Login</Button>
+                  <Button className='buttonSubmit' type="submit">Login</Button>
                 </div>
               </div>
             </Box>

@@ -22,12 +22,12 @@ function Logo(this: any, { navigateHome }: props) {
         <>  
             {navigateHome ? (
                 <div onClick={handleClick}>
-                    <img src='LogoHighRes.png' className='logo'/>
+                    <img src={process.env.PUBLIC_URL + '/LogoHighRes.png'} alt='Logo img' className='logo'/>
                     <h1 className='siteNameHome'>QUICK.SHARE</h1>
                 </div>
             ) : (
                 <div onClick={handleClick}>
-                    <img src='LogoHighRes.png' className='logo'/>
+                    <img src='LogoHighRes.png' alt='Logo img' className='logo'/>
                     <h1 className='siteNameHome'>QUICK.SHARE</h1>
                 </div>
             )}
