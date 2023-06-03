@@ -1,43 +1,7 @@
-/*------------------- Logo Quickshare -----------------------*/
-.logo {
-    width: 35px;
-    margin-left: 0 !important;
-    margin-top: 3px !important;
-}
-
-.siteNameHome {
-    color: #FF5C4D;
-    font-size: 26px;
-    margin-left: 40px;
-    margin-top: 8px;
-    font-family: NeonSans;
-    margin-bottom: 1px !important;
-    text-shadow: 0 0 5px #FF5C4DFF !important;
-}
-
-.logo:hover,
-.siteNameHome:hover,
-.avatarIcon:hover,
-.menuIcon:hover,
-.settingIcon:hover {
-    cursor: pointer;
-}
-
-/*------------------- Menu Icon and Setting Icon -----------------------*/
-.menuIcon,
-.settingIcon {
-    margin-top: 13px;
-    font-size: 30px !important;
-}
-
-.menuIcon {
-    margin-left: 25px;
-}
-
 /*------------------- SearchBar -----------------------*/
 .searchBar {
     width: 100%;
-    margin-left: 25px !important;
+    margin-left: 20px !important;
     font-family: "Roboto Light", serif;
 }
 

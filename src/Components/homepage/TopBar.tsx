@@ -13,19 +13,24 @@ import {styled} from "@mui/material/styles";
 
 function TopBar() {
     //Variable declaration
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl]
+        = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
     const CssTextField = styled(TextField)({
         '& label.Mui-focused': {
             color: '#F4B7AD',
         },
-        '& .MuiInput-underline:after': {
+        '& label': {
+            color: '#F4B7AD',
+        },
+        '& .MuiInput-underline': {
             borderBottomColor: '#F4B7AD',
         },
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
                 borderColor: '#9D8D8B',
+                borderRadius : '22px',
             },
             '&:hover fieldset': {
                 borderColor: '#9D8D8B',
@@ -46,15 +51,10 @@ function TopBar() {
             <React.Fragment>
                 <hr className='lineHomepage'></hr>
 
-                <Grid container wrap='nowrap'>
-                    <Grid lg={0.6} md={0.6} sx={{minWidth : '65px'}}>
-                        <MenuIcon sx={{color : '#ffb4aa'}} className='menuIcon'/>
-                    </Grid>
-                    <Grid lg={1} md={1} sx={{ display:{xs : 'none' , md : 'block'}, minWidth : '210px'}}>
-                        <Logo navigateHome={true}/>
-                    </Grid>
+                <Grid container>
+                    <Logo navigateHome={true}/>
 
-                    <Grid lg={7} md={7} xs={8}>
+                    <Grid lg={7} md={7} xs={9}>
                         <CssTextField InputLabelProps={{ sx: { color: '#9D8D8B' } }} id="search"
                                       type="search" label="Search" className='searchBar' onClick={handleChange}
                                       InputProps={{

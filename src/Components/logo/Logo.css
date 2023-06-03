@@ -1,18 +1,9 @@
 /*------------------- Logo Quickshare -----------------------*/
 .logo {
-    width: 30px;
-    position: absolute;
-    margin-left: 15px;
-    margin-right: 5px !important;
-    margin-top: 17px !important;
-}
-
-.siteNameHome {
-    color: #FF5C4D;
-    font-size: 27px !important;
-    text-align: left;
-    font-family: "Logo Font", serif !important;
-    text-shadow: 0 0 5px #FF5C4DFF !important;
+    width: 40px !important;
+    position: absolute !important;
+    margin-left: 10px !important;
+    margin-top: 9px !important;
 }
 
 .logo:hover,
