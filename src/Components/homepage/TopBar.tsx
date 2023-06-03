@@ -1,5 +1,4 @@
 //MUI
-import MenuIcon from '@mui/icons-material/Menu';
 import {InputAdornment, TextField} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Grid from '@mui/material/Grid';
@@ -30,7 +29,7 @@ function TopBar() {
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
                 borderColor: '#9D8D8B',
-                borderRadius : '22px',
+                borderRadius: '22px',
             },
             '&:hover fieldset': {
                 borderColor: '#9D8D8B',
@@ -46,7 +45,7 @@ function TopBar() {
     const handleChange = () => {
     };
 
-    return(
+    return (
         <>
             <React.Fragment>
                 <hr className='lineHomepage'></hr>
@@ -55,12 +54,12 @@ function TopBar() {
                     <Logo navigateHome={true}/>
 
                     <Grid lg={7} md={7} xs={9}>
-                        <CssTextField InputLabelProps={{ sx: { color: '#9D8D8B' } }} id="search"
+                        <CssTextField InputLabelProps={{sx: {color: '#9D8D8B'}}} id="search"
                                       type="search" label="Search" className='searchBar' onClick={handleChange}
                                       InputProps={{
                                           endAdornment: (
                                               <InputAdornment position="end">
-                                                  <SearchIcon sx={{color : '#9D8D8B'}} />
+                                                  <SearchIcon sx={{color: '#9D8D8B'}}/>
                                               </InputAdornment>
                                           ),
                                       }}/>

@@ -82,7 +82,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
             <Grid container className='topMarginHomepage' wrap='nowrap'
                   sx={{display: 'flex', flexDirection: 'row-reverse'}}>
                 <Grid wrap='nowrap' className='avatarPositionGrid'
-                      sx={{minWidth : '120px'}}>
+                      sx={{minWidth: '120px'}}>
                     <IconButton
                         sx={{marginBottom: '-10px', marginRight: '15px'}}
                         onClick={(event) => topBarClick(event, 'notification')}
