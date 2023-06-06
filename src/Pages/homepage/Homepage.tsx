@@ -10,7 +10,7 @@ import MyMessageComponent from '../../Components/homepage/MyMessageComponent'
 import './Homepage.css'
 //JS
 //Other
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from '@mui/material/Grid';
 import {Box, IconButton, Menu, Stack, Tooltip, tooltipClasses, TooltipProps, Typography, Zoom} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
@@ -20,6 +20,8 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {styled} from "@mui/material/styles";
+import { checkJwt } from '../../Utils/AuthService';
+import { useNavigate } from 'react-router-dom';
 
 interface HomepageProps {
     componentToRender: React.ComponentType;
@@ -30,6 +32,8 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     //Variable declaration
     const [selectedItem, setSelectedItem] = useState(Home);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    let jwtError = false;
+    let navigate = useNavigate();
 
     const [menuId, setMenuId] = useState<string | undefined>(undefined);
     const topBarClick = (event: React.MouseEvent<HTMLElement>, id: string) => {
@@ -41,6 +45,17 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     document.body.style.backgroundImage = '';
 
     //Function
+    useEffect(() => {
+        const check = async () => {
+            jwtError = await checkJwt();
+
+            if(jwtError) navigate("/");
+        }
+
+        check();
+    });
+
+
     const handleSelectItem = (item: any) => {
         setSelectedItem(item);
     };

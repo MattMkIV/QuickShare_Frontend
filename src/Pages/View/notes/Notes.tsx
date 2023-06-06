@@ -4,8 +4,32 @@ import * as React from "react";
 import '../home/Home.css'
 import './Notes.css'
 import CardLayout from '../../../Components/homepage/CardLayout'
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { checkJwt } from "../../../Utils/AuthService";
+import { TakeNote } from "../../../Utils/note_service";
 
 function Notes() {
+
+    let jwtError = false;
+    let navigate = useNavigate();
+    const [note, setNote] = useState([]);
+
+    useEffect(() => {
+        const check = async () => {
+            jwtError = await checkJwt();
+            if(jwtError) navigate("/");
+        }
+
+        const takePhotos = async () => {
+            let response:any = await TakeNote();
+            setNote(response);
+        }   
+
+        check();
+        takePhotos();
+    }, []);
+
     //Render
     return(
         <>

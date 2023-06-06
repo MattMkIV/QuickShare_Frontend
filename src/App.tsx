@@ -11,6 +11,7 @@ import UploadPhoto from "./Pages/View/uploadPhoto/UploadPhoto";
 import Notes from "./Pages/View/notes/Notes";
 import Lists from "./Pages/View/list/Lists";
 import Homepage from "./Pages/homepage/Homepage";
+import ConfirmRegistration from './Pages/SignUp/ConfirmRegistration';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
                     <Route index path="/homepage/lists" element={<Homepage componentToRender={Lists}/>}/>
                     <Route index path="/signUp" element={<SignUp/>}/>
                     <Route index path="/forgotPassword" element={<ForgotPassword/>}/>
+                    <Route index path="/confirmRegistration" element={<ConfirmRegistration/>}/>
                 </Routes>
             </BrowserRouter>
         </>

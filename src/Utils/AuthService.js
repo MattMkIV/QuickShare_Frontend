@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as urls from "./urls.js";
+import * as jose from 'jose';
 
 export async function registerNewUser(userInfo) {
 
@@ -8,7 +9,6 @@ export async function registerNewUser(userInfo) {
     if (userInfo.Nome && userInfo.Cognome && userInfo.Username && userInfo.Email && userInfo.Password && userInfo.ConfirmPassword) {
 
         if (userInfo.Password === userInfo.ConfirmPassword) {
-            console.log("Uguali");
             await axios.post(urls.serverURL + '/register', {
 
                 "first_name": userInfo.Nome.toString(),
@@ -54,21 +54,67 @@ export async function registerNewUser(userInfo) {
     return isError;
 }
 
+//Check JWT
+export async function checkJwt() {
+    const jwt = localStorage.getItem("jwt");
+    let jwtError = false;
+
+    if (jwt) {
+        console.log("JWT presente.");
+
+        const claims = jose.decodeJwt(jwt);
+        const actualTime = parseInt(Date.now() / 1000);
+
+        if (actualTime > claims.exp) {
+            console.log("Scaduto");
+
+            let jwtRefresh = localStorage.getItem("jwtRefresh");
+            await axios.post(urls.serverURL + '/api/token/refresh/', {
+                "refresh": jwtRefresh,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => { localStorage.removeItem("jwt"); localStorage.setItem("jwt", response.data.access); })
+                .catch(function (error) {
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        let responseStatus = parseInt(error.response.status);
+                        if (responseStatus === 401) {
+                            console.log("Errore 401: Utente o password errati");
+                            jwtError = true;
+                        }
+
+                    } else if (error.request) {
+                        console.log("Errore 500: errore server");
+                        jwtError = true;
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log('Errore:', error.message);
+                        jwtError = true;
+                    }
+                });
+        }
+
+    } else jwtError = true;
+
+    return jwtError;
+}
 
 export async function doLogin(username, password) {
 
     let isError = false;
 
-    if (username && password) { //localhost:7004   francescobergonzini.ns0.it
+    if (username && password) {
 
-        await axios.post(urls.serverURL + '/api/token', {
+        await axios.post(urls.serverURL + '/api/token/', {
             "username": username,
             "password": password,
         }, {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(response => { localStorage.setItem("jwt", response.data); })
+        }).then(response => { localStorage.setItem("jwt", response.data.access); localStorage.setItem("jwtRefresh", response.data.refresh); })
             .catch(function (error) {
                 if (error.response) {
                     // The request was made and the server responded with a status code

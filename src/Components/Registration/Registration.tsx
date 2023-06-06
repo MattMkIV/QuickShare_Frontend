@@ -55,13 +55,6 @@ function Registration (this: any) {
             let email = data.get('email');
             let password = data.get('password');
             let confirmPassword = data.get('confirmPassword');
-            
-            console.log("Nome: "+nome);
-            console.log("Cognome: "+cognome);
-            console.log("username: "+username);
-            console.log("email: "+email);
-            console.log("password: "+password);
-            console.log("confirmPassword : "+confirmPassword);
 
             var userInfo = {
                 Nome: nome,
@@ -74,7 +67,7 @@ function Registration (this: any) {
 
             isError = await registerNewUser(userInfo);
 
-            if(!isError) navigate("/");
+            if(!isError) navigate("/confirmRegistration");
             else setErrorInput(true);
 
       }

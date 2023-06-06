@@ -56,13 +56,10 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
             //Take Value
             let username = data.get('username');
             let password = data.get('password');
-            
-            console.log("username: "+username);
-            console.log("password: "+password);
 
             isError = await doLogin(username, password);
 
-            if(!isError) navigate("/");
+            if(!isError) navigate("/homepage");
             else setErrorInput(true);
 
         }
