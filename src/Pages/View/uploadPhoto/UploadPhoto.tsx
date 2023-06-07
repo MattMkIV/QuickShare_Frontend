@@ -8,7 +8,7 @@ import {useState} from "react";
 import './UploadPhoto.css'
 import Button from "@mui/material/Button";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import {createTheme, Fab, Grow, ThemeProvider} from "@mui/material";
+import {createTheme, Fab, Grow, Modal, ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from "@mui/icons-material/Info";
@@ -46,10 +46,14 @@ const StyledButton = styled(Button)`
 
 
 function UploadPhoto() {
+    
     const [hoveredIndex, setHoveredIndex] = useState(-1);
     let jwtError = false;
     let navigate = useNavigate();
     const [photo, setPhoto] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [clickedImage, setClickedImage] = useState();
+    
 
     useEffect(() => {
         const check = async () => {
@@ -66,15 +70,22 @@ function UploadPhoto() {
         takePhotos();
     }, []);
 
-    
-
-
     const handleMouseEnter = (index: number) => {
         setHoveredIndex(index);
     };
+
     const handleMouseLeave = () => {
         setHoveredIndex(-1);
     };
+
+    const handleClose = () => setOpen(false);
+
+    const askDeleteImage = async (imageId: any) => {
+        console.log("IMAGE ID: "+imageId);
+        setOpen(true);
+        setClickedImage(imageId);
+        //let isError = await DeleteImage(imageId);
+    }
 
     const deleteImage = async (imageId: any) => {
         console.log("IMAGE ID: "+imageId);
@@ -108,7 +119,7 @@ function UploadPhoto() {
                                     src={`${photo.image_name}?w=248&fit=crop&auto=format`}
                                     srcSet={`${photo.image_name}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                 />
-                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={100} onClick={() => {deleteImage(photo.image_id)}}>
+                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={100} onClick={() => {askDeleteImage(photo.image_id)}}>
                                     <Fab sx={{
                                         position: 'absolute', bottom: '15px', right: '15px', backgroundColor: '#ffb4aa',
                                         ':hover': {backgroundColor: '#fda498'}
@@ -153,6 +164,19 @@ function UploadPhoto() {
                             <input type="file" hidden/>
                         </StyledButton>
                     </ThemeProvider>
+
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={{backgroundColor: 'red'}}>
+                            <h1>Confermi di voler eliminare la foto?</h1>
+                            <Button variant="outlined">Annulla</Button>
+                            <Button variant="contained" onClick={() => deleteImage(clickedImage)}>Conferma</Button>
+                        </Box>
+                    </Modal>
                 </Box>
             </Box>
         </>

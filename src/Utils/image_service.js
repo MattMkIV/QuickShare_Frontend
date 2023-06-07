@@ -42,6 +42,7 @@ export async function DeleteImage(imageId) {
     console.log(imageId);
 
     await axios.delete(urls.serverURL + '/image/' + UserId, {
+        "image_id": parseInt(imageId),
     }, {
         data: {
             "image_id": parseInt(imageId),
