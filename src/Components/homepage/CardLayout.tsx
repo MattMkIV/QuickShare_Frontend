@@ -49,7 +49,7 @@ const CardLayout: React.FC = () => {
                 <CardContent sx={{m: -1}}
                              onMouseEnter={handleMouseEnter}
                              onMouseLeave={handleMouseLeave}>
-                    <Typography noWrap className='cardTitle'>
+                    <Typography noWrap className='cardTitle' contentEditable={true}>
                         Prova titolo molto lungo
                     </Typography>
 

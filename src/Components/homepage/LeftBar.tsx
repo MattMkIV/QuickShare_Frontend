@@ -148,8 +148,14 @@ function LeftBar({onSelect}: any) {
                             <ListItemText primary="Calendar "/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem className='noPaddingTopBottom' onClick={() => onSelect('AccountBalance')}>
-                        <ListItemButton style={{color: '#ffb4aa'}} className='clickAnimation'>
+                    <ListItem className='noPaddingTopBottom' onClick={function (event) {
+                        navigate("/homepage/accountbalance");
+                        handleItemClick("account balance");
+                    }}>
+                        <ListItemButton
+                            style={{color: '#ffb4aa'}}
+                            className={selectedItem === "account balance" ? "selected" : ""}
+                            sx={{marginLeft: '-16px', borderRadius: '0 22px 22px 0', marginRight: '-16px'}}>
                             <AccountBalanceWalletIcon className='icon'/>
                             <ListItemText primary="Account balance"/>
                         </ListItemButton>

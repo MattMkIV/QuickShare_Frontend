@@ -1,11 +1,23 @@
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import * as React from "react";
+
 function Calendar() {
 
 
     //Render
-    return(
-        <>  
-            <h1>Calendar</h1>
-            <p>sehserhhserthsetseteshserhserhserh</p>
+    return (
+        <>
+            <Box className='homeBox'>
+                <Grid container>
+                    <h1 className='titleSection'>Calendar:</h1>
+                </Grid>
+
+                <hr className='lineCentralContent'></hr>
+
+                <Box sx={{width: '100%'}}>
+                </Box>
+            </Box>
         </>
     );
 }
