@@ -111,10 +111,10 @@ function UploadPhoto() {
     const addAllowed = async (imageId: any, allowedUserEmail:any) => {
         console.log(imageId);
         console.log(allowedUserEmail);
-        let userInfo = await TakeUserInfoByEmail(allowedUserEmail);
-        console.log("ID by EMAIL: ");
-        //let isError = await AddAllowed();
-
+        let userInfo:any = await TakeUserInfoByEmail(allowedUserEmail);
+        console.log("ID by EMAIL: " + userInfo.id);
+        let isError = await AddAllowed(imageId, userInfo.id);
+        console.log(isError);
     }
 
 

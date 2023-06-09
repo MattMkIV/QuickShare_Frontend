@@ -7,12 +7,22 @@ import './Login.css'
 //Other
 import { useNavigate } from "react-router-dom";
 import {Typography} from "@mui/material";
+import { useEffect } from 'react';
+import { checkJwt } from '../../Utils/AuthService';
 
 function Login() {
     //Variable declaration
     const navigate = useNavigate();
 
     //Function
+    useEffect(() => {
+        const check = async () => {
+            let jwtError = await checkJwt();
+            if(!jwtError) navigate("/homepage");
+        }
+
+        check();
+    }, []);
     
 
     //Style

@@ -42,11 +42,10 @@ export async function DeleteImage(imageId) {
     console.log(imageId);
 
     await axios.delete(urls.serverURL + '/image/' + UserId, {
-        "image_id": parseInt(imageId),
-    }, {
         data: {
             "image_id": parseInt(imageId),
         },
+    }, {
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
@@ -74,12 +73,17 @@ export async function AddAllowed(imageId, allowedUserId) {
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 
-    await axios.put(urls.serverURL + '/image/' + UserId, {
-        "image_id": imageId,
-        "new_user_id": allowedUserId,
+    await axios.put(urls.serverURL + '/image/' + UserId,{
+        data: {
+            "image_id": parseInt(imageId),
+            "new_user_id": parseInt(allowedUserId),
+        },
     }, {
+        data: {
+            "image_id": parseInt(imageId),
+            "new_user_id": parseInt(allowedUserId),
+        },
         headers: {
-            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
         }
     }).catch(function (error) {

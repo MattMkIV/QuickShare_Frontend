@@ -178,31 +178,24 @@ export async function TakeUserInfoByEmail(userEmail) {
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 
-    await axios.get(urls.serverURL + '/user/info/email/',
-        {
-            data: {
-                "email": userEmail,
-            }
+    await axios.get(urls.serverURL + '/user/info/email/' + userEmail,{
+    }, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
         },
-        {
-            data: {
-                "email": userEmail,
-            },
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-            }
-        }).then(response => {
-            console.log(response);
-            responseData = response.data;
-        }).catch(function (error) {
-            if (error.request) {
-                console.log("Errore 500: errore server");
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Errore:', error.message);
-            }
-        });
+    }).then(response => {
+        responseData = response.data[0];
+    }).catch(function (error) {
+        if (error.request) {
+            console.log("Errore 500: errore server");
+            return true;
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Errore:', error.message);
+            return true;
+        }
+    });
 
     return responseData;
 }
