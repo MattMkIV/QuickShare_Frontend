@@ -18,9 +18,9 @@ function AccountBalance() {
 
     const navigate = useNavigate();
 
-    const isMdScreen = useMediaQuery('(max-width: 960px)'); // Aggiungi la dimensione che corrisponde a "md"
-    const isXsScreen = useMediaQuery('(max-width: 600px)'); // Aggiungi la dimensione che corrisponde a "xs"
-    const isLgScreen = useMediaQuery('(max-width: 1200px)'); // Aggiungi la dimensione che corrisponde a "xs"
+    const isMdScreen = useMediaQuery('(max-width: 960px)');
+    const isXsScreen = useMediaQuery('(max-width: 600px)');
+    const isLgScreen = useMediaQuery('(max-width: 1200px)');
 
 
     //Render
