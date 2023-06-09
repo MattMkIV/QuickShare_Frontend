@@ -64,3 +64,34 @@ export async function DeleteImage(imageId) {
 
     return false;
 }
+
+export async function AddAllowed(imageId, allowedUserId) {
+
+    const responseData = [];
+    let jwt = localStorage.getItem("jwt");
+    let jwtDecode = jose.decodeJwt(jwt);
+    let UserId = jwtDecode.user_id;
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+
+    await axios.put(urls.serverURL + '/image/' + UserId, {
+        "image_id": imageId,
+        "new_user_id": allowedUserId,
+    }, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+        }
+    }).catch(function (error) {
+        if (error.request) {
+            console.log("Errore 500: errore server");
+            return true;
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Errore:', error.message);
+            return true;
+        }
+    });
+
+    return false;
+}

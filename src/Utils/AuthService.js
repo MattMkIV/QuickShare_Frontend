@@ -101,6 +101,7 @@ export async function checkJwt() {
     return jwtError;
 }
 
+//Do Login
 export async function doLogin(username, password) {
 
     let isError = false;
@@ -139,4 +140,102 @@ export async function doLogin(username, password) {
     }
 
     return isError;
+}
+
+//Take user info
+export async function TakeUserInfo(userId) {
+
+    let responseData;
+    let jwt = localStorage.getItem("jwt");
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+
+    await axios.get(urls.serverURL + '/user/info/' + userId, {
+    }, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+        }
+    }).then(response => {
+        responseData = response.data;
+    }).catch(function (error) {
+        if (error.request) {
+            console.log("Errore 500: errore server");
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Errore:', error.message);
+        }
+    });
+
+    return responseData;
+}
+
+//Take user info by email
+export async function TakeUserInfoByEmail(userEmail) {
+
+    let responseData;
+    let jwt = localStorage.getItem("jwt");
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+
+    await axios.get(urls.serverURL + '/user/info/email/',
+        {
+            data: {
+                "email": userEmail,
+            }
+        },
+        {
+            data: {
+                "email": userEmail,
+            },
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+            }
+        }).then(response => {
+            console.log(response);
+            responseData = response.data;
+        }).catch(function (error) {
+            if (error.request) {
+                console.log("Errore 500: errore server");
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Errore:', error.message);
+            }
+        });
+
+    return responseData;
+}
+
+//Take user info of allowed
+export async function TakeUserInfoAll(allowed) {
+
+    const responseData = [];
+    let jwt = localStorage.getItem("jwt");
+    let jwtDecode = jose.decodeJwt(jwt);
+    let UserId = jwtDecode.user_id;
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+
+    for (let i = 0; i < allowed.length; i++) {
+
+        await axios.get(urls.serverURL + '/user/info/' + allowed[i], {
+        }, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+            }
+        }).then(response => {
+            responseData.push(response.data[0]);
+        }).catch(function (error) {
+            if (error.request) {
+                console.log("Errore 500: errore server");
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Errore:', error.message);
+            }
+        });
+    }
+
+    return responseData;
 }

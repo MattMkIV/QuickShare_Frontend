@@ -15,8 +15,8 @@ import InfoIcon from "@mui/icons-material/Info";
 import ShareIcon from "@mui/icons-material/Share";
 import { useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkJwt } from '../../../Utils/AuthService';
-import { DeleteImage, TakeImage } from '../../../Utils/image_service';
+import { checkJwt, TakeUserInfoAll, TakeUserInfoByEmail } from '../../../Utils/AuthService';
+import { AddAllowed, DeleteImage, TakeImage } from '../../../Utils/image_service';
 
 
 const customTheme = createTheme({
@@ -50,7 +50,7 @@ function UploadPhoto() {
     const [hoveredIndex, setHoveredIndex] = useState(-1);
     let jwtError = false;
     let navigate = useNavigate();
-    const [photo, setPhoto] = useState([]);
+    const [photo, setPhoto] = useState<any>([]);
     const [open, setOpen] = useState(false);
     const [clickedImage, setClickedImage] = useState();
     
@@ -63,7 +63,23 @@ function UploadPhoto() {
 
         const takePhotos = async () => {
             let response:any = await TakeImage();
-            setPhoto(response);
+            let photoInfo = [];
+            
+            for (let i = 0; i < response.length; i++) {
+                var element = response[i];
+                let userInfo = await TakeUserInfoAll(element.allowed);
+
+                let all = {
+                    "image_id": response[i].image_id,
+                    "image_name": response[i].image_name,
+                    "upload_data": response[i].upload_data,
+                    "allowed": userInfo
+                }
+
+                photoInfo.push(all);
+            }
+
+            setPhoto(photoInfo);
         }   
 
         check();
@@ -91,6 +107,16 @@ function UploadPhoto() {
         console.log("IMAGE ID: "+imageId);
         let isError = await DeleteImage(imageId);
     }
+
+    const addAllowed = async (imageId: any, allowedUserEmail:any) => {
+        console.log(imageId);
+        console.log(allowedUserEmail);
+        let userInfo = await TakeUserInfoByEmail(allowedUserEmail);
+        console.log("ID by EMAIL: ");
+        //let isError = await AddAllowed();
+
+    }
+
 
     //Render
     return (
@@ -128,7 +154,7 @@ function UploadPhoto() {
                                     </Fab>
                                 </Grow>
 
-                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={200}>
+                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={200} onClick={() => {addAllowed(photo.image_id, "sgsdg@sdfgsdfg.it")}}>
                                     <Fab sx={{
                                         position: 'absolute', bottom: '15px', right: '90px', backgroundColor: '#e7bdb7',
                                         ':hover': {backgroundColor: '#e3ada5'}
@@ -136,6 +162,12 @@ function UploadPhoto() {
                                         <ShareIcon sx={{color: '#442926'}}/>
                                     </Fab>
                                 </Grow>
+                                <Box>
+                                    <h3>Upload Data: {photo.upload_data}</h3>
+                                    {photo.allowed.map((allowedValue:any, index:any) => (
+                                        <p key={index}>Username: {allowedValue.email}</p>
+                                    ))}   
+                                </Box>
 
                                 <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={400}>
                                     <Fab sx={{
@@ -173,7 +205,20 @@ function UploadPhoto() {
                     >
                         <Box sx={{backgroundColor: 'red'}}>
                             <h1>Confermi di voler eliminare la foto?</h1>
-                            <Button variant="outlined">Annulla</Button>
+                            <Button variant="outlined" onClick={() => handleClose()}>Annulla</Button>
+                            <Button variant="contained" onClick={() => deleteImage(clickedImage)}>Conferma</Button>
+                        </Box>
+                    </Modal>
+
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={{backgroundColor: 'red'}}>
+                            <h1>Upload photo</h1>
+                            <Button variant="outlined" onClick={() => handleClose()}>Annulla</Button>
                             <Button variant="contained" onClick={() => deleteImage(clickedImage)}>Conferma</Button>
                         </Box>
                     </Modal>
