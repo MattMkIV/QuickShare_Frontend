@@ -1,21 +1,19 @@
 import {
     Box,
-    Button,
     CardContent,
     Fab,
-    Fade,
     Grow,
     Menu,
-    MenuItem,
-    Slide, Stack,
+    Slide,
     TextField,
     Tooltip,
     tooltipClasses,
     TooltipProps,
-    Zoom
+    Typography
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import * as React from "react";
+import {useState} from "react";
 import InfoIcon from '@mui/icons-material/Info';
 import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -25,8 +23,7 @@ import Grid from "@mui/material/Grid";
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import {styled} from "@mui/material/styles";
-import {useState} from "react";
-import SendIcon from "@mui/icons-material/Send";
+import Home from "../../Pages/View/home/Home";
 
 
 const NoteCardLayout: React.FC = () => {
@@ -71,17 +68,18 @@ const NoteCardLayout: React.FC = () => {
 
     /************************* Menù pop up functions *************************/
 
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(Home);
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-    const handleClick = (event :any) => {
+    const [menuId, setMenuId] = useState<string | undefined>(undefined);
+    const topBarClick = (event: React.MouseEvent<HTMLElement>, id: string) => {
         setAnchorEl(event.currentTarget);
+        setMenuId(id);
     };
 
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    const open = Boolean(anchorEl);
 
     return (
         <>
@@ -112,9 +110,9 @@ const NoteCardLayout: React.FC = () => {
                                 fontSize: '30px !important',
                                 height: '15px',
                                 width: '273px',
-                            }
+                            },
+                            marginLeft: '-15px',
                         }}
-                        className='cardTitle'
                         defaultValue='PROVA TITOLO MOLTO LUNGO'
                         onClick={handleTextFieldClick}>
                     </TextField>
@@ -159,52 +157,180 @@ const NoteCardLayout: React.FC = () => {
 
                         </Grid>
                     ) : (
-                        <Grid>
-                            <LightTooltip TransitionComponent={Zoom} title='Show info'
-                                          sx={{marginTop: '-7px !important'}}
-                                          placement="bottom">
-                                <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={100}>
-                                        <Fab sx={{
-                                            backgroundColor: '#dfc38c', marginLeft: '27px', marginRight: '25px',
-                                            ':hover': {backgroundColor: '#deba7b'}
-                                        }}
-                                             aria-controls={open ? 'fade-menu' : undefined}
-                                             aria-haspopup="true"
-                                             aria-expanded={open ? 'true' : undefined}
-                                             onClick={handleClick}>
-                                            <InfoIcon sx={{color: '#3f2e04'}}/>
-                                        </Fab>
-                                </Slide>
-                            </LightTooltip>
+                        <Box>
+                            <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={100}>
+                                <Fab sx={{
+                                    backgroundColor: '#dfc38c', marginLeft: '27px', marginRight: '25px',
+                                    ':hover': {backgroundColor: '#deba7b'}
+                                }} onClick={(event) => topBarClick(event, 'notification')}
+                                     aria-controls='notification'
+                                     aria-haspopup='true'>
+                                    <InfoIcon sx={{color: '#3f2e04'}}/>
+                                </Fab>
+                            </Slide>
+
                             <Menu
-                                id="fade-menu"
+                                id='notification'
                                 anchorEl={anchorEl}
-                                open={open}
+                                open={Boolean(anchorEl && menuId === 'notification')}
                                 onClose={handleClose}
-                                PaperProps={{ elevation: 12, style: { backgroundColor: 'transparent', borderRadius : '22px', position : 'absolute'}}}>
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'center',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'center',
+                                }}
+                                PaperProps={{
+                                    elevation: 24,
+                                    style: {
+                                        width: '250px',
+                                        height: '320px',
+                                        borderRadius: '22px',
+                                        backgroundColor: '#dfc38c',
+                                        overflowY: 'hidden'
+                                    }
+                                }}>
+                                <Typography component="span" display="inline-block"
+                                            sx={{
+                                                fontFamily: 'Roboto Black',
+                                                fontSize: '17px',
+                                                marginLeft: '15px',
+                                                marginTop: '5px',
+                                                color: '#3f2e04'
+                                            }}>
+                                    Created in:
+                                </Typography>
+                                <Typography component="span" display="inline-block" whiteSpace="nowrap"
+                                            sx={{
+                                                fontFamily: 'Roboto Regular',
+                                                fontSize: '17px',
+                                                marginLeft: '5px',
+                                                color: '#3f2e04'
+                                            }}>
+                                    19/03/2021
+                                </Typography>
+                                <Typography sx={{
+                                    fontFamily: 'Roboto Black',
+                                    fontSize: '17px',
+                                    marginLeft: '15px',
+                                    marginTop: '20px',
+                                    color: '#3f2e04'
+                                }}>Actually shared with:</Typography>
 
+                                <Box sx={{
+                                    width: '100%',
+                                    height: '237px',
+                                    borderRadius: '22px',
+                                    backgroundColor: '#b2945f',
+                                    overflowY: 'scroll',
+                                    pl: 1.2, pr: 1.2, pt: 1.2
+                                }}>
+                                    <TextField inputProps={{
+                                        sx: {color: '#3f2e04 !important'}
+                                    }}
+                                               sx={{
+                                                   '& .MuiInput-underline': {
+                                                       borderBottomColor: 'transparent',
+                                                   },
+                                                   '& .MuiOutlinedInput-root': {
+                                                       '& fieldset': {
+                                                           borderColor: '#3f2e04',
+                                                           borderRadius: '18px',
+                                                       },
+                                                       '&:hover fieldset': {
+                                                           borderColor: '#3f2e04',
+                                                       },
+                                                       '&.Mui-focused fieldset': {
+                                                           borderColor: 'transparent',
+                                                       },
+                                                   },
+                                                   '& .MuiInputBase-input': {
+                                                       fontFamily: 'Roboto Regular',
+                                                       fontSize: '15px !important',
+                                                       height: '10px',
+                                                       width: '202px',
+                                                   },
+                                                   marginBottom: 1.2
+                                               }}
+                                               defaultValue='ciaocarlo@gmail.com'
+                                               disabled>
+                                    </TextField>
+
+                                </Box>
                             </Menu>
-                            <LightTooltip TransitionComponent={Zoom} title='Share' sx={{marginTop: '-7px !important'}}
-                                          placement="bottom">
-                                <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={200}>
-                                    <Fab sx={{
-                                        backgroundColor: '#e7bdb7', marginRight: '25px',
-                                        ':hover': {backgroundColor: '#e3ada5'}
-                                    }}>
-                                        <ShareIcon sx={{color: '#442926'}}/>
-                                    </Fab>
-                                </Slide>
-                            </LightTooltip>
-                            <LightTooltip TransitionComponent={Zoom} title='Delete' sx={{marginTop: '-7px !important'}}
-                                          placement="bottom">
-                                <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={400}>
-                                    <Fab sx={{backgroundColor: '#ffb4aa', ':hover': {backgroundColor: '#fda498'}}}>
-                                        <DeleteIcon sx={{color: '#690003'}}/>
-                                    </Fab>
-                                </Slide>
-                            </LightTooltip>
-                        </Grid>
 
+                            <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={200}>
+                                <Fab sx={{
+                                    backgroundColor: '#e7bdb7', marginRight: '25px',
+                                    ':hover': {backgroundColor: '#e3ada5'}
+                                }} onClick={(event) => topBarClick(event, 'share')}
+                                     aria-controls='share'
+                                     aria-haspopup='true'>
+                                    <ShareIcon sx={{color: '#442926'}}/>
+                                </Fab>
+                            </Slide>
+
+                            <Menu
+                                id='share'
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl && menuId === 'share')}
+                                onClose={handleClose}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'center',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'center',
+                                }}
+                                PaperProps={{
+                                    elevation: 24,
+                                    style: {
+                                        width: '250px',
+                                        height: '320px',
+                                        borderRadius: '22px',
+                                        backgroundColor: '#e7bdb7',
+                                    }
+                                }}>
+                            </Menu>
+
+                            <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={400}>
+                                <Fab sx={{
+                                    backgroundColor: '#ffb4aa',
+                                    ':hover': {backgroundColor: '#fda498'}
+                                }} onClick={(event) => topBarClick(event, 'delete')}
+                                     aria-controls='delete'
+                                     aria-haspopup='true'>
+                                    <DeleteIcon sx={{color: '#690003'}}/>
+                                </Fab>
+                            </Slide>
+
+                            <Menu
+                                id='delete'
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl && menuId === 'delete')}
+                                onClose={handleClose}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'center',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'center',
+                                }}
+                                PaperProps={{
+                                    elevation: 24,
+                                    style: {
+                                        width: '250px',
+                                        height: '320px',
+                                        borderRadius: '22px',
+                                        backgroundColor: '#ffb4aa',
+                                    }
+                                }}>
+                            </Menu>
+                        </Box>
                     )}
                 </CardContent>
             </Card>
