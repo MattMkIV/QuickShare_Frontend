@@ -73,16 +73,12 @@ export async function AddAllowed(imageId, allowedUserId) {
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 
-    await axios.put(urls.serverURL + '/image/' + UserId,{
+    await axios.put(urls.serverURL + '/image/' + UserId, {
         data: {
             "image_id": parseInt(imageId),
             "new_user_id": parseInt(allowedUserId),
         },
     }, {
-        data: {
-            "image_id": parseInt(imageId),
-            "new_user_id": parseInt(allowedUserId),
-        },
         headers: {
             'Content-Type': 'application/json',
         }
