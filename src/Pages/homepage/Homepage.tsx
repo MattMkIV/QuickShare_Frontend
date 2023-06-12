@@ -40,6 +40,14 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
         setMenuId(id);
     };
 
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     //Function
     const handleSelectItem = (item: any) => {
         setSelectedItem(item);
@@ -81,24 +89,27 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
         <>
             <Grid container className='topMarginHomepage' wrap='nowrap'
                   sx={{display: 'flex', flexDirection: 'row-reverse'}}>
-                <Grid wrap='nowrap' className='avatarPositionGrid'
-                      sx={{minWidth: '120px'}}>
-                    <Box sx={{backgroundColor : 'red', height : '100%', width : '100%'}}>
-                        <IconButton
-                            sx={{marginBottom: '-10px', marginRight: '15px'}}>
-
-                            <LightTooltip TransitionComponent={Zoom} title='Messages' sx={{marginTop: '0'}}>
-                                <NotificationsNoneIcon
-                                    sx={{width: '30px', height: '30px', color: '#ffb4aa'}}></NotificationsNoneIcon>
-                            </LightTooltip>
-                        </IconButton>
-                    </Box>
+                <Grid wrap='nowrap' sx={{
+                    width: '150px',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: 'center'
+                }}>
+                    <IconButton onClick={(event) => topBarClick(event, 'notification')}
+                                aria-controls="notification"
+                                aria-haspopup="true"
+                                sx={{marginRight: '20px'}}>
+                        <LightTooltip TransitionComponent={Zoom} title='Messages' sx={{marginTop: '0'}}>
+                            <NotificationsNoneIcon
+                                sx={{width: '30px', height: '30px', color: '#ffb4aa'}}></NotificationsNoneIcon>
+                        </LightTooltip>
+                    </IconButton>
 
                     <IconButton
-                        className='avatarIconClickAnimation'
                         onClick={(event) => topBarClick(event, 'avatar')}
                         aria-controls="avatar"
-                        aria-haspopup="true">
+                        aria-haspopup="true"
+                        sx={{marginRight: '10px'}}>
 
                         <Avatar sx={{backgroundColor: '#008fdb'}}>M</Avatar>
                     </IconButton>
@@ -117,16 +128,27 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
             </Grid>
 
             <Menu
-                id='notification'
+                id="notification"
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl && menuId === 'notification')}
-                onClose={handleMenuClose}
+                onClose={handleClose}
+                MenuListProps={{
+                    'aria-labelledby': 'notification',
+                }}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
                 PaperProps={{
                     elevation: 24,
                     style: {
                         width: '410px',
                         height: '600px',
-                        borderRadius : '22px',
+                        borderRadius: '22px',
                         backgroundColor: '#a08c8a',
                     }
                 }}
@@ -164,19 +186,28 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
             </Menu>
 
             <Menu
-                id='avatar'
+                id="avatar"
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl && menuId === 'avatar')}
-                onClose={handleMenuClose}
+                onClose={handleClose}
+                MenuListProps={{
+                    'aria-labelledby': 'avatar',
+                }}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
                 PaperProps={{
                     elevation: 24,
                     style: {
-                        backgroundColor: '#a08c8a',
-                        borderRadius: '22px',
-                        marginTop: '10px',
-                        marginRight: '0',
                         width: '350px',
-                        height: '120px'
+                        height: '120px',
+                        borderRadius: '22px',
+                        backgroundColor: '#a08c8a',
                     }
                 }}
             >
@@ -207,18 +238,6 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                                         fontFamily: 'Roboto Light'
                                     }}>prova@gmail.com</Typography>
                             </Grid>
-                            <Box className='exitPopUpIcon'
-                                 sx={{
-                                     backgroundColor: '#ba1a1a', borderRadius: '13px', marginTop: '12px',
-                                     marginLeft: '120px',
-                                     width: '47px',
-                                     height: '47px',
-                                 }}>
-                                <LogoutIcon sx={{
-                                    color: '#ffffff', marginTop: '12px', fontSize: '22px',
-                                    marginLeft: '15px'
-                                }}></LogoutIcon>
-                            </Box>
                         </Grid>
                     </Box>
                     <Box className='loginOtherAccountPopUp'
