@@ -2,7 +2,7 @@ import * as React from 'react';
 import './Home.css'
 import Grid from "@mui/material/Grid";
 import {Box, Stack} from "@mui/material";
-import CardLayout from '../../../Components/homepage/CardLayout'
+import CardLayout from '../../../Components/homepage/NoteCardLayout'
 import ListCardLayout from '../../../Components/homepage/ListsCardLayout'
 
 function Home() {

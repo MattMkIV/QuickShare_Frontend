@@ -27,6 +27,9 @@ interface HomepageProps {
 
 const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
 
+    //Style
+    document.body.style.backgroundImage = '';
+
     //Variable declaration
     const [selectedItem, setSelectedItem] = useState(Home);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -36,9 +39,6 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
         setAnchorEl(event.currentTarget);
         setMenuId(id);
     };
-
-    //Style
-    document.body.style.backgroundImage = '';
 
     //Function
     const handleSelectItem = (item: any) => {
@@ -83,17 +83,16 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                   sx={{display: 'flex', flexDirection: 'row-reverse'}}>
                 <Grid wrap='nowrap' className='avatarPositionGrid'
                       sx={{minWidth: '120px'}}>
-                    <IconButton
-                        sx={{marginBottom: '-10px', marginRight: '15px'}}
-                        onClick={(event) => topBarClick(event, 'notification')}
-                        aria-controls="notification"
-                        aria-haspopup="true">
+                    <Box sx={{backgroundColor : 'red', height : '100%', width : '100%'}}>
+                        <IconButton
+                            sx={{marginBottom: '-10px', marginRight: '15px'}}>
 
-                        <LightTooltip TransitionComponent={Zoom} title='Messages' sx={{marginTop: '0'}}>
-                            <NotificationsNoneIcon
-                                sx={{width: '30px', height: '30px', color: '#ffb4aa'}}></NotificationsNoneIcon>
-                        </LightTooltip>
-                    </IconButton>
+                            <LightTooltip TransitionComponent={Zoom} title='Messages' sx={{marginTop: '0'}}>
+                                <NotificationsNoneIcon
+                                    sx={{width: '30px', height: '30px', color: '#ffb4aa'}}></NotificationsNoneIcon>
+                            </LightTooltip>
+                        </IconButton>
+                    </Box>
 
                     <IconButton
                         className='avatarIconClickAnimation'
@@ -122,7 +121,15 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl && menuId === 'notification')}
                 onClose={handleMenuClose}
-                PaperProps={{elevation: 0, style: {backgroundColor: "transparent"}}}
+                PaperProps={{
+                    elevation: 24,
+                    style: {
+                        width: '410px',
+                        height: '600px',
+                        borderRadius : '22px',
+                        backgroundColor: '#a08c8a',
+                    }
+                }}
                 classes={{paper: 'notification'}}>
 
                 <Grid>
@@ -161,7 +168,17 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl && menuId === 'avatar')}
                 onClose={handleMenuClose}
-                PaperProps={{elevation: 0, style: {backgroundColor: "transparent"}}}
+                PaperProps={{
+                    elevation: 24,
+                    style: {
+                        backgroundColor: '#a08c8a',
+                        borderRadius: '22px',
+                        marginTop: '10px',
+                        marginRight: '0',
+                        width: '350px',
+                        height: '120px'
+                    }
+                }}
             >
                 <Grid>
                     <Box

@@ -298,7 +298,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     sx={{width: '458px', marginLeft: '15px'}}
                                     value={textField}
                                     type='text'
-
+                                    onChange={(e) => handleChangeTextField(index, e.target.value)}
                                     fullWidth
                                     margin="normal"
                                     label='Email'

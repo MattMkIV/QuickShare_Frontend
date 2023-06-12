@@ -3,7 +3,7 @@ import {Box, Stack, Typography} from "@mui/material";
 import * as React from "react";
 import '../home/Home.css'
 import './Notes.css'
-import CardLayout from '../../../Components/homepage/CardLayout'
+import CardLayout from '../../../Components/homepage/NoteCardLayout'
 
 function Notes() {
     //Render
