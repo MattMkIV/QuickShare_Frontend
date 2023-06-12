@@ -46,7 +46,7 @@ function Notes() {
                 <Grid item className='cardSliderHomePage'>
                     <Stack spacing={5} direction="row">
                     {notes.map((note:any, index:any) => (
-                        <CardLayout key={index} title={note.title} noteId={note.note_id} createData={note.create_data} body={note.body} allowed={note.allowed}></CardLayout>
+                        <CardLayout key={index} title={note.title} noteId={note.note_id} createData={note.create_date} body={note.body} allowed={note.allowed}></CardLayout>
                     ))} 
                     </Stack>
                 </Grid>

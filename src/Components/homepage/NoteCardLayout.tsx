@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import InfoIcon from '@mui/icons-material/Info';
 import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -27,6 +27,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { DeleteNote, UpdateNote } from "../../Utils/note_service";
 import { common } from "@mui/material/colors";
 import Home from "../../Pages/View/home/Home";
+import { TakeUserInfoAll } from "../../Utils/AuthService";
 
 interface Props {
     title: any,
@@ -41,6 +42,19 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
     const formRef = React.useRef<any>(null);
     const [titleNote, setTitle] = useState(title);
     const [bodyNote, setBody] = useState(body);
+    const [userInfo, setUserInfo] = useState<any>([]);
+
+    useEffect(() => {
+
+        const takeUserInfo = async () => {
+            let response:any = await TakeUserInfoAll(allowed);
+            setUserInfo(response);
+        }   
+
+        takeUserInfo();
+    }, []);
+
+    
     /************************* Handle notes MouseEnter & MouseExit *************************/
     const [isHovered, setIsHovered] = React.useState(false);
 
@@ -256,7 +270,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                                 marginLeft: '5px',
                                                 color: '#3f2e04'
                                             }}>
-                                    19/03/2021
+                                    {createData}
                                 </Typography>
                                 <Typography sx={{
                                     fontFamily: 'Roboto Black',
@@ -274,37 +288,38 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                     overflowY: 'scroll',
                                     pl: 1.2, pr: 1.2, pt: 1.2
                                 }}>
-                                    <TextField inputProps={{
-                                        sx: {color: '#3f2e04 !important'}
-                                    }}
-                                               sx={{
-                                                   '& .MuiInput-underline': {
-                                                       borderBottomColor: 'transparent',
-                                                   },
-                                                   '& .MuiOutlinedInput-root': {
-                                                       '& fieldset': {
-                                                           borderColor: '#3f2e04',
-                                                           borderRadius: '18px',
-                                                       },
-                                                       '&:hover fieldset': {
-                                                           borderColor: '#3f2e04',
-                                                       },
-                                                       '&.Mui-focused fieldset': {
-                                                           borderColor: 'transparent',
-                                                       },
-                                                   },
-                                                   '& .MuiInputBase-input': {
-                                                       fontFamily: 'Roboto Regular',
-                                                       fontSize: '15px !important',
-                                                       height: '10px',
-                                                       width: '202px',
-                                                   },
-                                                   marginBottom: 1.2
-                                               }}
-                                               defaultValue='ciaocarlo@gmail.com'
-                                               disabled>
-                                    </TextField>
-
+                                    {userInfo.map((user:any, index:any) => (
+                                        <TextField inputProps={{
+                                            sx: {color: '#3f2e04 !important'}
+                                        }}
+                                                sx={{
+                                                    '& .MuiInput-underline': {
+                                                        borderBottomColor: 'transparent',
+                                                    },
+                                                    '& .MuiOutlinedInput-root': {
+                                                        '& fieldset': {
+                                                            borderColor: '#3f2e04',
+                                                            borderRadius: '18px',
+                                                        },
+                                                        '&:hover fieldset': {
+                                                            borderColor: '#3f2e04',
+                                                        },
+                                                        '&.Mui-focused fieldset': {
+                                                            borderColor: 'transparent',
+                                                        },
+                                                    },
+                                                    '& .MuiInputBase-input': {
+                                                        fontFamily: 'Roboto Regular',
+                                                        fontSize: '15px !important',
+                                                        height: '10px',
+                                                        width: '202px',
+                                                    },
+                                                    marginBottom: 1.2
+                                                }}
+                                                defaultValue={user.email}
+                                                disabled>
+                                        </TextField>
+                                    ))}
                                 </Box>
                             </Menu>
 
