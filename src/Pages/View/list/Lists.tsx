@@ -3,7 +3,7 @@ import {Box, Stack, Typography} from "@mui/material";
 import * as React from "react";
 import '../home/Home.css'
 import './Lists.css'
-import CardLayout from '../../../Components/homepage/CardLayout'
+import ListsCardLayout from '../../../Components/homepage/ListsCardLayout'
 
 function Notes() {
     //Render
@@ -21,12 +21,13 @@ function Notes() {
 
                 <Grid item className='cardSliderHomePage'>
                     <Stack spacing={5} direction="row">
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
                     </Stack>
                 </Grid>
 
@@ -38,12 +39,13 @@ function Notes() {
 
                 <Grid item className='cardSliderHomePage'>
                     <Stack spacing={5} direction="row">
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
+                        <ListsCardLayout/>
                     </Stack>
                 </Grid>
             </Box>
