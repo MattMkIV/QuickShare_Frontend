@@ -3,18 +3,17 @@ import {Box, Stack, Typography} from "@mui/material";
 import * as React from "react";
 import '../home/Home.css'
 import './Notes.css'
-import CardLayout from '../../../Components/homepage/CardLayout'
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { checkJwt } from "../../../Utils/AuthService";
 import { TakeNote } from "../../../Utils/note_service";
-import CardLayout from '../../../Components/homepage/NoteCardLayout'
+import CardLayout from '../../../Components/homepage/NoteCardLayout';
 
 function Notes() {
 
     let jwtError = false;
     let navigate = useNavigate();
-    const [note, setNote] = useState([]);
+    const [notes, setNotes] = useState<any>([]);
 
     useEffect(() => {
         const check = async () => {
@@ -22,13 +21,13 @@ function Notes() {
             if(jwtError) navigate("/");
         }
 
-        const takePhotos = async () => {
+        const takeNotes = async () => {
             let response:any = await TakeNote();
-            setNote(response);
+            setNotes(response);
         }   
 
         check();
-        takePhotos();
+        takeNotes();
     }, []);
 
     //Render
@@ -46,12 +45,9 @@ function Notes() {
 
                 <Grid item className='cardSliderHomePage'>
                     <Stack spacing={5} direction="row">
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                    {notes.map((note:any, index:any) => (
+                        <CardLayout key={index} title={note.title} noteId={note.note_id} createData={note.create_data} body={note.body} allowed={note.allowed}></CardLayout>
+                    ))} 
                     </Stack>
                 </Grid>
 
@@ -63,12 +59,12 @@ function Notes() {
 
                 <Grid item className='cardSliderHomePage'>
                     <Stack spacing={5} direction="row">
+                        {/* <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                        <CardLayout></CardLayout> */}
                     </Stack>
                 </Grid>
             </Box>

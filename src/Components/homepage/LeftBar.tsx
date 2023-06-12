@@ -52,6 +52,9 @@ export interface SimpleDialogProps {
 
 function SimpleDialog(props: SimpleDialogProps) {
 
+
+    const [titleNote, setTitle] = useState('Insert Title');
+    const [bodyNote, setBody] = useState('');
     const {onClose, selectedValue, open} = props;
     const handleClose = () => {
         onClose(selectedValue);
@@ -136,6 +139,14 @@ function SimpleDialog(props: SimpleDialogProps) {
         // Aggiungi qui la logica per confermare la modifica
     };
 
+    const handleChangeTitle = (event:any) => {
+        setTitle(event.target.value);
+    };
+
+    const handleChangeBody = (event:any) => {
+        setBody(event.target.value);
+    };
+
     return (
         <Dialog onClose={handleClose} open={open} sx={{
             "& .MuiDialog-container": {
@@ -172,7 +183,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                       }}>
                                     <CardContent sx={{m: -1}}>
                                         <Typography noWrap className='cardTitle' contentEditable={true}>
-                                            Title Note
+                                            Text 
                                         </Typography>
 
                                         <hr className='littleSeparationLine'></hr>
@@ -193,6 +204,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     </CardContent>
                                 </Card>
                             </LightTooltip>
+
                             <LightTooltip TransitionComponent={Zoom} title='New Event' sx={{marginTop: '0'}}
                                           followCursor>
                                 <Card key='Card 3'

@@ -20,7 +20,7 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {styled} from "@mui/material/styles";
-import { checkJwt } from '../../Utils/AuthService';
+import { TakeUserInfoFromJwt, checkJwt } from '../../Utils/AuthService';
 import { useNavigate } from 'react-router-dom';
 
 interface HomepageProps {
@@ -35,6 +35,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     //Variable declaration
     const [selectedItem, setSelectedItem] = useState(Home);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [userInfo, setUserInfo] = useState<any>([]);
     let jwtError = false;
     let navigate = useNavigate();
 
@@ -60,8 +61,14 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
             if(jwtError) navigate("/");
         }
 
+        const takeUserData = async () => {
+            let response:any = await TakeUserInfoFromJwt();
+            setUserInfo(response[0]);
+        }
+
         check();
-    });
+        takeUserData();
+    },[]);
 
 
     const handleSelectItem = (item: any) => {
@@ -98,6 +105,11 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
             fontSize: 11.5,
         },
     }));
+
+    const logOut = () => {
+        localStorage.clear();
+        navigate("/");
+    }
 
     //Render
     return (
@@ -246,12 +258,12 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                                         fontFamily: 'Roboto Black', color: 'white', fontSize: '16px',
                                         marginTop: '10px',
                                         marginLeft: '10px'
-                                    }}>Carlo</Typography>
+                                    }}>{userInfo.first_name} {userInfo.last_name}</Typography>
                                 <Typography
                                     sx={{
                                         color: 'white', fontSize: '12px', marginLeft: '10px',
                                         fontFamily: 'Roboto Light'
-                                    }}>prova@gmail.com</Typography>
+                                    }}>{userInfo.email}</Typography>
                             </Grid>
                         </Grid>
                     </Box>
@@ -267,7 +279,8 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                                 color: 'white', fontFamily: 'Roboto Regular', fontSize: '15px',
                                 marginTop: '6px',
                                 marginLeft: '10px'
-                            }}>Log-In with another account</Typography>
+                            }}
+                            onClick = {() => logOut()}>Log-In with another account</Typography>
                         </Grid>
                     </Box>
                 </Grid>

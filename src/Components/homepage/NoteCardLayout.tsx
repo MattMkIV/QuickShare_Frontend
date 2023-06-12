@@ -27,9 +27,22 @@ import CloseIcon from '@mui/icons-material/Close';
 import {styled} from "@mui/material/styles";
 import {useState} from "react";
 import SendIcon from "@mui/icons-material/Send";
+import { DeleteNote, UpdateNote } from "../../Utils/note_service";
+import { common } from "@mui/material/colors";
 
+interface Props {
+    title: any,
+    noteId: any,
+    createData: any,
+    body: any,
+    allowed: any
+}
 
-const NoteCardLayout: React.FC = () => {
+const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
+
+    const formRef = React.useRef<any>(null);
+    const [titleNote, setTitle] = useState(title);
+    const [bodyNote, setBody] = useState(body);
     /************************* Handle notes MouseEnter & MouseExit *************************/
     const [isHovered, setIsHovered] = React.useState(false);
 
@@ -82,6 +95,31 @@ const NoteCardLayout: React.FC = () => {
     };
 
     const open = Boolean(anchorEl);
+    
+    const updateNote:any = async (noteId:any) => {
+
+        let isError = await UpdateNote(titleNote, bodyNote, null, noteId);
+
+        if(isError)
+            console.log("Errore aggiornamento nota");
+    }
+
+    const deleteNote:any = async (noteId:any) => {
+
+        let isError = await DeleteNote(noteId);
+
+        if(isError)
+            console.log("Errore aggiornamento nota");
+    }
+
+    const handleChangeTitle = (event:any) => {
+        setTitle(event.target.value);
+    };
+
+
+    const handleChangeBody = (event:any) => {
+        setBody(event.target.value);
+    };
 
     return (
         <>
@@ -115,7 +153,8 @@ const NoteCardLayout: React.FC = () => {
                             }
                         }}
                         className='cardTitle'
-                        defaultValue='PROVA TITOLO MOLTO LUNGO'
+                        value={titleNote}
+                        onChange={handleChangeTitle}
                         onClick={handleTextFieldClick}>
                     </TextField>
 
@@ -134,8 +173,12 @@ const NoteCardLayout: React.FC = () => {
                             '& fieldset': {border: 'none'},
                             '& .MuiInputBase-input': {fontFamily: 'Roboto Light', fontSize: '20px !important'}
                         }}
+                        defaultValue={body}
+                        value={bodyNote}
+                        onChange={handleChangeBody}
                         onClick={handleTextFieldClick}
                     />
+                
 
                     {isEditable ? (
                         <Grid>
@@ -148,7 +191,7 @@ const NoteCardLayout: React.FC = () => {
                                 </Fab>
                             </Grow>
 
-                            <Grow in={isHovered} mountOnEnter unmountOnExit timeout={200}>
+                            <Grow in={isHovered} mountOnEnter unmountOnExit timeout={200} onClick={() => updateNote(noteId)}>
                                 <Fab onClick={handleConfirmClick} sx={{
                                     backgroundColor: '#65cc8f', marginLeft: '27px', marginRight: '25px',
                                     ':hover': {backgroundColor: '#58b27f'}
@@ -161,17 +204,17 @@ const NoteCardLayout: React.FC = () => {
                     ) : (
                         <Grid>
                             <LightTooltip TransitionComponent={Zoom} title='Show info'
-                                          sx={{marginTop: '-7px !important'}}
-                                          placement="bottom">
+                                        sx={{marginTop: '-7px !important'}}
+                                        placement="bottom">
                                 <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={100}>
                                         <Fab sx={{
                                             backgroundColor: '#dfc38c', marginLeft: '27px', marginRight: '25px',
                                             ':hover': {backgroundColor: '#deba7b'}
                                         }}
-                                             aria-controls={open ? 'fade-menu' : undefined}
-                                             aria-haspopup="true"
-                                             aria-expanded={open ? 'true' : undefined}
-                                             onClick={handleClick}>
+                                            aria-controls={open ? 'fade-menu' : undefined}
+                                            aria-haspopup="true"
+                                            aria-expanded={open ? 'true' : undefined}
+                                            onClick={handleClick}>
                                             <InfoIcon sx={{color: '#3f2e04'}}/>
                                         </Fab>
                                 </Slide>
@@ -185,7 +228,7 @@ const NoteCardLayout: React.FC = () => {
 
                             </Menu>
                             <LightTooltip TransitionComponent={Zoom} title='Share' sx={{marginTop: '-7px !important'}}
-                                          placement="bottom">
+                                        placement="bottom">
                                 <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={200}>
                                     <Fab sx={{
                                         backgroundColor: '#e7bdb7', marginRight: '25px',
@@ -196,8 +239,8 @@ const NoteCardLayout: React.FC = () => {
                                 </Slide>
                             </LightTooltip>
                             <LightTooltip TransitionComponent={Zoom} title='Delete' sx={{marginTop: '-7px !important'}}
-                                          placement="bottom">
-                                <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={400}>
+                                        placement="bottom">
+                                <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={400} onClick={() => deleteNote(noteId)}>
                                     <Fab sx={{backgroundColor: '#ffb4aa', ':hover': {backgroundColor: '#fda498'}}}>
                                         <DeleteIcon sx={{color: '#690003'}}/>
                                     </Fab>

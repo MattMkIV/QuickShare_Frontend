@@ -16,13 +16,13 @@ function Home() {
 
                 <Grid item className='cardSliderHomePage'>
                     <Stack spacing={5} direction="row">
-                        <CardLayout></CardLayout>
+                        {/* <CardLayout></CardLayout>
                         <ListCardLayout></ListCardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                        <CardLayout></CardLayout> */}
                     </Stack>
                 </Grid>
 
@@ -34,12 +34,12 @@ function Home() {
 
                 <Grid className='cardSliderHomePage'>
                     <Stack direction="row" spacing={5}>
+                        {/* <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                        <CardLayout></CardLayout> */}
                     </Stack>
                 </Grid>
 
@@ -51,12 +51,12 @@ function Home() {
 
                 <Grid className='cardSliderHomePage'>
                     <Stack direction="row" spacing={5}>
+                        {/* <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                        <CardLayout></CardLayout> */}
                     </Stack>
                 </Grid>
             </Box>

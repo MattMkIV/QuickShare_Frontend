@@ -30,3 +30,86 @@ export async function TakeNote() {
     });
     return responseData;
 }
+
+// Update Note
+export async function UpdateNote(title, body, newUser, noteId) {
+
+    let jwt = localStorage.getItem("jwt");
+    let jwtDecode = jose.decodeJwt(jwt);
+    let UserId = jwtDecode.user_id;
+
+    await axios.put(urls.serverURL + '/note/' + UserId, {
+
+        "new_user_id": newUser,
+        "note_id": noteId,
+        "title": title.toString(),
+        "body": body.toString(),
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).catch(function (error) {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            let responseStatus = parseInt(error.response.status);
+            if (responseStatus === 401 || responseStatus === 400) {
+                console.log("Errore 401 or 400: Bad Request");
+                console.log(error);
+                return true;
+            } else if (responseStatus === 409) {
+                console.log("Errore 409: Conflict! Utente gia registrato");
+                return true;
+            }
+
+        } else if (error.request) {
+            console.log("Errore 500: Errore server");
+            return true;
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Errore:', error.message);
+            return true;
+        }
+    });
+
+    return false;
+}
+
+// Update Note
+export async function DeleteNote(noteId) {
+
+    let jwt = localStorage.getItem("jwt");
+    let jwtDecode = jose.decodeJwt(jwt);
+    let UserId = jwtDecode.user_id;
+
+    await axios.delete(urls.serverURL + '/note/' + UserId, {
+
+        "note_id": noteId,
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).catch(function (error) {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            let responseStatus = parseInt(error.response.status);
+            if (responseStatus === 401 || responseStatus === 400) {
+                console.log("Errore 401 or 400: Bad Request");
+                console.log(error);
+                return true;
+            } else if (responseStatus === 409) {
+                console.log("Errore 409: Conflict! Utente gia registrato");
+                return true;
+            }
+
+        } else if (error.request) {
+            console.log("Errore 500: Errore server");
+            return true;
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Errore:', error.message);
+            return true;
+        }
+    });
+
+    return false;
+}
