@@ -45,10 +45,6 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
         setMenuId(id);
     };
 
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
     const handleClose = () => {
         setAnchorEl(null);
     };
