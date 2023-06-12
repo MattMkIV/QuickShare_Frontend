@@ -29,21 +29,8 @@
 }
 
 /*---------------- Pop-Up -------------*/
-
-.MuiMenu-paper.notification ul {
-    background-color: #a08c8a;
-    margin-top: 0 !important;
-    margin-right: 65px !important;
-    height: 600px !important;
-    width: 410px !important;
-}
-
 .sendButton:hover {
     background-color: #76ab02 !important;
-    cursor: pointer;
-}
-
-.exitPopUpIcon:hover {
     cursor: pointer;
 }
 
