@@ -12,6 +12,8 @@ import Notes from "./Pages/View/notes/Notes";
 import Lists from "./Pages/View/list/Lists";
 import Homepage from "./Pages/homepage/Homepage";
 import ConfirmRegistration from './Pages/SignUp/ConfirmRegistration';
+import Calendar from "./Pages/View/calendar/Calendar";
+import AccountBalance from "./Pages/View/accountBalance/AccountBalance";
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
                     <Route index path="/homepage/photo" element={<Homepage componentToRender={UploadPhoto}/>}/>
                     <Route index path="/homepage/notes" element={<Homepage componentToRender={Notes}/>}/>
                     <Route index path="/homepage/lists" element={<Homepage componentToRender={Lists}/>}/>
+                    <Route index path="/homepage/calendar" element={<Homepage componentToRender={Calendar}/>}/>
+                    <Route index path="/homepage/accountbalance" element={<Homepage componentToRender={AccountBalance}/>}/>
                     <Route index path="/signUp" element={<SignUp/>}/>
                     <Route index path="/forgotPassword" element={<ForgotPassword/>}/>
                     <Route index path="/confirmRegistration" element={<ConfirmRegistration/>}/>

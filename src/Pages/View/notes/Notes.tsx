@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { checkJwt } from "../../../Utils/AuthService";
 import { TakeNote } from "../../../Utils/note_service";
+import CardLayout from '../../../Components/homepage/NoteCardLayout'
 
 function Notes() {
 

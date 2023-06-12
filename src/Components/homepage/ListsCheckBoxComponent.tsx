@@ -1,7 +1,8 @@
 import {styled} from "@mui/material/styles";
-import {Checkbox, CheckboxProps, Typography} from "@mui/material";
+import {Checkbox, CheckboxProps, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const BpIcon = styled('span')(({theme}) => ({
     borderRadius: 3,
@@ -31,7 +32,7 @@ const BpIcon = styled('span')(({theme}) => ({
 }));
 
 const BpCheckedIcon = styled(BpIcon)({
-    backgroundColor: '#b4261f',
+    backgroundColor: '#920609',
     backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
     '&:before': {
         display: 'block',
@@ -44,7 +45,7 @@ const BpCheckedIcon = styled(BpIcon)({
         content: '""',
     },
     'input:hover ~ &': {
-        backgroundColor: '#b4261f',
+        backgroundColor: '#920609',
     },
 });
 
@@ -64,13 +65,57 @@ function BpCheckbox(props: CheckboxProps) {
 }
 
 function ListsCheckBoxComponent() {
+    const [checked, setChecked] = React.useState([0]);
+
+    const handleToggle = (value: number) => () => {
+        const currentIndex = checked.indexOf(value);
+        const newChecked = [...checked];
+
+        if (currentIndex === -1) {
+            newChecked.push(value);
+        } else {
+            newChecked.splice(currentIndex, 1);
+        }
+
+        setChecked(newChecked);
+    };
+
+
     return (
         <>
             <Grid wrap='nowrap'
                   sx={{display : 'flex', alignItems : 'center', justifyContent : 'flex-start', marginTop : '0px',
                       marginBottom : '-2px'}}>
-                <BpCheckbox sx={{marginLeft : '5px'}}/>
-                <Typography sx={{fontFamily : 'Roboto Light', letterSpacing : '-0.2px'}}>Fare la spesa</Typography>
+                <List sx={{ width: '100%', maxWidth: 360, bgcolor: '#ede0de' }}>
+                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((value) => {
+                        const labelId = `checkbox-list-label-${value}`;
+
+                        return (
+                            <ListItem
+                                key={value}
+                                secondaryAction={
+                                    <IconButton edge="end" aria-label="comments">
+                                        <DeleteIcon />
+                                    </IconButton>
+                                }
+                                disablePadding
+                            >
+                                <ListItemButton role={undefined} onClick={handleToggle(value)} dense sx={{height : '35px'}}>
+                                    <ListItemIcon>
+                                        <BpCheckbox
+                                            edge="start"
+                                            checked={checked.indexOf(value) !== -1}
+                                            tabIndex={-1}
+                                            disableRipple
+                                            inputProps={{ 'aria-labelledby': labelId }}
+                                        />
+                                    </ListItemIcon>
+                                    <ListItemText id={labelId} primary={`Line item ${value + 1}`} sx={{marginLeft : '-20px'}}/>
+                                </ListItemButton>
+                            </ListItem>
+                        );
+                    })}
+                </List>
             </Grid>
         </>
     );

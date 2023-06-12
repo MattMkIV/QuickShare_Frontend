@@ -34,3 +34,12 @@
     background-color: #e7bdb7 !important;
     color: #442926 !important;
 }
+
+/*----------------- New menu --------------------*/
+
+.littleSeparationLine {
+    width: 242px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    border-color: #a08c8a !important;
+}
