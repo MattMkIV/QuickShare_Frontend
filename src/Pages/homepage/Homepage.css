@@ -17,12 +17,8 @@
     font-family: Manrope, serif;
 }
 
-.avatarPositionGrid {
-    width: 160px !important;
-}
-
 .avatarIconClickAnimation {
-    margin-right: 15px !important;
+    margin-right: 0px !important;
     width: 40px !important;
     height: 40px !important;
     margin-top:7px !important;
@@ -37,14 +33,14 @@
     background-color: #a08c8a;
     border-radius: 22px !important;
     margin-top: 10px !important;
-    margin-right: 20px !important;
+    margin-right: 0 !important;
     width: 350px !important;
     height: 120px !important;
 }
 
 .MuiMenu-paper.notification ul {
     margin-top: 0 !important;
-    margin-right: 95px !important;
+    margin-right: 65px !important;
     height: 600px !important;
     width: 410px !important;
 }

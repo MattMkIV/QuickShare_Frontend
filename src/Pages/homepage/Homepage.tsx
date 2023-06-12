@@ -96,9 +96,10 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
         <>
             <Grid container className='topMarginHomepage' wrap='nowrap'
                   sx={{display: 'flex', flexDirection: 'row-reverse'}}>
-                <Grid item className='avatarPositionGrid'>
+                <Grid wrap='nowrap' className='avatarPositionGrid'
+                      sx={{minWidth: '120px'}}>
                     <IconButton
-                        sx={{marginBottom: '-10px', marginRight: '20px'}}
+                        sx={{marginBottom: '-10px', marginRight: '15px'}}
                         onClick={(event) => topBarClick(event, 'notification')}
                         aria-controls="notification"
                         aria-haspopup="true">
@@ -122,11 +123,11 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
             </Grid>
 
             <Grid container wrap='nowrap'>
-                <Grid item lg={2.5} md={2.5}>
+                <Grid item lg={2} md={2}>
                     <LeftBar onSelect={handleSelectItem}/>
                 </Grid>
 
-                <Grid container className='homepageBoxBackground' lg={9.5} md={9.5} xs={12}>
+                <Grid container className='homepageBoxBackground' lg={10} md={10} xs={12}>
                     <Component/>
                 </Grid>
             </Grid>
