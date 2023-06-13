@@ -1,14 +1,4 @@
 /*------------------- SearchBar -----------------------*/
-.searchBar {
-    width: 100%;
-    margin-left: 20px !important;
-    font-family: "Roboto Light", serif;
-}
-
-.avatarIcon {
-    border-radius: 16px !important;
-}
-
 .lineHomepage {
     width: 100%;
     border-color: #545454;

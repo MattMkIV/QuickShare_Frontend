@@ -54,15 +54,38 @@ function TopBar() {
                     <Logo navigateHome={true}/>
 
                     <Grid lg={7} md={7} xs={9}>
-                        <CssTextField InputLabelProps={{sx: {color: '#9D8D8B'}}} id="search"
-                                      type="search" label="Search" className='searchBar' onClick={handleChange}
-                                      InputProps={{
-                                          endAdornment: (
-                                              <InputAdornment position="end">
-                                                  <SearchIcon sx={{color: '#9D8D8B'}}/>
-                                              </InputAdornment>
-                                          ),
-                                      }}/>
+                        <TextField
+                            placeholder="Search"
+                            onClick={handleChange}
+                            InputProps={{
+                                endAdornment: <SearchIcon sx={{ color: '#F4B7AD' }} />,
+                            }}
+                            sx={{
+                                '& .MuiInput-underline': {
+                                    borderBottomColor: 'transparent',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: '#F4B7AD',
+                                        borderRadius: '25px',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: '#F4B7AD',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#F4B7AD',
+                                        borderWidth: '2px',
+                                    },
+                                },
+                                '& .MuiInputBase-input': {
+                                    borderRadius: '25px',
+                                    fontFamily: 'Roboto Regular',
+                                    fontSize: '17px !important',
+                                    height: '20px',
+                                },
+                                width: '100%',
+                                marginLeft: '20px',
+                            }}/>
                     </Grid>
                 </Grid>
             </React.Fragment>

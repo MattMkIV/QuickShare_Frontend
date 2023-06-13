@@ -6,15 +6,12 @@ import LeftBar from '../../Components/homepage/LeftBar';
 import Home from '../View/home/Home';
 import OtherMessageComponent from '../../Components/homepage/OtherMessageComponent'
 import MyMessageComponent from '../../Components/homepage/MyMessageComponent'
-//CSS
-import './Homepage.css'
 //JS
 //Other
 import React, {useEffect, useState} from 'react';
 import Grid from '@mui/material/Grid';
 import {Box, IconButton, Menu, Stack, Tooltip, tooltipClasses, TooltipProps, Typography, Zoom} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import TextField from "@mui/material/TextField";
@@ -70,27 +67,6 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     const handleSelectItem = (item: any) => {
         setSelectedItem(item);
     };
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        setMenuId(undefined);
-    };
-
-    const CssTextField = styled(TextField)({
-        '& label.Mui-focused': {
-            color: '#534341',
-        },
-        '& .MuiOutlinedInput-notchedOutline': {
-            border: 'none',
-        },
-        '& .MuiOutlinedInput-root': {
-            '&:hover fieldset': {
-                borderRadius: 12,
-            },
-            '&.Mui-focused fieldset': {
-                borderRadius: 12,
-            },
-        },
-    });
 
     const LightTooltip = styled(({className, ...props}: TooltipProps) => (
         <Tooltip {...props} classes={{popper: className}}/>))(({theme}) => ({
@@ -110,8 +86,8 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     //Render
     return (
         <>
-            <Grid container className='topMarginHomepage' wrap='nowrap'
-                  sx={{display: 'flex', flexDirection: 'row-reverse'}}>
+            <Grid container wrap='nowrap'
+                  sx={{display: 'flex', flexDirection: 'row-reverse', marginTop: '20px'}}>
                 <Grid wrap='nowrap' sx={{
                     width: '150px',
                     display: 'flex',
@@ -134,7 +110,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                         aria-haspopup="true"
                         sx={{marginRight: '10px'}}>
 
-                        <Avatar sx={{backgroundColor: '#008fdb'}}>M</Avatar>
+                        <Avatar sx={{backgroundColor: '#008fdb', boxShadow: 12}}>M</Avatar>
                     </IconButton>
                 </Grid>
                 <TopBar/>
@@ -145,7 +121,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                     <LeftBar onSelect={handleSelectItem}/>
                 </Grid>
 
-                <Grid container className='homepageBoxBackground' lg={10} md={10} xs={12}>
+                <Grid container sx={{marginTop: '30px'}} lg={10} md={10} xs={12}>
                     <Component/>
                 </Grid>
             </Grid>
@@ -174,35 +150,63 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                         borderRadius: '22px',
                         backgroundColor: '#a08c8a',
                     }
-                }}
-                classes={{paper: 'notification'}}>
+                }}>
 
-                <Grid>
-                    <Stack sx={{height: '532px', marginBottom: '10px', overflowY: 'scroll'}} spacing={2}
+                <Grid sx={{marginTop: '2px'}}>
+                    <Stack sx={{height: '516px', marginBottom: '10px', overflowY: 'scroll'}} spacing={2}
                            direction="column">
                         <OtherMessageComponent/>
                         <MyMessageComponent/>
                     </Stack>
-                    <Grid wrap='nowrap'>
-                        <CssTextField
-                            sx={{
-                                marginLeft: '9px', marginRight: '5px', width: '323px',
-                                backgroundColor: '#D9D9D9 !important', borderRadius: '15px',
-                                fontFamily: 'Roboto Light'
+                    <Grid wrap='nowrap' sx={{display: 'flex', alignItems: 'center', marginLeft: '10px'}}>
+                        <TextField
+                            inputProps={{
+                                sx: {color: '#3f2e04 !important'}
                             }}
-                            inputProps={{sx: {color: '#534341 !important',},}}
-                            label="Type your message here..."
+                            sx={{
+                                '& .MuiInput-underline': {
+                                    borderBottomColor: 'transparent',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderRadius: '18px',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: '#3f2e04',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderWidth: '2px',
+                                    },
+                                },
+                                '& .MuiInputBase-input': {
+                                    borderRadius: '18px',
+                                    backgroundColor: '#d8c2be',
+                                    fontFamily: 'Roboto Regular',
+                                    fontSize: '16px !important',
+                                    height: '35px',
+                                    width: '300px',
+                                    boxShadow: 8,
+                                },
+                            }}
+                            placeholder="Type your message here"
                             size='small'/>
 
-                        <Button className='sendButton'
-                                sx={{
-                                    background: '#7EB503',
-                                    width: '40px',
-                                    height: '40px',
-                                    borderRadius: '15px',
-                                    marginRight: '9px'
-                                }}>
-                            <SendIcon sx={{width: '25px', height: '25px', color: 'white'}}/>
+                        <Button sx={{
+                            background: 'rgba(112,190,53,0.93)',
+                            minWidth: '51px',
+                            height: '51px',
+                            borderRadius: '22px',
+                            marginRight: '10px',
+                            marginLeft: '10px',
+                            boxShadow: 8,
+                            ':hover': {
+                                backgroundColor: 'rgb(110,178,54)',
+                                cursor: 'pointer'
+                            }
+                        }}>
+                            <SendIcon sx={{width: '23px', height: '23px', color: '#263417'}}/>
                         </Button>
                     </Grid>
                 </Grid>
@@ -263,20 +267,22 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                             </Grid>
                         </Grid>
                     </Box>
-                    <Box className='loginOtherAccountPopUp'
-                         sx={{
-                             borderRadius: '5px 5px 15px 15px', height: '35px', marginTop: '3px',
-                             marginLeft: '5px',
-                             marginRight: '5px'
-                         }}>
+                    <Box
+                        sx={{
+                            borderRadius: '5px 5px 15px 15px', height: '35px', marginTop: '3px',
+                            marginLeft: '5px',
+                            marginRight: '5px',
+                            ':hover': {backgroundColor: '#800507', cursor: 'pointer'}
+                        }}>
                         <Grid container>
-                            <LoginIcon sx={{color: 'white', marginTop: '5px', marginLeft: '18px'}}></LoginIcon>
+                            <LoginIcon
+                                sx={{color: 'white', marginTop: '5px', marginLeft: '18px'}}></LoginIcon>
                             <Typography sx={{
                                 color: 'white', fontFamily: 'Roboto Regular', fontSize: '15px',
                                 marginTop: '6px',
                                 marginLeft: '10px'
                             }}
-                            onClick = {() => logOut()}>Log-In with another account</Typography>
+                            onClick = {() => logOut()}>Log-out</Typography>
                         </Grid>
                     </Box>
                 </Grid>

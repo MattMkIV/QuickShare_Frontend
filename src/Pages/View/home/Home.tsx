@@ -14,7 +14,7 @@ function Home() {
                     <h1 className='titleSection'>Most Recent:</h1>
                 </Grid>
 
-                <Grid item className='cardSliderHomePage'>
+                <Grid className='cardSliderHomePage'>
                     <Stack spacing={5} direction="row">
                         {/* <CardLayout></CardLayout>
                         <ListCardLayout></ListCardLayout>
