@@ -74,6 +74,50 @@ export async function UpdateNote(title, body, newUser, noteId) {
     return false;
 }
 
+// Create Note
+export async function CreateNote(title, body) {
+
+    let responseData;
+    let jwt = localStorage.getItem("jwt");
+    let jwtDecode = jose.decodeJwt(jwt);
+    let UserId = jwtDecode.user_id;
+
+    await axios.post(urls.serverURL + '/note/' + UserId, {
+
+        "title": title.toString(),
+        "body": body.toString(),
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then(response => {
+        responseData = response.data;
+    }).catch(function (error) {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            let responseStatus = parseInt(error.response.status);
+            if (responseStatus === 401 || responseStatus === 400) {
+                console.log("Errore 401 or 400: Bad Request");
+                console.log(error);
+                return [true];
+            } else if (responseStatus === 409) {
+                console.log("Errore 409: Conflict! Utente gia registrato");
+                return [true];
+            }
+
+        } else if (error.request) {
+            console.log("Errore 500: Errore server");
+            return [true];
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Errore:', error.message);
+            return [true];
+        }
+    });
+
+    return [false, responseData];
+}
+
 // Update Note
 export async function DeleteNote(noteId) {
 
@@ -83,7 +127,7 @@ export async function DeleteNote(noteId) {
 
     await axios.delete(urls.serverURL + '/note/' + UserId, {
 
-        "note_id": noteId,
+        "note_id": parseInt(noteId),
     }, {
         headers: {
             'Content-Type': 'application/json',

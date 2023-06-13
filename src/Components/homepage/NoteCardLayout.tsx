@@ -16,7 +16,8 @@ import SendIcon from "@mui/icons-material/Send";
 import { DeleteNote, UpdateNote } from "../../Utils/note_service";
 import { common } from "@mui/material/colors";
 import Home from "../../Pages/View/home/Home";
-import { TakeUserInfoAll } from "../../Utils/AuthService";
+import { TakeUserInfoAll, TakeUserInfoByEmail } from "../../Utils/AuthService";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     title: any,
@@ -32,6 +33,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
     const [titleNote, setTitle] = useState(title);
     const [bodyNote, setBody] = useState(body);
     const [userInfo, setUserInfo] = useState<any>([]);
+    let navigate = useNavigate();
 
     useEffect(() => {
 
@@ -89,14 +91,18 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
 
     const open = Boolean(anchorEl);
     
+    // metodo modifica nota
     const updateNote:any = async (noteId:any) => {
 
         let isError = await UpdateNote(titleNote, bodyNote, null, noteId);
 
         if(isError)
             console.log("Errore aggiornamento nota");
+
+        window.location.reload();
     }
 
+    // metodo eliminazione nota
     const deleteNote:any = async (noteId:any) => {
 
         let isError = await DeleteNote(noteId);
@@ -105,6 +111,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
             console.log("Errore aggiornamento nota");
     }
 
+    // aggiornamento testi
     const handleChangeTitle = (event:any) => {
         setTitle(event.target.value);
     };
@@ -112,6 +119,33 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
 
     const handleChangeBody = (event:any) => {
         setBody(event.target.value);
+    }
+
+    // metodo per aggiungere "allowed" alla nota
+    const addAllowed = async (event: any) => {
+
+        let emailAllowedUser:any = [];
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        //Take Value
+
+        for(let i=0; i < textFields.length; i++) {
+            let response:any = await TakeUserInfoByEmail(data.get('nota'+i));
+            console.log(response);
+            emailAllowedUser.push(response.id);
+        }
+        
+        let response:any = await TakeUserInfoAll(emailAllowedUser);
+
+        for(let i=0; i < response.length; i++) {
+            let isError = await UpdateNote(titleNote, bodyNote, response[i].id, noteId);
+        }
+
+        window.location.reload();
+    }
+
+    
+
     /************************* Share pop up TextField *************************/
     const [textFields, setTextFields] = useState<string[]>([]);
 
@@ -308,7 +342,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                                        },
                                                        marginBottom: 1.2
                                                    }}
-                                                   defaultValue={user.mail}
+                                                   defaultValue={user.email}
                                                    disabled>
                                         </TextField>
                                     ))}
@@ -348,107 +382,114 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         backgroundColor: '#e7bdb7',
                                         overflowY: 'hidden'
                                     }
-                                }}>
-                                <Typography sx={{
-                                    fontFamily: 'Roboto Black',
-                                    fontSize: '17px',
-                                    marginLeft: '15px',
-                                    marginTop: '5px',
-                                    color: '#3f2e04',
-                                }}>Share with:</Typography>
-                                <Box sx={{
-                                    width: '100%',
-                                    height: '220px',
-                                    borderRadius: '22px',
-                                    backgroundColor: '#eaa79d',
-                                    pl: 1.2, pr: 1.2, pt: 1.2,
-                                    overflowY: 'scroll',
-                                }}>
-                                    {textFields.map((textField, index) => (
-                                        <div key={index} style={{display: 'flex'}}>
-                                            <TextField
-                                                inputProps={{
-                                                    sx: {color: '#3f2e04 !important'}
-                                                }}
-                                                sx={{
-                                                    '& .MuiInput-underline': {
-                                                        borderBottomColor: 'transparent',
-                                                    },
-                                                    '& .MuiOutlinedInput-root': {
-                                                        '& fieldset': {
-                                                            borderColor: '#3f2e04',
-                                                            borderRadius: '18px',
-                                                        },
-                                                        '&:hover fieldset': {
-                                                            borderColor: '#3f2e04',
-                                                        },
-                                                        '&.Mui-focused fieldset': {
-                                                            borderColor: '#3f2e04',
-                                                            borderWidth: '2px',
-                                                        },
-                                                    },
-                                                    '& .MuiInputBase-input': {
-                                                        borderRadius: '18px',
-                                                        fontFamily: 'Roboto Regular',
-                                                        fontSize: '15px !important',
-                                                        height: '5px',
-                                                        width: '202px',
-                                                        boxShadow: 4,
-                                                    },
-                                                    marginBottom: 1.2
-                                                }}
-                                                placeholder='Email or Username'
-                                            />
-                                            <Button onClick={() => handleRemoveTextField(index)}
-                                                    sx={{
-                                                        backgroundColor: '#920609',
-                                                        height: '30px',
-                                                        minWidth: '30px',
-                                                        borderRadius: '22px',
-                                                        marginLeft: '10px',
-                                                        marginTop: '3px',
-                                                        boxShadow: 4,
-                                                        ':hover': {backgroundColor: '#9f3a3c'}
+                                }}
+                            >
+                                <form onSubmit={addAllowed}>
+                                    <Typography sx={{
+                                        fontFamily: 'Roboto Black',
+                                        fontSize: '17px',
+                                        marginLeft: '15px',
+                                        marginTop: '5px',
+                                        color: '#3f2e04',
+                                    }}>
+                                        Share with:
+                                    </Typography>
+                                    <Box sx={{
+                                        width: '100%',
+                                        height: '220px',
+                                        borderRadius: '22px',
+                                        backgroundColor: '#eaa79d',
+                                        pl: 1.2, pr: 1.2, pt: 1.2,
+                                        overflowY: 'scroll',
+                                    }}
+                                    >
+                                        {textFields.map((textField, index) => (
+                                            <div key={index} style={{display: 'flex'}}>
+                                                <TextField
+                                                    inputProps={{
+                                                        sx: {color: '#3f2e04 !important'}
                                                     }}
-                                                    disableRipple>
-                                                <DeleteIcon sx={{height: '15px', width: '15px', color: '#ffb4aa'}}/>
-                                            </Button>
-                                        </div>
-                                    ))}
-                                </Box>
-                                <Grid sx={{
-                                    width: '100%',
-                                    marginTop: '10px',
-                                    display: 'flex',
-                                    justifyContent: 'flex-end',
-                                    alignContent: 'center',
-                                    pr: 1.2
-                                }}>
-                                    <Button sx={{
-                                        minWidth: '40px',
-                                        height: '40px',
-                                        boxShadow: 8,
-                                        backgroundColor: '#8fb677',
-                                        borderRadius: '30px',
-                                        ':hover': {backgroundColor: '#7a9a65'}
-                                    }} disableRipple onClick={handleAddTextField}>
-                                        <AddIcon sx={{color: '#201a19'}}></AddIcon>
-                                    </Button>
-                                    <Button sx={{
-                                        minWidth: '90px',
-                                        height: '40px',
-                                        marginLeft: '92px',
-                                        boxShadow: 8,
-                                        backgroundColor: '#dfc38c',
-                                        borderRadius: '30px',
-                                        fontFamily: 'Roboto Regular',
-                                        fontSize: '14px',
-                                        ':hover': {backgroundColor: '#c7ad7b'},
-                                        color: '#201a19',
-                                    }} disableRipple onClick={handleAddTextField}>
-                                        Share!
-                                    </Button>
-                                </Grid>
+                                                    sx={{
+                                                        '& .MuiInput-underline': {
+                                                            borderBottomColor: 'transparent',
+                                                        },
+                                                        '& .MuiOutlinedInput-root': {
+                                                            '& fieldset': {
+                                                                borderColor: '#3f2e04',
+                                                                borderRadius: '18px',
+                                                            },
+                                                            '&:hover fieldset': {
+                                                                borderColor: '#3f2e04',
+                                                            },
+                                                            '&.Mui-focused fieldset': {
+                                                                borderColor: '#3f2e04',
+                                                                borderWidth: '2px',
+                                                            },
+                                                        },
+                                                        '& .MuiInputBase-input': {
+                                                            borderRadius: '18px',
+                                                            fontFamily: 'Roboto Regular',
+                                                            fontSize: '15px !important',
+                                                            height: '5px',
+                                                            width: '202px',
+                                                            boxShadow: 4,
+                                                        },
+                                                        marginBottom: 1.2
+                                                    }}
+                                                    placeholder='Email'
+                                                    name={"nota"+index}
+                                                />
+                                                <Button onClick={() => handleRemoveTextField(index)}
+                                                        sx={{
+                                                            backgroundColor: '#920609',
+                                                            height: '30px',
+                                                            minWidth: '30px',
+                                                            borderRadius: '22px',
+                                                            marginLeft: '10px',
+                                                            marginTop: '3px',
+                                                            boxShadow: 4,
+                                                            ':hover': {backgroundColor: '#9f3a3c'}
+                                                        }}
+                                                        disableRipple>
+                                                    <DeleteIcon sx={{height: '15px', width: '15px', color: '#ffb4aa'}}/>
+                                                </Button>
+                                            </div>
+                                        ))}
+                                    </Box>
+                                    <Grid sx={{
+                                        width: '100%',
+                                        marginTop: '10px',
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        alignContent: 'center',
+                                        pr: 1.2
+                                    }}>
+                                        <Button sx={{
+                                            minWidth: '40px',
+                                            height: '40px',
+                                            boxShadow: 8,
+                                            backgroundColor: '#8fb677',
+                                            borderRadius: '30px',
+                                            ':hover': {backgroundColor: '#7a9a65'}
+                                        }} disableRipple onClick={handleAddTextField}>
+                                            <AddIcon sx={{color: '#201a19'}}></AddIcon>
+                                        </Button>
+                                        <Button sx={{
+                                            minWidth: '90px',
+                                            height: '40px',
+                                            marginLeft: '92px',
+                                            boxShadow: 8,
+                                            backgroundColor: '#dfc38c',
+                                            borderRadius: '30px',
+                                            fontFamily: 'Roboto Regular',
+                                            fontSize: '14px',
+                                            ':hover': {backgroundColor: '#c7ad7b'},
+                                            color: '#201a19',
+                                        }} disableRipple  type="submit">
+                                            Share!
+                                        </Button>
+                                    </Grid>
+                                </form>
                             </Menu>
 
                             <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={400}>
@@ -517,7 +558,8 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                             marginLeft: '20px',
                                             marginTop: '10px',
                                             ':hover': {backgroundColor: '#7e0508'}
-                                        }} disableRipple>Yes</Button>
+                                        }} disableRipple
+                                        onClick={() => deleteNote(noteId)}>Yes</Button>
                                     </Grid>
                                 </Box>
                             </Menu>
@@ -527,6 +569,6 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
             </Card>
         </>
     );
-}}
+}
 
 export default NoteCardLayout;
