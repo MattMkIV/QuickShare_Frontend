@@ -87,7 +87,7 @@ const NoteCardLayout: React.FC = () => {
 
     return (
         <>
-            <Card onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='cardsLayout'>
+            <Card onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='cardsLayout' sx={{boxShadow : 8}}>
                 <CardContent sx={{m: -1}}>
                     <TextField
                         inputProps={{
@@ -219,13 +219,13 @@ const NoteCardLayout: React.FC = () => {
                                     fontFamily: 'Roboto Black',
                                     fontSize: '17px',
                                     marginLeft: '15px',
-                                    marginTop: '20px',
+                                    marginTop: '10px',
                                     color: '#3f2e04'
                                 }}>Actually shared with:</Typography>
 
                                 <Box sx={{
                                     width: '100%',
-                                    height: '237px',
+                                    height: '246px',
                                     borderRadius: '22px',
                                     backgroundColor: '#d9b267',
                                     overflowY: 'scroll',
@@ -348,6 +348,7 @@ const NoteCardLayout: React.FC = () => {
                                                     },
                                                     marginBottom: 1.2
                                                 }}
+                                                placeholder='Email or Username'
                                             />
                                             <Button onClick={() => handleRemoveTextField(index)}
                                                     sx={{
@@ -441,7 +442,7 @@ const NoteCardLayout: React.FC = () => {
                                     marginTop: '5px',
                                     color: '#3f2e04'
                                 }}>Delete permanently?</Typography>
-                                <Box sx={{backgroundColor: '#fc8e82', height: '77px', borderRadius: '22px'}}>
+                                <Box sx={{backgroundColor: '#fd9d91', height: '77px', borderRadius: '22px'}}>
                                     <Grid sx={{display: 'flex', justifyContent: 'center'}}>
                                         <Button sx={{
                                             boxShadow: 8,
