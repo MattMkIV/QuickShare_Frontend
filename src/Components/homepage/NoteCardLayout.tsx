@@ -57,17 +57,6 @@ const NoteCardLayout: React.FC = () => {
         setIsEditable(false);
     };
 
-    /************************* Custom Tooltip element for cards *************************/
-    const LightTooltip = styled(({className, ...props}: TooltipProps) => (
-        <Tooltip {...props} classes={{popper: className}}/>))(({theme}) => ({
-        [`& .${tooltipClasses.tooltip}`]: {
-            backgroundColor: '#dec2a2',
-            color: 'rgba(0, 0, 0, 0.87)',
-            boxShadow: theme.shadows[3],
-            fontSize: 11.5,
-        },
-    }));
-
     /************************* Menù pop up functions *************************/
 
     const [selectedItem, setSelectedItem] = useState(Home);
@@ -93,12 +82,6 @@ const NoteCardLayout: React.FC = () => {
     const handleRemoveTextField = (index: number) => {
         const updatedTextFields = [...textFields];
         updatedTextFields.splice(index, 1);
-        setTextFields(updatedTextFields);
-    };
-
-    const handleChangeTextField = (index: number, value: string) => {
-        const updatedTextFields = [...textFields];
-        updatedTextFields[index] = value;
         setTextFields(updatedTextFields);
     };
 
