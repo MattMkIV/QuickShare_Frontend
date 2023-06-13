@@ -29,11 +29,6 @@
 }
 
 /*---------------- Pop-Up -------------*/
-.sendButton:hover {
-    background-color: #76ab02 !important;
-    cursor: pointer;
-}
-
 .loginOtherAccountPopUp:hover {
     background-color: #534341 !important;
     cursor: pointer;

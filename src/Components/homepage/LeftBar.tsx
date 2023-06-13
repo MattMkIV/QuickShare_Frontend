@@ -453,6 +453,7 @@ function LeftBar({onSelect}: any) {
                         background: '#920609',
                         justifyContent: 'flex-start',
                         color: '#ffdad5',
+                        boxShadow: 8,
                         ':hover': {backgroundColor: '#a4070a'}
                     }}
                     variant="contained" startIcon={<AddIcon sx={{height: '26px', width: '26px'}}/>}
