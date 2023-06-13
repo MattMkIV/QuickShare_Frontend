@@ -12,20 +12,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {
-    Box,
-    CardContent,
-    Dialog,
-    DialogContent,
-    Fab,
-    Slide,
-    TextField,
-    Tooltip,
-    tooltipClasses,
-    TooltipProps,
-    Typography,
-    Zoom
-} from "@mui/material";
+import {Box, CardContent, Dialog, DialogContent, Fab, Slide, TextField, Typography} from "@mui/material";
 //CSS
 import './LeftBar.css';
 import React, {useState} from 'react';
@@ -33,10 +20,7 @@ import Grid from "@mui/material/Grid";
 import {AddPhotoAlternate} from '@mui/icons-material';
 import {useNavigate} from "react-router-dom";
 import Card from "@mui/material/Card";
-import {styled} from "@mui/material/styles";
 
-
-//Other
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -529,7 +513,8 @@ function LeftBar({onSelect}: any) {
                             className={selectedItem === "account balance" ? "selected" : ""}
                             sx={{marginLeft: '-16px', borderRadius: '0 22px 22px 0', marginRight: '-16px'}}>
                             <AccountBalanceWalletIcon className='icon'/>
-                            <ListItemText primary="Account balance"/>
+                            <ListItemText primary="Account balance"
+                                          sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
                         </ListItemButton>
                     </ListItem>
                 </List>

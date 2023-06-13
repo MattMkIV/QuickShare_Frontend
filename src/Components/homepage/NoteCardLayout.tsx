@@ -1,17 +1,4 @@
-import {
-    Box,
-    Button,
-    CardContent,
-    Fab,
-    Grow,
-    Menu,
-    Slide,
-    TextField,
-    Tooltip,
-    tooltipClasses,
-    TooltipProps,
-    Typography
-} from "@mui/material";
+import {Box, Button, CardContent, Fab, Grow, Menu, Slide, TextField, Typography} from "@mui/material";
 import Card from "@mui/material/Card";
 import * as React from "react";
 import {useState} from "react";
@@ -24,7 +11,6 @@ import './NoteCardLayout.css'
 import Grid from "@mui/material/Grid";
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
-import {styled} from "@mui/material/styles";
 import Home from "../../Pages/View/home/Home";
 
 
@@ -87,7 +73,8 @@ const NoteCardLayout: React.FC = () => {
 
     return (
         <>
-            <Card onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='cardsLayout' sx={{boxShadow : 8}}>
+            <Card onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='cardsLayout'
+                  sx={{boxShadow: 8}}>
                 <CardContent sx={{m: -1}}>
                     <TextField
                         inputProps={{

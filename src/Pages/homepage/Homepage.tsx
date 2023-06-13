@@ -6,8 +6,6 @@ import LeftBar from '../../Components/homepage/LeftBar';
 import Home from '../View/home/Home';
 import OtherMessageComponent from '../../Components/homepage/OtherMessageComponent'
 import MyMessageComponent from '../../Components/homepage/MyMessageComponent'
-//CSS
-import './Homepage.css'
 //JS
 //Other
 import React, {useState} from 'react';
@@ -47,27 +45,6 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     const handleSelectItem = (item: any) => {
         setSelectedItem(item);
     };
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        setMenuId(undefined);
-    };
-
-    const CssTextField = styled(TextField)({
-        '& label.Mui-focused': {
-            color: '#534341',
-        },
-        '& .MuiOutlinedInput-notchedOutline': {
-            border: 'none',
-        },
-        '& .MuiOutlinedInput-root': {
-            '&:hover fieldset': {
-                borderRadius: 12,
-            },
-            '&.Mui-focused fieldset': {
-                borderRadius: 12,
-            },
-        },
-    });
 
     const LightTooltip = styled(({className, ...props}: TooltipProps) => (
         <Tooltip {...props} classes={{popper: className}}/>))(({theme}) => ({
@@ -82,8 +59,8 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     //Render
     return (
         <>
-            <Grid container className='topMarginHomepage' wrap='nowrap'
-                  sx={{display: 'flex', flexDirection: 'row-reverse'}}>
+            <Grid container wrap='nowrap'
+                  sx={{display: 'flex', flexDirection: 'row-reverse', marginTop: '20px'}}>
                 <Grid wrap='nowrap' sx={{
                     width: '150px',
                     display: 'flex',
@@ -117,7 +94,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                     <LeftBar onSelect={handleSelectItem}/>
                 </Grid>
 
-                <Grid container className='homepageBoxBackground' lg={10} md={10} xs={12}>
+                <Grid container sx={{marginTop: '30px'}} lg={10} md={10} xs={12}>
                     <Component/>
                 </Grid>
             </Grid>
@@ -178,7 +155,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                                 },
                                 '& .MuiInputBase-input': {
                                     borderRadius: '18px',
-                                    backgroundColor : '#d8c2be',
+                                    backgroundColor: '#d8c2be',
                                     fontFamily: 'Roboto Regular',
                                     fontSize: '16px !important',
                                     height: '35px',
@@ -263,12 +240,13 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                             </Grid>
                         </Grid>
                     </Box>
-                    <Box className='loginOtherAccountPopUp'
-                         sx={{
-                             borderRadius: '5px 5px 15px 15px', height: '35px', marginTop: '3px',
-                             marginLeft: '5px',
-                             marginRight: '5px'
-                         }}>
+                    <Box
+                        sx={{
+                            borderRadius: '5px 5px 15px 15px', height: '35px', marginTop: '3px',
+                            marginLeft: '5px',
+                            marginRight: '5px',
+                            ':hover': {backgroundColor: '#800507', cursor: 'pointer'}
+                        }}>
                         <Grid container>
                             <LoginIcon
                                 sx={{color: 'white', marginTop: '5px', marginLeft: '18px'}}></LoginIcon>
