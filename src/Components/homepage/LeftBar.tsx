@@ -16,8 +16,9 @@ import {
     Box,
     CardContent,
     Dialog,
-    DialogContent, Fab,
-    Grow, Slide,
+    DialogContent,
+    Fab,
+    Slide,
     TextField,
     Tooltip,
     tooltipClasses,
@@ -33,11 +34,6 @@ import {AddPhotoAlternate} from '@mui/icons-material';
 import {useNavigate} from "react-router-dom";
 import Card from "@mui/material/Card";
 import {styled} from "@mui/material/styles";
-import {Dayjs} from 'dayjs';
-import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import CloseIcon from "@mui/icons-material/Close";
-import InfoIcon from "@mui/icons-material/Info";
 
 
 //Other
@@ -87,16 +83,6 @@ function SimpleDialog(props: SimpleDialogProps) {
         updatedTextFields[index] = value;
         setTextFields(updatedTextFields);
     };
-
-    const LightTooltip = styled(({className, ...props}: TooltipProps) => (
-        <Tooltip {...props} classes={{popper: className}}/>))(({theme}) => ({
-        [`& .${tooltipClasses.tooltip}`]: {
-            backgroundColor: '#ede0de',
-            color: 'rgba(0, 0, 0, 0.87)',
-            boxShadow: theme.shadows[3],
-            fontSize: 11.5,
-        },
-    }));
 
     const [isHovered, setIsHovered] = React.useState(false);
 
@@ -197,87 +183,81 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     />
                                 </CardContent>
                             </Card>
-                            <LightTooltip TransitionComponent={Zoom} title='New Event' sx={{marginTop: '0'}}
-                                          followCursor>
-                                <Card key='Card 3'
-                                      onMouseEnter={() => handleCardEnter('Card 3')}
-                                      onMouseLeave={handleCardLeave} sx={{
-                                    width: '260px',
-                                    height: '120px',
-                                    marginTop: '30px',
-                                    backgroundColor: '#ede0de',
-                                    boxShadow: '8px 8px 10px 4px rgba(0, 0, 0, 0.22)',
-                                    border: selectedCard === 'Card 3' ? '3px solid #b4261f' : 'none',
-                                }}>
-                                    <CardContent sx={{m: -1}}>
-                                        <Typography noWrap sx={{
-                                            width: '272px',
-                                            marginTop: '5px',
-                                            fontSize: '25px',
-                                            fontWeight: 'bold',
-                                            letterSpacing: '-0.2px',
-                                            fontFamily: 'Roboto Bold'
-                                        }} contentEditable={true}>
-                                            Event title
-                                        </Typography>
-
-                                        <hr className='littleSeparationLine'></hr>
-
-                                        <Box>
-
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </LightTooltip>
-                        </Grid>
-
-                        <LightTooltip TransitionComponent={Zoom} title='List card' sx={{marginTop: '0'}}
-                                      followCursor>
-                            <Card key='Card 2'
-                                  onMouseEnter={() => handleCardEnter('Card 2')}
-                                  onMouseLeave={handleCardLeave}
-                                  sx={{
-                                      width: '260px',
-                                      height: '390px',
-                                      marginLeft: '30px',
-                                      borderRadius: '12px',
-                                      backgroundColor: '#ede0de',
-                                      boxShadow: '8px 8px 10px 4px rgba(0, 0, 0, 0.22)',
-                                      border: selectedCard === 'Card 2' ? '3px solid #b4261f' : 'none',
-                                  }}>
+                            <Card key='Card 3'
+                                  onMouseEnter={() => handleCardEnter('Card 3')}
+                                  onMouseLeave={handleCardLeave} sx={{
+                                width: '260px',
+                                height: '120px',
+                                marginTop: '30px',
+                                backgroundColor: '#ede0de',
+                                boxShadow: '8px 8px 10px 4px rgba(0, 0, 0, 0.22)',
+                                border: selectedCard === 'Card 3' ? '3px solid #b4261f' : 'none',
+                            }}>
                                 <CardContent sx={{m: -1}}>
-                                    <Typography noWrap className='cardTitle' contentEditable={true}>
-                                        Title List
+                                    <Typography noWrap sx={{
+                                        width: '272px',
+                                        marginTop: '5px',
+                                        fontSize: '25px',
+                                        fontWeight: 'bold',
+                                        letterSpacing: '-0.2px',
+                                        fontFamily: 'Roboto Bold'
+                                    }} contentEditable={true}>
+                                        Event title
                                     </Typography>
 
                                     <hr className='littleSeparationLine'></hr>
 
-                                    <Box onMouseEnter={handleMouseEnter}
-                                         onMouseLeave={handleMouseLeave}
-                                         sx={{
-                                             height: '283px',
-                                             marginTop: '7px',
-                                             overflowY: 'scroll',
-                                         }}>
-                                        <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit
-                                               timeout={100}>
-                                            <Fab sx={{
-                                                position: 'absolute',
-                                                marginLeft: '180px',
-                                                marginTop: '255px',
-                                                maxWidth: '50px',
-                                                minHeight: '50px',
-                                                maxHeight: '10px',
-                                                backgroundColor: '#528839',
-                                                ':hover': {backgroundColor: '#477531'}
-                                            }}>
-                                                <AddIcon sx={{color: '#201a19', width: '20px', height: '20px'}}/>
-                                            </Fab>
-                                        </Slide>
+                                    <Box>
+
                                     </Box>
                                 </CardContent>
                             </Card>
-                        </LightTooltip>
+                        </Grid>
+
+                        <Card key='Card 2'
+                              onMouseEnter={() => handleCardEnter('Card 2')}
+                              onMouseLeave={handleCardLeave}
+                              sx={{
+                                  width: '260px',
+                                  height: '390px',
+                                  marginLeft: '30px',
+                                  borderRadius: '12px',
+                                  backgroundColor: '#ede0de',
+                                  boxShadow: '8px 8px 10px 4px rgba(0, 0, 0, 0.22)',
+                                  border: selectedCard === 'Card 2' ? '3px solid #b4261f' : 'none',
+                              }}>
+                            <CardContent sx={{m: -1}}>
+                                <Typography noWrap className='cardTitle' contentEditable={true}>
+                                    Title List
+                                </Typography>
+
+                                <hr className='littleSeparationLine'></hr>
+
+                                <Box onMouseEnter={handleMouseEnter}
+                                     onMouseLeave={handleMouseLeave}
+                                     sx={{
+                                         height: '283px',
+                                         marginTop: '7px',
+                                         overflowY: 'scroll',
+                                     }}>
+                                    <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit
+                                           timeout={100}>
+                                        <Fab sx={{
+                                            position: 'absolute',
+                                            marginLeft: '180px',
+                                            marginTop: '255px',
+                                            maxWidth: '50px',
+                                            minHeight: '50px',
+                                            maxHeight: '10px',
+                                            backgroundColor: '#528839',
+                                            ':hover': {backgroundColor: '#477531'}
+                                        }}>
+                                            <AddIcon sx={{color: '#201a19', width: '20px', height: '20px'}}/>
+                                        </Fab>
+                                    </Slide>
+                                </Box>
+                            </CardContent>
+                        </Card>
                     </Grid> : ''}
 
                 {!isFirstChecked ?
@@ -301,7 +281,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                         boxShadow: 8,
                     }}>
                         {textFields.map((textField, index) => (
-                            <Grid key={index} style={{display: 'flex', alignContent : 'center'}}>
+                            <Grid key={index} style={{display: 'flex', alignContent: 'center'}}>
                                 <TextField
                                     inputProps={{
                                         sx: {color: '#3f2e04 !important'}
@@ -346,7 +326,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                             borderRadius: '22px',
                                             marginLeft: '10px',
                                             marginTop: '5px',
-                                            boxShadow : 4,
+                                            boxShadow: 4,
                                             ':hover': {backgroundColor: '#9f3a3c'}
                                         }}
                                         disableRipple>
@@ -381,28 +361,24 @@ function SimpleDialog(props: SimpleDialogProps) {
                         >Next</Button> : ''}
 
                     {!isFirstChecked ?
-                        <LightTooltip TransitionComponent={Zoom} title='Add mail'
-                                      sx={{marginBottom: '-7px !important'}}
-                                      placement="top">
-                            <Button
-                                startIcon={<AddIcon sx={{height: '25px', width: '25px', color: '#201a19'}}/>}
-                                variant="contained" onClick={handleAddTextField} sx={{
-                                fontFamily: 'Roboto Bold',
-                                height: '60px',
-                                minWidth: '80px',
-                                fontSize: '18px',
-                                marginRight: '341px',
-                                marginTop: '15px',
-                                backgroundColor: '#528839',
-                                borderRadius: '50px',
-                                color: '#201a19',
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                boxShadow: 8,
-                                ':hover': {backgroundColor: '#477531'}
-                            }}>Add</Button>
-                        </LightTooltip> : ''}
+                        <Button
+                            startIcon={<AddIcon sx={{height: '25px', width: '25px', color: '#201a19'}}/>}
+                            variant="contained" onClick={handleAddTextField} sx={{
+                            fontFamily: 'Roboto Bold',
+                            height: '60px',
+                            minWidth: '80px',
+                            fontSize: '18px',
+                            marginRight: '341px',
+                            marginTop: '15px',
+                            backgroundColor: '#528839',
+                            borderRadius: '50px',
+                            color: '#201a19',
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            boxShadow: 8,
+                            ':hover': {backgroundColor: '#477531'}
+                        }}>Add</Button> : ''}
 
                     {!isFirstChecked ? <Button
                         onClick={() => setIsFirstChecked(!isFirstChecked)}
