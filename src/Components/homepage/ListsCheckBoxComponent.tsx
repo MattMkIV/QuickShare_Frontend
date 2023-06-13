@@ -1,8 +1,21 @@
 import {styled} from "@mui/material/styles";
-import {Checkbox, CheckboxProps, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    Checkbox,
+    CheckboxProps,
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText
+} from "@mui/material";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {AddIcCall} from "@mui/icons-material";
+import AddIcon from '@mui/icons-material/Add';
 
 const BpIcon = styled('span')(({theme}) => ({
     borderRadius: 3,
@@ -53,12 +66,12 @@ function BpCheckbox(props: CheckboxProps) {
     return (
         <Checkbox
             sx={{
-                '&:hover': { bgcolor: 'transparent' },
+                '&:hover': {bgcolor: 'transparent'},
             }}
             color="default"
-            checkedIcon={<BpCheckedIcon />}
-            icon={<BpIcon />}
-            inputProps={{ 'aria-label': 'Checkbox demo' }}
+            checkedIcon={<BpCheckedIcon/>}
+            icon={<BpIcon/>}
+            inputProps={{'aria-label': 'Checkbox demo'}}
             {...props}
         />
     );
@@ -79,42 +92,68 @@ function ListsCheckBoxComponent() {
 
         setChecked(newChecked);
     };
-
+    const [items, setItems] = React.useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+    const handleDelete = (index: number) => {
+        const newItems = [...items];
+        newItems.splice(index, 1);
+        setItems(newItems);
+    };
 
     return (
         <>
             <Grid wrap='nowrap'
-                  sx={{display : 'flex', alignItems : 'center', justifyContent : 'flex-start', marginTop : '0px',
-                      marginBottom : '-2px'}}>
-                <List sx={{ width: '100%', maxWidth: 360, bgcolor: '#ede0de' }}>
+                  sx={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginTop: '0px',
+                      marginBottom: '-2px'
+                  }}>
+                <List sx={{width: '100%', maxWidth: 360, bgcolor: '#ede0de'}}>
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((value) => {
                         const labelId = `checkbox-list-label-${value}`;
-
                         return (
                             <ListItem
                                 key={value}
                                 secondaryAction={
-                                    <IconButton edge="end" aria-label="comments">
-                                        <DeleteIcon />
+                                    <IconButton edge="end" aria-label="comments" onClick={() => handleDelete(value)}>
+                                        <DeleteIcon sx={{width: '20px', height: '20px', color: '#9f3a3c'}}/>
                                     </IconButton>
                                 }
-                                disablePadding
-                            >
-                                <ListItemButton role={undefined} onClick={handleToggle(value)} dense sx={{height : '35px'}}>
+                                disablePadding>
+                                <ListItemButton role={undefined} onClick={handleToggle(value)} dense
+                                                sx={{
+                                                    height: '40px',
+                                                    borderRadius: '22px',
+                                                    marginLeft: '5px',
+                                                    marginRight: '5px',
+                                                    ':hover': {boxShadow: 4}
+                                                }}>
                                     <ListItemIcon>
                                         <BpCheckbox
                                             edge="start"
                                             checked={checked.indexOf(value) !== -1}
                                             tabIndex={-1}
                                             disableRipple
-                                            inputProps={{ 'aria-labelledby': labelId }}
+                                            inputProps={{'aria-labelledby': labelId}}
                                         />
                                     </ListItemIcon>
-                                    <ListItemText id={labelId} primary={`Line item ${value + 1}`} sx={{marginLeft : '-20px'}}/>
+                                    <ListItemText id={labelId} primary={`Line item ${value + 1}`}
+                                                  sx={{marginLeft: '-20px'}}/>
                                 </ListItemButton>
                             </ListItem>
                         );
                     })}
+                    <Grid sx={{display: 'flex', justifyContent: 'center', marginTop: '5px'}}>
+                        <Button sx={{
+                            height: '40px',
+                            minWidth: '80%', boxShadow: 4,
+                            backgroundColor: '#8fb677',
+                            borderRadius: '30px',
+                            color: '#201a19',
+                            fontFamily: 'Roboto Black',
+                            fontSize: '15px',
+                            ':hover': {backgroundColor: '#7a9a65'}
+                        }}>Add row</Button>
+                    </Grid>
+
                 </List>
             </Grid>
         </>

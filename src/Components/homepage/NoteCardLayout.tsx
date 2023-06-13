@@ -11,7 +11,6 @@ import './NoteCardLayout.css'
 import Grid from "@mui/material/Grid";
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
-import Home from "../../Pages/View/home/Home";
 
 
 const NoteCardLayout: React.FC = () => {
@@ -45,7 +44,6 @@ const NoteCardLayout: React.FC = () => {
 
     /************************* Menù pop up functions *************************/
 
-    const [selectedItem, setSelectedItem] = useState(Home);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const [menuId, setMenuId] = useState<string | undefined>(undefined);
@@ -212,7 +210,7 @@ const NoteCardLayout: React.FC = () => {
 
                                 <Box sx={{
                                     width: '100%',
-                                    height: '246px',
+                                    height: '248px',
                                     borderRadius: '22px',
                                     backgroundColor: '#d9b267',
                                     overflowY: 'scroll',
@@ -335,7 +333,7 @@ const NoteCardLayout: React.FC = () => {
                                                     },
                                                     marginBottom: 1.2
                                                 }}
-                                                placeholder='Email or Username'
+                                                placeholder='Email'
                                             />
                                             <Button onClick={() => handleRemoveTextField(index)}
                                                     sx={{
@@ -383,7 +381,7 @@ const NoteCardLayout: React.FC = () => {
                                         fontSize: '14px',
                                         ':hover': {backgroundColor: '#c7ad7b'},
                                         color: '#201a19',
-                                    }} disableRipple onClick={handleAddTextField}>
+                                    }} disableRipple>
                                         Share!
                                     </Button>
                                 </Grid>

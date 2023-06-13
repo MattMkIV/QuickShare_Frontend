@@ -20,6 +20,8 @@ import Grid from "@mui/material/Grid";
 import {AddPhotoAlternate} from '@mui/icons-material';
 import {useNavigate} from "react-router-dom";
 import Card from "@mui/material/Card";
+import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -81,6 +83,7 @@ function SimpleDialog(props: SimpleDialogProps) {
     const handleAddClick = () => {
         // Aggiungi qui la logica per confermare la modifica
     };
+    const [startDate, setStartDate] = useState(new Date());
 
     return (
         <Dialog onClose={handleClose} open={open} sx={{
@@ -193,6 +196,9 @@ function SimpleDialog(props: SimpleDialogProps) {
 
                                     <Box>
 
+                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            <DatePicker/>
+                                        </LocalizationProvider>
                                     </Box>
                                 </CardContent>
                             </Card>
@@ -299,7 +305,8 @@ function SimpleDialog(props: SimpleDialogProps) {
                                         pb: 2,
                                     }}
                                     value={textField}
-                                    placeholder='Email or Username'
+                                    type='email'
+                                    placeholder='Email'
                                     onChange={(e) => handleChangeTextField(index, e.target.value)}
                                 />
                                 <Button onClick={() => handleRemoveTextField(index)}
