@@ -429,7 +429,7 @@ const NoteCardLayout: React.FC = () => {
                                     elevation: 24,
                                     style: {
                                         width: '250px',
-                                        height: '108px',
+                                        height: '103px',
                                         borderRadius: '22px',
                                         backgroundColor: '#ffb4aa',
                                     }
