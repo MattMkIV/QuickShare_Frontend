@@ -8,7 +8,7 @@ import {useState} from "react";
 import './UploadPhoto.css'
 import Button from "@mui/material/Button";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import {createTheme, Fab, Grow, Menu, TextField, ThemeProvider, Typography} from "@mui/material";
+import {createTheme, Divider, Fab, Grow, Menu, TextField, ThemeProvider, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from "@mui/icons-material/Info";
@@ -123,6 +123,9 @@ function UploadPhoto() {
 
                                 <Menu
                                     id='delete'
+                                    MenuListProps={{
+                                        'aria-labelledby': 'delete',
+                                    }}
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl && menuId === 'delete' && selectedItemIndex === index)}
                                     onClose={(event) => {
@@ -145,7 +148,8 @@ function UploadPhoto() {
                                             borderRadius: '22px',
                                             backgroundColor: '#ffb4aa',
                                         }
-                                    }}>
+                                    }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                                >
                                     <Typography sx={{
                                         fontFamily: 'Roboto Black',
                                         fontSize: '17px',
@@ -166,7 +170,12 @@ function UploadPhoto() {
                                                 fontSize: '15px',
                                                 marginTop: '10px',
                                                 ':hover': {backgroundColor: '#49302b'}
-                                            }} disableRipple>No</Button>
+                                            }}
+                                                    disableRipple
+                                                    onClick={() => {
+                                                        handleClose();
+                                                    }}
+                                            >No</Button>
                                             <Button sx={{
                                                 boxShadow: 8,
                                                 height: '45px',
@@ -201,6 +210,9 @@ function UploadPhoto() {
 
                                 <Menu
                                     id='share'
+                                    MenuListProps={{
+                                        'aria-labelledby': 'share',
+                                    }}
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl && menuId === 'share' && selectedItemIndex === index)}
                                     onClose={(event) => {
@@ -224,7 +236,8 @@ function UploadPhoto() {
                                             backgroundColor: '#e7bdb7',
                                             overflowY: 'hidden'
                                         }
-                                    }}>
+                                    }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                                >
                                     <Typography sx={{
                                         fontFamily: 'Roboto Black',
                                         fontSize: '17px',
@@ -273,7 +286,6 @@ function UploadPhoto() {
                                                         },
                                                         marginBottom: 1.2
                                                     }}
-                                                    type='email'
                                                     placeholder='Email'
                                                 />
                                                 <Button onClick={() => handleRemoveTextField(index)}
@@ -302,6 +314,8 @@ function UploadPhoto() {
                                         pr: 1.2
                                     }}>
                                         <Button sx={{
+                                            border: 1,
+                                            borderColor: '#7a9a65',
                                             minWidth: '40px',
                                             height: '40px',
                                             boxShadow: 8,
@@ -318,7 +332,7 @@ function UploadPhoto() {
                                             boxShadow: 8,
                                             backgroundColor: '#dfc38c',
                                             borderRadius: '30px',
-                                            fontFamily: 'Roboto Regular',
+                                            fontFamily: 'Roboto Bold',
                                             fontSize: '14px',
                                             ':hover': {backgroundColor: '#c7ad7b'},
                                             color: '#201a19',
@@ -347,7 +361,10 @@ function UploadPhoto() {
                                 </Grow>
 
                                 <Menu
-                                    id='info'
+                                    id="info"
+                                    MenuListProps={{
+                                        'aria-labelledby': 'info',
+                                    }}
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl && menuId === 'info' && selectedItemIndex === index)}
                                     onClose={(event) => {
@@ -371,7 +388,8 @@ function UploadPhoto() {
                                             backgroundColor: '#dfc38c',
                                             overflowY: 'hidden'
                                         }
-                                    }}>
+                                    }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                                >
                                     <Typography component="span" display="inline-block"
                                                 sx={{
                                                     fontFamily: 'Roboto Black',
@@ -384,13 +402,23 @@ function UploadPhoto() {
                                     </Typography>
                                     <Typography component="span" display="inline-block" whiteSpace="nowrap"
                                                 sx={{
-                                                    fontFamily: 'Roboto Regular',
+                                                    fontFamily: 'Roboto Light',
                                                     fontSize: '17px',
-                                                    marginLeft: '5px',
+                                                    marginLeft: '10px',
                                                     color: '#3f2e04'
                                                 }}>
                                         19/03/2021
                                     </Typography>
+
+                                    <Divider sx={{
+                                        width: '220px',
+                                        marginTop: '5px',
+                                        boxShadow: 24,
+                                        position: 'absolute',
+                                        borderColor: 'rgba(63,46,4,0.38)',
+                                        marginLeft: '15px'
+                                    }}/>
+
                                     <Typography sx={{
                                         fontFamily: 'Roboto Black',
                                         fontSize: '17px',
@@ -441,7 +469,6 @@ function UploadPhoto() {
                                         </TextField>
                                     </Box>
                                 </Menu>
-
                             </ImageListItem>
                         ))}
                     </ImageList>
