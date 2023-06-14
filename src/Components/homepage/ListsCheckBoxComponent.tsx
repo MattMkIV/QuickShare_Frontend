@@ -1,6 +1,5 @@
 import {styled} from "@mui/material/styles";
 import {
-    Box,
     Button,
     Checkbox,
     CheckboxProps,
@@ -14,8 +13,6 @@ import {
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {AddIcCall} from "@mui/icons-material";
-import AddIcon from '@mui/icons-material/Add';
 
 const BpIcon = styled('span')(({theme}) => ({
     borderRadius: 3,
@@ -107,7 +104,7 @@ function ListsCheckBoxComponent() {
                       marginBottom: '-2px'
                   }}>
                 <List sx={{width: '100%', maxWidth: 360, bgcolor: '#ede0de'}}>
-                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((value) => {
+                    {items.map((value) => {
                         const labelId = `checkbox-list-label-${value}`;
                         return (
                             <ListItem
@@ -151,6 +148,9 @@ function ListsCheckBoxComponent() {
                             fontFamily: 'Roboto Black',
                             fontSize: '15px',
                             ':hover': {backgroundColor: '#7a9a65'}
+                        }} onClick={() => {
+                            const newItem = items.length;
+                            setItems([...items, newItem]);
                         }}>Add row</Button>
                     </Grid>
 
