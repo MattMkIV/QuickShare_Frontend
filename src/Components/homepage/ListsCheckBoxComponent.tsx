@@ -1,8 +1,21 @@
 import {styled} from "@mui/material/styles";
-import {Checkbox, CheckboxProps, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
+import {
+    Button,
+    Checkbox,
+    CheckboxProps,
+    Grow,
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText
+} from "@mui/material";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {useState} from "react";
+import TextField from "@mui/material/TextField";
 
 const BpIcon = styled('span')(({theme}) => ({
     borderRadius: 3,
@@ -53,12 +66,12 @@ function BpCheckbox(props: CheckboxProps) {
     return (
         <Checkbox
             sx={{
-                '&:hover': { bgcolor: 'transparent' },
+                '&:hover': {bgcolor: 'transparent'},
             }}
             color="default"
-            checkedIcon={<BpCheckedIcon />}
-            icon={<BpIcon />}
-            inputProps={{ 'aria-label': 'Checkbox demo' }}
+            checkedIcon={<BpCheckedIcon/>}
+            icon={<BpIcon/>}
+            inputProps={{'aria-label': 'Checkbox demo'}}
             {...props}
         />
     );
@@ -79,42 +92,95 @@ function ListsCheckBoxComponent() {
 
         setChecked(newChecked);
     };
+    const [items, setItems] = React.useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+    const handleDelete = (index: number) => {
+        const newItems = [...items];
+        newItems.splice(index, 1);
+        setItems(newItems);
+    };
 
+
+    const [hoveredIndex, setHoveredIndex] = useState(-1);
+
+    const handleMouseEnter = (index: number) => {
+        setHoveredIndex(index);
+    };
+    const handleMouseLeave = () => {
+        setHoveredIndex(-1);
+    };
 
     return (
         <>
             <Grid wrap='nowrap'
-                  sx={{display : 'flex', alignItems : 'center', justifyContent : 'flex-start', marginTop : '0px',
-                      marginBottom : '-2px'}}>
-                <List sx={{ width: '100%', maxWidth: 360, bgcolor: '#ede0de' }}>
-                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((value) => {
+                  sx={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginTop: '0px',
+                      marginBottom: '-2px'
+                  }}>
+                <List sx={{width: '100%', maxWidth: 360, bgcolor: '#ede0de'}}>
+                    {items.map((value) => {
                         const labelId = `checkbox-list-label-${value}`;
-
                         return (
                             <ListItem
                                 key={value}
+                                onMouseEnter={() => {
+                                    handleMouseEnter(value)
+                                }}
+                                onMouseLeave={() => {
+                                    handleMouseLeave()
+                                }}
                                 secondaryAction={
-                                    <IconButton edge="end" aria-label="comments">
-                                        <DeleteIcon />
-                                    </IconButton>
+                                    <Grow in={hoveredIndex === value} mountOnEnter unmountOnExit timeout={200}>
+                                        <IconButton edge="end" aria-label="comments"
+                                                    onClick={() => handleDelete(value)}>
+                                            <DeleteIcon sx={{width: '20px', height: '20px', color: '#442926'}}/>
+                                        </IconButton>
+                                    </Grow>
                                 }
-                                disablePadding
-                            >
-                                <ListItemButton role={undefined} onClick={handleToggle(value)} dense sx={{height : '35px'}}>
+
+                                disablePadding>
+                                <ListItemButton role={undefined} onClick={handleToggle(value)} dense
+                                                sx={{
+                                                    height: '40px',
+                                                    borderRadius: '22px',
+                                                    marginLeft: '5px',
+                                                    marginRight: '5px',
+                                                }}>
                                     <ListItemIcon>
                                         <BpCheckbox
                                             edge="start"
                                             checked={checked.indexOf(value) !== -1}
                                             tabIndex={-1}
                                             disableRipple
-                                            inputProps={{ 'aria-labelledby': labelId }}
+                                            inputProps={{'aria-labelledby': labelId}}
                                         />
                                     </ListItemIcon>
-                                    <ListItemText id={labelId} primary={`Line item ${value + 1}`} sx={{marginLeft : '-20px'}}/>
+                                    <TextField
+                                        inputProps={{
+                                            sx: {color: '#3f2e04 !important'}
+                                        }}
+                                        sx={{
+                                            '& fieldset': {border: 'none'},
+                                            '& .MuiInputBase-input': {
+                                                fontFamily: 'Roboto Light',
+                                                fontSize: '18px !important',
+                                                height: '0px',
+                                                width: '190px',
+                                            },
+                                            '&.Mui-disabled': {
+                                                color: 'red !important',
+                                            },
+                                            marginLeft: '-30px'
+                                        }}
+                                        disabled
+                                        id={labelId}
+                                        defaultValue={`Line item ${value + 1}`}
+                                        type='text'
+                                    />
                                 </ListItemButton>
                             </ListItem>
                         );
                     })}
+
                 </List>
             </Grid>
         </>

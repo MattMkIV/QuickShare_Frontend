@@ -1,4 +1,4 @@
-import {Box, Button, CardContent, Fab, Grow, Menu, Slide, TextField, Typography} from "@mui/material";
+import {Box, Button, CardContent, Divider, Grow, IconButton, Menu, Slide, TextField, Typography} from "@mui/material";
 import Card from "@mui/material/Card";
 import * as React from "react";
 import {useEffect, useState} from "react";
@@ -57,6 +57,17 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
         setIsHovered(false);
     };
 
+    const [retardTransition, setRetardTransition] = useState(false)
+
+    const retardTransitionTrue = () => {
+        setRetardTransition(true);
+    }
+    const retardTransitionFalse = () => {
+        setTimeout(() => {
+            setRetardTransition(false);
+        }, 200);
+    }
+
     /************************* Handle notes changes functions *************************/
     const [isEditable, setIsEditable] = React.useState(false);
 
@@ -76,7 +87,6 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
 
     /************************* Menù pop up functions *************************/
 
-    const [selectedItem, setSelectedItem] = useState(Home);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const [menuId, setMenuId] = useState<string | undefined>(undefined);
@@ -159,10 +169,30 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
         setTextFields(updatedTextFields);
     };
 
+    /************************* Dynamic scaling components *************************/
+    const [isMenuOpen, setMenuOpen] = useState(false);
+    const openMenu = () => {
+        setMenuOpen(true);
+    };
+
+    const closeMenu = () => {
+        setMenuOpen(false);
+    };
+
     return (
         <>
-            <Card onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='cardsLayout'
-                  sx={{boxShadow: 8}}>
+            <Card className='cardsLayout'
+                  onMouseEnter={(event) => {
+                      {
+                          handleMouseEnter();
+                          retardTransitionTrue()
+                      }
+                  }} onMouseLeave={(event) => {
+                {
+                    handleMouseLeave();
+                    retardTransitionFalse()
+                }
+            }} sx={{boxShadow: 8}}>
                 <CardContent sx={{m: -1}}>
                     <TextField
                         inputProps={{
@@ -190,7 +220,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                 height: '15px',
                                 width: '273px',
                             },
-                            marginLeft: '-15px',
+                            marginLeft: '-14px',
                         }}
                         className='cardTitle'
                         value={titleNote}
@@ -202,7 +232,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
 
                     <TextField
                         multiline
-                        rows={12}
+                        rows={(isHovered || retardTransition) ? 12 : 15}
                         inputProps={{
                             sx: {
                                 color: '#574419 !important',
@@ -210,6 +240,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                         }}
                         sx={{
                             width: '100%',
+                            height: (isHovered || isMenuOpen || retardTransition) ? '270px' : '350px',
                             '& fieldset': {border: 'none'},
                             '& .MuiInputBase-input': {fontFamily: 'Roboto Light', fontSize: '20px !important'}
                         }}
@@ -221,44 +252,78 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                 
 
                     {isEditable ? (
-                        <Grid>
-                            <Grow in={isHovered} mountOnEnter unmountOnExit timeout={100}>
-                                <Fab onClick={handleCloseClick} sx={{
-                                    backgroundColor: '#ffb4aa', marginLeft: '55px', marginRight: '25px',
-                                    ':hover': {backgroundColor: '#fda498'}
-                                }}>
+                        <div>
+                            <Grow in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={400}>
+
+                                <IconButton onClick={handleCloseClick}
+                                            sx={{
+                                                backgroundColor: '#ffb4aa',
+                                                ':hover': {backgroundColor: '#fda498'},
+                                                height: '56px',
+                                                width: '56px',
+                                                boxShadow: 8,
+                                                marginLeft: '55px',
+                                                marginRight: '25px',
+                                                marginTop: '15px',
+                                            }}>
                                     <CloseIcon sx={{color: '#690003'}}/>
-                                </Fab>
+                                </IconButton>
                             </Grow>
 
-                            <Grow in={isHovered} mountOnEnter unmountOnExit timeout={200} onClick={() => updateNote(noteId)}>
-                                <Fab onClick={handleConfirmClick} sx={{
-                                    backgroundColor: '#65cc8f', marginLeft: '27px', marginRight: '25px',
-                                    ':hover': {backgroundColor: '#58b27f'}
-                                }}>
+                            <Grow in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={600} onClick={() => updateNote(noteId)}>
+                                <IconButton onClick={handleConfirmClick}
+                                            sx={{
+                                                backgroundColor: '#65cc8f',
+                                                ':hover': {backgroundColor: '#58b27f'},
+                                                height: '56px',
+                                                width: '56px',
+                                                boxShadow: 8,
+                                                marginLeft: '27px',
+                                                marginRight: '25px',
+                                                marginTop: '15px',
+                                            }}>
                                     <DoneIcon sx={{color: '#285740'}}/>
-                                </Fab>
+                                </IconButton>
                             </Grow>
 
-                        </Grid>
+                        </div>
                     ) : (
-                        <Box>
-                            <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={100}>
-                                <Fab sx={{
-                                    backgroundColor: '#dfc38c', marginLeft: '27px', marginRight: '25px',
-                                    ':hover': {backgroundColor: '#deba7b'}
-                                }} onClick={(event) => topBarClick(event, 'info')}
-                                     aria-controls='info'
-                                     aria-haspopup='true'>
+                        <div>
+                            <Slide direction="up" in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={300}>
+                                <IconButton
+                                    sx={{
+                                        backgroundColor: '#dfc38c',
+                                        marginLeft: '27px',
+                                        marginRight: '25px',
+                                        height: '56px',
+                                        width: '56px',
+                                        boxShadow: 8,
+                                        marginTop: '15px',
+                                        ':hover': {backgroundColor: '#deba7b'},
+                                    }}
+                                    aria-label="more"
+                                    id="info"
+                                    aria-controls='info'
+                                    aria-haspopup='true'
+                                    onClick={(event) => {
+                                        topBarClick(event, 'info');
+                                        openMenu()
+                                    }}>
                                     <InfoIcon sx={{color: '#3f2e04'}}/>
-                                </Fab>
+                                </IconButton>
                             </Slide>
 
                             <Menu
-                                id='info'
+                                id="info"
+                                MenuListProps={{
+                                    'aria-labelledby': 'info',
+                                }}
                                 anchorEl={anchorEl}
                                 open={Boolean(anchorEl && menuId === 'info')}
-                                onClose={handleClose}
+                                onClose={(event) => {
+                                    handleClose();
+                                    closeMenu();
+                                }}
                                 anchorOrigin={{
                                     vertical: 'top',
                                     horizontal: 'center',
@@ -276,7 +341,8 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         backgroundColor: '#dfc38c',
                                         overflowY: 'hidden'
                                     }
-                                }}>
+                                }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                            >
                                 <Typography component="span" display="inline-block"
                                             sx={{
                                                 fontFamily: 'Roboto Black',
@@ -289,13 +355,23 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                 </Typography>
                                 <Typography component="span" display="inline-block" whiteSpace="nowrap"
                                             sx={{
-                                                fontFamily: 'Roboto Regular',
+                                                fontFamily: 'Roboto Light',
                                                 fontSize: '17px',
-                                                marginLeft: '5px',
+                                                marginLeft: '10px',
                                                 color: '#3f2e04'
                                             }}>
                                     {createData}
                                 </Typography>
+
+                                <Divider sx={{
+                                    width: '220px',
+                                    marginTop: '5px',
+                                    boxShadow: 24,
+                                    position: 'absolute',
+                                    borderColor: 'rgba(63,46,4,0.38)',
+                                    marginLeft: '15px'
+                                }}/>
+
                                 <Typography sx={{
                                     fontFamily: 'Roboto Black',
                                     fontSize: '17px',
@@ -306,7 +382,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
 
                                 <Box sx={{
                                     width: '100%',
-                                    height: '246px',
+                                    height: '248px',
                                     borderRadius: '22px',
                                     backgroundColor: '#d9b267',
                                     overflowY: 'scroll',
@@ -349,22 +425,39 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                 </Box>
                             </Menu>
 
-                            <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={200}>
-                                <Fab sx={{
-                                    backgroundColor: '#e7bdb7', marginRight: '25px',
-                                    ':hover': {backgroundColor: '#e3ada5'}
-                                }} onClick={(event) => topBarClick(event, 'share')}
-                                     aria-controls='share'
-                                     aria-haspopup='true'>
+                            <Slide direction="up" in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={500}>
+                                <IconButton
+                                    sx={{
+                                        backgroundColor: '#e7bdb7',
+                                        marginRight: '25px',
+                                        height: '56px',
+                                        width: '56px',
+                                        boxShadow: 8,
+                                        marginTop: '15px',
+                                        ':hover': {backgroundColor: '#e3ada5'}
+                                    }} aria-label="more"
+                                    id="share"
+                                    aria-controls='share'
+                                    aria-haspopup='true'
+                                    onClick={(event) => {
+                                        topBarClick(event, 'share');
+                                        openMenu()
+                                    }}>
                                     <ShareIcon sx={{color: '#442926'}}/>
-                                </Fab>
+                                </IconButton>
                             </Slide>
 
                             <Menu
                                 id='share'
+                                MenuListProps={{
+                                    'aria-labelledby': 'share',
+                                }}
                                 anchorEl={anchorEl}
                                 open={Boolean(anchorEl && menuId === 'share')}
-                                onClose={handleClose}
+                                onClose={(event) => {
+                                    handleClose();
+                                    closeMenu();
+                                }}
                                 anchorOrigin={{
                                     vertical: 'top',
                                     horizontal: 'center',
@@ -382,7 +475,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         backgroundColor: '#e7bdb7',
                                         overflowY: 'hidden'
                                     }
-                                }}
+                                }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
                             >
                                 <form onSubmit={addAllowed}>
                                     <Typography sx={{
@@ -391,9 +484,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         marginLeft: '15px',
                                         marginTop: '5px',
                                         color: '#3f2e04',
-                                    }}>
-                                        Share with:
-                                    </Typography>
+                                    }}>Share with:</Typography>
                                     <Box sx={{
                                         width: '100%',
                                         height: '220px',
@@ -401,8 +492,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         backgroundColor: '#eaa79d',
                                         pl: 1.2, pr: 1.2, pt: 1.2,
                                         overflowY: 'scroll',
-                                    }}
-                                    >
+                                    }}>
                                         {textFields.map((textField, index) => (
                                             <div key={index} style={{display: 'flex'}}>
                                                 <TextField
@@ -437,7 +527,6 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                                         marginBottom: 1.2
                                                     }}
                                                     placeholder='Email'
-                                                    name={"nota"+index}
                                                 />
                                                 <Button onClick={() => handleRemoveTextField(index)}
                                                         sx={{
@@ -465,6 +554,8 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         pr: 1.2
                                     }}>
                                         <Button sx={{
+                                            border: 1,
+                                            borderColor: '#7a9a65',
                                             minWidth: '40px',
                                             height: '40px',
                                             boxShadow: 8,
@@ -481,33 +572,50 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                             boxShadow: 8,
                                             backgroundColor: '#dfc38c',
                                             borderRadius: '30px',
-                                            fontFamily: 'Roboto Regular',
+                                            fontFamily: 'Roboto Bold',
                                             fontSize: '14px',
                                             ':hover': {backgroundColor: '#c7ad7b'},
                                             color: '#201a19',
-                                        }} disableRipple  type="submit">
+                                        }} disableRipple>
                                             Share!
                                         </Button>
                                     </Grid>
                                 </form>
                             </Menu>
 
-                            <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit timeout={400}>
-                                <Fab sx={{
-                                    backgroundColor: '#ffb4aa',
-                                    ':hover': {backgroundColor: '#fda498'}
-                                }} onClick={(event) => topBarClick(event, 'delete')}
-                                     aria-controls='delete'
-                                     aria-haspopup='true'>
+                            <Slide direction="up" in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={700}>
+                                <IconButton
+                                    sx={{
+                                        backgroundColor: '#ffb4aa',
+                                        ':hover': {backgroundColor: '#fda498'},
+                                        height: '56px',
+                                        width: '56px',
+                                        boxShadow: 8,
+                                        marginTop: '15px',
+                                    }}
+                                    aria-label="more"
+                                    id="delete"
+                                    aria-controls='delete'
+                                    aria-haspopup='true'
+                                    onClick={(event) => {
+                                        topBarClick(event, 'delete');
+                                        openMenu()
+                                    }}>
                                     <DeleteIcon sx={{color: '#690003'}}/>
-                                </Fab>
+                                </IconButton>
                             </Slide>
 
                             <Menu
                                 id='delete'
+                                MenuListProps={{
+                                    'aria-labelledby': 'delete',
+                                }}
                                 anchorEl={anchorEl}
                                 open={Boolean(anchorEl && menuId === 'delete')}
-                                onClose={handleClose}
+                                onClose={(event) => {
+                                    handleClose();
+                                    closeMenu();
+                                }}
                                 anchorOrigin={{
                                     vertical: 'top',
                                     horizontal: 'center',
@@ -524,7 +632,8 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         borderRadius: '22px',
                                         backgroundColor: '#ffb4aa',
                                     }
-                                }}>
+                                }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                            >
                                 <Typography sx={{
                                     fontFamily: 'Roboto Black',
                                     fontSize: '17px',
@@ -563,7 +672,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                     </Grid>
                                 </Box>
                             </Menu>
-                        </Box>
+                        </div>
                     )}
                 </CardContent>
             </Card>
