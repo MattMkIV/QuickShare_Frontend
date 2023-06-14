@@ -1,4 +1,16 @@
-import {Box, Button, Card, CardContent, Grow, IconButton, Menu, Slide, TextField, Typography} from '@mui/material';
+import {
+    Box,
+    Button,
+    Card,
+    CardContent,
+    Divider,
+    Grow,
+    IconButton,
+    Menu,
+    Slide,
+    TextField,
+    Typography
+} from '@mui/material';
 import ListsCheckBoxComponent from './ListsCheckBoxComponent'
 import InfoIcon from "@mui/icons-material/Info";
 import ShareIcon from "@mui/icons-material/Share";
@@ -328,6 +340,16 @@ function ListCardLayout() {
                                     }}>
                             19/03/2021
                         </Typography>
+
+                        <Divider sx={{
+                            width: '220px',
+                            marginTop: '5px',
+                            boxShadow: 24,
+                            position: 'absolute',
+                            borderColor: 'rgba(63,46,4,0.38)',
+                            marginLeft: '15px'
+                        }}/>
+
                         <Typography sx={{
                             fontFamily: 'Roboto Black',
                             fontSize: '17px',

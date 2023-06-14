@@ -3,6 +3,7 @@ import {
     Button,
     Checkbox,
     CheckboxProps,
+    Grow,
     IconButton,
     List,
     ListItem,
@@ -13,6 +14,8 @@ import {
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {useState} from "react";
+import TextField from "@mui/material/TextField";
 
 const BpIcon = styled('span')(({theme}) => ({
     borderRadius: 3,
@@ -96,6 +99,16 @@ function ListsCheckBoxComponent() {
         setItems(newItems);
     };
 
+
+    const [hoveredIndex, setHoveredIndex] = useState(-1);
+
+    const handleMouseEnter = (index: number) => {
+        setHoveredIndex(index);
+    };
+    const handleMouseLeave = () => {
+        setHoveredIndex(-1);
+    };
+
     return (
         <>
             <Grid wrap='nowrap'
@@ -109,11 +122,21 @@ function ListsCheckBoxComponent() {
                         return (
                             <ListItem
                                 key={value}
+                                onMouseEnter={() => {
+                                    handleMouseEnter(value)
+                                }}
+                                onMouseLeave={() => {
+                                    handleMouseLeave()
+                                }}
                                 secondaryAction={
-                                    <IconButton edge="end" aria-label="comments" onClick={() => handleDelete(value)}>
-                                        <DeleteIcon sx={{width: '20px', height: '20px', color: '#9f3a3c'}}/>
-                                    </IconButton>
+                                    <Grow in={hoveredIndex === value} mountOnEnter unmountOnExit timeout={200}>
+                                        <IconButton edge="end" aria-label="comments"
+                                                    onClick={() => handleDelete(value)}>
+                                            <DeleteIcon sx={{width: '20px', height: '20px', color: '#442926'}}/>
+                                        </IconButton>
+                                    </Grow>
                                 }
+
                                 disablePadding>
                                 <ListItemButton role={undefined} onClick={handleToggle(value)} dense
                                                 sx={{
@@ -121,7 +144,6 @@ function ListsCheckBoxComponent() {
                                                     borderRadius: '22px',
                                                     marginLeft: '5px',
                                                     marginRight: '5px',
-                                                    ':hover': {boxShadow: 4}
                                                 }}>
                                     <ListItemIcon>
                                         <BpCheckbox
@@ -132,27 +154,32 @@ function ListsCheckBoxComponent() {
                                             inputProps={{'aria-labelledby': labelId}}
                                         />
                                     </ListItemIcon>
-                                    <ListItemText id={labelId} primary={`Line item ${value + 1}`}
-                                                  sx={{marginLeft: '-20px'}}/>
+                                    <TextField
+                                        inputProps={{
+                                            sx: {color: '#3f2e04 !important'}
+                                        }}
+                                        sx={{
+                                            '& fieldset': {border: 'none'},
+                                            '& .MuiInputBase-input': {
+                                                fontFamily: 'Roboto Light',
+                                                fontSize: '18px !important',
+                                                height: '0px',
+                                                width: '190px',
+                                            },
+                                            '&.Mui-disabled': {
+                                                color: 'red !important',
+                                            },
+                                            marginLeft: '-30px'
+                                        }}
+                                        disabled
+                                        id={labelId}
+                                        defaultValue={`Line item ${value + 1}`}
+                                        type='text'
+                                    />
                                 </ListItemButton>
                             </ListItem>
                         );
                     })}
-                    <Grid sx={{display: 'flex', justifyContent: 'center', marginTop: '5px'}}>
-                        <Button sx={{
-                            height: '40px',
-                            minWidth: '80%', boxShadow: 4,
-                            backgroundColor: '#8fb677',
-                            borderRadius: '30px',
-                            color: '#201a19',
-                            fontFamily: 'Roboto Black',
-                            fontSize: '15px',
-                            ':hover': {backgroundColor: '#7a9a65'}
-                        }} onClick={() => {
-                            const newItem = items.length;
-                            setItems([...items, newItem]);
-                        }}>Add row</Button>
-                    </Grid>
 
                 </List>
             </Grid>
