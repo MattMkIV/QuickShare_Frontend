@@ -104,16 +104,14 @@ function ListCardLayout() {
         <>
             <Card className='cardsLayout'
                   onMouseEnter={(event) => {
-                      {
-                          handleMouseEnter();
-                          retardTransitionTrue()
-                      }
-                  }} onMouseLeave={(event) => {
-                {
-                    handleMouseLeave();
-                    retardTransitionFalse()
-                }
-            }} sx={{boxShadow: 8}}>
+                      handleMouseEnter();
+                      retardTransitionTrue()
+                  }}
+                  onMouseLeave={(event) => {
+                      handleMouseLeave();
+                      retardTransitionFalse()
+                  }}
+                  sx={{boxShadow: 8}}>
                 <CardContent sx={{m: -1}}>
                     <Grid sx={{width: '290px', display: 'flex', alignItems: 'center'}}>
                         <TextField

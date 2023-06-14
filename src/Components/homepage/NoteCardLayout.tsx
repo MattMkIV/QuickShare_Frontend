@@ -94,16 +94,14 @@ const NoteCardLayout: React.FC = () => {
         <>
             <Card className='cardsLayout'
                   onMouseEnter={(event) => {
-                      {
-                          handleMouseEnter();
-                          retardTransitionTrue()
-                      }
-                  }} onMouseLeave={(event) => {
-                {
-                    handleMouseLeave();
-                    retardTransitionFalse()
-                }
-            }} sx={{boxShadow: 8}}>
+                      handleMouseEnter();
+                      retardTransitionTrue()
+                  }}
+                  onMouseLeave={(event) => {
+                      handleMouseLeave();
+                      retardTransitionFalse()
+                  }}
+                  sx={{boxShadow: 8}}>
                 <CardContent sx={{m: -1}}>
                     <TextField
                         inputProps={{
