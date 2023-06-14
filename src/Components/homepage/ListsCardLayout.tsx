@@ -121,21 +121,7 @@ function ListCardLayout() {
                                 sx: {color: '#442926 !important'}
                             }}
                             sx={{
-                                '& .MuiInput-underline': {
-                                    borderBottomColor: 'transparent',
-                                },
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'transparent',
-                                        borderRadius: '22px',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'transparent',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'transparent',
-                                    },
-                                },
+                                '& fieldset': {border: 'none'},
                                 '& .MuiInputBase-input': {
                                     fontFamily: 'Roboto Black',
                                     fontSize: '30px !important',
@@ -629,7 +615,13 @@ function ListCardLayout() {
                                     fontSize: '15px',
                                     marginTop: '10px',
                                     ':hover': {backgroundColor: '#49302b'}
-                                }} disableRipple>No</Button>
+                                }}
+                                        disableRipple
+                                        onClick={() => {
+                                            handleClose();
+                                            closeMenu()
+                                        }}
+                                >No</Button>
                                 <Button sx={{
                                     boxShadow: 8,
                                     height: '45px',

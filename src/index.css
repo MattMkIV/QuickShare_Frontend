@@ -29,7 +29,6 @@ body,
   src: local("Roboto Black"), url("./Fonts/Roboto-Black.ttf") format("truetype");
 }
 
-
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
