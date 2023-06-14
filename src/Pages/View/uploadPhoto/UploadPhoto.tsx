@@ -51,7 +51,7 @@ function UploadPhoto() {
     const [hoveredIndex, setHoveredIndex] = useState(-1);
     let jwtError = false;
     let navigate = useNavigate();
-    const [photo, setPhoto] = useState<any>([]);
+    const [photos, setPhotos] = useState<any>([]);
     const [open, setOpen] = useState(false);
     const [clickedImage, setClickedImage] = useState();
     
@@ -80,7 +80,7 @@ function UploadPhoto() {
                 photoInfo.push(all);
             }
 
-            setPhoto(photoInfo);
+            setPhotos(photoInfo);
         }   
 
         check();
@@ -159,7 +159,7 @@ function UploadPhoto() {
                         cols={3}
                         gap={8}
                         sx={{marginTop: '20px', marginLeft: '25px', marginRight: '25px', alignItems: 'center'}}>
-                        {photo.map((photo:any, index:any) => (
+                        {photos.map((photo:any, index:any) => (
                             <ImageListItem
                                 key={index}
                                 onMouseEnter={() => handleMouseEnter(index)}
@@ -170,7 +170,8 @@ function UploadPhoto() {
                                     src={`${photo.image_name}?w=248&fit=crop&auto=format`}
                                     srcSet={`${photo.image_name}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                 />
-                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={100} onClick={() => {askDeleteImage(photo.image_id)}}>
+                                
+                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={100}>
                                     <Fab sx={{
                                         position: 'absolute', bottom: '15px', right: '15px', backgroundColor: '#ffb4aa',
                                         ':hover': {backgroundColor: '#fda498'}
@@ -247,8 +248,7 @@ function UploadPhoto() {
                                     </Box>
                                 </Menu>
 
-
-                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={200} onClick={() => {addAllowed(photo.image_id, "sgsdg@sdfgsdfg.it")}}>
+                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={200}>
                                     <Fab sx={{
                                         position: 'absolute', bottom: '15px', right: '90px', backgroundColor: '#e7bdb7',
                                         ':hover': {backgroundColor: '#e3ada5'}
@@ -261,12 +261,6 @@ function UploadPhoto() {
                                         <ShareIcon sx={{color: '#442926'}}/>
                                     </Fab>
                                 </Grow>
-                                <Box>
-                                    <h3>Upload Data: {photo.upload_data}</h3>
-                                    {photo.allowed.map((allowedValue:any, index:any) => (
-                                        <p key={index}>Username: {allowedValue.email}</p>
-                                    ))}   
-                                </Box>
 
                                 <Menu
                                     id='share'
@@ -397,7 +391,6 @@ function UploadPhoto() {
                                     </Grid>
                                 </Menu>
 
-
                                 <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={400}>
                                     <Fab sx={{
                                         position: 'absolute',
@@ -449,7 +442,7 @@ function UploadPhoto() {
                                                     marginTop: '5px',
                                                     color: '#3f2e04'
                                                 }}>
-                                        Created on:
+                                        Upload:
                                     </Typography>
                                     <Typography component="span" display="inline-block" whiteSpace="nowrap"
                                                 sx={{
@@ -458,7 +451,7 @@ function UploadPhoto() {
                                                     marginLeft: '5px',
                                                     color: '#3f2e04'
                                                 }}>
-                                        19/03/2021
+                                        {photo.upload_data}
                                     </Typography>
                                     <Typography sx={{
                                         fontFamily: 'Roboto Black',
@@ -476,38 +469,40 @@ function UploadPhoto() {
                                         overflowY: 'scroll',
                                         pl: 1.2, pr: 1.2, pt: 1.2
                                     }}>
-                                        <TextField inputProps={{
-                                            sx: {color: '#3f2e04 !important'}
-                                        }}
-                                                   sx={{
-                                                       '& .MuiInput-underline': {
-                                                           borderBottomColor: 'transparent',
-                                                       },
-                                                       '& .MuiOutlinedInput-root': {
-                                                           '& fieldset': {
-                                                               borderColor: '#3f2e04',
-                                                               borderRadius: '18px',
-                                                           },
-                                                           '&:hover fieldset': {
-                                                               borderColor: '#3f2e04',
-                                                           },
-                                                           '&.Mui-focused fieldset': {
-                                                               borderColor: 'transparent',
-                                                           },
-                                                       },
-                                                       '& .MuiInputBase-input': {
-                                                           fontFamily: 'Roboto Regular',
-                                                           fontSize: '15px !important',
-                                                           height: '5px',
-                                                           width: '202px',
-                                                           borderRadius: '18px',
-                                                           boxShadow: 4,
-                                                       },
-                                                       marginBottom: 1.2
-                                                   }}
-                                                   defaultValue='ciaocarlo@gmail.com'
-                                                   disabled>
-                                        </TextField>
+                                        {photo.allowed.map((user:any, index:any) => (
+                                            <TextField key={index} inputProps={{
+                                                sx: {color: '#3f2e04 !important'}
+                                            }}
+                                                    sx={{
+                                                        '& .MuiInput-underline': {
+                                                            borderBottomColor: 'transparent',
+                                                        },
+                                                        '& .MuiOutlinedInput-root': {
+                                                            '& fieldset': {
+                                                                borderColor: '#3f2e04',
+                                                                borderRadius: '18px',
+                                                            },
+                                                            '&:hover fieldset': {
+                                                                borderColor: '#3f2e04',
+                                                            },
+                                                            '&.Mui-focused fieldset': {
+                                                                borderColor: 'transparent',
+                                                            },
+                                                        },
+                                                        '& .MuiInputBase-input': {
+                                                            fontFamily: 'Roboto Regular',
+                                                            fontSize: '15px !important',
+                                                            height: '5px',
+                                                            width: '202px',
+                                                            borderRadius: '18px',
+                                                            boxShadow: 4,
+                                                        },
+                                                        marginBottom: 1.2
+                                                    }}
+                                                    defaultValue={user.email}
+                                                    disabled>
+                                            </TextField>
+                                        ))}
                                     </Box>
                                 </Menu>
 
@@ -526,32 +521,6 @@ function UploadPhoto() {
                             <input type="file" hidden/>
                         </StyledButton>
                     </ThemeProvider>
-
-                    <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={{backgroundColor: 'red'}}>
-                            <h1>Confermi di voler eliminare la foto?</h1>
-                            <Button variant="outlined" onClick={() => handleClose()}>Annulla</Button>
-                            <Button variant="contained" onClick={() => deleteImage(clickedImage)}>Conferma</Button>
-                        </Box>
-                    </Modal>
-
-                    <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={{backgroundColor: 'red'}}>
-                            <h1>Upload photo</h1>
-                            <Button variant="outlined" onClick={() => handleClose()}>Annulla</Button>
-                            <Button variant="contained" onClick={() => deleteImage(clickedImage)}>Conferma</Button>
-                        </Box>
-                    </Modal>
                 </Box>
             </Box>
         </>
