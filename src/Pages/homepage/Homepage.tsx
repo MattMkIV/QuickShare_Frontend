@@ -123,7 +123,8 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                         borderRadius: '22px',
                         backgroundColor: '#a08c8a',
                     }
-                }}>
+                }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+            >
 
                 <Grid sx={{marginTop: '2px'}}>
                     <Stack sx={{height: '516px', marginBottom: '10px', overflowY: 'scroll'}} spacing={2}
@@ -167,7 +168,9 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                             size='small'/>
 
                         <Button sx={{
-                            background: 'rgba(112,190,53,0.93)',
+                            border: 1,
+                            borderColor: '#7a9a65',
+                            backgroundColor: '#8fb677',
                             minWidth: '51px',
                             height: '51px',
                             borderRadius: '22px',
@@ -175,11 +178,11 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                             marginLeft: '10px',
                             boxShadow: 8,
                             ':hover': {
-                                backgroundColor: 'rgb(110,178,54)',
+                                backgroundColor: '#7a9a65',
                                 cursor: 'pointer'
                             }
                         }}>
-                            <SendIcon sx={{width: '23px', height: '23px', color: '#263417'}}/>
+                            <SendIcon sx={{width: '23px', height: '23px', color: '#201a19'}}/>
                         </Button>
                     </Grid>
                 </Grid>
@@ -209,7 +212,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                         borderRadius: '22px',
                         backgroundColor: '#a08c8a',
                     }
-                }}
+                }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
             >
                 <Grid>
                     <Box

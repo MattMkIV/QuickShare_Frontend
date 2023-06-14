@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import Home from "../../Pages/View/home/Home";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import {Simulate} from "react-dom/test-utils";
+import CheckIcon from '@mui/icons-material/Check';
 
 function ListCardLayout() {
     /************************* Handle notes MouseEnter & MouseExit *************************/
@@ -174,28 +174,74 @@ function ListCardLayout() {
                             PaperProps={{
                                 elevation: 24,
                                 style: {
-                                    height: '200px',
+                                    height: '96px',
                                     width: '276px',
-                                    backgroundColor: '#a08c8a',
+                                    backgroundColor: '#dedede',
                                     borderRadius: '22px',
                                 },
                             }}
+                            sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
                         >
                             <Typography sx={{
                                 fontFamily: 'Roboto Black',
                                 fontSize: '17px',
                                 marginLeft: '15px',
                                 marginTop: '5px',
-                            }}>What do you want to add?</Typography>
+                            }}>Add a new element</Typography>
                             <Box sx={{
                                 width: '100%',
-                                height: '248px',
+                                height: '190px',
                                 borderRadius: '22px',
-                                backgroundColor: '#817371',
+                                backgroundColor: '#c4bfc4',
                                 overflowY: 'scroll',
                                 pl: 1.2, pr: 1.2, pt: 1.2
                             }}>
-
+                                <TextField
+                                    inputProps={{
+                                        sx: {color: '#3f2e04 !important'}
+                                    }}
+                                    sx={{
+                                        '& .MuiInput-underline': {
+                                            borderBottomColor: 'transparent',
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderRadius: '18px',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#3f2e04',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderWidth: '2px',
+                                            },
+                                        },
+                                        '& .MuiInputBase-input': {
+                                            borderRadius: '18px',
+                                            fontFamily: 'Roboto Regular',
+                                            fontSize: '15px !important',
+                                            height: '5px',
+                                            width: '183px',
+                                            boxShadow: 4,
+                                        },
+                                        marginBottom: 1.2,
+                                    }}
+                                    placeholder='New element'
+                                    type='text'
+                                />
+                                <Button sx={{
+                                    border: 1,
+                                    backgroundColor: '#8fb677',
+                                    minWidth: '40px',
+                                    height: '40px',
+                                    marginLeft: '5px',
+                                    borderRadius: '22px',
+                                    borderColor: '#7a9a65',
+                                    ':hover': {backgroundColor: '#7a9a65'}
+                                }}>
+                                    <CheckIcon sx={{color: '#201a19'}}/>
+                                </Button>
                             </Box>
                         </Menu>
                     </Grid>
@@ -261,7 +307,8 @@ function ListCardLayout() {
                                 backgroundColor: '#dfc38c',
                                 overflowY: 'hidden'
                             }
-                        }}>
+                        }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                    >
                         <Typography component="span" display="inline-block"
                                     sx={{
                                         fontFamily: 'Roboto Black',
@@ -382,7 +429,8 @@ function ListCardLayout() {
                                 backgroundColor: '#e7bdb7',
                                 overflowY: 'hidden'
                             }
-                        }}>
+                        }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                    >
                         <Typography sx={{
                             fontFamily: 'Roboto Black',
                             fontSize: '17px',
@@ -460,11 +508,13 @@ function ListCardLayout() {
                             pr: 1.2
                         }}>
                             <Button sx={{
+                                border: 1,
+                                borderColor: '#7a9a65',
                                 minWidth: '40px',
                                 height: '40px',
                                 boxShadow: 8,
-                                backgroundColor: '#8fb677',
                                 borderRadius: '30px',
+                                backgroundColor: '#8fb677',
                                 ':hover': {backgroundColor: '#7a9a65'}
                             }} disableRipple onClick={handleAddTextField}>
                                 <AddIcon sx={{color: '#201a19'}}></AddIcon>
@@ -476,7 +526,7 @@ function ListCardLayout() {
                                 boxShadow: 8,
                                 backgroundColor: '#dfc38c',
                                 borderRadius: '30px',
-                                fontFamily: 'Roboto Regular',
+                                fontFamily: 'Roboto Bold',
                                 fontSize: '14px',
                                 ':hover': {backgroundColor: '#c7ad7b'},
                                 color: '#201a19',
@@ -535,7 +585,8 @@ function ListCardLayout() {
                                 borderRadius: '22px',
                                 backgroundColor: '#ffb4aa',
                             }
-                        }}>
+                        }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                    >
                         <Typography sx={{
                             fontFamily: 'Roboto Black',
                             fontSize: '17px',
@@ -573,7 +624,6 @@ function ListCardLayout() {
                             </Grid>
                         </Box>
                     </Menu>
-
                 </CardContent>
             </Card>
         </>

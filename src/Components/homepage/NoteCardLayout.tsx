@@ -1,4 +1,4 @@
-import {Box, Button, CardContent, Grow, IconButton, Menu, Slide, TextField, Typography} from "@mui/material";
+import {Box, Button, CardContent, Divider, Grow, IconButton, Menu, Slide, TextField, Typography} from "@mui/material";
 import Card from "@mui/material/Card";
 import * as React from "react";
 import {useState} from "react";
@@ -246,7 +246,8 @@ const NoteCardLayout: React.FC = () => {
                                         backgroundColor: '#dfc38c',
                                         overflowY: 'hidden'
                                     }
-                                }}>
+                                }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                            >
                                 <Typography component="span" display="inline-block"
                                             sx={{
                                                 fontFamily: 'Roboto Black',
@@ -259,13 +260,23 @@ const NoteCardLayout: React.FC = () => {
                                 </Typography>
                                 <Typography component="span" display="inline-block" whiteSpace="nowrap"
                                             sx={{
-                                                fontFamily: 'Roboto Regular',
+                                                fontFamily: 'Roboto Light',
                                                 fontSize: '17px',
-                                                marginLeft: '5px',
+                                                marginLeft: '10px',
                                                 color: '#3f2e04'
                                             }}>
                                     19/03/2021
                                 </Typography>
+
+                                <Divider sx={{
+                                    width: '220px',
+                                    marginTop: '5px',
+                                    boxShadow: 24,
+                                    position: 'absolute',
+                                    borderColor: 'rgba(63,46,4,0.38)',
+                                    marginLeft: '15px'
+                                }}/>
+
                                 <Typography sx={{
                                     fontFamily: 'Roboto Black',
                                     fontSize: '17px',
@@ -367,7 +378,8 @@ const NoteCardLayout: React.FC = () => {
                                         backgroundColor: '#e7bdb7',
                                         overflowY: 'hidden'
                                     }
-                                }}>
+                                }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                            >
                                 <Typography sx={{
                                     fontFamily: 'Roboto Black',
                                     fontSize: '17px',
@@ -444,6 +456,8 @@ const NoteCardLayout: React.FC = () => {
                                     pr: 1.2
                                 }}>
                                     <Button sx={{
+                                        border: 1,
+                                        borderColor: '#7a9a65',
                                         minWidth: '40px',
                                         height: '40px',
                                         boxShadow: 8,
@@ -460,7 +474,7 @@ const NoteCardLayout: React.FC = () => {
                                         boxShadow: 8,
                                         backgroundColor: '#dfc38c',
                                         borderRadius: '30px',
-                                        fontFamily: 'Roboto Regular',
+                                        fontFamily: 'Roboto Bold',
                                         fontSize: '14px',
                                         ':hover': {backgroundColor: '#c7ad7b'},
                                         color: '#201a19',
@@ -519,7 +533,8 @@ const NoteCardLayout: React.FC = () => {
                                         borderRadius: '22px',
                                         backgroundColor: '#ffb4aa',
                                     }
-                                }}>
+                                }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                            >
                                 <Typography sx={{
                                     fontFamily: 'Roboto Black',
                                     fontSize: '17px',
