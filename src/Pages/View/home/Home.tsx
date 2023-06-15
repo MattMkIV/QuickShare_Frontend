@@ -20,7 +20,7 @@ function Home() {
                         <ListCardLayout></ListCardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                        <ListCardLayout></ListCardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                     </Stack>
@@ -51,12 +51,13 @@ function Home() {
 
                 <Grid className='cardSliderHomePage'>
                     <Stack direction="row" spacing={5}>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                        <ListCardLayout></ListCardLayout>
+                        <ListCardLayout></ListCardLayout>
+                        <ListCardLayout></ListCardLayout>
+                        <ListCardLayout></ListCardLayout>
+                        <ListCardLayout></ListCardLayout>
+                        <ListCardLayout></ListCardLayout>
+                        <ListCardLayout></ListCardLayout>
                     </Stack>
                 </Grid>
             </Box>

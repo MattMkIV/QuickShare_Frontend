@@ -499,7 +499,6 @@ function UploadPhoto() {
                     <Snackbar open={open} autoHideDuration={4000} onClose={handleCloseAlert}>
                         <Alert elevation={24} onClose={handleCloseAlert} severity="success"
                                sx={{
-                                   width: '100%',
                                    backgroundColor: '#8fb677',
                                    borderRadius: '18px',
                                    color: '#201a19',
