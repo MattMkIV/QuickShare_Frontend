@@ -558,9 +558,15 @@ function LeftBar({
                         handleItemClick("home");
                     }}>
                         <ListItemButton
-                            style={{color: '#ffb4aa'}}
                             className={selectedItem === "home" ? "selected" : ""}
-                            sx={{marginLeft: '-16px', borderRadius: '0 22px 22px 0', marginRight: '-16px'}}>
+                            sx={{
+                                marginLeft: '-16px',
+                                borderRadius: '0 22px 22px 0',
+                                marginRight: '-16px',
+                                color: '#ffb4aa',
+                                ':hover': {backgroundColor: '#382d2c'},
+                            }}
+                            disableRipple>
                             <HomeIcon className='icon'/>
                             <ListItemText primary="Home"/>
                         </ListItemButton>
@@ -570,9 +576,15 @@ function LeftBar({
                         handleItemClick("notes");
                     }}>
                         <ListItemButton
-                            style={{color: '#ffb4aa'}}
                             className={selectedItem === "notes" ? "selected" : ""}
-                            sx={{marginLeft: '-16px', borderRadius: '0 22px 22px 0', marginRight: '-16px'}}>
+                            sx={{
+                                marginLeft: '-16px',
+                                borderRadius: '0 22px 22px 0',
+                                marginRight: '-16px',
+                                color: '#ffb4aa',
+                                ':hover': {backgroundColor: '#382d2c'},
+                            }}
+                            disableRipple>
                             <AssignmentIcon className='icon'/>
                             <ListItemText primary="Notes"/>
                         </ListItemButton>
@@ -582,9 +594,15 @@ function LeftBar({
                         handleItemClick("lists");
                     }}>
                         <ListItemButton
-                            style={{color: '#ffb4aa'}}
                             className={selectedItem === "lists" ? "selected" : ""}
-                            sx={{marginLeft: '-16px', borderRadius: '0 22px 22px 0', marginRight: '-16px'}}>
+                            sx={{
+                                marginLeft: '-16px',
+                                borderRadius: '0 22px 22px 0',
+                                marginRight: '-16px',
+                                color: '#ffb4aa',
+                                ':hover': {backgroundColor: '#382d2c'},
+                            }}
+                            disableRipple>
                             <FormatListBulletedIcon className='icon'/>
                             <ListItemText primary="Lists"/>
                         </ListItemButton>
@@ -594,9 +612,15 @@ function LeftBar({
                         handleItemClick("photo");
                     }}>
                         <ListItemButton
-                            style={{color: '#ffb4aa'}}
                             className={selectedItem === "photo" ? "selected" : ""}
-                            sx={{marginLeft: '-16px', borderRadius: '0 22px 22px 0', marginRight: '-16px'}}>
+                            sx={{
+                                marginLeft: '-16px',
+                                borderRadius: '0 22px 22px 0',
+                                marginRight: '-16px',
+                                color: '#ffb4aa',
+                                ':hover': {backgroundColor: '#382d2c'},
+                            }}
+                            disableRipple>
                             <AddPhotoAlternate className='icon'/>
                             <ListItemText primary="Photos"/>
                         </ListItemButton>
@@ -606,9 +630,15 @@ function LeftBar({
                         handleItemClick("calendar");
                     }}>
                         <ListItemButton
-                            style={{color: '#ffb4aa'}}
                             className={selectedItem === "calendar" ? "selected" : ""}
-                            sx={{marginLeft: '-16px', borderRadius: '0 22px 22px 0', marginRight: '-16px'}}>
+                            sx={{
+                                marginLeft: '-16px',
+                                borderRadius: '0 22px 22px 0',
+                                marginRight: '-16px',
+                                color: '#ffb4aa',
+                                ':hover': {backgroundColor: '#382d2c'},
+                            }}
+                            disableRipple>
                             <DateRangeIcon className='icon'/>
                             <ListItemText primary="Calendar "/>
                         </ListItemButton>
@@ -618,9 +648,15 @@ function LeftBar({
                         handleItemClick("account balance");
                     }}>
                         <ListItemButton
-                            style={{color: '#ffb4aa'}}
                             className={selectedItem === "account balance" ? "selected" : ""}
-                            sx={{marginLeft: '-16px', borderRadius: '0 22px 22px 0', marginRight: '-16px'}}>
+                            sx={{
+                                marginLeft: '-16px',
+                                borderRadius: '0 22px 22px 0',
+                                marginRight: '-16px',
+                                color: '#ffb4aa',
+                                ':hover': {backgroundColor: '#382d2c'},
+                            }}
+                            disableRipple>
                             <AccountBalanceWalletIcon className='icon'/>
                             <ListItemText primary="Account balance"
                                           sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
