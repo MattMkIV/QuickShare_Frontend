@@ -115,7 +115,6 @@ function SimpleDialog(props: SimpleDialogProps) {
     const handleAddClick = () => {
         // Aggiungi qui la logica per confermare la modifica
     };
-    const [startDate, setStartDate] = useState(new Date());
 
 
     return (

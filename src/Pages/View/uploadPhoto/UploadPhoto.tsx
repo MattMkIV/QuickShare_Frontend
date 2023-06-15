@@ -514,6 +514,7 @@ function UploadPhoto() {
         </>
     );
 }
+
 export default UploadPhoto;
 
 const itemData = [
