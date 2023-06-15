@@ -302,7 +302,6 @@ const NoteCardLayout: React.FC = () => {
                                                        height: '5px',
                                                        width: '202px',
                                                        borderRadius: '18px',
-                                                       boxShadow: 4,
                                                    },
                                                    marginBottom: 1.2
                                                }}
@@ -408,7 +407,6 @@ const NoteCardLayout: React.FC = () => {
                                                         fontSize: '15px !important',
                                                         height: '5px',
                                                         width: '202px',
-                                                        boxShadow: 4,
                                                     },
                                                     marginBottom: 1.2
                                                 }}

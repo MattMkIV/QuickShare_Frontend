@@ -13,6 +13,7 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Box, CardContent, Dialog, DialogContent, Grow, IconButton, TextField, Typography} from "@mui/material";
+
 //CSS
 import './LeftBar.css';
 import React, {useState} from 'react';
@@ -162,7 +163,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                             },
                                             marginLeft: '-15px',
                                         }}
-                                        placeholder='Title Note'>
+                                        placeholder='Note Title'>
                                     </TextField>
 
                                     <hr className='littleSeparationLine'></hr>
@@ -214,7 +215,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                             },
                                             marginLeft: '-15px',
                                         }}
-                                        placeholder='Title Event'>
+                                        placeholder='Event'>
                                     </TextField>
 
                                     <hr className='littleSeparationLine'></hr>
@@ -263,7 +264,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                         },
                                         marginLeft: '-15px',
                                     }}
-                                    placeholder='Title List'>
+                                    placeholder='List Title'>
                                 </TextField>
 
                                 <hr className='littleSeparationLine'></hr>
@@ -303,7 +304,6 @@ function SimpleDialog(props: SimpleDialogProps) {
                                                         fontSize: '18px !important',
                                                         height: '5px',
                                                         width: '155px',
-                                                        boxShadow: 4,
                                                     },
                                                     pb: 1.2,
                                                     marginLeft: '5px',
@@ -399,7 +399,6 @@ function SimpleDialog(props: SimpleDialogProps) {
                                             fontSize: '18px !important',
                                             height: '15px',
                                             width: '440px',
-                                            boxShadow: 4,
                                         },
                                         pb: 2,
                                     }}

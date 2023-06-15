@@ -285,7 +285,6 @@ function UploadPhoto() {
                                                             fontSize: '15px !important',
                                                             height: '5px',
                                                             width: '202px',
-                                                            boxShadow: 4,
                                                         },
                                                         marginBottom: 1.2
                                                     }}
@@ -463,7 +462,6 @@ function UploadPhoto() {
                                                            height: '5px',
                                                            width: '202px',
                                                            borderRadius: '18px',
-                                                           boxShadow: 4,
                                                        },
                                                        marginBottom: 1.2
                                                    }}

@@ -1,86 +1,182 @@
 //MUI
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
-//CSS
-import "./InputLogIn.css";
+
 //Other
 import React, {useState} from 'react';
 //Axios
 import {useNavigate} from 'react-router-dom';
+import {Typography} from "@mui/material";
 
 //Props
 interface Props {
     firstLabel: string,
     secondLabel: string;
 }
-  
 
-function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
+function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
 
-      //Variable declaration
-      const navigate = useNavigate();
-      let isErrorInput = false;
-      const [ErrorInput, setErrorInput] = useState(false);
+    //Variable declaration
+    const navigate = useNavigate();
+    let isErrorInput = false;
+    const [ErrorInput, setErrorInput] = useState(false);
 
-      const CssTextField = styled(TextField)({
-          '& label.Mui-focused': {
-            color: '#F4B7AD',
-          },
-          '& label': {
-              color: '#F4B7AD',
-          },
-          '& .MuiInput-underline': {
-              borderBottomColor: '#F4B7AD',
-          },
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: '#9D8D8B',
-                borderRadius : '22px',
-            },
-            '&:hover fieldset': {
-                borderColor: '#9D8D8B',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: '#F4B7AD',
-            },
-          },
-      });
+    //Functions
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        //Take Value
+        let username = data.get('username');
+        let password = data.get('password');
 
-      //Functions
-      const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-          event.preventDefault();
-          const data = new FormData(event.currentTarget);
-          //Take Value
-          let username = data.get('username');
-          let password = data.get('password');
+        console.log("Username: " + username);
+        console.log("Password: " + password);
 
-          console.log("Username: "+username);
-          console.log("Password: "+password);
+        if (!isErrorInput) navigate("/homepage");
+        else setErrorInput(true);
+    }
 
-          if(!isErrorInput) navigate("/homepage");
-          else setErrorInput(true);
-      }
-
-      return(
-          <>
-            <Box component="form" onSubmit={handleSubmit}>
-              <CssTextField className="inputStyle" error={ErrorInput} name="username" sx={{input: {color: 'darkgrey'}}} label={firstLabel} variant="outlined"/>
-             
-              <CssTextField className="inputStyle" error={ErrorInput} name="password" type='password' sx={{input: {color: 'darkgrey'}}} label={secondLabel} variant="outlined"/>
-              <p><a className='forgotLink' onClick={() => navigate("/forgotPassword")}>Forgot your password?</a></p>
-              <div className='w3-row'>
-                <div className='w3-col l6'>
-                  <Button className='buttonGuest' type="submit" variant="contained">guest</Button>
-                </div>
-                <div className='w3-col l6'>
-                  <Button className='buttonSubmit' type="submit">Login</Button>
-                </div>
-              </div>
+    return (
+        <>
+            <Box sx={{
+                marginTop: '30px',
+                display: 'flex',
+                justifyContent: 'center',
+            }}>
+                <Typography
+                    sx={{
+                        color: '#E9DEDC',
+                        fontSize: '27px',
+                        textAlign: 'center',
+                        fontFamily: 'Roboto Bold',
+                    }}>Login</Typography>
             </Box>
-          </>    
-      );
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pt: 4,
+                }}>
+
+                <TextField
+                    error={ErrorInput}
+                    type='text'
+                    placeholder={firstLabel}
+                    sx={{
+                        '& .MuiInput-underline': {
+                            borderBottomColor: 'transparent',
+                        },
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': {
+                                borderColor: '#dfc38c',
+                                borderRadius: '25px',
+                            },
+                            '&:hover fieldset': {
+                                borderColor: '#dfc38c',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#dfc38c',
+                                borderWidth: '2px',
+                            },
+                        },
+                        '& .MuiInputBase-input': {
+                            borderRadius: '25px',
+                            fontFamily: 'Roboto Regular',
+                            fontSize: '17px !important',
+                            height: '25px',
+                        },
+                        width: '380px',
+                    }}/>
+
+                <TextField
+                    error={ErrorInput}
+                    type='password'
+                    placeholder={secondLabel}
+                    sx={{
+                        '& .MuiInput-underline': {
+                            borderBottomColor: 'transparent',
+                        },
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': {
+                                borderColor: '#dfc38c',
+                                borderRadius: '25px',
+                            },
+                            '&:hover fieldset': {
+                                borderColor: '#dfc38c',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#dfc38c',
+                                borderWidth: '2px',
+                            },
+                        },
+                        '& .MuiInputBase-input': {
+                            borderRadius: '25px',
+                            fontFamily: 'Roboto Regular',
+                            fontSize: '17px !important',
+                            height: '25px',
+                        },
+                        marginTop: '30px',
+                        width: '380px',
+                    }}/>
+
+                <Box sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: '60px',
+                }}>
+                    <Button
+                        type='submit'
+                        disableRipple
+                        sx={{
+                            width: '140px',
+                            height: '70px',
+                            fontFamily: 'Roboto Black',
+                            color: '#442926',
+                            fontSize: '16px',
+                            borderRadius: '22px',
+                            backgroundColor: '#e7bdb7',
+                            boxShadow: 8,
+                            ':hover': {backgroundColor: '#e7bdb7', boxShadow: 15}
+                        }}>Guest</Button>
+
+                    <Button
+                        type='submit'
+                        disableRipple
+                        sx={{
+                            width: '140px',
+                            height: '70px',
+                            fontFamily: 'Roboto Black',
+                            color: '#ffdad5',
+                            fontSize: '16px',
+                            borderRadius: '22px',
+                            backgroundColor: '#920609',
+                            marginLeft: '65px',
+                            boxShadow: 8,
+                            ':hover': {backgroundColor: '#920609', boxShadow: 15}
+                        }}>Login</Button>
+                </Box>
+                <Box sx={{justifyItems: 'flex-start', width: '100%', marginTop: '55px'}}>
+                    <Typography
+                        sx={{
+                            color: '#dfc38c',
+                            fontFamily: 'Roboto Light',
+                            fontSize: '19px',
+                            marginLeft: '30px',
+                            ':hover': {color: '#dab143', cursor: 'pointer'},
+                        }}
+                        onClick={() => navigate("/signUp")}>Create a new account</Typography>
+                </Box>
+            </Box>
+        </>
+    );
 }
 
 export default InputLogin;

@@ -4,7 +4,6 @@ import './App.css';
 import Login from './Pages/Login/Login';
 import Home from './Pages/View/home/Home';
 import SignUp from './Pages/SignUp/SignUp';
-import ForgotPassword from './Pages/Login/ForgotPassword';
 //Other
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import UploadPhoto from "./Pages/View/uploadPhoto/UploadPhoto";
@@ -29,7 +28,6 @@ function App() {
                     <Route index path="/homepage/calendar" element={<Homepage componentToRender={Calendar}/>}/>
                     <Route index path="/homepage/accountbalance" element={<Homepage componentToRender={AccountBalance}/>}/>
                     <Route index path="/signUp" element={<SignUp/>}/>
-                    <Route index path="/forgotPassword" element={<ForgotPassword/>}/>
                 </Routes>
             </BrowserRouter>
         </>
