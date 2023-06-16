@@ -1,5 +1,5 @@
 //MUI
-import {InputAdornment, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Grid from '@mui/material/Grid';
 //Component
@@ -8,37 +8,9 @@ import Logo from '../logo/Logo';
 import './TopBar.css';
 //Other
 import React from 'react';
-import {styled} from "@mui/material/styles";
 
 function TopBar() {
     //Variable declaration
-    const [anchorEl, setAnchorEl]
-        = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-
-    const CssTextField = styled(TextField)({
-        '& label.Mui-focused': {
-            color: '#F4B7AD',
-        },
-        '& label': {
-            color: '#F4B7AD',
-        },
-        '& .MuiInput-underline': {
-            borderBottomColor: '#F4B7AD',
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: '#9D8D8B',
-                borderRadius: '22px',
-            },
-            '&:hover fieldset': {
-                borderColor: '#9D8D8B',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: '#F4B7AD',
-            },
-        },
-    });
 
     //Functions
 
@@ -58,7 +30,7 @@ function TopBar() {
                             placeholder="Search"
                             onClick={handleChange}
                             InputProps={{
-                                endAdornment: <SearchIcon sx={{ color: '#F4B7AD' }} />,
+                                endAdornment: <SearchIcon sx={{color: '#F4B7AD'}}/>,
                             }}
                             sx={{
                                 '& .MuiInput-underline': {

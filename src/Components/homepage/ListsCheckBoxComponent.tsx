@@ -1,20 +1,9 @@
 import {styled} from "@mui/material/styles";
-import {
-    Button,
-    Checkbox,
-    CheckboxProps,
-    Grow,
-    IconButton,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText
-} from "@mui/material";
+import {Checkbox, CheckboxProps, Grow, IconButton, List, ListItem, ListItemButton, ListItemIcon} from "@mui/material";
 import * as React from "react";
+import {useState} from "react";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {useState} from "react";
 import TextField from "@mui/material/TextField";
 
 const BpIcon = styled('span')(({theme}) => ({
