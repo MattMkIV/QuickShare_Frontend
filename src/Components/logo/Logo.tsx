@@ -34,7 +34,8 @@ function Logo(this: any, {navigateHome}: props) {
                     <img
                         src={process.env.PUBLIC_URL + '/LogoHighRes.png'}
                         alt='Logo img'
-                        className='logo'/>
+                        className='logo'
+                        onClick={handleClick}/>
                     <Typography
                         sx={{
                             color: '#FF5C4D',
@@ -59,7 +60,8 @@ function Logo(this: any, {navigateHome}: props) {
                     <img
                         src={process.env.PUBLIC_URL + '/LogoHighRes.png'}
                         alt='Logo img'
-                        className='logo'/>
+                        className='logo'
+                        onClick={handleClick}/>
                     <Typography
                         sx={{
                             color: '#FF5C4D',

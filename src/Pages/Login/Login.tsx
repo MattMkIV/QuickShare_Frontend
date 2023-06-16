@@ -5,7 +5,6 @@ import InputLogin from '../../Components/login/InputLogIn';
 import './Login.css'
 //JS
 //Other
-import {useNavigate} from "react-router-dom";
 import {Box, Divider, Typography} from "@mui/material";
 
 function Login() {

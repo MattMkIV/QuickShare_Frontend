@@ -3,7 +3,6 @@ import SendIcon from '@mui/icons-material/Send';
 //Component
 import TopBar from '../../Components/homepage/TopBar';
 import LeftBar from '../../Components/homepage/LeftBar';
-import Home from '../View/home/Home';
 import OtherMessageComponent from '../../Components/homepage/OtherMessageComponent'
 import MyMessageComponent from '../../Components/homepage/MyMessageComponent'
 //JS
@@ -28,7 +27,6 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     document.body.style.backgroundImage = '';
 
     //Variable declaration
-    const [selectedItem, setSelectedItem] = useState(Home);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const [menuId, setMenuId] = useState<string | undefined>(undefined);
@@ -42,9 +40,6 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     };
 
     //Function
-    const handleSelectItem = (item: any) => {
-        setSelectedItem(item);
-    };
 
     const LightTooltip = styled(({className, ...props}: TooltipProps) => (
         <Tooltip {...props} classes={{popper: className}}/>))(({theme}) => ({
@@ -91,7 +86,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
 
             <Grid container wrap='nowrap'>
                 <Grid item lg={2} md={2}>
-                    <LeftBar onSelect={handleSelectItem}/>
+                    <LeftBar/>
                 </Grid>
 
                 <Grid container sx={{marginTop: '30px'}} lg={10} md={10} xs={12}>
