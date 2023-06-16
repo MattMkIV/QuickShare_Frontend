@@ -21,8 +21,9 @@ import Grid from "@mui/material/Grid";
 import {AddPhotoAlternate} from '@mui/icons-material';
 import {useNavigate} from "react-router-dom";
 import Card from "@mui/material/Card";
-import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import {DatePicker, DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -117,6 +118,8 @@ function SimpleDialog(props: SimpleDialogProps) {
         // Aggiungi qui la logica per confermare la modifica
     };
 
+
+    const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
 
     return (
         <Dialog onClose={handleClose} open={open} sx={{
