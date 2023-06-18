@@ -107,14 +107,37 @@ function UploadPhoto() {
         let isError = await DeleteImage(imageId);
     }
 
-    const addAllowed = async (imageId: any, allowedUserEmail:any) => {
-        console.log(imageId);
-        console.log(allowedUserEmail);
-        let userInfo:any = await TakeUserInfoByEmail(allowedUserEmail);
-        console.log("ID by EMAIL: " + userInfo.id);
-        let isError = await AddAllowed(imageId, userInfo.id);
-        console.log(isError);
-    }
+    // const addAllowed = async (imageId: any, allowedUserEmail:any) => {
+    //     console.log(imageId);
+    //     console.log(allowedUserEmail);
+    //     let userInfo:any = await TakeUserInfoByEmail(allowedUserEmail);
+    //     console.log("ID by EMAIL: " + userInfo.id);
+    //     let isError = await AddAllowed(imageId, userInfo.id);
+    //     console.log(isError);
+    // }
+
+     // metodo per aggiungere "allowed" alla nota
+    // const addAllowed = async (event: any) => {
+
+    //     let emailAllowedUser:any = [];
+    //     event.preventDefault();
+    //     const data = new FormData(event.currentTarget);
+    //     //Take Value
+
+    //     for(let i=0; i < textFields.length; i++) {
+    //         let response:any = await TakeUserInfoByEmail(data.get('person'+i));
+    //         console.log(response);
+    //         emailAllowedUser.push(response.id);
+    //     }
+        
+    //     let response:any = await TakeUserInfoAll(emailAllowedUser);
+
+    //     for(let i=0; i < response.length; i++) {
+    //         let isError = await AddAllowed(titleNote, bodyNote, response[i].id, noteId);
+    //     }
+
+    //     window.location.reload();
+    // }
 
     /************************* Menù pop up functions *************************/
     const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
@@ -248,7 +271,7 @@ function UploadPhoto() {
                                     </Box>
                                 </Menu>
 
-                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={200}>
+                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={200} >
                                     <Fab sx={{
                                         position: 'absolute', bottom: '15px', right: '90px', backgroundColor: '#e7bdb7',
                                         ':hover': {backgroundColor: '#e3ada5'}
