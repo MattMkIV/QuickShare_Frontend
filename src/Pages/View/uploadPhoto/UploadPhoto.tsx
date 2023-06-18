@@ -7,8 +7,6 @@ import {useState} from "react";
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import './UploadPhoto.css'
 import Button from "@mui/material/Button";
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import {createTheme, Fab, Grow, Menu, Modal, TextField, ThemeProvider, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {Alert, Divider, Fab, Grow, Menu, Snackbar, TextField, Typography} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -156,8 +154,6 @@ function UploadPhoto() {
             };
         }
     };
-
-    const [open, setOpen] = React.useState(false);
 
     const handleClickAlert = () => {
         setOpen(true);

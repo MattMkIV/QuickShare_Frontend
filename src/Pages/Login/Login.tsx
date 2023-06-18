@@ -6,7 +6,6 @@ import './Login.css'
 //JS
 //Other
 import { useNavigate } from "react-router-dom";
-import {Typography} from "@mui/material";
 import { useEffect } from 'react';
 import { checkJwt } from '../../Utils/AuthService';
 import {Box, Divider, Typography} from "@mui/material";

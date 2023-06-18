@@ -25,14 +25,6 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
 
     //Functions
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        //Take Value
-        let username = data.get('username');
-        let password = data.get('password');
-
-      //Functions
-      const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             let isError = false;
             const data = new FormData(event.currentTarget);
@@ -47,42 +39,21 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
 
         }
 
-      return(
-          <>
-            <Box component="form" onSubmit={handleSubmit}>
-              <CssTextField className="inputStyle" error={ErrorInput} name="username" sx={{input: {color: 'darkgrey'}}} label={firstLabel} variant="outlined"/>
-             
-              <CssTextField className="inputStyle" error={ErrorInput} name="password" type='password' sx={{input: {color: 'darkgrey'}}} label={secondLabel} variant="outlined"/>
-              <p><a className='forgotLink' onClick={() => navigate("/forgotPassword")}>Forgot your password?</a></p>
-              <div className='w3-row'>
-                <div className='w3-col l6'>
-                  <Button className='buttonGuest' type="submit" variant="contained">guest</Button>
-                </div>
-                <div className='w3-col l6'>
-                  <Button className='buttonSubmit' type="submit">Login</Button>
-                </div>
-              </div>
-        console.log("Username: " + username);
-        console.log("Password: " + password);
-
-        if (!isErrorInput) navigate("/homepage");
-        else setErrorInput(true);
-    }
-
-    return (
+    return(
         <>
             <Box sx={{
                 marginTop: '30px',
                 display: 'flex',
                 justifyContent: 'center',
             }}>
-                <Typography
-                    sx={{
-                        color: '#E9DEDC',
-                        fontSize: '27px',
-                        textAlign: 'center',
-                        fontFamily: 'Roboto Bold',
-                    }}>Login</Typography>
+                <Typography sx={{
+                    color: '#E9DEDC',
+                    fontSize: '27px',
+                    textAlign: 'center',
+                    fontFamily: 'Roboto Bold',
+                }}>
+                    Login
+                </Typography>
             </Box>
             <Box
                 component="form"
@@ -93,7 +64,8 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     pt: 4,
-                }}>
+                }}
+            >
 
                 <TextField
                     error={ErrorInput}
@@ -123,7 +95,8 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
                             height: '25px',
                         },
                         width: '380px',
-                    }}/>
+                    }}
+                    name="username"/>
 
                 <TextField
                     error={ErrorInput}
@@ -154,7 +127,9 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
                         },
                         marginTop: '30px',
                         width: '380px',
-                    }}/>
+                    }}
+                    name="password"
+                    />
 
                 <Box sx={{
                     width: '100%',
@@ -165,7 +140,6 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
                     marginTop: '60px',
                 }}>
                     <Button
-                        type='submit'
                         disableRipple
                         sx={{
                             width: '140px',

@@ -62,9 +62,9 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     },[]);
 
 
-    const handleSelectItem = (item: any) => {
-        setSelectedItem(item);
-    };
+    // const handleSelectItem = (item: any) => {
+    //     setSelectedItem(item);
+    // };
 
     const LightTooltip = styled(({className, ...props}: TooltipProps) => (
         <Tooltip {...props} classes={{popper: className}}/>))(({theme}) => ({
@@ -274,7 +274,8 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                             marginLeft: '5px',
                             marginRight: '5px',
                             ':hover': {backgroundColor: '#800507', cursor: 'pointer'}
-                        }}>
+                        }} 
+                        onClick = {() => logOut()}>
                         <Grid container>
                             <LoginIcon
                                 sx={{color: 'white', marginTop: '5px', marginLeft: '18px'}}></LoginIcon>
@@ -282,8 +283,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                                 color: 'white', fontFamily: 'Roboto Regular', fontSize: '15px',
                                 marginTop: '6px',
                                 marginLeft: '10px'
-                            }}
-                            onClick = {() => logOut()}>Log-out</Typography>
+                            }}>Log-out</Typography>
                         </Grid>
                     </Box>
                 </Grid>

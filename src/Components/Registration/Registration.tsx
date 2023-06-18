@@ -9,7 +9,7 @@ import './Registration.css'
 //Other
 import { useState } from 'react';
 import { registerNewUser } from '../../Utils/AuthService';
-import React, {useState} from 'react';
+import React from 'react';
 //Axios
 import {useNavigate} from 'react-router-dom';
 import {Typography} from "@mui/material";
@@ -62,32 +62,7 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
 
     /************************* Handle pages in registration *************************/
     const [secondPage, setSecondPage] = useState(false);
-
-      return(
-          <>
-              <Box component="form" onSubmit={handleSubmit}>
-                    <div className='w3-row inputStyle'>
-                        <div className='w3-col l6'>
-                            <CssTextField className="inputStyleName" error={ErrorInput} name="nome" label="Nome" variant="outlined"/>
-                        </div>
-                        <div className='w3-col l6'>
-                            <CssTextField className="inputStyleSurname" error={ErrorInput} name="cognome" label="Cognome" variant="outlined"/>
-                        </div>
-                    </div>
-                    <CssTextField className="inputStyle" type="text" error={ErrorInput} name="username" label="Username" variant="outlined"/>
-
-                    <CssTextField className="inputStyle" type="email" error={ErrorInput} name="email" label="Email" variant="outlined"/>
-                    <CssTextField className="inputStyle" error={ErrorInput} name="password" type='password' label="Password" variant="outlined"/>
-                    <CssTextField className="inputStyle" error={ErrorInput} name="confirmPassword" type='password' label="Confirm Password" variant="outlined"/>
-
-                    <Button className='buttonSignup'
-                        sx={{width : '90%', height : '60px', fontFamily : 'Roboto Black', color : '#ffdad5',
-                            fontSize : '17px', borderRadius : '18px', boxShadow : '0 0 20px 5px rgba(0, 0, 0, 0.13)',
-                            backgroundColor : '#920609', marginTop : '88px', marginLeft : '21px' }}
-                        type="submit">Signup</Button>
-              </Box>
-          </>    
-      );
+ 
     const isSecondPage = () => {
         setSecondPage(true);
     };
@@ -185,7 +160,8 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                         },
                         marginTop: '30px',
                         width: '380px',
-                    }}/>
+                    }}
+                    name="cognome"/>
 
                 <TextField
                     error={ErrorInput}
@@ -217,7 +193,8 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                         },
                         marginTop: '30px',
                         width: '380px',
-                    }}/>
+                    }}
+                    name="username"/>
 
 
                 <Box sx={{
@@ -290,7 +267,8 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                                 height: '25px',
                             },
                             width: '380px',
-                        }}/>
+                        }}
+                        name="email"/>
 
                     <TextField
                         error={ErrorInput}
@@ -322,7 +300,8 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                             },
                             marginTop: '30px',
                             width: '380px',
-                        }}/>
+                        }}
+                        name="password"/>
 
                     <TextField
                         error={ErrorInput}
@@ -354,7 +333,8 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                             },
                             marginTop: '30px',
                             width: '380px',
-                        }}/>
+                        }}
+                        name="confirmPassword"/>
 
 
                     <Box sx={{

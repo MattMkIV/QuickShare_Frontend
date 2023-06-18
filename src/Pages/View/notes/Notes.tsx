@@ -24,6 +24,7 @@ function Notes() {
 
         const takeNotes = async () => {
             let response:any = await TakeNote();
+            console.log(response);
 
             let allNotes = [];
             let currentDate = [];
@@ -65,7 +66,7 @@ function Notes() {
                 {notes.map((note:any, index:any) => ( 
                     <>
                         <Grid wrap='nowrap' sx={{display : 'flex', alignItems : 'center', justifyContent : 'flex-start'}}>
-                            <Typography sx={{fontFamily : 'Roboto Bold', fontSize : '12px', color : '#dfc38c', marginRight : '10px', marginLeft : '25px'}}>{note[index].create_date}</Typography>
+                            <Typography sx={{fontFamily : 'Roboto Bold', fontSize : '12px', color : '#dfc38c', marginRight : '10px', marginLeft : '25px'}}>{note[0].create_date}</Typography>
                             <hr className='dateLineCentralContent'></hr>
                         </Grid>
 

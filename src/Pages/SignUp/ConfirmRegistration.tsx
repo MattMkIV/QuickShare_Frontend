@@ -1,5 +1,4 @@
 
-import './SignUp.css';
 import { useNavigate } from "react-router-dom";
 import CheckIcon from '@mui/icons-material/Check';
 
