@@ -4,59 +4,73 @@ import Grid from "@mui/material/Grid";
 import {Box, Stack} from "@mui/material";
 import CardLayout from '../../../Components/homepage/NoteCardLayout'
 import ListCardLayout from '../../../Components/homepage/ListsCardLayout'
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { checkJwt } from '../../../Utils/AuthService';
+import { TakeList } from '../../../Utils/list_service';
+import { TakeNote } from '../../../Utils/note_service';
+import ListsCardLayout from '../../../Components/homepage/ListsCardLayout';
 
 function Home() {
+
+    let jwtError = false;
+    let navigate = useNavigate();
+    const [lists, setLists] = useState<any>([]);
+    const [notes, setNotes] = useState<any>([]);
+    const [previusDate, setPreviusDate ] = useState<String>("");
+
+    useEffect(() => {
+        const check = async () => {
+            jwtError = await checkJwt();
+            if(jwtError) navigate("/");
+        }
+
+        const takeLists = async () => {
+            let response:any = await TakeList();
+            console.log(response);
+
+            setLists(response);
+        }   
+
+        const takeNotes = async () => {
+            let response:any = await TakeNote();
+            console.log(response);
+
+            setNotes(response);
+        }   
+
+        check();
+        takeLists();
+        takeNotes();
+    }, []);
+
     //Render
     return (
         <>
             <Box className='homeBox'>
                 <Grid container>
-                    <h1 className='titleSection'>Most Recent:</h1>
+                    <h1 className='titleSection'>Most Recent Notes:</h1>
                 </Grid>
 
                 <Grid className='cardSliderHomePage'>
-                    <Stack spacing={5} direction="row">
-                        {/* <CardLayout></CardLayout>
-                        <ListCardLayout></ListCardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <ListCardLayout></ListCardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout> */}
+                    <Stack direction="row" spacing={5}>
+                        {notes.slice(0, 4).map((n:any, i:any) => (                    
+                            <CardLayout key={i} title={n.title} noteId={n.note_id} createData={n.create_date} body={n.body} allowed={n.allowed}></CardLayout>
+                        ))} 
                     </Stack>
                 </Grid>
 
                 <hr className='lineCentralContent'></hr>
 
                 <Grid container>
-                    <h1 className='titleSection'>Notes:</h1>
+                    <h1 className='titleSection'>Most Recent Lists:</h1>
                 </Grid>
 
                 <Grid className='cardSliderHomePage'>
                     <Stack direction="row" spacing={5}>
-                        {/* <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout> */}
-                    </Stack>
-                </Grid>
-
-                <hr className='lineCentralContent'></hr>
-
-                <Grid container>
-                    <h1 className='titleSection'>Lists:</h1>
-                </Grid>
-
-                <Grid className='cardSliderHomePage'>
-                    <Stack direction="row" spacing={5}>
-                        {/* <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
-                        <CardLayout></CardLayout> */}
+                        {/* {lists.slice(0, 4).map((n:any, i:any) => (                    
+                            <ListsCardLayout key={i} title={n.title} list_id={n.list_id} create_date={n.create_date} allowed={n.allowed}></ListsCardLayout>
+                        ))} */}
                     </Stack>
                 </Grid>
             </Box>

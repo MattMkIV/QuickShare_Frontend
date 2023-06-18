@@ -112,6 +112,29 @@ function UploadPhoto() {
     //     window.location.reload();
     // }
 
+    const addAllowed = async (event: any) => {
+
+        let emailAllowedUser:any = [];
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        //Take Value
+
+        for(let i=0; i < textFields.length; i++) {
+            console.log(data.get('email'+i));
+            let response:any = await TakeUserInfoByEmail(data.get('email'+i));
+            console.log(response);
+            emailAllowedUser.push(response.id);
+        }
+        
+        let response:any = await TakeUserInfoAll(emailAllowedUser);
+
+        for(let i=0; i < response.length; i++) {
+            //let isError = await UpdateNote(titleNote, bodyNote, response[i].id, noteId);
+        }
+
+        window.location.reload();
+    }
+
     /************************* Menù pop up functions *************************/
     const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -153,6 +176,7 @@ function UploadPhoto() {
                 setUploadState("uploaded");
             };
         }
+        console.log(reader.result);
     };
 
     const handleClickAlert = () => {
@@ -374,6 +398,7 @@ function UploadPhoto() {
                                                         marginBottom: 1.2
                                                     }}
                                                     placeholder='Email'
+                                                    name={'email'+index}
                                                 />
                                                 <Button onClick={() => handleRemoveTextField(index)}
                                                         sx={{

@@ -140,7 +140,8 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
         //Take Value
 
         for(let i=0; i < textFields.length; i++) {
-            let response:any = await TakeUserInfoByEmail(data.get('nota'+i));
+            console.log(data.get('email'+i));
+            let response:any = await TakeUserInfoByEmail(data.get('email'+i));
             console.log(response);
             emailAllowedUser.push(response.id);
         }
@@ -511,6 +512,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                                         marginBottom: 1.2
                                                     }}
                                                     placeholder='Email'
+                                                    name={'email'+index}
                                                 />
                                                 <Button onClick={() => handleRemoveTextField(index)}
                                                         sx={{
@@ -560,7 +562,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                             fontSize: '14px',
                                             ':hover': {backgroundColor: '#c7ad7b'},
                                             color: '#201a19',
-                                        }} disableRipple>
+                                        }} disableRipple type="submit">
                                             Share!
                                         </Button>
                                     </Grid>

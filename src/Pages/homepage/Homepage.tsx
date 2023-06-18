@@ -252,7 +252,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                                 sx={{
                                     backgroundColor: '#008fdb', marginTop: '13px', marginLeft: '13px',
                                     height: '40px', width: '40px', fontSize: '25px'
-                                }}>M</Avatar>
+                                }}>G</Avatar>
                             <Grid>
                                 <Typography
                                     sx={{

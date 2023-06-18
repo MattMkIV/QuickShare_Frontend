@@ -22,7 +22,14 @@ import Home from "../../Pages/View/home/Home";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CheckIcon from '@mui/icons-material/Check';
 
-function ListCardLayout() {
+interface Props {
+    list_id: any,
+    title: any,
+    create_date: any,
+    allowed: any
+}
+
+function ListCardLayout({list_id, title, create_date, allowed}:Props) {
     /************************* Handle notes MouseEnter & MouseExit *************************/
     const [isHovered, setIsHovered] = React.useState(false);
 
@@ -128,7 +135,7 @@ function ListCardLayout() {
                                 },
                                 marginLeft: '-14px',
                             }}
-                            defaultValue='PROVA LISTA TITOLO'
+                            defaultValue={title}
                             onClick={handleTextFieldClick}>
                         </TextField>
                         <Grow in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={400}>
@@ -322,7 +329,7 @@ function ListCardLayout() {
                                         marginLeft: '5px',
                                         color: '#3f2e04'
                                     }}>
-                            19/03/2021
+                            {create_date}
                         </Typography>
 
                         <Divider sx={{

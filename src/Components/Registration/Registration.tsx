@@ -30,6 +30,34 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
     const navigate = useNavigate();
     let isErrorInput = false;
     const [ErrorInput, setErrorInput] = useState(false);
+    const[nome, setNome] = useState<any>();
+    const[cognome, setCognome] = useState<any>();
+    const[username, setUsername] = useState<any>();
+    const[email, setEmail] = useState<any>();
+    const[password, setPassword] = useState<any>();
+    const[confirmPassword, setConfirmPassword] = useState<any>();
+    
+
+    /************************* Handle pages in registration *************************/
+    const [secondPage, setSecondPage] = useState(false);
+ 
+    const isSecondPage = () => {
+        setSecondPage(true);
+    };
+
+    const notSecondPage = () => {
+        setSecondPage(false);
+    };
+
+
+    const takeValue = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        setNome(data.get('nome'));
+        setCognome(data.get('cognome'));
+        setUsername(data.get('username'));
+        isSecondPage();
+    }
 
       //Functions
       const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -37,9 +65,6 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
             let isError = false;
             const data = new FormData(event.currentTarget);
             //Take Value
-            let nome = data.get('nome');
-            let cognome = data.get('cognome');
-            let username = data.get('username');
             let email = data.get('email');
             let password = data.get('password');
             let confirmPassword = data.get('confirmPassword');
@@ -60,16 +85,6 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
 
       }
 
-    /************************* Handle pages in registration *************************/
-    const [secondPage, setSecondPage] = useState(false);
- 
-    const isSecondPage = () => {
-        setSecondPage(true);
-    };
-
-    const notSecondPage = () => {
-        setSecondPage(false);
-    };
 
     return (
         <>
@@ -88,7 +103,7 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
             </Box>
             {!secondPage ? <Box
                 component="form"
-                onSubmit={handleSubmit}
+                onSubmit={takeValue}
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -207,7 +222,7 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                 }}>
 
                     <Button
-                        onClick={isSecondPage}
+                        type="submit"
                         disableRipple
                         sx={{
                             width: '100px',
