@@ -11,7 +11,7 @@ interface props {
     navigateHome: boolean;
 }
 
-function Logo(this: any, { navigateHome }: props) {
+function Logo(this: any, {navigateHome}: props) {
     //Variable declaration
     const navigate = useNavigate();
 
@@ -20,24 +20,58 @@ function Logo(this: any, { navigateHome }: props) {
         navigate("/homepage");
     };
 
-    return(
-        <>  
+    return (
+        <>
             {navigateHome ? (
-                <Grid wrap='nowrap' lg={2} md={2} sx={{ display:{xs : 'none' , md : 'block'}, minWidth : '210px'}}>
-                    <img src={process.env.PUBLIC_URL + '/LogoHighRes.png'} alt='Logo img' className='logo'/>
+                <Grid
+                    wrap='nowrap'
+                    lg={2}
+                    md={2}
+                    sx={{
+                        display: {xs: 'none', md: 'block'},
+                        minWidth: '210px'
+                    }}>
+                    <img
+                        src={process.env.PUBLIC_URL + '/LogoHighRes.png'}
+                        alt='Logo img'
+                        className='logo'
+                        onClick={handleClick}/>
                     <Typography
-                        sx={{color: '#FF5C4D', position: 'absolute', marginTop : '10px', fontSize : '25px',
-                            marginLeft : '57px', fontFamily: 'Logo Font', textShadow : '0 0 5px #FF5C4DFF'}}
-                    >QUICK.SHARE</Typography>
+                        sx={{
+                            color: '#FF5C4D',
+                            position: 'absolute',
+                            marginTop: '10px',
+                            fontSize: '25px',
+                            marginLeft: '57px',
+                            fontFamily: 'Logo Font',
+                            textShadow: '0 0 5px #FF5C4DFF',
+                            ':hover': {cursor: 'pointer'}
+                        }}>QUICK.SHARE</Typography>
                 </Grid>
             ) : (
-                <Grid wrap='nowrap' lg={2} md={2} sx={{ display:{xs : 'none' , md : 'block'}, minWidth : '210px',
-                    backgroundColor : 'green'}}>
-                    <img src={process.env.PUBLIC_URL + '/LogoHighRes.png'} alt='Logo img' className='logo'/>
+                <Grid
+                    wrap='nowrap'
+                    lg={2}
+                    md={2}
+                    sx={{
+                        display: {xs: 'none', md: 'block'},
+                        minWidth: '210px',
+                    }}>
+                    <img
+                        src={process.env.PUBLIC_URL + '/LogoHighRes.png'}
+                        alt='Logo img'
+                        className='logo'
+                        onClick={handleClick}/>
                     <Typography
-                        sx={{color: '#FF5C4D', position: 'absolute', marginTop : '10px', fontSize : '25px',
-                            marginLeft : '57px', fontFamily: 'Logo Font', textShadow : '0 0 5px #FF5C4DFF'}}
-                    >QUICK.SHARE</Typography>
+                        sx={{
+                            color: '#FF5C4D',
+                            position: 'absolute',
+                            marginTop: '10px',
+                            fontSize: '25px',
+                            marginLeft: '57px',
+                            fontFamily: 'Logo Font',
+                            textShadow: '0 0 5px #FF5C4DFF'
+                        }}>QUICK.SHARE</Typography>
                 </Grid>
             )}
         </>

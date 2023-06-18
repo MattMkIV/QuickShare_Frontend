@@ -4,12 +4,13 @@ import ImageListItem from '@mui/material/ImageListItem';
 import Grid from "@mui/material/Grid";
 import * as React from "react";
 import {useState} from "react";
-
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import './UploadPhoto.css'
 import Button from "@mui/material/Button";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import {createTheme, Fab, Grow, Menu, Modal, TextField, ThemeProvider, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
+import {Alert, Divider, Fab, Grow, Menu, Snackbar, TextField, Typography} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from "@mui/icons-material/Info";
 import ShareIcon from "@mui/icons-material/Share";
@@ -18,33 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { checkJwt, TakeUserInfoAll, TakeUserInfoByEmail } from '../../../Utils/AuthService';
 import { AddAllowed, DeleteImage, TakeImage } from '../../../Utils/image_service';
 import AddIcon from "@mui/icons-material/Add";
-
-
-const customTheme = createTheme({
-    palette: {
-        primary: {
-            main: '#ba1a1a',
-        },
-        secondary: {
-            main: '#574419',
-        }
-    },
-});
-
-const StyledButton = styled(Button)`
-  ${({theme}) => `
-  cursor: pointer;
-  background-color: ${theme.palette.primary.main};
-  transition: ${theme.transitions.create(['background-color', 'transform'], {
-    duration: theme.transitions.duration.standard,
-  })};
-  &:hover {
-    background-color: ${theme.palette.secondary.main};
-    transform: scale(1.2);
-  }
-  `}
-`;
-
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 function UploadPhoto() {
     
@@ -166,6 +141,37 @@ function UploadPhoto() {
         setTextFields(updatedTextFields);
     };
 
+    /************************* Upload photo event *************************/
+    const [uploadState, setUploadState] = React.useState('initial');
+    const [image, setImage] = React.useState('');
+
+    const handleUploadClick = (event: any) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        if (file) {
+            reader.readAsDataURL(file);
+            reader.onloadend = function (e) {
+                setImage(`${reader.result}`);
+                setUploadState("uploaded");
+            };
+        }
+    };
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickAlert = () => {
+        setOpen(true);
+    };
+
+    const handleCloseAlert = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+
     //Render
     return (
         <>
@@ -210,6 +216,9 @@ function UploadPhoto() {
 
                                 <Menu
                                     id='delete'
+                                    MenuListProps={{
+                                        'aria-labelledby': 'delete',
+                                    }}
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl && menuId === 'delete' && selectedItemIndex === index)}
                                     onClose={(event) => {
@@ -232,7 +241,8 @@ function UploadPhoto() {
                                             borderRadius: '22px',
                                             backgroundColor: '#ffb4aa',
                                         }
-                                    }}>
+                                    }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                                >
                                     <Typography sx={{
                                         fontFamily: 'Roboto Black',
                                         fontSize: '17px',
@@ -253,7 +263,12 @@ function UploadPhoto() {
                                                 fontSize: '15px',
                                                 marginTop: '10px',
                                                 ':hover': {backgroundColor: '#49302b'}
-                                            }} disableRipple>No</Button>
+                                            }}
+                                                    disableRipple
+                                                    onClick={() => {
+                                                        handleClose();
+                                                    }}
+                                            >No</Button>
                                             <Button sx={{
                                                 boxShadow: 8,
                                                 height: '45px',
@@ -287,6 +302,9 @@ function UploadPhoto() {
 
                                 <Menu
                                     id='share'
+                                    MenuListProps={{
+                                        'aria-labelledby': 'share',
+                                    }}
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl && menuId === 'share' && selectedItemIndex === index)}
                                     onClose={(event) => {
@@ -310,7 +328,8 @@ function UploadPhoto() {
                                             backgroundColor: '#e7bdb7',
                                             overflowY: 'hidden'
                                         }
-                                    }}>
+                                    }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                                >
                                     <Typography sx={{
                                         fontFamily: 'Roboto Black',
                                         fontSize: '17px',
@@ -355,11 +374,9 @@ function UploadPhoto() {
                                                             fontSize: '15px !important',
                                                             height: '5px',
                                                             width: '202px',
-                                                            boxShadow: 4,
                                                         },
                                                         marginBottom: 1.2
                                                     }}
-                                                    type='email'
                                                     placeholder='Email'
                                                 />
                                                 <Button onClick={() => handleRemoveTextField(index)}
@@ -388,6 +405,8 @@ function UploadPhoto() {
                                         pr: 1.2
                                     }}>
                                         <Button sx={{
+                                            border: 1,
+                                            borderColor: '#7a9a65',
                                             minWidth: '40px',
                                             height: '40px',
                                             boxShadow: 8,
@@ -404,7 +423,7 @@ function UploadPhoto() {
                                             boxShadow: 8,
                                             backgroundColor: '#dfc38c',
                                             borderRadius: '30px',
-                                            fontFamily: 'Roboto Regular',
+                                            fontFamily: 'Roboto Bold',
                                             fontSize: '14px',
                                             ':hover': {backgroundColor: '#c7ad7b'},
                                             color: '#201a19',
@@ -432,7 +451,10 @@ function UploadPhoto() {
                                 </Grow>
 
                                 <Menu
-                                    id='info'
+                                    id="info"
+                                    MenuListProps={{
+                                        'aria-labelledby': 'info',
+                                    }}
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl && menuId === 'info' && selectedItemIndex === index)}
                                     onClose={(event) => {
@@ -456,7 +478,8 @@ function UploadPhoto() {
                                             backgroundColor: '#dfc38c',
                                             overflowY: 'hidden'
                                         }
-                                    }}>
+                                    }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
+                                >
                                     <Typography component="span" display="inline-block"
                                                 sx={{
                                                     fontFamily: 'Roboto Black',
@@ -469,13 +492,23 @@ function UploadPhoto() {
                                     </Typography>
                                     <Typography component="span" display="inline-block" whiteSpace="nowrap"
                                                 sx={{
-                                                    fontFamily: 'Roboto Regular',
+                                                    fontFamily: 'Roboto Light',
                                                     fontSize: '17px',
-                                                    marginLeft: '5px',
+                                                    marginLeft: '10px',
                                                     color: '#3f2e04'
                                                 }}>
                                         {photo.upload_data}
                                     </Typography>
+
+                                    <Divider sx={{
+                                        width: '220px',
+                                        marginTop: '5px',
+                                        boxShadow: 24,
+                                        position: 'absolute',
+                                        borderColor: 'rgba(63,46,4,0.38)',
+                                        marginLeft: '15px'
+                                    }}/>
+
                                     <Typography sx={{
                                         fontFamily: 'Roboto Black',
                                         fontSize: '17px',
@@ -528,22 +561,42 @@ function UploadPhoto() {
                                         ))}
                                     </Box>
                                 </Menu>
-
                             </ImageListItem>
                         ))}
                     </ImageList>
+                    <Button
+                        component="label"
+                        sx={{
+                            width: '80px',
+                            height: '80px',
+                            position: 'fixed',
+                            bottom: 45,
+                            right: 45,
+                            borderRadius: '90px',
+                            boxShadow: 24,
+                            backgroundColor: '#ba1a1a',
+                            ':hover': {backgroundColor: '#690003', transform: 'scale(1.1)'}
+                        }}
+                        disableRipple
+                        onClick={handleClickAlert}>
 
-                    <ThemeProvider theme={customTheme}>
-                        <StyledButton className='uploadButton'
-                                      style={{width: '70px', height: '70px'}}
-                                      type="submit"
-                                      variant="contained"
-                                      startIcon={<FileUploadIcon/>}
-                                      sx={{position: 'fixed', bottom: 45, right: 45}}>
+                        <FileUploadIcon sx={{color: '#ffdad5', height: '30px', width: '30px'}}/>
 
-                            <input type="file" hidden/>
-                        </StyledButton>
-                    </ThemeProvider>
+                        <input type='file' accept='image/png,image/jpeg,image/jpg' onChange={handleUploadClick} hidden/>
+                    </Button>
+
+                    <Snackbar open={open} autoHideDuration={4000} onClose={handleCloseAlert}>
+                        <Alert elevation={24} onClose={handleCloseAlert} severity="success"
+                               sx={{
+                                   backgroundColor: '#8fb677',
+                                   borderRadius: '18px',
+                                   color: '#201a19',
+                                   fontFamily: 'Roboto Regular'
+                               }}
+                               icon={<TaskAltIcon sx={{color: '#201a19'}}/>}>
+                            Photo added correctly!
+                        </Alert>
+                    </Snackbar>
                 </Box>
             </Box>
         </>

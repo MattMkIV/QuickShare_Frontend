@@ -183,37 +183,21 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
         <>
             <Card className='cardsLayout'
                   onMouseEnter={(event) => {
-                      {
-                          handleMouseEnter();
-                          retardTransitionTrue()
-                      }
-                  }} onMouseLeave={(event) => {
-                {
-                    handleMouseLeave();
-                    retardTransitionFalse()
-                }
-            }} sx={{boxShadow: 8}}>
+                      handleMouseEnter();
+                      retardTransitionTrue()
+                  }}
+                  onMouseLeave={(event) => {
+                      handleMouseLeave();
+                      retardTransitionFalse()
+                  }}
+                  sx={{boxShadow: 8}}>
                 <CardContent sx={{m: -1}}>
                     <TextField
                         inputProps={{
                             sx: {color: '#442926 !important'}
                         }}
                         sx={{
-                            '& .MuiInput-underline': {
-                                borderBottomColor: 'transparent',
-                            },
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: 'transparent',
-                                    borderRadius: '22px',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: 'transparent',
-                                },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: 'transparent',
-                                },
-                            },
+                            '& fieldset': {border: 'none'},
                             '& .MuiInputBase-input': {
                                 fontFamily: 'Roboto Black',
                                 fontSize: '30px !important',
@@ -654,7 +638,13 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                             fontSize: '15px',
                                             marginTop: '10px',
                                             ':hover': {backgroundColor: '#49302b'}
-                                        }} disableRipple>No</Button>
+                                        }}
+                                                disableRipple
+                                                onClick={() => {
+                                                    handleClose();
+                                                    closeMenu()
+                                                }}
+                                        >No</Button>
                                         <Button sx={{
                                             boxShadow: 8,
                                             height: '45px',

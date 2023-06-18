@@ -20,7 +20,7 @@ function Home() {
                         <ListCardLayout></ListCardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
-                        <CardLayout></CardLayout>
+                        <ListCardLayout></ListCardLayout>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout> */}
                     </Stack>
