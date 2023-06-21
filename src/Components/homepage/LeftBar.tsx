@@ -21,7 +21,8 @@ import Grid from "@mui/material/Grid";
 import {AddPhotoAlternate} from '@mui/icons-material';
 import {useNavigate} from "react-router-dom";
 import Card from "@mui/material/Card";
-import {DatePicker, DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import {DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
 

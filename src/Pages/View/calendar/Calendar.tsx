@@ -6,6 +6,9 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import {createTheme} from "@mui/material";
+import {red} from "@mui/material/colors";
 
 function Calendar() {
     //const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().getFullYear()+'-'+(new Date().getMonth()+1+'-'+new Date().getDate())));
@@ -21,7 +24,7 @@ function Calendar() {
     //                         />
     //                     </LocalizationProvider>
 
-
+    const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
 
     //Render
     return (
@@ -33,8 +36,19 @@ function Calendar() {
 
                 <hr className='lineCentralContent'></hr>
 
-                <Box sx={{width: '100%', height : '100%'}}>
+                <Box sx={{width: '100%', height : '100%', backgroundColor:'darkolivegreen'}}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DateTimePicker
+                            formatDensity="spacious"
+                            slotProps={{ textField: {  size: 'small',  } }}
+                            label="DateTimePicker"
+                            value={value}
+                            onChange={(newValue) => {
+                                setValue(newValue);
+                            }}
 
+                        />
+                    </LocalizationProvider>
                 </Box>
             </Box>
         </>
