@@ -126,9 +126,9 @@ export async function DeleteNote(noteId) {
     let UserId = jwtDecode.user_id;
 
     await axios.delete(urls.serverURL + '/note/' + UserId, {
-
-        "note_id": parseInt(noteId),
-    }, {
+        data: {
+            "note_id": noteId,
+        },
         headers: {
             'Content-Type': 'application/json',
         }

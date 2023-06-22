@@ -26,7 +26,7 @@ function Notes() {
             let response:any = await TakeList();
             console.log(response);
 
-            let allNotes = [];
+            let allLists = [];
             let currentDate = [];
             let previusDate = "0000-00-00";
 
@@ -39,16 +39,18 @@ function Notes() {
                     previusDate = response[i].create_date;
                 } else {
                     if(i !== 0)
-                        allNotes.push(currentDate);
+                    allLists.push(currentDate);
                     
                     currentDate = [];
                     currentDate.push(response[i]);
                     previusDate = response[i].create_date;
                 }
             }
-            allNotes.push(currentDate);
-            console.log(allNotes);
-            setLists(allNotes);
+            allLists.push(currentDate);
+            console.log("------------------------------");
+            console.log(allLists);
+            console.log("------------------------------");
+            setLists(allLists);
         }   
 
         check();
@@ -74,7 +76,7 @@ function Notes() {
                             <Stack spacing={5} direction="row">
                                 {list.map((n:any, i:any) => (                    
                                     <ListsCardLayout key={i} title={n.title} list_id={n.list_id} create_date={n.create_date} allowed={n.allowed}></ListsCardLayout>
-                                ))} 
+                                ))}
                             </Stack>
                         </Grid>
                     </>

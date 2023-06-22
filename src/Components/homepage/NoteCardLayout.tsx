@@ -117,8 +117,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
 
         let isError = await DeleteNote(noteId);
 
-        if(isError)
-            console.log("Errore aggiornamento nota");
+        window.location.reload();
     }
 
     // aggiornamento testi
@@ -140,9 +139,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
         //Take Value
 
         for(let i=0; i < textFields.length; i++) {
-            console.log(data.get('email'+i));
             let response:any = await TakeUserInfoByEmail(data.get('email'+i));
-            console.log(response);
             emailAllowedUser.push(response.id);
         }
         
@@ -182,7 +179,8 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
 
     return (
         <>
-            <Card className='cardsLayout'
+            <Card
+                  className='cardsLayout'
                   onMouseEnter={(event) => {
                       handleMouseEnter();
                       retardTransitionTrue()
@@ -229,7 +227,6 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                             '& fieldset': {border: 'none'},
                             '& .MuiInputBase-input': {fontFamily: 'Roboto Light', fontSize: '20px !important'}
                         }}
-                        defaultValue={body}
                         value={bodyNote}
                         onChange={handleChangeBody}
                         onClick={handleTextFieldClick}
@@ -512,6 +509,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                                         marginBottom: 1.2
                                                     }}
                                                     placeholder='Email'
+                                                    type='email'
                                                     name={'email'+index}
                                                 />
                                                 <Button onClick={() => handleRemoveTextField(index)}

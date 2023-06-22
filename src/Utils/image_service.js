@@ -64,7 +64,7 @@ export async function DeleteImage(imageId) {
     return false;
 }
 
-export async function AddAllowed(imageId, allowedUserId) {
+export async function AddAllowedPhoto(imageId, allowedUserId) {
 
     const responseData = [];
     let jwt = localStorage.getItem("jwt");
@@ -74,10 +74,9 @@ export async function AddAllowed(imageId, allowedUserId) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 
     await axios.put(urls.serverURL + '/image/' + UserId, {
-        data: {
-            "image_id": parseInt(imageId),
-            "new_user_id": parseInt(allowedUserId),
-        },
+        "image_id": parseInt(imageId),
+        "new_user_id": parseInt(allowedUserId),
+
     }, {
         headers: {
             'Content-Type': 'application/json',

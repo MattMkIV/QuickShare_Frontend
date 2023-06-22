@@ -1,10 +1,11 @@
 import {styled} from "@mui/material/styles";
 import {Checkbox, CheckboxProps, Grow, IconButton, List, ListItem, ListItemButton, ListItemIcon} from "@mui/material";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
+import { DeleteListElement, TakeListElement, UpdateListElement } from "../../Utils/list_service";
 
 const BpIcon = styled('span')(({theme}) => ({
     borderRadius: 4,
@@ -66,27 +67,22 @@ function BpCheckbox(props: CheckboxProps) {
     );
 }
 
-function ListsCheckBoxComponent() {
-    const [checked, setChecked] = React.useState([0]);
+interface Props {
+    listId: any
+}
 
-    const handleToggle = (value: number) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
+function ListsCheckBoxComponent({listId}: Props) {
+    const [checked, setChecked] = useState([0]);
+    const [items, setItems] = useState([]);
 
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
+    useEffect(() => {
+        const takeLists = async () => {
+            let response:any = await TakeListElement(listId);
+            setItems(response);
+        }   
 
-        setChecked(newChecked);
-    };
-    const [items, setItems] = React.useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-    const handleDelete = (index: number) => {
-        const newItems = [...items];
-        newItems.splice(index, 1);
-        setItems(newItems);
-    };
+        takeLists();
+    }, []);
 
     /************************* Handle trash animations *************************/
     const [hoveredIndex, setHoveredIndex] = useState(-1);
@@ -98,6 +94,18 @@ function ListsCheckBoxComponent() {
         setHoveredIndex(-1);
     };
 
+    // Set do
+    const setDo = (listElementId:any, doCurrent:any, description:any) => {
+        UpdateListElement(listId, listElementId, !doCurrent, description);
+        window.location.reload();
+    }
+
+    // Delete Element
+    const deleteElement = (listElementId:any) => {
+        DeleteListElement(listId, listElementId);
+        window.location.reload();
+    }
+
     return (
         <>
             <Grid wrap='nowrap'
@@ -106,7 +114,7 @@ function ListsCheckBoxComponent() {
                       marginBottom: '-2px'
                   }}>
                 <List sx={{width: '100%', maxWidth: 360, bgcolor: '#ede0de'}}>
-                    {items.map((value) => {
+                    {items.map((value:any, index:any) => {
                         const labelId = `checkbox-list-label-${value}`;
                         return (
                             <ListItem
@@ -120,14 +128,13 @@ function ListsCheckBoxComponent() {
                                 secondaryAction={
                                     <Grow in={hoveredIndex === value} mountOnEnter unmountOnExit timeout={200}>
                                         <IconButton edge="end" aria-label="comments"
-                                                    onClick={() => handleDelete(value)}>
+                                                    onClick={() => deleteElement(value.list_element_id)}>
                                             <DeleteIcon sx={{width: '20px', height: '20px', color: '#442926'}}/>
                                         </IconButton>
                                     </Grow>
                                 }
-
                                 disablePadding>
-                                <ListItemButton role={undefined} onClick={handleToggle(value)} dense
+                                <ListItemButton role={undefined} onClick={() => setDo(value.list_element_id, value.do, value.description)} dense
                                                 sx={{
                                                     height: '40px',
                                                     borderRadius: '22px',
@@ -137,7 +144,7 @@ function ListsCheckBoxComponent() {
                                     <ListItemIcon>
                                         <BpCheckbox
                                             edge="start"
-                                            checked={checked.indexOf(value) !== -1}
+                                            checked={value.do}
                                             tabIndex={-1}
                                             disableRipple
                                             inputProps={{'aria-labelledby': labelId}}
@@ -162,7 +169,7 @@ function ListsCheckBoxComponent() {
                                         }}
                                         disabled
                                         id={labelId}
-                                        defaultValue={`Line item ${value + 1}`}
+                                        defaultValue={value.description}
                                         type='text'
                                     />
                                 </ListItemButton>

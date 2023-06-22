@@ -54,8 +54,8 @@ function Home() {
 
                 <Grid className='cardSliderHomePage'>
                     <Stack direction="row" spacing={5}>
-                        {notes.slice(0, 4).map((n:any, i:any) => (                    
-                            <CardLayout key={i} title={n.title} noteId={n.note_id} createData={n.create_date} body={n.body} allowed={n.allowed}></CardLayout>
+                        {notes.slice(0, 4).map((n:any, index:any) => (                    
+                            <CardLayout key={index} title={n.title} noteId={n.note_id} createData={n.create_date} body={n.body} allowed={n.allowed}></CardLayout>
                         ))} 
                     </Stack>
                 </Grid>
@@ -68,9 +68,9 @@ function Home() {
 
                 <Grid className='cardSliderHomePage'>
                     <Stack direction="row" spacing={5}>
-                        {/* {lists.slice(0, 4).map((n:any, i:any) => (                    
+                        {lists.slice(0, 4).map((n:any, i:any) => (                    
                             <ListsCardLayout key={i} title={n.title} list_id={n.list_id} create_date={n.create_date} allowed={n.allowed}></ListsCardLayout>
-                        ))} */}
+                        ))}
                     </Stack>
                 </Grid>
             </Box>

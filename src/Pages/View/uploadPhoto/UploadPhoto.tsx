@@ -15,7 +15,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkJwt, TakeUserInfoAll, TakeUserInfoByEmail } from '../../../Utils/AuthService';
-import { AddAllowed, DeleteImage, TakeImage } from '../../../Utils/image_service';
+import { AddAllowedPhoto, DeleteImage, TakeImage } from '../../../Utils/image_service';
 import AddIcon from "@mui/icons-material/Add";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 
@@ -28,7 +28,6 @@ function UploadPhoto() {
     const [open, setOpen] = useState(false);
     const [clickedImage, setClickedImage] = useState();
     
-
     useEffect(() => {
         const check = async () => {
             jwtError = await checkJwt();
@@ -68,49 +67,11 @@ function UploadPhoto() {
         setHoveredIndex(-1);
     };
 
-    const askDeleteImage = async (imageId: any) => {
-        console.log("IMAGE ID: "+imageId);
-        setOpen(true);
-        setClickedImage(imageId);
-        //let isError = await DeleteImage(imageId);
-    }
-
     const deleteImage = async (imageId: any) => {
         console.log("IMAGE ID: "+imageId);
         let isError = await DeleteImage(imageId);
+        window.location.reload();
     }
-
-    // const addAllowed = async (imageId: any, allowedUserEmail:any) => {
-    //     console.log(imageId);
-    //     console.log(allowedUserEmail);
-    //     let userInfo:any = await TakeUserInfoByEmail(allowedUserEmail);
-    //     console.log("ID by EMAIL: " + userInfo.id);
-    //     let isError = await AddAllowed(imageId, userInfo.id);
-    //     console.log(isError);
-    // }
-
-     // metodo per aggiungere "allowed" alla nota
-    // const addAllowed = async (event: any) => {
-
-    //     let emailAllowedUser:any = [];
-    //     event.preventDefault();
-    //     const data = new FormData(event.currentTarget);
-    //     //Take Value
-
-    //     for(let i=0; i < textFields.length; i++) {
-    //         let response:any = await TakeUserInfoByEmail(data.get('person'+i));
-    //         console.log(response);
-    //         emailAllowedUser.push(response.id);
-    //     }
-        
-    //     let response:any = await TakeUserInfoAll(emailAllowedUser);
-
-    //     for(let i=0; i < response.length; i++) {
-    //         let isError = await AddAllowed(titleNote, bodyNote, response[i].id, noteId);
-    //     }
-
-    //     window.location.reload();
-    // }
 
     const addAllowed = async (event: any) => {
 
@@ -120,16 +81,15 @@ function UploadPhoto() {
         //Take Value
 
         for(let i=0; i < textFields.length; i++) {
-            console.log(data.get('email'+i));
             let response:any = await TakeUserInfoByEmail(data.get('email'+i));
-            console.log(response);
             emailAllowedUser.push(response.id);
         }
         
         let response:any = await TakeUserInfoAll(emailAllowedUser);
+        let imageId = data.get('image_id');
 
         for(let i=0; i < response.length; i++) {
-            //let isError = await UpdateNote(titleNote, bodyNote, response[i].id, noteId);
+            let isError = await AddAllowedPhoto(imageId, response[i].id);
         }
 
         window.location.reload();
@@ -190,7 +150,6 @@ function UploadPhoto() {
 
         setOpen(false);
     };
-
 
     //Render
     return (
@@ -301,7 +260,8 @@ function UploadPhoto() {
                                                 marginLeft: '20px',
                                                 marginTop: '10px',
                                                 ':hover': {backgroundColor: '#7e0508'}
-                                            }} disableRipple>Yes</Button>
+                                            }} disableRipple
+                                            onClick={() => deleteImage(photo.image_id)}>Yes</Button>
                                         </Grid>
                                     </Box>
                                 </Menu>
@@ -349,109 +309,113 @@ function UploadPhoto() {
                                             overflowY: 'hidden'
                                         }
                                     }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
-                                >
-                                    <Typography sx={{
-                                        fontFamily: 'Roboto Black',
-                                        fontSize: '17px',
-                                        marginLeft: '15px',
-                                        marginTop: '5px',
-                                        color: '#3f2e04',
-                                    }}>Share with:</Typography>
-                                    <Box sx={{
-                                        width: '100%',
-                                        height: '220px',
-                                        borderRadius: '22px',
-                                        backgroundColor: '#eaa79d',
-                                        pl: 1.2, pr: 1.2, pt: 1.2,
-                                        overflowY: 'scroll',
-                                    }}>
-                                        {textFields.map((textField, index) => (
-                                            <div key={index} style={{display: 'flex'}}>
-                                                <TextField
-                                                    inputProps={{
-                                                        sx: {color: '#3f2e04 !important'}
-                                                    }}
-                                                    sx={{
-                                                        '& .MuiInput-underline': {
-                                                            borderBottomColor: 'transparent',
-                                                        },
-                                                        '& .MuiOutlinedInput-root': {
-                                                            '& fieldset': {
-                                                                borderColor: '#3f2e04',
-                                                                borderRadius: '18px',
-                                                            },
-                                                            '&:hover fieldset': {
-                                                                borderColor: '#3f2e04',
-                                                            },
-                                                            '&.Mui-focused fieldset': {
-                                                                borderColor: '#3f2e04',
-                                                                borderWidth: '2px',
-                                                            },
-                                                        },
-                                                        '& .MuiInputBase-input': {
-                                                            borderRadius: '18px',
-                                                            fontFamily: 'Roboto Regular',
-                                                            fontSize: '15px !important',
-                                                            height: '5px',
-                                                            width: '202px',
-                                                        },
-                                                        marginBottom: 1.2
-                                                    }}
-                                                    placeholder='Email'
-                                                    name={'email'+index}
-                                                />
-                                                <Button onClick={() => handleRemoveTextField(index)}
-                                                        sx={{
-                                                            backgroundColor: '#920609',
-                                                            height: '30px',
-                                                            minWidth: '30px',
-                                                            borderRadius: '22px',
-                                                            marginLeft: '10px',
-                                                            marginTop: '3px',
-                                                            boxShadow: 4,
-                                                            ':hover': {backgroundColor: '#9f3a3c'}
+                                >   
+                                    <form onSubmit={addAllowed}>
+                                        <Typography sx={{
+                                            fontFamily: 'Roboto Black',
+                                            fontSize: '17px',
+                                            marginLeft: '15px',
+                                            marginTop: '5px',
+                                            color: '#3f2e04',
+                                        }}>Share with:</Typography>
+                                        <Box sx={{
+                                            width: '100%',
+                                            height: '220px',
+                                            borderRadius: '22px',
+                                            backgroundColor: '#eaa79d',
+                                            pl: 1.2, pr: 1.2, pt: 1.2,
+                                            overflowY: 'scroll',
+                                        }}>
+                                            {textFields.map((textField, index) => (
+                                                <div key={index} style={{display: 'flex'}}>
+                                                    <TextField
+                                                        inputProps={{
+                                                            sx: {color: '#3f2e04 !important'}
                                                         }}
-                                                        disableRipple>
-                                                    <DeleteIcon sx={{height: '15px', width: '15px', color: '#ffb4aa'}}/>
-                                                </Button>
-                                            </div>
-                                        ))}
-                                    </Box>
-                                    <Grid sx={{
-                                        width: '100%',
-                                        marginTop: '10px',
-                                        display: 'flex',
-                                        justifyContent: 'flex-end',
-                                        alignContent: 'center',
-                                        pr: 1.2
-                                    }}>
-                                        <Button sx={{
-                                            border: 1,
-                                            borderColor: '#7a9a65',
-                                            minWidth: '40px',
-                                            height: '40px',
-                                            boxShadow: 8,
-                                            backgroundColor: '#8fb677',
-                                            borderRadius: '30px',
-                                            ':hover': {backgroundColor: '#7a9a65'}
-                                        }} disableRipple onClick={handleAddTextField}>
-                                            <AddIcon sx={{color: '#201a19'}}></AddIcon>
-                                        </Button>
-                                        <Button sx={{
-                                            minWidth: '90px',
-                                            height: '40px',
-                                            marginLeft: '92px',
-                                            boxShadow: 8,
-                                            backgroundColor: '#dfc38c',
-                                            borderRadius: '30px',
-                                            fontFamily: 'Roboto Bold',
-                                            fontSize: '14px',
-                                            ':hover': {backgroundColor: '#c7ad7b'},
-                                            color: '#201a19',
-                                        }} disableRipple>
-                                            Share!
-                                        </Button>
-                                    </Grid>
+                                                        sx={{
+                                                            '& .MuiInput-underline': {
+                                                                borderBottomColor: 'transparent',
+                                                            },
+                                                            '& .MuiOutlinedInput-root': {
+                                                                '& fieldset': {
+                                                                    borderColor: '#3f2e04',
+                                                                    borderRadius: '18px',
+                                                                },
+                                                                '&:hover fieldset': {
+                                                                    borderColor: '#3f2e04',
+                                                                },
+                                                                '&.Mui-focused fieldset': {
+                                                                    borderColor: '#3f2e04',
+                                                                    borderWidth: '2px',
+                                                                },
+                                                            },
+                                                            '& .MuiInputBase-input': {
+                                                                borderRadius: '18px',
+                                                                fontFamily: 'Roboto Regular',
+                                                                fontSize: '15px !important',
+                                                                height: '5px',
+                                                                width: '202px',
+                                                            },
+                                                            marginBottom: 1.2
+                                                        }}
+                                                        placeholder='Email'
+                                                        name={'email'+index}
+                                                    />
+                                                    <input type="hidden" name="image_id" value={photo.image_id}/>
+                                                    <Button onClick={() => handleRemoveTextField(index)}
+                                                            sx={{
+                                                                backgroundColor: '#920609',
+                                                                height: '30px',
+                                                                minWidth: '30px',
+                                                                borderRadius: '22px',
+                                                                marginLeft: '10px',
+                                                                marginTop: '3px',
+                                                                boxShadow: 4,
+                                                                ':hover': {backgroundColor: '#9f3a3c'}
+                                                            }}
+                                                            disableRipple>
+                                                        <DeleteIcon sx={{height: '15px', width: '15px', color: '#ffb4aa'}}/>
+                                                    </Button>
+                                                </div>
+                                            ))}
+                                        </Box>
+                                        <Grid sx={{
+                                            width: '100%',
+                                            marginTop: '10px',
+                                            display: 'flex',
+                                            justifyContent: 'flex-end',
+                                            alignContent: 'center',
+                                            pr: 1.2
+                                        }}>
+                                            <Button sx={{
+                                                border: 1,
+                                                borderColor: '#7a9a65',
+                                                minWidth: '40px',
+                                                height: '40px',
+                                                boxShadow: 8,
+                                                backgroundColor: '#8fb677',
+                                                borderRadius: '30px',
+                                                ':hover': {backgroundColor: '#7a9a65'}
+                                            }} disableRipple onClick={handleAddTextField}>
+                                                <AddIcon sx={{color: '#201a19'}}></AddIcon>
+                                            </Button>
+                                            <Button sx={{
+                                                minWidth: '90px',
+                                                height: '40px',
+                                                marginLeft: '92px',
+                                                boxShadow: 8,
+                                                backgroundColor: '#dfc38c',
+                                                borderRadius: '30px',
+                                                fontFamily: 'Roboto Bold',
+                                                fontSize: '14px',
+                                                ':hover': {backgroundColor: '#c7ad7b'},
+                                                color: '#201a19',
+                                            }} disableRipple
+                                            type="submit">
+                                                Share!
+                                            </Button>
+                                        </Grid>
+                                    </form>
                                 </Menu>
 
                                 <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={400}>
