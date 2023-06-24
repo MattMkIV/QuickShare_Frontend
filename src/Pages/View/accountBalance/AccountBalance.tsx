@@ -473,13 +473,40 @@ function AccountBalance() {
                                 views={['day', 'month', 'year']}
                                 formatDensity="spacious"
                                 slotProps={{textField: {size: 'small',}}}
-                                label="DateTimePicker"
                                 value={value}
                                 onChange={(newValue) => {
                                     setValue(newValue);
                                 }}
-                                sx={{width: '200px', marginLeft: '20px', boxShadow: 3, borderRadius: '5px !important'}}
+                                sx={{
+                                    width: '200px',
+                                    marginLeft: '20px',
+                                    boxShadow: 3,
+                                    borderRadius: '5px !important',
 
+                                    '& .MuiInput-underline': {
+                                        borderBottomColor: 'transparent',
+                                    },
+                                    '& .MuiFormLabel-root': {
+                                        color: '#3f2e04',
+                                    },
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: '#3f2e04',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: '#3f2e04',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#3f2e04',
+                                            borderWidth: '2px',
+                                        },
+                                    },
+                                    '& .MuiInputBase-input': {
+                                        borderRadius: '18px',
+                                        fontFamily: 'Roboto Regular',
+                                        fontSize: '16px !important',
+                                    },
+                                }}
                             />
                         </LocalizationProvider>
                     </Grid>

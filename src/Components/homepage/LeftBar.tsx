@@ -12,7 +12,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Box, CardContent, Dialog, DialogContent, Grow, IconButton, TextField, Typography} from "@mui/material";
+import {Box, CardContent, Dialog, DialogContent, IconButton, Slide, TextField, Typography} from "@mui/material";
 
 //CSS
 import './LeftBar.css';
@@ -21,10 +21,10 @@ import Grid from "@mui/material/Grid";
 import {AddPhotoAlternate} from '@mui/icons-material';
 import {useNavigate} from "react-router-dom";
 import Card from "@mui/material/Card";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import {DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import {LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs';
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -224,10 +224,55 @@ function SimpleDialog(props: SimpleDialogProps) {
 
                                     <hr className='littleSeparationLine'></hr>
 
-                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <DatePicker/>
-                                    </LocalizationProvider>
-
+                                    <Grid sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        height: '65px'
+                                    }}>
+                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            <DatePicker
+                                                format="DD/MM/YYYY"
+                                                views={['day', 'month', 'year']}
+                                                formatDensity="spacious"
+                                                slotProps={{textField: {size: 'small',}}}
+                                                value={value}
+                                                onChange={(newValue) => {
+                                                    setValue(newValue);
+                                                }}
+                                                sx={{
+                                                    width: '235px',
+                                                    height: '40px',
+                                                    boxShadow: 3,
+                                                    borderRadius: '5px !important',
+                                                    backgroundColor: '#a08c8a',
+                                                    '& .MuiInput-underline': {
+                                                        borderBottomColor: 'transparent',
+                                                    },
+                                                    '& .MuiFormLabel-root': {
+                                                        color: '#3f2e04',
+                                                    },
+                                                    '& .MuiOutlinedInput-root': {
+                                                        '& fieldset': {
+                                                            borderColor: '#3f2e04',
+                                                        },
+                                                        '&:hover fieldset': {
+                                                            borderColor: '#3f2e04',
+                                                        },
+                                                        '&.Mui-focused fieldset': {
+                                                            borderColor: '#3f2e04',
+                                                            borderWidth: '2px',
+                                                        },
+                                                    },
+                                                    '& .MuiInputBase-input': {
+                                                        borderRadius: '18px',
+                                                        fontFamily: 'Roboto Regular',
+                                                        fontSize: '16px !important',
+                                                    },
+                                                }}
+                                            />
+                                        </LocalizationProvider>
+                                    </Grid>
                                 </CardContent>
                             </Card>
                         </Grid>
@@ -333,13 +378,14 @@ function SimpleDialog(props: SimpleDialogProps) {
                                         </Grid>
                                     ))}
                                 </Box>
-                                <Grow in={isHovered} onClick={handleListElements} mountOnEnter unmountOnExit
-                                      timeout={400}>
+                                <Slide direction='up' in={isHovered} onClick={handleListElements} mountOnEnter
+                                       unmountOnExit
+                                       timeout={200}>
                                     <IconButton sx={{
                                         height: '56px',
                                         width: '56px',
                                         marginTop: '5px',
-                                        marginLeft: '182px',
+                                        marginLeft: '178px',
                                         boxShadow: 8,
                                         border: 1,
                                         borderColor: '#7a9a65',
@@ -348,7 +394,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     }}>
                                         <AddIcon sx={{color: '#201a19', width: '20px', height: '20px'}}/>
                                     </IconButton>
-                                </Grow>
+                                </Slide>
                             </CardContent>
                         </Card>
                     </Grid> : ''}
