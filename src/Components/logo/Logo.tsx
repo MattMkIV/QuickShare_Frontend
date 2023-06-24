@@ -29,7 +29,7 @@ function Logo(this: any, {navigateHome}: props) {
                     md={2}
                     sx={{
                         display: {xs: 'none', md: 'block'},
-                        minWidth: '210px'
+                        minWidth: '239px'
                     }}>
                     <img
                         src={process.env.PUBLIC_URL + '/LogoHighRes.png'}
@@ -39,7 +39,6 @@ function Logo(this: any, {navigateHome}: props) {
                     <Typography
                         sx={{
                             color: '#FF5C4D',
-                            position: 'absolute',
                             marginTop: '10px',
                             fontSize: '25px',
                             marginLeft: '57px',
