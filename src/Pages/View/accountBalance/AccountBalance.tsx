@@ -218,7 +218,7 @@ function AccountBalance() {
                     <Box sx={{
                         width: '900px', height: '50px', borderRadius: '50px', backgroundColor: '#ffdad5',
                         overflowX: 'scroll', display: 'flex', alignContent: 'center', justifyContent: 'left',
-                        boxShadow: '3px 3px 7px 2px rgba(0, 0, 0, 0.34)'
+                        boxShadow: 10,
                     }}>
                         <List component={Stack} direction="row" sx={{
                             width: '100%', marginLeft: '3px',
@@ -269,7 +269,7 @@ function AccountBalance() {
                                     width: '50%', height: '60px', backgroundColor: '#dfc38c',
                                     borderRadius: '30px', display: 'flex',
                                     justifyContent: 'center', alignItems: 'center', marginTop: '-30px',
-                                    boxShadow: '3px 3px 7px 2px rgba(0, 0, 0, 0.34)'
+                                    boxShadow: 12,
                                 }}>
 
                                     <Typography sx={{
@@ -327,7 +327,7 @@ function AccountBalance() {
                                     width: '50%', height: '60px', backgroundColor: '#dfc38c',
                                     borderRadius: '30px', display: 'flex',
                                     justifyContent: 'center', alignItems: 'center', marginTop: '-30px',
-                                    boxShadow: '3px 3px 7px 2px rgba(0, 0, 0, 0.34)'
+                                    boxShadow: 10,
                                 }}>
 
                                     <Typography sx={{
