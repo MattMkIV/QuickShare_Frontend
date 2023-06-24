@@ -410,7 +410,7 @@ function AccountBalance() {
                         elevation: 24,
                         style: {
                             width: '320px',
-                            height: '410px',
+                            height: '420px',
                             borderRadius: '22px',
                             backgroundColor: '#a08c8a',
                         }
@@ -708,7 +708,7 @@ function AccountBalance() {
                             size='small'/>
                     </Grid>
 
-                    <Grid sx={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}>
+                    <Grid sx={{display: 'flex', justifyContent: 'center', marginTop: '25px'}}>
                         <Button sx={{
                             fontFamily: 'Roboto Bold',
                             fontSize: '17px',

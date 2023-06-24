@@ -25,19 +25,7 @@ function Calendar() {
 
                 <hr className='lineCentralContent'></hr>
 
-                <Box sx={{width: '100%', height : '100%', backgroundColor:'darkolivegreen'}}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateTimePicker
-                            formatDensity="spacious"
-                            slotProps={{ textField: {  size: 'small',  } }}
-                            label="DateTimePicker"
-                            value={value}
-                            onChange={(newValue) => {
-                                setValue(newValue);
-                            }}
-
-                        />
-                    </LocalizationProvider>
+                <Box sx={{width: '100%', height : '100%'}}>
 
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <StaticDatePicker
@@ -47,7 +35,7 @@ function Calendar() {
                             onChange={(newValue) => {
                                 setValue(newValue);
                             }}
-                            sx={{backgroundColor : '#775652', width : '50%', borderRadius : '22px'}}
+                            sx={{backgroundColor : '#775652', width : '490px', height: '300px', borderRadius : '22px'}}
                         />
                     </LocalizationProvider>
                 </Box>
