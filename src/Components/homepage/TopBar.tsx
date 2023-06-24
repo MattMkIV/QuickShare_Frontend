@@ -32,7 +32,6 @@ import LoginIcon from "@mui/icons-material/Login";
 function TopBar() {
     const isMdScreen = useMediaQuery('(max-width: 900px)');
     const isXsScreen = useMediaQuery('(max-width: 600px)');
-    const isLgScreen = useMediaQuery('(max-width: 1200px)');
 
     /************************** TopBar pop-up **************************/
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
