@@ -11,20 +11,9 @@ import {createTheme} from "@mui/material";
 import {red} from "@mui/material/colors";
 
 function Calendar() {
-    //const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().getFullYear()+'-'+(new Date().getMonth()+1+'-'+new Date().getDate())));
-    //<LocalizationProvider dateAdapter={AdapterDayjs}>
-    //                         <StaticDatePicker
-    //                             orientation="landscape"
-    //                             openTo="day"
-    //                             value={value}
-    //                             onChange={(newValue) => {
-    //                                 setValue(newValue);
-    //                             }}
-    //                             sx={{backgroundColor : '#775652', width : '50%', borderRadius : '22px'}}
-    //                         />
-    //                     </LocalizationProvider>
+    const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().getFullYear()+'-'+(new Date().getMonth()+1+'-'+new Date().getDate())));
 
-    const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
+
 
     //Render
     return (
@@ -47,6 +36,18 @@ function Calendar() {
                                 setValue(newValue);
                             }}
 
+                        />
+                    </LocalizationProvider>
+
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <StaticDatePicker
+                            orientation="landscape"
+                            openTo="day"
+                            value={value}
+                            onChange={(newValue) => {
+                                setValue(newValue);
+                            }}
+                            sx={{backgroundColor : '#775652', width : '50%', borderRadius : '22px'}}
                         />
                     </LocalizationProvider>
                 </Box>

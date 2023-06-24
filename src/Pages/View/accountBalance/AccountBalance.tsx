@@ -3,19 +3,24 @@ import Box from "@mui/material/Box";
 import * as React from "react";
 import {useState} from "react";
 import {
-    Collapse,
-    IconButton,
+    Collapse, Divider,
+    FormControl, FormControlLabel, FormLabel,
+    IconButton, InputAdornment,
     List,
     ListItem,
     ListItemButton,
     ListItemText,
-    Paper,
-    Stack, Table,
+    Menu,
+    Paper, Radio,
+    RadioGroup,
+    Stack,
+    Table,
     TableBody,
     TableCell,
     TableContainer,
     TableHead,
     TableRow,
+    TextField,
     Typography,
     useMediaQuery
 } from "@mui/material";
@@ -23,22 +28,26 @@ import './AccountBalance.css'
 import {useNavigate} from "react-router-dom";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Button from "@mui/material/Button";
+import AddIcon from '@mui/icons-material/Add';
+import dayjs, {Dayjs} from "dayjs";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
 
 
 function createData(
-    name: string,
+    title: string,
     price: number,
-    category: string,
 ) {
     return {
-        name,
+        title,
         price,
-        category,
         history: [
             {
                 date: '2020-01-05',
-                customerId: '11091700',
-                amount: 3,
+                method: 'PayPal',
+                category: 'Prova',
             },
         ],
     };
@@ -67,19 +76,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                                fontFamily: 'Roboto Regular',
                                fontSize: '15px',
                                color: '#fffbff'
-                           }}>{row.name}</TableCell>
+                           }}>{row.title}</TableCell>
                 <TableCell align="left"
                            sx={{
                                fontFamily: 'Roboto Regular',
                                fontSize: '15px',
                                color: '#fffbff'
                            }}>{row.price}</TableCell>
-                <TableCell align="left"
-                           sx={{
-                               fontFamily: 'Roboto Regular',
-                               fontSize: '15px',
-                               color: '#fffbff'
-                           }}>{row.category}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
@@ -115,19 +118,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                                             color: '#fffbff',
                                             fontFamily: 'Roboto Bold',
                                             fontSize: '16px'
-                                        }}>Customer</TableCell>
+                                        }}>Method</TableCell>
                                         <TableCell align="left"
                                                    sx={{
                                                        color: '#fffbff',
                                                        fontFamily: 'Roboto Bold',
                                                        fontSize: '16px'
-                                                   }}>Amount</TableCell>
-                                        <TableCell align="left"
-                                                   sx={{
-                                                       color: '#fffbff',
-                                                       fontFamily: 'Roboto Bold',
-                                                       fontSize: '16px'
-                                                   }}>Total price (€)</TableCell>
+                                                   }}>Category</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -145,19 +142,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                                                 color: '#fffbff',
                                                 fontFamily: 'Roboto Light',
                                                 fontSize: '14px'
-                                            }}>{historyRow.customerId}</TableCell>
+                                            }}>{historyRow.method}</TableCell>
                                             <TableCell align="left"
                                                        sx={{
                                                            color: '#fffbff',
                                                            fontFamily: 'Roboto Light',
                                                            fontSize: '14px'
-                                                       }}>{historyRow.amount}</TableCell>
-                                            <TableCell align="left"
-                                                       sx={{
-                                                           color: '#fffbff',
-                                                           fontFamily: 'Roboto Light',
-                                                           fontSize: '14px'
-                                                       }}>{Math.round(historyRow.amount * 100) / 100}</TableCell>
+                                                       }}>{historyRow.category}</TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
@@ -171,11 +162,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 }
 
 const rows = [
-    createData('MacBook Pro', 2000, "Tech"),
-    createData('Breakfast', 10, "Entertainment"),
-    createData('Surf', 262, "Entertainment"),
-    createData('France', 1200, "Travel"),
-    createData('University fee', 356, "Uni"),
+    createData('MacBook Pro', 2000),
+    createData('Breakfast', 10),
+    createData('Surf', 262),
+    createData('France', 1200),
+    createData('University fee', 356),
 ];
 
 function AccountBalance() {
@@ -193,8 +184,17 @@ function AccountBalance() {
     const isMdScreen = useMediaQuery('(max-width: 960px)');
     const isXsScreen = useMediaQuery('(max-width: 600px)');
     const isLgScreen = useMediaQuery('(max-width: 1200px)');
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-
+    const [menuId, setMenuId] = useState<string | undefined>(undefined);
+    const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().getFullYear()+'-'+(new Date().getMonth()+1+'-'+new Date().getDate())));
+    const topBarClick = (event: React.MouseEvent<HTMLElement>, id: string) => {
+        setAnchorEl(event.currentTarget);
+        setMenuId(id);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     //Render
     return (
         <>
@@ -286,24 +286,18 @@ function AccountBalance() {
                                                            fontFamily: 'Roboto Black',
                                                            fontSize: '20px',
                                                            color: '#fffbff'
-                                                       }}>Name</TableCell>
+                                                       }}>Title</TableCell>
                                             <TableCell align="left"
                                                        sx={{
                                                            fontFamily: 'Roboto Black',
                                                            fontSize: '20px',
                                                            color: '#fffbff'
                                                        }}>Price (€)</TableCell>
-                                            <TableCell align="left"
-                                                       sx={{
-                                                           fontFamily: 'Roboto Black',
-                                                           fontSize: '20px',
-                                                           color: '#fffbff'
-                                                       }}>Category</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {rows.map((row) => (
-                                            <Row key={row.name} row={row}/>
+                                            <Row key={row.title} row={row}/>
                                         ))}
                                     </TableBody>
                                 </Table>
@@ -350,32 +344,356 @@ function AccountBalance() {
                                                            fontFamily: 'Roboto Black',
                                                            fontSize: '20px',
                                                            color: '#fffbff'
-                                                       }}>Name</TableCell>
+                                                       }}>Title</TableCell>
                                             <TableCell align="left"
                                                        sx={{
                                                            fontFamily: 'Roboto Black',
                                                            fontSize: '20px',
                                                            color: '#fffbff'
                                                        }}>Price (€)</TableCell>
-                                            <TableCell align="left"
-                                                       sx={{
-                                                           fontFamily: 'Roboto Black',
-                                                           fontSize: '20px',
-                                                           color: '#fffbff'
-                                                       }}>Category</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {rows.map((row) => (
-                                            <Row key={row.name} row={row}/>
+                                            <Row key={row.title} row={row}/>
                                         ))}
                                     </TableBody>
                                 </Table>
                             </TableContainer>
                         </Box>
                     </Grid>
-
                 </Grid>
+                <Button
+                    component="label"
+                    sx={{
+                        width: '80px',
+                        height: '80px',
+                        position: 'fixed',
+                        bottom: 45,
+                        right: 45,
+                        borderRadius: '90px',
+                        boxShadow: 24,
+                        fontSize: '15px',
+                        fontFamily: 'Roboto Black',
+                        backgroundColor: '#ba1a1a',
+                        ':hover': {backgroundColor: '#690003', transform: 'scale(1.1)'}
+                    }}
+                    onClick={(event) => topBarClick(event, 'addVoice')}
+                    aria-controls="notification"
+                    aria-haspopup="true"
+                    disableRipple>
+
+                    <AddIcon sx={{color: '#ffdad5', height: '30px', width: '30px'}}/>
+                </Button>
+
+                <Menu
+                    id="addVoice"
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl && menuId === 'addVoice')}
+                    onClose={handleClose}
+                    MenuListProps={{
+                        'aria-labelledby': 'addVoice',
+                    }}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                    PaperProps={{
+                        elevation: 24,
+                        style: {
+                            width: '320px',
+                            height: '410px',
+                            borderRadius: '22px',
+                            backgroundColor: '#a08c8a',
+                        }
+                    }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}>
+                    <Grid sx={{display: 'flex', alignItems: 'center'}}>
+                    <Grid sx={{width: '80px'}}>
+                        <Typography component="span" display="inline-block"
+                                    sx={{
+                                        fontFamily: 'Roboto Black',
+                                        fontSize: '17px',
+                                        marginLeft: '15px',
+                                        color: '#3f2e04'
+                                    }}>
+                            Type:
+                        </Typography>
+                    </Grid>
+                        <FormControl>
+                            <RadioGroup
+                                row
+                                aria-labelledby="demo-row-radio-buttons-group-label"
+                                name="row-radio-buttons-group"
+                                sx={{marginLeft: '20px'}}>
+                                <FormControlLabel
+                                    value="income"
+                                    control={<Radio
+                                        sx={{
+                                            color: '#442926',
+                                            '&.Mui-checked': {
+                                                color: '#920609',
+                                            },
+                                        }}/>} label="Income"/>
+                                <FormControlLabel
+                                    value="expenses"
+                                    control={<Radio
+                                        sx={{
+                                            color: '#442926',
+                                            '&.Mui-checked': {
+                                                color: '#920609',
+                                            },
+                                        }}/>} label="Expenses"/>
+                            </RadioGroup>
+                        </FormControl>
+                    </Grid>
+                    <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '10px', marginBottom: '20px'}}>
+                        <Grid sx={{width: '80px'}}>
+                            <Typography component="span" display="inline-block"
+                                        sx={{
+                                            fontFamily: 'Roboto Black',
+                                            fontSize: '17px',
+                                            marginLeft: '15px',
+                                            color: '#3f2e04'
+                                        }}>
+                                Date:
+                            </Typography>
+                        </Grid>
+
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                format="DD/MM/YYYY"
+                                views={['day', 'month', 'year']}
+                                formatDensity="spacious"
+                                slotProps={{ textField: {  size: 'small',  } }}
+                                label="DateTimePicker"
+                                value={value}
+                                onChange={(newValue) => {
+                                    setValue(newValue);
+                                }}
+                                sx={{width: '200px', marginLeft: '20px', boxShadow: 3, borderRadius: '5px !important'}}
+
+                            />
+                        </LocalizationProvider>
+                    </Grid>
+
+                    <Divider sx={{
+                        width: '290px',
+                        marginTop: '5px',
+                        marginBottom: '20px',
+                        boxShadow: 24,
+                        borderColor: 'rgba(63,46,4,0.38)',
+                        marginLeft: '15px'
+                    }}/>
+
+                    <Grid sx={{display: 'flex', alignItems: 'center'}}>
+                        <Grid sx={{width: '80px'}}>
+                            <Typography component="span" display="inline-block"
+                                        sx={{
+                                            fontFamily: 'Roboto Black',
+                                            fontSize: '17px',
+                                            marginLeft: '15px',
+                                            color: '#3f2e04'
+                                        }}>
+                                Title:
+                            </Typography>
+                        </Grid>
+                        <TextField
+                            inputProps={{
+                                sx: {color: '#3f2e04 !important'},
+                            }}
+                            sx={{
+                                '& .MuiInput-underline': {
+                                    borderBottomColor: 'transparent',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderRadius: '18px',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: '#3f2e04',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderWidth: '2px',
+                                    },
+                                },
+                                '& .MuiInputBase-input': {
+                                    borderRadius: '18px',
+                                    backgroundColor: '#d8c2be',
+                                    fontFamily: 'Roboto Regular',
+                                    fontSize: '16px !important',
+                                    height: '20px',
+                                    boxShadow: 8,
+                                },
+                                width: '200px',
+                                marginLeft: '20px',
+                            }}
+                            size='small'/>
+                    </Grid>
+
+                    <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
+                        <Grid sx={{width: '80px'}}>
+                            <Typography component="span" display="inline-block"
+                                        sx={{
+                                            fontFamily: 'Roboto Black',
+                                            fontSize: '17px',
+                                            marginLeft: '15px',
+                                            color: '#3f2e04'
+                                        }}>
+                                Price:
+                            </Typography>
+                        </Grid>
+                        <TextField
+                            inputProps={{
+                                sx: {color: '#3f2e04 !important'},
+                            }}
+                            sx={{
+                                '& .MuiInput-underline': {
+                                    borderBottomColor: 'transparent',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderRadius: '18px',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: '#3f2e04',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderWidth: '2px',
+                                    },
+                                },
+                                '& .MuiInputBase-input': {
+                                    borderRadius: '18px',
+                                    backgroundColor: '#d8c2be',
+                                    fontFamily: 'Roboto Regular',
+                                    fontSize: '16px !important',
+                                    height: '20px',
+                                    boxShadow: 8,
+                                },
+                                width: '200px',
+                                marginLeft: '20px',
+                            }}
+                            size='small'/>
+                    </Grid>
+
+                    <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
+                        <Grid sx={{width: '80px'}}>
+                            <Typography component="span" display="inline-block"
+                                        sx={{
+                                            fontFamily: 'Roboto Black',
+                                            fontSize: '17px',
+                                            marginLeft: '15px',
+                                            color: '#3f2e04'
+                                        }}>
+                                Method:
+                            </Typography>
+                        </Grid>
+                        <TextField
+                            inputProps={{
+                                sx: {color: '#3f2e04 !important'},
+                            }}
+                            sx={{
+                                '& .MuiInput-underline': {
+                                    borderBottomColor: 'transparent',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderRadius: '18px',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: '#3f2e04',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderWidth: '2px',
+                                    },
+                                },
+                                '& .MuiInputBase-input': {
+                                    borderRadius: '18px',
+                                    backgroundColor: '#d8c2be',
+                                    fontFamily: 'Roboto Regular',
+                                    fontSize: '16px !important',
+                                    height: '20px',
+                                    boxShadow: 8,
+                                },
+                                width: '200px',
+                                marginLeft: '20px',
+                            }}
+                            size='small'/>
+                    </Grid>
+
+                    <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
+                        <Grid sx={{width: '80px'}}>
+                            <Typography component="span" display="inline-block"
+                                        sx={{
+                                            fontFamily: 'Roboto Black',
+                                            fontSize: '17px',
+                                            marginLeft: '15px',
+                                            color: '#3f2e04'
+                                        }}>
+                                Category:
+                            </Typography>
+                        </Grid>
+                        <TextField
+                            inputProps={{
+                                sx: {color: '#3f2e04 !important'},
+                            }}
+                            sx={{
+                                '& .MuiInput-underline': {
+                                    borderBottomColor: 'transparent',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderRadius: '18px',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: '#3f2e04',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#3f2e04',
+                                        borderWidth: '2px',
+                                    },
+                                },
+                                '& .MuiInputBase-input': {
+                                    borderRadius: '18px',
+                                    backgroundColor: '#d8c2be',
+                                    fontFamily: 'Roboto Regular',
+                                    fontSize: '16px !important',
+                                    height: '20px',
+                                    boxShadow: 8,
+                                },
+                                width: '200px',
+                                marginLeft: '20px',
+                            }}
+                            size='small'/>
+                    </Grid>
+
+                    <Grid sx={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}>
+                        <Button sx={{
+                            fontFamily: 'Roboto Bold',
+                            fontSize: '17px',
+                            width: '200px',
+                            height: '50px',
+                            backgroundColor: '#8fb677',
+                            color: '#201a19',
+                            borderRadius: '22px',
+                            border: 1,
+                            boxShadow: 8,
+                            borderColor: '#7a9a65',
+                            ':hover': {backgroundColor: '#7a9a65'}
+                        }}>Confirm
+                        </Button>
+                    </Grid>
+                </Menu>
             </Box>
         </>
     );

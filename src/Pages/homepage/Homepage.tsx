@@ -159,6 +159,7 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                                     boxShadow: 8,
                                 },
                             }}
+                            type='text'
                             placeholder="Type your message here"
                             size='small'/>
 
