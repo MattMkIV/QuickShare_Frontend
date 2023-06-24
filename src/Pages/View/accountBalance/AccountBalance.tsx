@@ -3,15 +3,18 @@ import Box from "@mui/material/Box";
 import * as React from "react";
 import {useState} from "react";
 import {
-    Collapse, Divider,
-    FormControl, FormControlLabel, FormLabel,
-    IconButton, InputAdornment,
+    Collapse,
+    Divider,
+    FormControl,
+    FormControlLabel,
+    IconButton,
     List,
     ListItem,
     ListItemButton,
     ListItemText,
     Menu,
-    Paper, Radio,
+    Paper,
+    Radio,
     RadioGroup,
     Stack,
     Table,
@@ -33,7 +36,7 @@ import AddIcon from '@mui/icons-material/Add';
 import dayjs, {Dayjs} from "dayjs";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers";
+import {DatePicker} from "@mui/x-date-pickers";
 
 
 function createData(
@@ -184,11 +187,12 @@ function AccountBalance() {
     const isMdScreen = useMediaQuery('(max-width: 960px)');
     const isXsScreen = useMediaQuery('(max-width: 600px)');
     const isLgScreen = useMediaQuery('(max-width: 1200px)');
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const [menuId, setMenuId] = useState<string | undefined>(undefined);
-    const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().getFullYear()+'-'+(new Date().getMonth()+1+'-'+new Date().getDate())));
-    const topBarClick = (event: React.MouseEvent<HTMLElement>, id: string) => {
+    const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().getFullYear() + '-' + (new Date().getMonth() + 1 + '-' + new Date().getDate())));
+    const buttonClick = (event: React.MouseEvent<HTMLElement>, id: string) => {
         setAnchorEl(event.currentTarget);
         setMenuId(id);
     };
@@ -378,7 +382,7 @@ function AccountBalance() {
                         backgroundColor: '#ba1a1a',
                         ':hover': {backgroundColor: '#690003', transform: 'scale(1.1)'}
                     }}
-                    onClick={(event) => topBarClick(event, 'addVoice')}
+                    onClick={(event) => buttonClick(event, 'addVoice')}
                     aria-controls="notification"
                     aria-haspopup="true"
                     disableRipple>
@@ -412,17 +416,17 @@ function AccountBalance() {
                         }
                     }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}>
                     <Grid sx={{display: 'flex', alignItems: 'center'}}>
-                    <Grid sx={{width: '80px'}}>
-                        <Typography component="span" display="inline-block"
-                                    sx={{
-                                        fontFamily: 'Roboto Black',
-                                        fontSize: '17px',
-                                        marginLeft: '15px',
-                                        color: '#3f2e04'
-                                    }}>
-                            Type:
-                        </Typography>
-                    </Grid>
+                        <Grid sx={{width: '80px'}}>
+                            <Typography component="span" display="inline-block"
+                                        sx={{
+                                            fontFamily: 'Roboto Black',
+                                            fontSize: '17px',
+                                            marginLeft: '15px',
+                                            color: '#3f2e04'
+                                        }}>
+                                Type:
+                            </Typography>
+                        </Grid>
                         <FormControl>
                             <RadioGroup
                                 row
@@ -468,7 +472,7 @@ function AccountBalance() {
                                 format="DD/MM/YYYY"
                                 views={['day', 'month', 'year']}
                                 formatDensity="spacious"
-                                slotProps={{ textField: {  size: 'small',  } }}
+                                slotProps={{textField: {size: 'small',}}}
                                 label="DateTimePicker"
                                 value={value}
                                 onChange={(newValue) => {
