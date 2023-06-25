@@ -15,9 +15,10 @@ import ShareIcon from "@mui/icons-material/Share";
 import { useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkJwt, TakeUserInfoAll, TakeUserInfoByEmail } from '../../../Utils/AuthService';
-import { AddAllowedPhoto, DeleteImage, TakeImage } from '../../../Utils/image_service';
+import { AddAllowedPhoto, AddPhoto, DeleteImage, TakeImage } from '../../../Utils/image_service';
 import AddIcon from "@mui/icons-material/Add";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import {Buffer} from 'buffer';
 
 function UploadPhoto() {
     
@@ -41,10 +42,10 @@ function UploadPhoto() {
             for (let i = 0; i < response.length; i++) {
                 var element = response[i];
                 let userInfo = await TakeUserInfoAll(element.allowed);
-
+                
                 let all = {
                     "image_id": response[i].image_id,
-                    "image_name": response[i].image_name,
+                    "image_name": response[i].data,
                     "upload_data": response[i].upload_data,
                     "allowed": userInfo
                 }
@@ -123,20 +124,19 @@ function UploadPhoto() {
     };
 
     /************************* Upload photo event *************************/
-    const [uploadState, setUploadState] = React.useState('initial');
-    const [image, setImage] = React.useState('');
-
-    const handleUploadClick = (event: any) => {
+    const handleUploadClick = async (event: any) => {
+        let imageBase64;
         const file = event.target.files[0];
         const reader = new FileReader();
         if (file) {
             reader.readAsDataURL(file);
-            reader.onloadend = function (e) {
-                setImage(`${reader.result}`);
-                setUploadState("uploaded");
+            reader.onloadend = async function (e) {
+                imageBase64 = reader.result;
+                console.log(imageBase64);
+                let isError = await AddPhoto(imageBase64);
+                window.location.reload();
             };
         }
-        console.log(reader.result);
     };
 
     const handleClickAlert = () => {
@@ -175,8 +175,10 @@ function UploadPhoto() {
                                 <img
                                     loading="lazy"
                                     className='masonryImageStyle'
-                                    src={`${photo.image_name}?w=248&fit=crop&auto=format`}
-                                    srcSet={`${photo.image_name}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                    // src={`${photo.image_name}?w=248&fit=crop&auto=format`}
+                                    // srcSet={`${photo.image_name}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                    src={`${photo.image_name}`}
+                                    //srcSet={`${photo.image_name}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                 />
                                 
                                 <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={100}>
@@ -569,19 +571,6 @@ function UploadPhoto() {
 
                         <input type='file' accept='image/png,image/jpeg,image/jpg' onChange={handleUploadClick} hidden/>
                     </Button>
-
-                    <Snackbar open={open} autoHideDuration={4000} onClose={handleCloseAlert}>
-                        <Alert elevation={24} onClose={handleCloseAlert} severity="success"
-                               sx={{
-                                   backgroundColor: '#8fb677',
-                                   borderRadius: '18px',
-                                   color: '#201a19',
-                                   fontFamily: 'Roboto Regular'
-                               }}
-                               icon={<TaskAltIcon sx={{color: '#201a19'}}/>}>
-                            Photo added correctly!
-                        </Alert>
-                    </Snackbar>
                 </Box>
             </Box>
         </>
