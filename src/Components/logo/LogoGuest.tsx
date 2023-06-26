@@ -11,7 +11,7 @@ interface props {
     navigateHome: boolean;
 }
 
-function Logo(this: any, {navigateHome}: props) {
+function LogoGuest(this: any, {navigateHome}: props) {
     //Variable declaration
     const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ function Logo(this: any, {navigateHome}: props) {
                     alt='Logo img'
                     className='logo'
                     onClick={function (event) {
-                        navigate("/homepage");
+                        navigate("/homepageGuest");
                     }}/>
                 <Typography
                     sx={{
@@ -44,7 +44,7 @@ function Logo(this: any, {navigateHome}: props) {
                         ':hover': {cursor: 'pointer'}
                     }}
                     onClick={function (event) {
-                        navigate("/homepage");
+                        navigate("/homepageGuest");
                     }}>QUICK.SHARE</Typography>
             </Grid>
 
@@ -52,4 +52,4 @@ function Logo(this: any, {navigateHome}: props) {
     );
 }
 
-export default Logo;
+export default LogoGuest;

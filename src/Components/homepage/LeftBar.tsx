@@ -115,11 +115,6 @@ function SimpleDialog(props: SimpleDialogProps) {
         }, 300);
     }
 
-    const handleAddClick = () => {
-        // Aggiungi qui la logica per confermare la modifica
-    };
-
-
     const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
 
     return (
@@ -580,7 +575,13 @@ function LeftBar({
                 onClose={handleClose}
             />
 
-            <Grid sx={{display: {xs: 'none', md: 'block'}}} className='leftBarGrid'>
+            <Grid sx={{
+                display: {
+                    xs: 'none', md: 'block'
+                },
+                marginTop: '30px',
+                marginRight: '20px'
+            }}>
                 <Button
                     sx={{
                         fontFamily: 'Roboto Bold',
@@ -615,7 +616,10 @@ function LeftBar({
                                 ':hover': {backgroundColor: '#382d2c'},
                             }}
                             disableRipple>
-                            <HomeIcon className='icon'/>
+                            <HomeIcon sx={{
+                                marginLeft: '10px',
+                                marginRight: '13px'
+                            }}/>
                             <ListItemText primary="Home"/>
                         </ListItemButton>
                     </ListItem>
@@ -633,7 +637,10 @@ function LeftBar({
                                 ':hover': {backgroundColor: '#382d2c'},
                             }}
                             disableRipple>
-                            <AssignmentIcon className='icon'/>
+                            <AssignmentIcon sx={{
+                                marginLeft: '10px',
+                                marginRight: '13px'
+                            }}/>
                             <ListItemText primary="Notes"/>
                         </ListItemButton>
                     </ListItem>
@@ -651,7 +658,10 @@ function LeftBar({
                                 ':hover': {backgroundColor: '#382d2c'},
                             }}
                             disableRipple>
-                            <FormatListBulletedIcon className='icon'/>
+                            <FormatListBulletedIcon sx={{
+                                marginLeft: '10px',
+                                marginRight: '13px'
+                            }}/>
                             <ListItemText primary="Lists"/>
                         </ListItemButton>
                     </ListItem>
@@ -669,7 +679,10 @@ function LeftBar({
                                 ':hover': {backgroundColor: '#382d2c'},
                             }}
                             disableRipple>
-                            <AddPhotoAlternate className='icon'/>
+                            <AddPhotoAlternate sx={{
+                                marginLeft: '10px',
+                                marginRight: '13px'
+                            }}/>
                             <ListItemText primary="Photos"/>
                         </ListItemButton>
                     </ListItem>
@@ -687,7 +700,10 @@ function LeftBar({
                                 ':hover': {backgroundColor: '#382d2c'},
                             }}
                             disableRipple>
-                            <DateRangeIcon className='icon'/>
+                            <DateRangeIcon sx={{
+                                marginLeft: '10px',
+                                marginRight: '13px'
+                            }}/>
                             <ListItemText primary="Calendar "/>
                         </ListItemButton>
                     </ListItem>
@@ -705,7 +721,10 @@ function LeftBar({
                                 ':hover': {backgroundColor: '#382d2c'},
                             }}
                             disableRipple>
-                            <AccountBalanceWalletIcon className='icon'/>
+                            <AccountBalanceWalletIcon sx={{
+                                marginLeft: '10px',
+                                marginRight: '13px'
+                            }}/>
                             <ListItemText primary="Account balance"
                                           sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
                         </ListItemButton>

@@ -12,6 +12,7 @@ import Lists from "./Pages/View/list/Lists";
 import Homepage from "./Pages/homepage/Homepage";
 import Calendar from "./Pages/View/calendar/Calendar";
 import AccountBalance from "./Pages/View/accountBalance/AccountBalance";
+import HomepageGuest from "./Pages/homepage/HomapageGuest";
 
 function App() {
 
@@ -21,13 +22,17 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route index path="/" element={<Login/>}/>
+                    <Route index path="/signUp" element={<SignUp/>}/>
                     <Route index path="/homepage" element={<Homepage componentToRender={Home}/>}/>
-                    <Route index path="/homepage/photo" element={<Homepage componentToRender={UploadPhoto}/>}/>
                     <Route index path="/homepage/notes" element={<Homepage componentToRender={Notes}/>}/>
                     <Route index path="/homepage/lists" element={<Homepage componentToRender={Lists}/>}/>
+                    <Route index path="/homepage/photo" element={<Homepage componentToRender={UploadPhoto}/>}/>
                     <Route index path="/homepage/calendar" element={<Homepage componentToRender={Calendar}/>}/>
                     <Route index path="/homepage/accountbalance" element={<Homepage componentToRender={AccountBalance}/>}/>
-                    <Route index path="/signUp" element={<SignUp/>}/>
+
+                    <Route index path="/homepageGuest" element={<HomepageGuest componentToRender={Home}/>}/>
+                    <Route index path="/homepageGuest/notes" element={<HomepageGuest componentToRender={Notes}/>}/>
+                    <Route index path="/homepageGuest/lists" element={<HomepageGuest componentToRender={Lists}/>}/>
                 </Routes>
             </BrowserRouter>
         </>

@@ -4,6 +4,8 @@ import Grid from "@mui/material/Grid";
 import {Box, Stack} from "@mui/material";
 import CardLayout from '../../../Components/homepage/NoteCardLayout'
 import ListCardLayout from '../../../Components/homepage/ListsCardLayout'
+import NoteCardLayoutGuest from '../../../Components/homepage/NoteCardLayoutGuest'
+import ListCardLayoutGuest from '../../../Components/homepage/ListsCardLayoutGuest'
 
 function Home() {
     //Render
@@ -16,8 +18,8 @@ function Home() {
 
                 <Grid className='cardSliderHomePage'>
                     <Stack spacing={5} direction="row">
-                        <CardLayout></CardLayout>
-                        <ListCardLayout></ListCardLayout>
+                        <NoteCardLayoutGuest></NoteCardLayoutGuest>
+                        <ListCardLayoutGuest></ListCardLayoutGuest>
                         <CardLayout></CardLayout>
                         <CardLayout></CardLayout>
                         <ListCardLayout></ListCardLayout>

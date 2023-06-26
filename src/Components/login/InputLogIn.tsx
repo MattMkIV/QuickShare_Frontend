@@ -145,7 +145,8 @@ function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
                             backgroundColor: '#e7bdb7',
                             boxShadow: 8,
                             ':hover': {backgroundColor: '#e7bdb7', boxShadow: 15}
-                        }}>Guest</Button>
+                        }}
+                        onClick={() => navigate("/homepageGuest")}>Guest</Button>
 
                     <Button
                         type='submit'
