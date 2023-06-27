@@ -38,7 +38,9 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {DatePicker} from "@mui/x-date-pickers";
 import { checkJwt } from "../../../Utils/AuthService";
-import { TakeExpense, TakeIncome } from "../../../Utils/financial_service";
+import { AddExpenses, AddIncome, TakeExpense, TakeExpenseMonth, TakeIncome, TakeIncomeMonth } from "../../../Utils/financial_service";
+
+
 interface Props {
     title:any,
     price:any,
@@ -154,12 +156,12 @@ function Row({title, price, data, method, category}:Props) {
     );
 }
 
-
 function AccountBalance() {
 
     const months = ['All', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
     const [selectedLetter, setSelectedLetter] = React.useState('');
     const [selectedItem, setSelectedItem] = useState('All');
+    const [monthSelect, setMonthSelect] = useState();
     let jwtError = false;
     const navigate = useNavigate();
     const isMdScreen = useMediaQuery('(max-width: 960px)');
@@ -171,31 +173,56 @@ function AccountBalance() {
     const [expenses, setExpenses] = useState<any>([]);
     const [income, setIncome] = useState<any>([]);
 
+
     useEffect(() => {
         const check = async () => {
             jwtError = await checkJwt();
             if(jwtError) navigate("/");
         }
 
+        // All
         const takeExpenses = async () => {
             let response:any = await TakeExpense();
-            console.log(response);
             setExpenses(response);
         }   
 
         const takeIncome = async () => {
             let response:any = await TakeIncome();
-            console.log(response);
+            setIncome(response);
+        }  
+
+        // Month
+        const takeExpensesMonth = async (month:any) => {
+            let response:any = await TakeExpenseMonth(month);
+            setExpenses(response);
+        }   
+
+        const takeIncomeMonth = async (month:any) => {
+            let response:any = await TakeIncomeMonth(month);
             setIncome(response);
         }  
 
         check();
-        takeExpenses();
-        takeIncome();
+        let month:any = localStorage.getItem("month");
+
+        if(month === "All") {
+            takeExpenses();
+            takeIncome();
+        }else{
+            takeExpensesMonth(month);
+            takeIncomeMonth(month);
+        }
+
     }, []);
 
+    // When month is clicked
     const handleItemClick = (item: any) => {
         setSelectedItem(item);
+
+        localStorage.removeItem("month");
+        localStorage.setItem("month", item);
+
+        window.location.reload();
     };
     
     const buttonClick = (event: React.MouseEvent<HTMLElement>, id: string) => {
@@ -205,6 +232,37 @@ function AccountBalance() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleAddFinance = async (event: any) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+
+        let tipo = data.get('row-radio-buttons-group');
+        
+        // Format date
+        let dataCreazione:any = value;
+        let dataFormattata;
+
+        if(dataCreazione.$M+1 < 10){
+            dataFormattata = dataCreazione.$y+"-0"+(dataCreazione.$M+1)+"-"+dataCreazione.$D;
+        }else{
+            dataFormattata = dataCreazione.$y+"-"+(dataCreazione.$M+1)+"-"+dataCreazione.$D;
+        }
+
+        let title = data.get('title');
+        let price = data.get('price');
+        let method = data.get('method');
+        let category =  data.get('category');
+
+        if(tipo === "income")
+            await AddIncome(dataFormattata, title, price, method, category);
+        
+        if(tipo === "expenses") 
+            await AddExpenses(dataFormattata, title, price, method, category);    
+            
+        window.location.reload();
+    };
+    
     //Render
     return (
         <>
@@ -233,7 +291,6 @@ function AccountBalance() {
                             {months.map((letter, index) => (
                                 <Box sx={{width: '100%', display: 'flex', alignContent: 'center'}}>
                                     <ListItem disablePadding onClick={function (event) {
-                                        navigate("/homepage/accountbalance");
                                         handleItemClick(letter);
                                     }}>
 
@@ -422,315 +479,323 @@ function AccountBalance() {
                             backgroundColor: '#a08c8a',
                         }
                     }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}>
-                    <Grid sx={{display: 'flex', alignItems: 'center'}}>
-                        <Grid sx={{width: '80px'}}>
-                            <Typography component="span" display="inline-block"
-                                        sx={{
-                                            fontFamily: 'Roboto Black',
-                                            fontSize: '17px',
-                                            marginLeft: '15px',
-                                            color: '#3f2e04'
-                                        }}>
-                                Type:
-                            </Typography>
-                        </Grid>
-                        <FormControl>
-                            <RadioGroup
-                                row
-                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                name="row-radio-buttons-group"
-                                sx={{marginLeft: '20px'}}>
-                                <FormControlLabel
-                                    value="income"
-                                    control={<Radio
-                                        sx={{
-                                            color: '#442926',
-                                            '&.Mui-checked': {
-                                                color: '#920609',
-                                            },
-                                        }}/>} label="Income"/>
-                                <FormControlLabel
-                                    value="expenses"
-                                    control={<Radio
-                                        sx={{
-                                            color: '#442926',
-                                            '&.Mui-checked': {
-                                                color: '#920609',
-                                            },
-                                        }}/>} label="Expenses"/>
-                            </RadioGroup>
-                        </FormControl>
-                    </Grid>
-                    <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '10px', marginBottom: '20px'}}>
-                        <Grid sx={{width: '80px'}}>
-                            <Typography component="span" display="inline-block"
-                                        sx={{
-                                            fontFamily: 'Roboto Black',
-                                            fontSize: '17px',
-                                            marginLeft: '15px',
-                                            color: '#3f2e04'
-                                        }}>
-                                Date:
-                            </Typography>
-                        </Grid>
+                        <form onSubmit={handleAddFinance}>
+                            <Grid sx={{display: 'flex', alignItems: 'center'}}>
+                                <Grid sx={{width: '80px'}}>
+                                    <Typography component="span" display="inline-block"
+                                                sx={{
+                                                    fontFamily: 'Roboto Black',
+                                                    fontSize: '17px',
+                                                    marginLeft: '15px',
+                                                    color: '#3f2e04'
+                                                }}>
+                                        Type:
+                                    </Typography>
+                                </Grid>
+                                <FormControl>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="row-radio-buttons-group"
+                                        sx={{marginLeft: '20px'}}>
+                                        <FormControlLabel
+                                            value="income"
+                                            control={<Radio
+                                                sx={{
+                                                    color: '#442926',
+                                                    '&.Mui-checked': {
+                                                        color: '#920609',
+                                                    },
+                                                }}/>} label="Income"/>
+                                        <FormControlLabel
+                                            value="expenses"
+                                            control={<Radio
+                                                sx={{
+                                                    color: '#442926',
+                                                    '&.Mui-checked': {
+                                                        color: '#920609',
+                                                    },
+                                                }}/>} label="Expenses"/>
+                                    </RadioGroup>
+                                </FormControl>
+                            </Grid>
 
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                format="DD/MM/YYYY"
-                                views={['day', 'month', 'year']}
-                                formatDensity="spacious"
-                                slotProps={{textField: {size: 'small',}}}
-                                value={value}
-                                onChange={(newValue) => {
-                                    setValue(newValue);
-                                }}
-                                sx={{
+                            <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '10px', marginBottom: '20px'}}>
+                                <Grid sx={{width: '80px'}}>
+                                    <Typography component="span" display="inline-block"
+                                                sx={{
+                                                    fontFamily: 'Roboto Black',
+                                                    fontSize: '17px',
+                                                    marginLeft: '15px',
+                                                    color: '#3f2e04'
+                                                }}>
+                                        Date:
+                                    </Typography>
+                                </Grid>
+
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        format="YYYY/MM/DD"
+                                        views={['day', 'month', 'year']}
+                                        formatDensity="spacious"
+                                        slotProps={{textField: {size: 'small',}}}
+                                        value={value}
+                                        onChange={(newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                        sx={{
+                                            width: '200px',
+                                            marginLeft: '20px',
+                                            boxShadow: 3,
+                                            borderRadius: '5px !important',
+
+                                            '& .MuiInput-underline': {
+                                                borderBottomColor: 'transparent',
+                                            },
+                                            '& .MuiFormLabel-root': {
+                                                color: '#3f2e04',
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
+                                                    borderColor: '#3f2e04',
+                                                },
+                                                '&:hover fieldset': {
+                                                    borderColor: '#3f2e04',
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    borderColor: '#3f2e04',
+                                                    borderWidth: '2px',
+                                                },
+                                            },
+                                            '& .MuiInputBase-input': {
+                                                borderRadius: '18px',
+                                                fontFamily: 'Roboto Regular',
+                                                fontSize: '16px !important',
+                                            },
+                                        }}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
+
+                            <Divider sx={{
+                                width: '290px',
+                                marginTop: '5px',
+                                marginBottom: '20px',
+                                boxShadow: 24,
+                                borderColor: 'rgba(63,46,4,0.38)',
+                                marginLeft: '15px'
+                            }}/>
+
+                            <Grid sx={{display: 'flex', alignItems: 'center'}}>
+                                <Grid sx={{width: '80px'}}>
+                                    <Typography component="span" display="inline-block"
+                                                sx={{
+                                                    fontFamily: 'Roboto Black',
+                                                    fontSize: '17px',
+                                                    marginLeft: '15px',
+                                                    color: '#3f2e04'
+                                                }}>
+                                        Title:
+                                    </Typography>
+                                </Grid>
+                                <TextField
+                                    inputProps={{
+                                        sx: {color: '#3f2e04 !important'},
+                                    }}
+                                    sx={{
+                                        '& .MuiInput-underline': {
+                                            borderBottomColor: 'transparent',
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderRadius: '18px',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#3f2e04',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderWidth: '2px',
+                                            },
+                                        },
+                                        '& .MuiInputBase-input': {
+                                            borderRadius: '18px',
+                                            backgroundColor: '#d8c2be',
+                                            fontFamily: 'Roboto Regular',
+                                            fontSize: '16px !important',
+                                            height: '20px',
+                                            boxShadow: 8,
+                                        },
+                                        width: '200px',
+                                        marginLeft: '20px',
+                                    }}
+                                    size='small'
+                                    name="title"/>
+                            </Grid>
+
+                            <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
+                                <Grid sx={{width: '80px'}}>
+                                    <Typography component="span" display="inline-block"
+                                                sx={{
+                                                    fontFamily: 'Roboto Black',
+                                                    fontSize: '17px',
+                                                    marginLeft: '15px',
+                                                    color: '#3f2e04'
+                                                }}>
+                                        Price:
+                                    </Typography>
+                                </Grid>
+                                <TextField
+                                    inputProps={{
+                                        sx: {color: '#3f2e04 !important'},
+                                    }}
+                                    sx={{
+                                        '& .MuiInput-underline': {
+                                            borderBottomColor: 'transparent',
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderRadius: '18px',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#3f2e04',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderWidth: '2px',
+                                            },
+                                        },
+                                        '& .MuiInputBase-input': {
+                                            borderRadius: '18px',
+                                            backgroundColor: '#d8c2be',
+                                            fontFamily: 'Roboto Regular',
+                                            fontSize: '16px !important',
+                                            height: '20px',
+                                            boxShadow: 8,
+                                        },
+                                        width: '200px',
+                                        marginLeft: '20px',
+                                    }}
+                                    size='small'
+                                    name="price"/>
+                            </Grid>
+
+                            <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
+                                <Grid sx={{width: '80px'}}>
+                                    <Typography component="span" display="inline-block"
+                                                sx={{
+                                                    fontFamily: 'Roboto Black',
+                                                    fontSize: '17px',
+                                                    marginLeft: '15px',
+                                                    color: '#3f2e04'
+                                                }}>
+                                        Method:
+                                    </Typography>
+                                </Grid>
+                                <TextField
+                                    inputProps={{
+                                        sx: {color: '#3f2e04 !important'},
+                                    }}
+                                    sx={{
+                                        '& .MuiInput-underline': {
+                                            borderBottomColor: 'transparent',
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderRadius: '18px',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#3f2e04',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderWidth: '2px',
+                                            },
+                                        },
+                                        '& .MuiInputBase-input': {
+                                            borderRadius: '18px',
+                                            backgroundColor: '#d8c2be',
+                                            fontFamily: 'Roboto Regular',
+                                            fontSize: '16px !important',
+                                            height: '20px',
+                                            boxShadow: 8,
+                                        },
+                                        width: '200px',
+                                        marginLeft: '20px',
+                                    }}
+                                    size='small'
+                                    name="method"/>
+                            </Grid>
+
+                            <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
+                                <Grid sx={{width: '80px'}}>
+                                    <Typography component="span" display="inline-block"
+                                                sx={{
+                                                    fontFamily: 'Roboto Black',
+                                                    fontSize: '17px',
+                                                    marginLeft: '15px',
+                                                    color: '#3f2e04'
+                                                }}>
+                                        Category:
+                                    </Typography>
+                                </Grid>
+                                <TextField
+                                    inputProps={{
+                                        sx: {color: '#3f2e04 !important'},
+                                    }}
+                                    sx={{
+                                        '& .MuiInput-underline': {
+                                            borderBottomColor: 'transparent',
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderRadius: '18px',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#3f2e04',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#3f2e04',
+                                                borderWidth: '2px',
+                                            },
+                                        },
+                                        '& .MuiInputBase-input': {
+                                            borderRadius: '18px',
+                                            backgroundColor: '#d8c2be',
+                                            fontFamily: 'Roboto Regular',
+                                            fontSize: '16px !important',
+                                            height: '20px',
+                                            boxShadow: 8,
+                                        },
+                                        width: '200px',
+                                        marginLeft: '20px',
+                                    }}
+                                    size='small'
+                                    name="category"/>
+                            </Grid>
+
+                            <Grid sx={{display: 'flex', justifyContent: 'center', marginTop: '25px'}}>
+                                <Button sx={{
+                                    fontFamily: 'Roboto Bold',
+                                    fontSize: '17px',
                                     width: '200px',
-                                    marginLeft: '20px',
-                                    boxShadow: 3,
-                                    borderRadius: '5px !important',
-
-                                    '& .MuiInput-underline': {
-                                        borderBottomColor: 'transparent',
-                                    },
-                                    '& .MuiFormLabel-root': {
-                                        color: '#3f2e04',
-                                    },
-                                    '& .MuiOutlinedInput-root': {
-                                        '& fieldset': {
-                                            borderColor: '#3f2e04',
-                                        },
-                                        '&:hover fieldset': {
-                                            borderColor: '#3f2e04',
-                                        },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: '#3f2e04',
-                                            borderWidth: '2px',
-                                        },
-                                    },
-                                    '& .MuiInputBase-input': {
-                                        borderRadius: '18px',
-                                        fontFamily: 'Roboto Regular',
-                                        fontSize: '16px !important',
-                                    },
+                                    height: '50px',
+                                    backgroundColor: '#8fb677',
+                                    color: '#201a19',
+                                    borderRadius: '22px',
+                                    border: 1,
+                                    boxShadow: 8,
+                                    borderColor: '#7a9a65',
+                                    ':hover': {backgroundColor: '#7a9a65'}
                                 }}
-                            />
-                        </LocalizationProvider>
-                    </Grid>
-
-                    <Divider sx={{
-                        width: '290px',
-                        marginTop: '5px',
-                        marginBottom: '20px',
-                        boxShadow: 24,
-                        borderColor: 'rgba(63,46,4,0.38)',
-                        marginLeft: '15px'
-                    }}/>
-
-                    <Grid sx={{display: 'flex', alignItems: 'center'}}>
-                        <Grid sx={{width: '80px'}}>
-                            <Typography component="span" display="inline-block"
-                                        sx={{
-                                            fontFamily: 'Roboto Black',
-                                            fontSize: '17px',
-                                            marginLeft: '15px',
-                                            color: '#3f2e04'
-                                        }}>
-                                Title:
-                            </Typography>
-                        </Grid>
-                        <TextField
-                            inputProps={{
-                                sx: {color: '#3f2e04 !important'},
-                            }}
-                            sx={{
-                                '& .MuiInput-underline': {
-                                    borderBottomColor: 'transparent',
-                                },
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#3f2e04',
-                                        borderRadius: '18px',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#3f2e04',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#3f2e04',
-                                        borderWidth: '2px',
-                                    },
-                                },
-                                '& .MuiInputBase-input': {
-                                    borderRadius: '18px',
-                                    backgroundColor: '#d8c2be',
-                                    fontFamily: 'Roboto Regular',
-                                    fontSize: '16px !important',
-                                    height: '20px',
-                                    boxShadow: 8,
-                                },
-                                width: '200px',
-                                marginLeft: '20px',
-                            }}
-                            size='small'/>
-                    </Grid>
-
-                    <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
-                        <Grid sx={{width: '80px'}}>
-                            <Typography component="span" display="inline-block"
-                                        sx={{
-                                            fontFamily: 'Roboto Black',
-                                            fontSize: '17px',
-                                            marginLeft: '15px',
-                                            color: '#3f2e04'
-                                        }}>
-                                Price:
-                            </Typography>
-                        </Grid>
-                        <TextField
-                            inputProps={{
-                                sx: {color: '#3f2e04 !important'},
-                            }}
-                            sx={{
-                                '& .MuiInput-underline': {
-                                    borderBottomColor: 'transparent',
-                                },
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#3f2e04',
-                                        borderRadius: '18px',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#3f2e04',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#3f2e04',
-                                        borderWidth: '2px',
-                                    },
-                                },
-                                '& .MuiInputBase-input': {
-                                    borderRadius: '18px',
-                                    backgroundColor: '#d8c2be',
-                                    fontFamily: 'Roboto Regular',
-                                    fontSize: '16px !important',
-                                    height: '20px',
-                                    boxShadow: 8,
-                                },
-                                width: '200px',
-                                marginLeft: '20px',
-                            }}
-                            size='small'/>
-                    </Grid>
-
-                    <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
-                        <Grid sx={{width: '80px'}}>
-                            <Typography component="span" display="inline-block"
-                                        sx={{
-                                            fontFamily: 'Roboto Black',
-                                            fontSize: '17px',
-                                            marginLeft: '15px',
-                                            color: '#3f2e04'
-                                        }}>
-                                Method:
-                            </Typography>
-                        </Grid>
-                        <TextField
-                            inputProps={{
-                                sx: {color: '#3f2e04 !important'},
-                            }}
-                            sx={{
-                                '& .MuiInput-underline': {
-                                    borderBottomColor: 'transparent',
-                                },
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#3f2e04',
-                                        borderRadius: '18px',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#3f2e04',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#3f2e04',
-                                        borderWidth: '2px',
-                                    },
-                                },
-                                '& .MuiInputBase-input': {
-                                    borderRadius: '18px',
-                                    backgroundColor: '#d8c2be',
-                                    fontFamily: 'Roboto Regular',
-                                    fontSize: '16px !important',
-                                    height: '20px',
-                                    boxShadow: 8,
-                                },
-                                width: '200px',
-                                marginLeft: '20px',
-                            }}
-                            size='small'/>
-                    </Grid>
-
-                    <Grid sx={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
-                        <Grid sx={{width: '80px'}}>
-                            <Typography component="span" display="inline-block"
-                                        sx={{
-                                            fontFamily: 'Roboto Black',
-                                            fontSize: '17px',
-                                            marginLeft: '15px',
-                                            color: '#3f2e04'
-                                        }}>
-                                Category:
-                            </Typography>
-                        </Grid>
-                        <TextField
-                            inputProps={{
-                                sx: {color: '#3f2e04 !important'},
-                            }}
-                            sx={{
-                                '& .MuiInput-underline': {
-                                    borderBottomColor: 'transparent',
-                                },
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#3f2e04',
-                                        borderRadius: '18px',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#3f2e04',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#3f2e04',
-                                        borderWidth: '2px',
-                                    },
-                                },
-                                '& .MuiInputBase-input': {
-                                    borderRadius: '18px',
-                                    backgroundColor: '#d8c2be',
-                                    fontFamily: 'Roboto Regular',
-                                    fontSize: '16px !important',
-                                    height: '20px',
-                                    boxShadow: 8,
-                                },
-                                width: '200px',
-                                marginLeft: '20px',
-                            }}
-                            size='small'/>
-                    </Grid>
-
-                    <Grid sx={{display: 'flex', justifyContent: 'center', marginTop: '25px'}}>
-                        <Button sx={{
-                            fontFamily: 'Roboto Bold',
-                            fontSize: '17px',
-                            width: '200px',
-                            height: '50px',
-                            backgroundColor: '#8fb677',
-                            color: '#201a19',
-                            borderRadius: '22px',
-                            border: 1,
-                            boxShadow: 8,
-                            borderColor: '#7a9a65',
-                            ':hover': {backgroundColor: '#7a9a65'}
-                        }}>Confirm
-                        </Button>
-                    </Grid>
+                                type="submit">Confirm
+                                </Button>
+                            </Grid>
+                        </form>
                 </Menu>
             </Box>
         </>
