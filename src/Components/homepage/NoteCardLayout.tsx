@@ -11,13 +11,9 @@ import './NoteCardLayout.css'
 import Grid from "@mui/material/Grid";
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
-import {styled} from "@mui/material/styles";
-import SendIcon from "@mui/icons-material/Send";
-import { DeleteNote, UpdateNote } from "../../Utils/note_service";
-import { common } from "@mui/material/colors";
-import Home from "../../Pages/View/home/Home";
-import { TakeUserInfoAll, TakeUserInfoByEmail } from "../../Utils/AuthService";
-import { useNavigate } from "react-router-dom";
+import {DeleteNote, UpdateNote} from "../../Utils/note_service";
+import {TakeUserInfoAll, TakeUserInfoByEmail} from "../../Utils/AuthService";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
     title: any,
@@ -38,14 +34,14 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
     useEffect(() => {
 
         const takeUserInfo = async () => {
-            let response:any = await TakeUserInfoAll(allowed);
+            let response: any = await TakeUserInfoAll(allowed);
             setUserInfo(response);
-        }   
+        }
 
         takeUserInfo();
     }, []);
 
-    
+
     /************************* Handle notes MouseEnter & MouseExit *************************/
     const [isHovered, setIsHovered] = React.useState(false);
 
@@ -75,13 +71,16 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
         setIsEditable(true);
     };
 
-    const handleConfirmClick = () => {
-        // Aggiungi qui la logica per confermare la modifica
-        setIsEditable(false);
+    const handleConfirmClick: any = async (noteId: any) => {
+        let isError = await UpdateNote(titleNote, bodyNote, null, noteId);
+
+        if (isError)
+            console.log("Errore aggiornamento nota");
+
+        window.location.reload();
     };
 
     const handleCloseClick = () => {
-        // Aggiungi qui la logica per confermare la modifica
         setIsEditable(false);
     };
 
@@ -100,20 +99,9 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
     };
 
     const open = Boolean(anchorEl);
-    
-    // metodo modifica nota
-    const updateNote:any = async (noteId:any) => {
-
-        let isError = await UpdateNote(titleNote, bodyNote, null, noteId);
-
-        if(isError)
-            console.log("Errore aggiornamento nota");
-
-        window.location.reload();
-    }
 
     // metodo eliminazione nota
-    const deleteNote:any = async (noteId:any) => {
+    const deleteNote: any = async (noteId: any) => {
 
         let isError = await DeleteNote(noteId);
 
@@ -121,38 +109,37 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
     }
 
     // aggiornamento testi
-    const handleChangeTitle = (event:any) => {
+    const handleChangeTitle = (event: any) => {
         setTitle(event.target.value);
     };
 
 
-    const handleChangeBody = (event:any) => {
+    const handleChangeBody = (event: any) => {
         setBody(event.target.value);
     }
 
     // metodo per aggiungere "allowed" alla nota
     const addAllowed = async (event: any) => {
 
-        let emailAllowedUser:any = [];
+        let emailAllowedUser: any = [];
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         //Take Value
 
-        for(let i=0; i < textFields.length; i++) {
-            let response:any = await TakeUserInfoByEmail(data.get('email'+i));
+        for (let i = 0; i < textFields.length; i++) {
+            let response: any = await TakeUserInfoByEmail(data.get('email' + i));
             emailAllowedUser.push(response.id);
         }
-        
-        let response:any = await TakeUserInfoAll(emailAllowedUser);
 
-        for(let i=0; i < response.length; i++) {
+        let response: any = await TakeUserInfoAll(emailAllowedUser);
+
+        for (let i = 0; i < response.length; i++) {
             let isError = await UpdateNote(titleNote, bodyNote, response[i].id, noteId);
         }
 
         window.location.reload();
     }
 
-    
 
     /************************* Share pop up TextField *************************/
     const [textFields, setTextFields] = useState<string[]>([]);
@@ -180,16 +167,16 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
     return (
         <>
             <Card
-                  className='cardsLayout'
-                  onMouseEnter={(event) => {
-                      handleMouseEnter();
-                      retardTransitionTrue()
-                  }}
-                  onMouseLeave={(event) => {
-                      handleMouseLeave();
-                      retardTransitionFalse()
-                  }}
-                  sx={{boxShadow: 8}}>
+                className='cardsLayout'
+                onMouseEnter={(event) => {
+                    handleMouseEnter();
+                    retardTransitionTrue()
+                }}
+                onMouseLeave={(event) => {
+                    handleMouseLeave();
+                    retardTransitionFalse()
+                }}
+                sx={{boxShadow: 8}}>
                 <CardContent sx={{m: -1}}>
                     <TextField
                         inputProps={{
@@ -231,7 +218,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                         onChange={handleChangeBody}
                         onClick={handleTextFieldClick}
                     />
-                
+
 
                     {isEditable ? (
                         <div>
@@ -252,8 +239,8 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                 </IconButton>
                             </Grow>
 
-                            <Grow in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={600} onClick={() => updateNote(noteId)}>
-                                <IconButton onClick={handleConfirmClick}
+                            <Grow in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={600}>
+                                <IconButton onClick={() => handleConfirmClick(noteId)}
                                             sx={{
                                                 backgroundColor: '#65cc8f',
                                                 ':hover': {backgroundColor: '#58b27f'},
@@ -370,7 +357,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                     overflowY: 'scroll',
                                     pl: 1.2, pr: 1.2, pt: 1.2
                                 }}>
-                                    {userInfo.map((user:any, index:any) => (
+                                    {userInfo.map((user: any, index: any) => (
                                         <TextField inputProps={{
                                             sx: {color: '#3f2e04 !important'}
                                         }}
@@ -510,7 +497,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                                     }}
                                                     placeholder='Email'
                                                     type='email'
-                                                    name={'email'+index}
+                                                    name={'email' + index}
                                                 />
                                                 <Button onClick={() => handleRemoveTextField(index)}
                                                         sx={{
@@ -658,7 +645,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                             marginTop: '10px',
                                             ':hover': {backgroundColor: '#7e0508'}
                                         }} disableRipple
-                                        onClick={() => deleteNote(noteId)}>Yes</Button>
+                                                onClick={() => deleteNote(noteId)}>Yes</Button>
                                     </Grid>
                                 </Box>
                             </Menu>

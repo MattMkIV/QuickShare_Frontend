@@ -205,7 +205,7 @@ function AccountBalance() {
         check();
         let month:any = localStorage.getItem("month");
 
-        if(month === "All") {
+        if(month === "All" || month === null) {
             takeExpenses();
             takeIncome();
         }else{

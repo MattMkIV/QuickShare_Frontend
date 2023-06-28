@@ -54,7 +54,7 @@ function Home() {
 
                 <Grid className='cardSliderHomePage'>
                     <Stack direction="row" spacing={5}>
-                        {notes.slice(0, 4).map((n:any, index:any) => (                    
+                        {notes.slice(0, 10).map((n:any, index:any) => (
                             <CardLayout key={index} title={n.title} noteId={n.note_id} createData={n.create_date} body={n.body} allowed={n.allowed}></CardLayout>
                         ))} 
                     </Stack>

@@ -12,7 +12,18 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Box, CardContent, Dialog, DialogContent, Fab, Grow, IconButton, Slide, TextField, Typography} from "@mui/material";
+import {
+    Box,
+    CardContent,
+    Dialog,
+    DialogContent,
+    Fab,
+    Grow,
+    IconButton,
+    Slide,
+    TextField,
+    Typography
+} from "@mui/material";
 
 //CSS
 import './LeftBar.css';
@@ -21,12 +32,12 @@ import Grid from "@mui/material/Grid";
 import {AddPhotoAlternate} from '@mui/icons-material';
 import {useNavigate} from "react-router-dom";
 import Card from "@mui/material/Card";
-import { TakeUserInfoAll, TakeUserInfoByEmail } from '../../Utils/AuthService';
-import { CreateNote, UpdateNote } from '../../Utils/note_service';
+import {TakeUserInfoAll, TakeUserInfoByEmail} from '../../Utils/AuthService';
+import {CreateNote, UpdateNote} from '../../Utils/note_service';
 import {DatePicker} from '@mui/x-date-pickers';
 import {DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs';
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -125,48 +136,48 @@ function SimpleDialog(props: SimpleDialogProps) {
 
     const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
 
-    const handleChangeTitle = (event:any) => {
+    const handleChangeTitle = (event: any) => {
         setTitle(event.target.value);
     };
 
-    const handleChangeBody = (event:any) => {
+    const handleChangeBody = (event: any) => {
         setBody(event.target.value);
     };
 
     // Insert new elemnt
-    const takeInfo = (data:any) => {
+    const takeInfo = (data: any) => {
         console.log("HELLO");
         noteContent.current.push(data.get('noteTitle'));
         noteContent.current.push(data.get('noteBody'));
         setNewElement(1);
-    } 
+    }
 
-    const createNote = async (data:any) => {
+    const createNote = async (data: any) => {
         setNewElement(0);
         let emails = [];
-        let emailAllowedUser:any = [];
+        let emailAllowedUser: any = [];
         let title = noteContent.current[0];
         let body = noteContent.current[1];
 
-        let noteCreatedInfo:any = await CreateNote(title, body);
+        let noteCreatedInfo: any = await CreateNote(title, body);
 
-        if(!noteCreatedInfo[0]) {
-            for(let i=0; i < textFields.length; i++) {
-                emails.push(data.get('email'+i));
+        if (!noteCreatedInfo[0]) {
+            for (let i = 0; i < textFields.length; i++) {
+                emails.push(data.get('email' + i));
             }
-    
-            if(emails.length !== 0) {
-                    
-                for(let i=0; i < textFields.length; i++) {
-                    let response:any = await TakeUserInfoByEmail(data.get('email'+i));
+
+            if (emails.length !== 0) {
+
+                for (let i = 0; i < textFields.length; i++) {
+                    let response: any = await TakeUserInfoByEmail(data.get('email' + i));
                     emailAllowedUser.push(response.id);
                 }
 
-                let response:any = await TakeUserInfoAll(emailAllowedUser);
+                let response: any = await TakeUserInfoAll(emailAllowedUser);
 
-                for(let i=0; i < response.length; i++) {
+                for (let i = 0; i < response.length; i++) {
                     console.log(noteCreatedInfo[1].note_id);
-                   let isError = await UpdateNote(title, body, response[i].id, noteCreatedInfo[1].note_id);
+                    let isError = await UpdateNote(title, body, response[i].id, noteCreatedInfo[1].note_id);
                 }
             }
         }
@@ -179,9 +190,9 @@ function SimpleDialog(props: SimpleDialogProps) {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        if(newElement === 0)
+        if (newElement === 0)
             takeInfo(data);
-        else 
+        else
             createNote(data);
 
         setIsFirstChecked(!isFirstChecked);
@@ -208,16 +219,16 @@ function SimpleDialog(props: SimpleDialogProps) {
                         <Grid sx={{display: 'flex', justifyContent: 'center', height: '72.1%', marginTop: '15px'}}>
                             <Grid sx={{height: '100%'}}>
                                 <Card key='Card Note'
-                                    onMouseEnter={() => handleCardEnter('Card Note')}
-                                    onMouseLeave={handleCardLeave}
-                                    sx={{
-                                        boxShadow: 8,
-                                        width: '260px',
-                                        height: '240px',
-                                        backgroundColor: '#ede0de',
-                                        ':hover': {boxShadow: 12},
-                                        border: selectedCard === 'Card Note' ? '3px solid #b4261f' : 'none',
-                                    }}>
+                                      onMouseEnter={() => handleCardEnter('Card Note')}
+                                      onMouseLeave={handleCardLeave}
+                                      sx={{
+                                          boxShadow: 8,
+                                          width: '260px',
+                                          height: '240px',
+                                          backgroundColor: '#ede0de',
+                                          ':hover': {boxShadow: 12},
+                                          border: selectedCard === 'Card Note' ? '3px solid #b4261f' : 'none',
+                                      }}>
                                     <CardContent sx={{m: -1}}>
                                         <TextField
                                             inputProps={{
@@ -259,17 +270,17 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     </CardContent>
                                 </Card>
                                 <Card key='Card Event'
-                                    onMouseEnter={() => handleCardEnter('Card Event')}
-                                    onMouseLeave={handleCardLeave}
-                                    sx={{
-                                        boxShadow: 8,
-                                        width: '260px',
-                                        height: '120px',
-                                        marginTop: '30px',
-                                        backgroundColor: '#ede0de',
-                                        ':hover': {boxShadow: 12},
-                                        border: selectedCard === 'Card Event' ? '3px solid #b4261f' : 'none',
-                                    }}>
+                                      onMouseEnter={() => handleCardEnter('Card Event')}
+                                      onMouseLeave={handleCardLeave}
+                                      sx={{
+                                          boxShadow: 8,
+                                          width: '260px',
+                                          height: '120px',
+                                          marginTop: '30px',
+                                          backgroundColor: '#ede0de',
+                                          ':hover': {boxShadow: 12},
+                                          border: selectedCard === 'Card Event' ? '3px solid #b4261f' : 'none',
+                                      }}>
                                     <CardContent sx={{m: -1}}>
                                         <TextField
                                             inputProps={{
@@ -290,35 +301,80 @@ function SimpleDialog(props: SimpleDialogProps) {
 
                                         <hr className='littleSeparationLine'></hr>
 
-                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                            <DatePicker/>
-                                        </LocalizationProvider>
-
+                                        <Grid sx={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            height: '65px'
+                                        }}>
+                                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    format="DD/MM/YYYY"
+                                                    views={['day', 'month', 'year']}
+                                                    formatDensity="spacious"
+                                                    slotProps={{textField: {size: 'small',}}}
+                                                    value={value}
+                                                    onChange={(newValue) => {
+                                                        setValue(newValue);
+                                                    }}
+                                                    sx={{
+                                                        width: '235px',
+                                                        height: '40px',
+                                                        boxShadow: 3,
+                                                        borderRadius: '5px !important',
+                                                        backgroundColor: '#a08c8a',
+                                                        '& .MuiInput-underline': {
+                                                            borderBottomColor: 'transparent',
+                                                        },
+                                                        '& .MuiFormLabel-root': {
+                                                            color: '#3f2e04',
+                                                        },
+                                                        '& .MuiOutlinedInput-root': {
+                                                            '& fieldset': {
+                                                                borderColor: '#3f2e04',
+                                                            },
+                                                            '&:hover fieldset': {
+                                                                borderColor: '#3f2e04',
+                                                            },
+                                                            '&.Mui-focused fieldset': {
+                                                                borderColor: '#3f2e04',
+                                                                borderWidth: '2px',
+                                                            },
+                                                        },
+                                                        '& .MuiInputBase-input': {
+                                                            borderRadius: '18px',
+                                                            fontFamily: 'Roboto Regular',
+                                                            fontSize: '16px !important',
+                                                        },
+                                                    }}
+                                                />
+                                            </LocalizationProvider>
+                                        </Grid>
                                     </CardContent>
                                 </Card>
                             </Grid>
 
                             <Card key='Card List'
-                                onMouseEnter={() => {
-                                    handleCardEnter('Card List');
-                                    handleMouseEnter();
-                                    retardTransitionTrue()
-                                }}
-                                onMouseLeave={() => {
-                                    handleCardLeave();
-                                    handleMouseLeave();
-                                    retardTransitionFalse()
-                                }}
-                                sx={{
-                                    width: '260px',
-                                    height: '390px',
-                                    marginLeft: '30px',
-                                    borderRadius: '12px',
-                                    backgroundColor: '#ede0de',
-                                    boxShadow: 8,
-                                    ':hover': {boxShadow: 12},
-                                    border: selectedCard === 'Card List' ? '3px solid #b4261f' : 'none',
-                                }}>
+                                  onMouseEnter={() => {
+                                      handleCardEnter('Card List');
+                                      handleMouseEnter();
+                                      retardTransitionTrue()
+                                  }}
+                                  onMouseLeave={() => {
+                                      handleCardLeave();
+                                      handleMouseLeave();
+                                      retardTransitionFalse()
+                                  }}
+                                  sx={{
+                                      width: '260px',
+                                      height: '390px',
+                                      marginLeft: '30px',
+                                      borderRadius: '12px',
+                                      backgroundColor: '#ede0de',
+                                      boxShadow: 8,
+                                      ':hover': {boxShadow: 12},
+                                      border: selectedCard === 'Card List' ? '3px solid #b4261f' : 'none',
+                                  }}>
                                 <CardContent sx={{m: -1}}>
                                     <TextField
                                         inputProps={{
@@ -399,13 +455,14 @@ function SimpleDialog(props: SimpleDialogProps) {
                                             </Grid>
                                         ))}
                                     </Box>
-                                    <Grow in={isHovered} onClick={handleListElements} mountOnEnter unmountOnExit
-                                        timeout={400}>
+                                    <Slide direction='up' in={isHovered} onClick={handleListElements} mountOnEnter
+                                           unmountOnExit
+                                           timeout={200}>
                                         <IconButton sx={{
                                             height: '56px',
                                             width: '56px',
                                             marginTop: '5px',
-                                            marginLeft: '182px',
+                                            marginLeft: '178px',
                                             boxShadow: 8,
                                             border: 1,
                                             borderColor: '#7a9a65',
@@ -414,165 +471,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                         }}>
                                             <AddIcon sx={{color: '#201a19', width: '20px', height: '20px'}}/>
                                         </IconButton>
-                                    </Grow>
-                                </CardContent>
-                            </Card>
-                        </Grid> : ''}
-
-                    {!isFirstChecked ?
-                        <Grid wrap='nowrap' sx={{display: 'flex'}}>
-                            <Typography sx={{
-                                color: '#201a19',
-                                fontSize: '43px',
-                                fontFamily: 'Roboto Light'
-                            }}>Add something:</Typography> 
-                        </Grid>: ''}
-
-                    {isFirstChecked ?
-                        <Grid sx={{display: 'flex', justifyContent: 'center', height: '72.1%', marginTop: '15px'}}>
-                            <Grid sx={{height: '100%'}}>
-                                <Card key='Card 1'
-                                    onMouseEnter={() => handleCardEnter('Card 1')}
-                                    onMouseLeave={handleCardLeave}
-                                    sx={{
-                                        boxShadow: 8,
-                                        width: '260px',
-                                        height: '240px',
-                                        borderRadius: '12px',
-                                        backgroundColor: '#ede0de',
-                                        ':hover': {boxShadow: 12},
-                                        border: selectedCard === 'Card 1' ? '3px solid #b4261f' : 'none',
-                                    }}>
-                                    <CardContent sx={{m: -1}}>
-                                        <TextField
-                                            inputProps={{
-                                                sx: {color: '#442926 !important'}
-                                            }}
-                                            sx={{
-                                                '& .MuiInput-underline': {
-                                                    borderBottomColor: 'transparent',
-                                                },
-                                                '& .MuiOutlinedInput-root': {
-                                                    '& fieldset': {
-                                                        borderColor: 'transparent',
-                                                        borderRadius: '22px',
-                                                    },
-                                                    '&:hover fieldset': {
-                                                        borderColor: 'transparent',
-                                                    },
-                                                    '&.Mui-focused fieldset': {
-                                                        borderColor: 'transparent',
-                                                    },
-                                                },
-                                                '& .MuiInputBase-input': {
-                                                    fontFamily: 'Roboto Black',
-                                                    fontSize: '27px !important',
-                                                    height: '10px',
-                                                    width: '240px',
-                                                },
-                                                marginLeft: '-15px',
-                                            }}
-                                            placeholder='Title Note'
-                                            name="noteTitle"
-                                        >
-                                        </TextField>
-
-                                        <hr className='littleSeparationLine'></hr>
-
-                                        <TextField
-                                            multiline
-                                            rows={8}
-                                            placeholder='Content here...'
-                                            inputProps={{
-                                                sx: {
-                                                    color: '#574419 !important',
-                                                },
-                                            }}
-                                            sx={{
-                                                width: '100%',
-                                                '& fieldset': {border: 'none'},
-                                                '& .MuiInputBase-input': {
-                                                    fontFamily: 'Roboto Light',
-                                                    fontSize: '20px !important'
-                                                }
-                                            }}
-                                            name="noteBody"
-                                        />
-                                    </CardContent>
-                                </Card>
-                                <Card key='Card 3'
-                                    onMouseEnter={() => handleCardEnter('Card 3')}
-                                    onMouseLeave={handleCardLeave} sx={{
-                                    width: '260px',
-                                    height: '120px',
-                                    marginTop: '30px',
-                                    backgroundColor: '#ede0de',
-                                    boxShadow: '8px 8px 10px 4px rgba(0, 0, 0, 0.22)',
-                                    border: selectedCard === 'Card 3' ? '3px solid #b4261f' : 'none',
-                                }}>
-                                    <CardContent sx={{m: -1}}>
-                                        <Typography noWrap sx={{
-                                            width: '272px',
-                                            marginTop: '5px',
-                                            fontSize: '25px',
-                                            fontWeight: 'bold',
-                                            letterSpacing: '-0.2px',
-                                            fontFamily: 'Roboto Bold'
-                                        }} contentEditable={true}>
-                                            Event title
-                                        </Typography>
-
-                                        <hr className='littleSeparationLine'></hr>
-
-                                        <Box>
-
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-
-                            <Card key='Card 2'
-                                onMouseEnter={() => handleCardEnter('Card 2')}
-                                onMouseLeave={handleCardLeave}
-                                sx={{
-                                    width: '260px',
-                                    height: '390px',
-                                    marginLeft: '30px',
-                                    borderRadius: '12px',
-                                    backgroundColor: '#ede0de',
-                                    boxShadow: '8px 8px 10px 4px rgba(0, 0, 0, 0.22)',
-                                    border: selectedCard === 'Card 2' ? '3px solid #b4261f' : 'none',
-                                }}>
-                                <CardContent sx={{m: -1}}>
-                                    <Typography noWrap className='cardTitle' contentEditable={true}>
-                                        Title List
-                                    </Typography>
-
-                                    <hr className='littleSeparationLine'></hr>
-
-                                    <Box onMouseEnter={handleMouseEnter}
-                                        onMouseLeave={handleMouseLeave}
-                                        sx={{
-                                            height: '283px',
-                                            marginTop: '7px',
-                                            overflowY: 'scroll',
-                                        }}>
-                                        <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit
-                                            timeout={100}>
-                                            <Fab sx={{
-                                                position: 'absolute',
-                                                marginLeft: '180px',
-                                                marginTop: '255px',
-                                                maxWidth: '50px',
-                                                minHeight: '50px',
-                                                maxHeight: '10px',
-                                                backgroundColor: '#528839',
-                                                ':hover': {backgroundColor: '#477531'}
-                                            }}>
-                                                <AddIcon sx={{color: '#201a19', width: '20px', height: '20px'}}/>
-                                            </Fab>
-                                        </Slide>
-                                    </Box>
+                                    </Slide>
                                 </CardContent>
                             </Card>
                         </Grid> : ''}
@@ -586,77 +485,78 @@ function SimpleDialog(props: SimpleDialogProps) {
                             }}>Share with:</Typography>
                         </Grid> : ''}
 
-                {!isFirstChecked ?
-                    <Box sx={{
-                        width: '100%',
-                        height: '74%',
-                        overflowY: 'scroll',
-                        borderRadius: '22px',
-                        backgroundColor: '#d8c2be',
-                        marginTop: '5px',
-                        pl: 2, pr: 2, pt: 2,
-                        boxShadow: 8,
-                    }}>
-                        {textFields.map((textField, index) => (
-                            <Grid key={index} style={{display: 'flex', alignContent: 'center'}}>
-                                <TextField
-                                    inputProps={{
-                                        sx: {color: '#3f2e04 !important'}
-                                    }}
-                                    sx={{
-                                        '& .MuiInput-underline': {
-                                            borderBottomColor: 'transparent',
-                                        },
-                                        '& .MuiOutlinedInput-root': {
-                                            '& fieldset': {
-                                                borderColor: '#3f2e04',
-                                                borderRadius: '25px',
-                                            },
-                                            '&:hover fieldset': {
-                                                borderColor: '#3f2e04',
-                                                boxShadow: 12,
-                                            },
-                                            '&.Mui-focused fieldset': {
-                                                borderColor: '#3f2e04',
-                                                borderWidth: '2px',
-                                            },
-                                        },
-                                        '& .MuiInputBase-input': {
-                                            borderRadius: '25px',
-                                            fontFamily: 'Roboto Regular',
-                                            fontSize: '18px !important',
-                                            height: '15px',
-                                            width: '440px',
-                                        },
-                                        pb: 2,
-                                    }}
-                                    value={textField}
-                                    placeholder='Email or Username'
-                                    onChange={(e) => handleChangeTextField(index, e.target.value)}
-                                />
-                                <Button onClick={() => handleRemoveTextField(index)}
-                                        sx={{
-                                            backgroundColor: '#920609',
-                                            height: '40px',
-                                            minWidth: '40px',
-                                            borderRadius: '22px',
-                                            marginLeft: '10px',
-                                            marginTop: '5px',
-                                            boxShadow: 4,
-                                            ':hover': {backgroundColor: '#9f3a3c'}
+                    {!isFirstChecked ?
+                        <Box sx={{
+                            width: '100%',
+                            height: '400px',
+                            overflowY: 'scroll',
+                            borderRadius: '22px',
+                            backgroundColor: '#d8c2be',
+                            marginTop: '5px',
+                            pl: 2, pr: 2, pt: 2,
+                            boxShadow: 8,
+                        }}>
+                            {textFields.map((textField, index) => (
+                                <Grid key={index} style={{display: 'flex', alignContent: 'center'}}>
+                                    <TextField
+                                        inputProps={{
+                                            sx: {color: '#3f2e04 !important'}
                                         }}
-                                        disableRipple>
-                                    <DeleteIcon sx={{height: '20px', width: '20px', color: '#ffb4aa'}}/>
-                                </Button>
-                            </Grid>
-                        ))}
-                    </Box> : ''}
+                                        sx={{
+                                            '& .MuiInput-underline': {
+                                                borderBottomColor: 'transparent',
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
+                                                    borderColor: '#3f2e04',
+                                                    borderRadius: '25px',
+                                                },
+                                                '&:hover fieldset': {
+                                                    borderColor: '#3f2e04',
+                                                    boxShadow: 12,
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    borderColor: '#3f2e04',
+                                                    borderWidth: '2px',
+                                                },
+                                            },
+                                            '& .MuiInputBase-input': {
+                                                borderRadius: '25px',
+                                                fontFamily: 'Roboto Regular',
+                                                fontSize: '18px !important',
+                                                height: '15px',
+                                                width: '440px',
+                                            },
+                                            pb: 2,
+                                        }}
+                                        value={textField}
+                                        type='email'
+                                        placeholder='Email'
+                                        onChange={(e) => handleChangeTextField(index, e.target.value)}
+                                    />
+                                    <Button onClick={() => handleRemoveTextField(index)}
+                                            sx={{
+                                                backgroundColor: '#920609',
+                                                height: '40px',
+                                                minWidth: '40px',
+                                                borderRadius: '22px',
+                                                marginLeft: '10px',
+                                                marginTop: '5px',
+                                                boxShadow: 4,
+                                                ':hover': {backgroundColor: '#9f3a3c'}
+                                            }}
+                                            disableRipple>
+                                        <DeleteIcon sx={{height: '20px', width: '20px', color: '#ffb4aa'}}/>
+                                    </Button>
+                                </Grid>
+                            ))}
+                        </Box> : ''}
 
                     <Grid sx={{display: 'flex', justifyContent: 'flex-end'}}>
                         {isFirstChecked ?
                             <Button
                                 endIcon={<NavigateNextIcon sx={{height: '25px', width: '25px', color: '#201a19'}}/>}
-                                
+                                onClick={() => setIsFirstChecked(!isFirstChecked)}
                                 sx={{
                                     fontFamily: 'Roboto Bold',
                                     height: '60px',
@@ -673,7 +573,6 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     boxShadow: 4,
                                     ':hover': {backgroundColor: '#dab887'}
                                 }}
-                                type="submit"
                                 variant="contained"
                             >Next</Button> : ''}
 
@@ -697,27 +596,27 @@ function SimpleDialog(props: SimpleDialogProps) {
                                 ':hover': {backgroundColor: '#477531'}
                             }}>Add</Button> : ''}
 
-                        {!isFirstChecked ? <Button
-                            sx={{
-                                fontFamily: 'Roboto Bold',
-                                height: '60px',
-                                width: '110px',
-                                fontSize: '18px',
-                                backgroundColor: '#dfc38c',
-                                borderRadius: '25px',
-                                color: '#3f2e04',
-                                marginTop: '15px',
-                                display: 'flex',
-                                textAlign: 'center',
-                                alignContent: 'center',
-                                justifyContent: 'center',
-                                boxShadow: 8,
-                                ':hover': {backgroundColor: '#c2a46f'}
-                            }}
-                            variant="contained"
-                            type="submit"
-                        >Done</Button> : ''}
-
+                        {!isFirstChecked ?
+                            <Button
+                                onClick={() => setIsFirstChecked(!isFirstChecked)}
+                                sx={{
+                                    fontFamily: 'Roboto Bold',
+                                    height: '60px',
+                                    width: '110px',
+                                    fontSize: '18px',
+                                    backgroundColor: '#dfc38c',
+                                    borderRadius: '25px',
+                                    color: '#3f2e04',
+                                    marginTop: '15px',
+                                    display: 'flex',
+                                    textAlign: 'center',
+                                    alignContent: 'center',
+                                    justifyContent: 'center',
+                                    boxShadow: 8,
+                                    ':hover': {backgroundColor: '#c2a46f'}
+                                }}
+                                variant="contained"
+                            >Done</Button> : ''}
                     </Grid>
                 </form>
             </DialogContent>
