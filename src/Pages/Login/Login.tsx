@@ -5,9 +5,9 @@ import InputLogin from '../../Components/login/InputLogIn';
 import './Login.css'
 //JS
 //Other
-import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
-import { checkJwt } from '../../Utils/AuthService';
+import {useNavigate} from "react-router-dom";
+import {useEffect} from 'react';
+import {checkJwt} from '../../Utils/AuthService';
 import {Box, Divider, Typography} from "@mui/material";
 
 function Login() {
@@ -18,12 +18,12 @@ function Login() {
     useEffect(() => {
         const check = async () => {
             let jwtError = await checkJwt();
-            if(!jwtError) navigate("/homepage");
+            if (!jwtError) navigate("/homepage");
         }
 
         check();
     }, []);
-    
+
     document.body.style.backgroundImage = 'url("LoginBackground.png")';
 
     return (

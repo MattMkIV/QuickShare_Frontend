@@ -7,9 +7,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 //CSS
 import './Registration.css'
 //Other
-import { useState } from 'react';
-import { registerNewUser } from '../../Utils/AuthService';
-import React from 'react';
+import React, {useState} from 'react';
+import {registerNewUser} from '../../Utils/AuthService';
 //Axios
 import {useNavigate} from 'react-router-dom';
 import {Typography} from "@mui/material";
@@ -30,17 +29,17 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
     const navigate = useNavigate();
     let isErrorInput = false;
     const [ErrorInput, setErrorInput] = useState(false);
-    const[nome, setNome] = useState<any>();
-    const[cognome, setCognome] = useState<any>();
-    const[username, setUsername] = useState<any>();
-    const[email, setEmail] = useState<any>();
-    const[password, setPassword] = useState<any>();
-    const[confirmPassword, setConfirmPassword] = useState<any>();
-    
+    const [nome, setNome] = useState<any>();
+    const [cognome, setCognome] = useState<any>();
+    const [username, setUsername] = useState<any>();
+    const [email, setEmail] = useState<any>();
+    const [password, setPassword] = useState<any>();
+    const [confirmPassword, setConfirmPassword] = useState<any>();
+
 
     /************************* Handle pages in registration *************************/
     const [secondPage, setSecondPage] = useState(false);
- 
+
     const isSecondPage = () => {
         setSecondPage(true);
     };
@@ -59,31 +58,31 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
         isSecondPage();
     }
 
-      //Functions
-      const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            let isError = false;
-            const data = new FormData(event.currentTarget);
-            //Take Value
-            let email = data.get('email');
-            let password = data.get('password');
-            let confirmPassword = data.get('confirmPassword');
+    //Functions
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        let isError = false;
+        const data = new FormData(event.currentTarget);
+        //Take Value
+        let email = data.get('email');
+        let password = data.get('password');
+        let confirmPassword = data.get('confirmPassword');
 
-            var userInfo = {
-                Nome: nome,
-                Cognome: cognome,
-                Username: username,
-                Email: email,
-                Password: password,
-                ConfirmPassword: confirmPassword
-            };
+        var userInfo = {
+            Nome: nome,
+            Cognome: cognome,
+            Username: username,
+            Email: email,
+            Password: password,
+            ConfirmPassword: confirmPassword
+        };
 
-            isError = await registerNewUser(userInfo);
+        isError = await registerNewUser(userInfo);
 
-            if(!isError) navigate("/confirmRegistration");
-            else setErrorInput(true);
+        if (!isError) navigate("/confirmRegistration");
+        else setErrorInput(true);
 
-      }
+    }
 
 
     return (
