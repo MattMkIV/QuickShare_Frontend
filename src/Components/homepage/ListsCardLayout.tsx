@@ -129,7 +129,6 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
     };
 
     const handleCloseClick = () => {
-        // Aggiungi qui la logica per confermare la modifica
         setIsEditable(false);
     };
 
@@ -139,7 +138,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
 
     /************************* Menù pop up functions *************************/
 
-        //const [selectedItem, setSelectedItem] = useState(Home);
+    //const [selectedItem, setSelectedItem] = useState(Home);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
     const [menuId, setMenuId] = useState<string | undefined>(undefined);
@@ -204,6 +203,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                 },
                                 marginLeft: '-14px',
                             }}
+                            type='text'
                             defaultValue={title}
                             onChange={handleChangeTitle}
                             onClick={handleTextFieldClick}
@@ -301,9 +301,9 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                             },
                                             marginBottom: 1.2,
                                         }}
-                                        placeholder='New element'
                                         type='text'
                                         name='newListItem'
+                                        placeholder='New element'
                                     />
                                     <Button sx={{
                                         border: 1,
@@ -499,6 +499,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                                        },
                                                        marginBottom: 1.2
                                                    }}
+                                                   type='email'
                                                    defaultValue={user.email}
                                                    disabled>
                                         </TextField>
