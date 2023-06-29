@@ -1,12 +1,12 @@
 //MUI
 import {Box, TextField} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-//Component
-//CSS
-//JS
-//Other
 
-function MyMessageComponent() {
+interface Props {
+    message: any,
+}
+
+function MyMessageComponent({message}:Props) {
 
     //Render
     return (
@@ -28,6 +28,8 @@ function MyMessageComponent() {
                         borderRadius: '22px 22px 5px 22px',
                         boxShadow: 5,
                     }}
+                    placeholder={message}
+                    disabled
                 />
 
                 <Avatar
@@ -40,7 +42,7 @@ function MyMessageComponent() {
                         height: '35px',
                         boxShadow: 5,
                     }}
-                >M</Avatar>
+                ></Avatar>
             </Box>
         </>
     );

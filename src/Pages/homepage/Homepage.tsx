@@ -16,8 +16,9 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {styled} from "@mui/material/styles";
-import { TakeUserInfoFromJwt, checkJwt } from '../../Utils/AuthService';
+import { TakeUserInfoByEmail, TakeUserInfoFromJwt, checkJwt } from '../../Utils/AuthService';
 import { useNavigate } from 'react-router-dom';
+import { CreateMessage, TakeMessages, TakeUserId, UpdateMessage } from '../../Utils/message_service';
 
 interface HomepageProps {
     componentToRender: React.ComponentType;
@@ -31,6 +32,8 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
     //Variable declaration
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [userInfo, setUserInfo] = useState<any>([]);
+    const [messages, setMessages] = useState<any>([]);
+    const [userId, setUserId] = useState<any>();
     let jwtError = false;
     let navigate = useNavigate();
 
@@ -57,14 +60,44 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
             setUserInfo(response[0]);
         }
 
+        const takeMessage = async () => {
+
+            let response:any = await TakeMessages();
+            setMessages(response);
+
+            let user_id = await TakeUserId();
+            setUserId(user_id);
+        }
+
         check();
         takeUserData();
+        takeMessage();
     },[]);
 
 
-    // const handleSelectItem = (item: any) => {
-    //     setSelectedItem(item);
-    // };
+    const sendMessage = async (event: any) => {
+
+        let userIds = [];
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+
+        let command = String(data.get('message'));
+        let index = command.indexOf("@");
+        let message = command.substring(0, index);
+        let mails = command.substring(index+1, command.length);
+        let mailSplit = mails.split(",");
+
+        let response:any = await CreateMessage(message);
+
+        for (let i = 0; i < mailSplit.length; i++) {
+            let response:any = await TakeUserInfoByEmail(mailSplit[i]);
+            userIds.push(response.id);
+        }
+        
+        await UpdateMessage(response[1].message_id, userIds);
+
+        window.location.reload();
+    };
 
     const LightTooltip = styled(({className, ...props}: TooltipProps) => (
         <Tooltip {...props} classes={{popper: className}}/>))(({theme}) => ({
@@ -154,61 +187,71 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                 <Grid sx={{marginTop: '2px'}}>
                     <Stack sx={{height: '516px', marginBottom: '10px', overflowY: 'scroll'}} spacing={2}
                            direction="column">
-                        <OtherMessageComponent/>
-                        <MyMessageComponent/>
+                        {messages.map((message:any, index:any) => (
+                            message.fk_user_creator === userId ?
+                            <MyMessageComponent message={message.message}/>
+                            :
+                            <OtherMessageComponent message={message.message}/>
+                        ))} 
                     </Stack>
                     <Grid wrap='nowrap' sx={{display: 'flex', alignItems: 'center', marginLeft: '10px'}}>
-                        <TextField
-                            inputProps={{
-                                sx: {color: '#3f2e04 !important'}
-                            }}
-                            sx={{
-                                '& .MuiInput-underline': {
-                                    borderBottomColor: 'transparent',
-                                },
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#3f2e04',
+                        <form onSubmit={sendMessage}>
+                            <TextField
+                                type='text'
+                                inputProps={{
+                                    sx: {color: '#3f2e04 !important'}
+                                }}
+                                sx={{
+                                    '& .MuiInput-underline': {
+                                        borderBottomColor: 'transparent',
+                                    },
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: '#3f2e04',
+                                            borderRadius: '18px',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: '#3f2e04',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#3f2e04',
+                                            borderWidth: '2px',
+                                        },
+                                    },
+                                    '& .MuiInputBase-input': {
                                         borderRadius: '18px',
+                                        backgroundColor: '#d8c2be',
+                                        fontFamily: 'Roboto Regular',
+                                        fontSize: '16px !important',
+                                        height: '35px',
+                                        width: '300px',
+                                        boxShadow: 8,
                                     },
-                                    '&:hover fieldset': {
-                                        borderColor: '#3f2e04',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#3f2e04',
-                                        borderWidth: '2px',
-                                    },
-                                },
-                                '& .MuiInputBase-input': {
-                                    borderRadius: '18px',
-                                    backgroundColor: '#d8c2be',
-                                    fontFamily: 'Roboto Regular',
-                                    fontSize: '16px !important',
-                                    height: '35px',
-                                    width: '300px',
-                                    boxShadow: 8,
-                                },
-                            }}
-                            placeholder="Type your message here"
-                            size='small'/>
+                                }}
+                                placeholder="Type your message here"
+                                name='message'
+                                size='small'/>
 
-                        <Button sx={{
-                            border: 1,
-                            borderColor: '#7a9a65',
-                            backgroundColor: '#8fb677',
-                            minWidth: '51px',
-                            height: '51px',
-                            borderRadius: '22px',
-                            marginRight: '10px',
-                            marginLeft: '10px',
-                            boxShadow: 8,
-                            ':hover': {
-                                backgroundColor: '#7a9a65',
-                                cursor: 'pointer'
-                            }
-                        }}>
-                            <SendIcon sx={{width: '23px', height: '23px', color: '#201a19'}}/>
-                        </Button>
+                            <Button 
+                                type='submit'
+                                sx={{
+                                border: 1,
+                                borderColor: '#7a9a65',
+                                backgroundColor: '#8fb677',
+                                minWidth: '51px',
+                                height: '51px',
+                                borderRadius: '22px',
+                                marginRight: '10px',
+                                marginLeft: '10px',
+                                boxShadow: 8,
+                                ':hover': {
+                                    backgroundColor: '#7a9a65',
+                                    cursor: 'pointer'
+                                }
+                            }}>
+                                <SendIcon sx={{width: '23px', height: '23px', color: '#201a19'}}/>
+                            </Button>
+                        </form>
                     </Grid>
                 </Grid>
             </Menu>
