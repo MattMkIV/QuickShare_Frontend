@@ -755,11 +755,9 @@ function LeftBar({
 
     const [selectedItem, setSelectedItem] = useState('home');
 
-    const handleItemClick = (item: any) => {
+    const handleItemClick = (item: string) => {
         setSelectedItem(item);
     };
-
-    //Function
 
     return (
         <>

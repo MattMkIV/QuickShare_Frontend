@@ -192,6 +192,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                             },
                             marginLeft: '-14px',
                         }}
+                        type='text'
                         className='cardTitle'
                         value={titleNote}
                         onChange={handleChangeTitle}
@@ -387,6 +388,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                                        },
                                                        marginBottom: 1.2
                                                    }}
+                                                   type='email'
                                                    defaultValue={user.email}
                                                    disabled>
                                         </TextField>

@@ -37,6 +37,7 @@ function Logo(this: any, {navigateHome}: props) {
                         className='logo'
                         onClick={handleClick}/>
                     <Typography
+                        onClick={handleClick}
                         sx={{
                             color: '#FF5C4D',
                             position: 'absolute',
