@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import React, {useState} from 'react';
 //Axios
 import {useNavigate} from 'react-router-dom';
-import { doLogin } from '../../Utils/AuthService';
+import {doLogin} from '../../Utils/AuthService';
 import {Typography} from "@mui/material";
 
 //Props
@@ -15,8 +15,8 @@ interface Props {
     firstLabel: string,
     secondLabel: string;
 }
-  
-function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
+
+function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
 
     //Variable declaration
     const navigate = useNavigate();
@@ -25,21 +25,21 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
 
     //Functions
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            let isError = false;
-            const data = new FormData(event.currentTarget);
-            //Take Value
-            let username = data.get('username');
-            let password = data.get('password');
+        event.preventDefault();
+        let isError = false;
+        const data = new FormData(event.currentTarget);
+        //Take Value
+        let username = data.get('username');
+        let password = data.get('password');
 
-            isError = await doLogin(username, password);
+        isError = await doLogin(username, password);
 
-            if(!isError) navigate("/homepage");
-            else setErrorInput(true);
+        if (!isError) navigate("/homepage");
+        else setErrorInput(true);
 
-        }
+    }
 
-    return(
+    return (
         <>
             <Box sx={{
                 marginTop: '30px',
@@ -129,7 +129,7 @@ function InputLogin (this: any, {firstLabel, secondLabel}: Props) {
                         width: '380px',
                     }}
                     name="password"
-                    />
+                />
 
                 <Box sx={{
                     width: '100%',
