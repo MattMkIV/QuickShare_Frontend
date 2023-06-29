@@ -165,7 +165,7 @@ function Row({title, price, data, method, category}: Props) {
 function AccountBalance() {
 
     const months = ['All', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-    const [selectedItem, setSelectedItem] = useState('');
+    const [selectedItem, setSelectedItem] = useState(localStorage.getItem('month') || 'All');
     let jwtError = false;
     const navigate = useNavigate();
     const isMdScreen = useMediaQuery('(max-width: 960px)');

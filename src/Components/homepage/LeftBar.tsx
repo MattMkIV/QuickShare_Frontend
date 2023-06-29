@@ -753,7 +753,7 @@ function LeftBar({
 
     const navigate = useNavigate();
 
-    const [selectedItem, setSelectedItem] = useState(localStorage.getItem('section'));
+    const [selectedItem, setSelectedItem] = useState(localStorage.getItem('section') || 'home');
 
     const handleItemClick = (item: string) => {
         localStorage.setItem('section', item);

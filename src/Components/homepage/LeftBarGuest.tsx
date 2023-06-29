@@ -18,9 +18,8 @@ import Grid from "@mui/material/Grid";
 import {useNavigate} from "react-router-dom";
 import Card from "@mui/material/Card";
 import dayjs, {Dayjs} from 'dayjs';
-import { CreateNote, UpdateNote } from '../../Utils/note_service';
-import { TakeUserInfoAll, TakeUserInfoByEmail } from '../../Utils/AuthService';
-import { CreateElementList, CreateList, UpdateList } from '../../Utils/list_service';
+import {CreateNote} from '../../Utils/note_service';
+import {CreateElementList, CreateList} from '../../Utils/list_service';
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -117,7 +116,7 @@ function SimpleDialog(props: SimpleDialogProps) {
 
     // Insert new elemnt
     const takeInfo = (data: any) => {
-        
+
         console.log(data.get('noteTitle'));
         console.log(data.get('noteBody'));
         console.log(data.get('listTitle'));
@@ -130,17 +129,17 @@ function SimpleDialog(props: SimpleDialogProps) {
         // Take list info
         listContent.current.push(data.get('listTitle'));
         let listItems = [];
-          
+
         for (let i = 0; i < listElements.length; i++) {
             listItems.push(listElements[i]);
         }
 
         listContent.current.push(listItems);
 
-        if(noteContent.current[0] !== '' && noteContent.current[1] !== '')
+        if (noteContent.current[0] !== '' && noteContent.current[1] !== '')
             return 'N';
-    
-        if(listContent.current[0] !== '')
+
+        if (listContent.current[0] !== '')
             return 'L';
     }
 
@@ -183,11 +182,13 @@ function SimpleDialog(props: SimpleDialogProps) {
 
         whoAdd.current = takeInfo(data);
 
-        switch(whoAdd.current) {
-            case 'N': createNote(data);
-                    break;
-            case 'L': createList(data);
-                    break;
+        switch (whoAdd.current) {
+            case 'N':
+                createNote(data);
+                break;
+            case 'L':
+                createList(data);
+                break;
         }
     }
 
@@ -208,16 +209,16 @@ function SimpleDialog(props: SimpleDialogProps) {
                 <form onSubmit={handleCreate}>
                     <Grid sx={{display: 'flex', justifyContent: 'center', height: '72.1%', marginTop: '15px'}}>
                         <Card key='Card Note'
-                            onMouseEnter={() => handleCardEnter('Card Note')}
-                            onMouseLeave={handleCardLeave}
-                            sx={{
-                                boxShadow: 8,
-                                width: '260px',
-                                height: '390px',
-                                backgroundColor: '#ede0de',
-                                ':hover': {boxShadow: 12},
-                                border: selectedCard === 'Card Note' ? '3px solid #b4261f' : 'none',
-                            }}>
+                              onMouseEnter={() => handleCardEnter('Card Note')}
+                              onMouseLeave={handleCardLeave}
+                              sx={{
+                                  boxShadow: 8,
+                                  width: '260px',
+                                  height: '390px',
+                                  backgroundColor: '#ede0de',
+                                  ':hover': {boxShadow: 12},
+                                  border: selectedCard === 'Card Note' ? '3px solid #b4261f' : 'none',
+                              }}>
                             <CardContent sx={{m: -1}}>
                                 <TextField
                                     inputProps={{
@@ -262,26 +263,26 @@ function SimpleDialog(props: SimpleDialogProps) {
                         </Card>
 
                         <Card key='Card List'
-                            onMouseEnter={() => {
-                                handleCardEnter('Card List');
-                                handleMouseEnter();
-                                retardTransitionTrue()
-                            }}
-                            onMouseLeave={() => {
-                                handleCardLeave();
-                                handleMouseLeave();
-                                retardTransitionFalse()
-                            }}
-                            sx={{
-                                width: '260px',
-                                height: '390px',
-                                marginLeft: '30px',
-                                borderRadius: '12px',
-                                backgroundColor: '#ede0de',
-                                boxShadow: 8,
-                                ':hover': {boxShadow: 12},
-                                border: selectedCard === 'Card List' ? '3px solid #b4261f' : 'none',
-                            }}>
+                              onMouseEnter={() => {
+                                  handleCardEnter('Card List');
+                                  handleMouseEnter();
+                                  retardTransitionTrue()
+                              }}
+                              onMouseLeave={() => {
+                                  handleCardLeave();
+                                  handleMouseLeave();
+                                  retardTransitionFalse()
+                              }}
+                              sx={{
+                                  width: '260px',
+                                  height: '390px',
+                                  marginLeft: '30px',
+                                  borderRadius: '12px',
+                                  backgroundColor: '#ede0de',
+                                  boxShadow: 8,
+                                  ':hover': {boxShadow: 12},
+                                  border: selectedCard === 'Card List' ? '3px solid #b4261f' : 'none',
+                              }}>
                             <CardContent sx={{m: -1}}>
                                 <TextField
                                     inputProps={{
@@ -364,8 +365,8 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     ))}
                                 </Box>
                                 <Slide direction='up' in={isHovered} onClick={handleListElements} mountOnEnter
-                                    unmountOnExit
-                                    timeout={200}>
+                                       unmountOnExit
+                                       timeout={200}>
                                     <IconButton sx={{
                                         height: '56px',
                                         width: '56px',
@@ -383,7 +384,6 @@ function SimpleDialog(props: SimpleDialogProps) {
                             </CardContent>
                         </Card>
                     </Grid>
-
 
                     <Grid sx={{display: 'flex', justifyContent: 'flex-end'}}>
                         <Button
@@ -432,7 +432,7 @@ function LeftBarGuest({
 
     const navigate = useNavigate();
 
-    const [selectedItem, setSelectedItem] = useState(localStorage.getItem('section'));
+    const [selectedItem, setSelectedItem] = useState(localStorage.getItem('section') || 'homeGuest');
 
     const handleItemClick = (item: string) => {
         localStorage.setItem('section', item);

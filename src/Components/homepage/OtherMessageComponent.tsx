@@ -6,7 +6,7 @@ interface Props {
     message: any,
 }
 
-function MyMessageComponent({message}:Props) {
+function MyMessageComponent({message}: Props) {
 
     //Render
     return (
@@ -29,18 +29,21 @@ function MyMessageComponent({message}:Props) {
                     inputProps={{sx: {color: '#534341 !important',},}}
                     sx={{
                         '& .MuiOutlinedInput-notchedOutline': {
-                        border: 'none',
-                    },
+                            border: 'none',
+                        },
                         '& .MuiInputBase-input': {
-                        fontFamily: 'Roboto Light',
-                        fontSize: '16px !important',
-                    },
+                            fontFamily: 'Roboto Light',
+                            fontSize: '16px !important',
+                        },
+                        '& .Mui-disabled': {
+                            color: '#201a19'
+                        },
                         width: '80%',
                         backgroundColor: '#ede0de',
                         borderRadius: '22px 22px 22px 5px',
                         boxShadow: 5,
                     }}
-                    placeholder={message}
+                    label={message}
                     disabled
                 />
             </Box>

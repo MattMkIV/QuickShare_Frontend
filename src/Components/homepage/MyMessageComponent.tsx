@@ -23,12 +23,15 @@ function MyMessageComponent({message}:Props) {
                             fontFamily: 'Roboto Light',
                             fontSize: '16px !important',
                         },
+                        '& .Mui-disabled': {
+                            color: '#442926'
+                        },
                         width: '80%',
                         backgroundColor: '#DFC38C',
                         borderRadius: '22px 22px 5px 22px',
                         boxShadow: 5,
                     }}
-                    placeholder={message}
+                    label={message}
                     disabled
                 />
 

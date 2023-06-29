@@ -197,7 +197,6 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                     <Grid wrap='nowrap' sx={{display: 'flex', alignItems: 'center', marginLeft: '10px'}}>
                         <form onSubmit={sendMessage}>
                             <TextField
-                                type='text'
                                 inputProps={{
                                     sx: {color: '#3f2e04 !important'}
                                 }}
@@ -230,7 +229,9 @@ const Homepage: React.FC<HomepageProps> = ({componentToRender: Component}) => {
                                 }}
                                 placeholder="Type your message here"
                                 name='message'
-                                size='small'/>
+                                size='small'
+                                type='text'
+                            />
 
                             <Button 
                                 type='submit'

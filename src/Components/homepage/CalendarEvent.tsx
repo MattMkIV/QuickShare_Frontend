@@ -1,16 +1,16 @@
 import Box from "@mui/material/Box";
-import {Grid, Grow, IconButton, List, ListItem, Typography} from "@mui/material";
+import {Grow, IconButton, ListItem, Typography} from "@mui/material";
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { DeleteEvent } from "../../Utils/calendar_service";
+import {DeleteEvent} from "../../Utils/calendar_service";
 
 interface Props {
-    value:any,
+    value: any,
     index: any,
 }
 
-function CalendarEvent({index, value}:Props) {
+function CalendarEvent({index, value}: Props) {
 
     const handleDelete = async (index: any) => {
 
@@ -30,7 +30,7 @@ function CalendarEvent({index, value}:Props) {
 
     //Render
     return (
-        <>      
+        <>
             <ListItem
                 key={index}
                 sx={{marginBottom: 2}}
@@ -54,8 +54,7 @@ function CalendarEvent({index, value}:Props) {
                             <DeleteIcon sx={{width: '25px', height: '25px', color: '#ffb4aa'}}/>
                         </IconButton>
                     </Grow>
-                }
-                disablePadding>
+                } disablePadding>
 
                 <Box
                     sx={{
@@ -71,13 +70,8 @@ function CalendarEvent({index, value}:Props) {
                     }}>
                     <Typography sx={{
                         fontFamily: 'Roboto Light',
-                        fontSize: '26px'
-                    }}
-                    >
-                    
-                    {value.title}
-                    
-                    </Typography>
+                        fontSize: '25px'
+                    }}>{value.title}</Typography>
                 </Box>
             </ListItem>
         </>
