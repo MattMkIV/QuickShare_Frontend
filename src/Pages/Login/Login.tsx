@@ -7,9 +7,9 @@ import './Login.css'
 //Other
 import {useNavigate} from "react-router-dom";
 import {useEffect} from 'react';
-import {TakeUserInfoFromJwt, checkJwt} from '../../Utils/AuthService';
+import {checkJwt} from '../../Utils/AuthService';
 import {Box, Divider, Typography} from "@mui/material";
-import { TakeUserId } from '../../Utils/message_service';
+import {TakeUserId} from '../../Utils/message_service';
 
 function Login() {
 
@@ -20,7 +20,7 @@ function Login() {
         const check = async () => {
             let jwtError = await checkJwt();
             if (!jwtError) {
-                
+
                 let userId = await TakeUserId();
                 if (userId === 28)
                     navigate("/homepageGuest");

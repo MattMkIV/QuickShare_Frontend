@@ -6,7 +6,7 @@ interface Props {
     message: any,
 }
 
-function MyMessageComponent({message}:Props) {
+function MyMessageComponent({message}: Props) {
 
     //Render
     return (
