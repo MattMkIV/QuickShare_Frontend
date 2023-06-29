@@ -39,6 +39,11 @@ function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
 
     }
 
+    const loginGuest = async () => {
+        let isError = await doLogin("guest", "Password123!");
+        if (!isError) navigate("/homepageGuest");
+    }
+
     return (
         <>
             <Box sx={{
@@ -141,6 +146,7 @@ function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
                 }}>
                     <Button
                         disableRipple
+                        onClick={() => loginGuest()}
                         sx={{
                             width: '140px',
                             height: '70px',
