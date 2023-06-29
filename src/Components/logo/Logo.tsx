@@ -17,7 +17,10 @@ function Logo(this: any, {navigateHome}: props) {
 
     //Functions
     const handleClick = () => {
+        localStorage.setItem('section', 'home')
         navigate("/homepage");
+
+        window.location.reload();
     };
 
     return (
