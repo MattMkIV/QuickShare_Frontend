@@ -38,6 +38,8 @@ import {DatePicker} from '@mui/x-date-pickers';
 import {DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, {Dayjs} from 'dayjs';
+import { CreateElementList, CreateList, UpdateList } from '../../Utils/list_service';
+import { CreateEvent } from '../../Utils/calendar_service';
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -59,6 +61,9 @@ function SimpleDialog(props: SimpleDialogProps) {
     const [textFields, setTextFields] = useState<string[]>([]);
     const [isHovered, setIsHovered] = React.useState(false);
     const noteContent = useRef<any>(new Array());
+    const listContent = useRef<any>(new Array());
+    const eventContent = useRef<any>(new Array());
+    const whoAdd = useRef<any>('');
 
     const handleClose = () => {
         onClose(selectedValue);
@@ -146,10 +151,46 @@ function SimpleDialog(props: SimpleDialogProps) {
 
     // Insert new elemnt
     const takeInfo = (data: any) => {
-        console.log("HELLO");
+        
+        // Take note info
         noteContent.current.push(data.get('noteTitle'));
         noteContent.current.push(data.get('noteBody'));
+
+        // Take list info
+        listContent.current.push(data.get('listTitle'));
+        let listItems = [];
+          
+        for (let i = 0; i < listElements.length; i++) {
+            listItems.push(data.get('email' + i));
+        }
+
+        listContent.current.push(listItems);
+
+        // Take event info
+        eventContent.current.push(data.get('eventTitle'));
+
+        // Format date
+        let dataCreazione:any = value;
+        let dataFormattata;
+
+        if(dataCreazione.$M+1 < 10){
+            dataFormattata = dataCreazione.$y+"-0"+(dataCreazione.$M+1)+"-"+dataCreazione.$D;
+        }else{
+            dataFormattata = dataCreazione.$y+"-"+(dataCreazione.$M+1)+"-"+dataCreazione.$D;
+        }
+
+        eventContent.current.push(dataFormattata);
+
         setNewElement(1);
+
+        if(noteContent.current[0] !== '' && noteContent.current[1] !== '')
+            return 'N';
+    
+        if(listContent.current[0] !== '')
+            return 'L';
+
+        if(eventContent.current[0] !== '')
+            return 'E';
     }
 
     const createNote = async (data: any) => {
@@ -163,13 +204,13 @@ function SimpleDialog(props: SimpleDialogProps) {
 
         if (!noteCreatedInfo[0]) {
             for (let i = 0; i < textFields.length; i++) {
-                emails.push(data.get('email' + i));
+                emails.push(textFields[i]);
             }
 
             if (emails.length !== 0) {
 
-                for (let i = 0; i < textFields.length; i++) {
-                    let response: any = await TakeUserInfoByEmail(data.get('email' + i));
+                for (let i = 0; i < emails.length; i++) {
+                    let response: any = await TakeUserInfoByEmail(emails[i]);
                     emailAllowedUser.push(response.id);
                 }
 
@@ -185,17 +226,77 @@ function SimpleDialog(props: SimpleDialogProps) {
         window.location.reload();
     }
 
+    const createList = async (data: any) => {
+        setNewElement(0);
+        let emails = [];
+        let emailAllowedUser: any = [];
+        let title = listContent.current[0];
+        let listElemnt = listContent.current[1];
+
+        let listCreatedInfo: any = await CreateList(title);
+
+        if (!listCreatedInfo[0]) {
+
+            for (let i = 0; i < listElemnt.length; i++) {
+                await CreateElementList(listCreatedInfo[1].list_id, listElemnt[i]);
+            }
+
+            for (let i = 0; i < textFields.length; i++) {
+                emails.push(textFields[i]);
+            }
+
+            if (emails.length !== 0) {
+
+                for (let i = 0; i < emails.length; i++) {
+                    console.log(emails[i]);
+                    let response: any = await TakeUserInfoByEmail(emails[i]);
+                    console.log(response);
+                    emailAllowedUser.push(response.id);
+                }
+
+                let responses: any = await TakeUserInfoAll(emailAllowedUser);
+
+                for (let i = 0; i < responses.length; i++) {
+                    let isError = await UpdateList(listCreatedInfo[1].list_id, title, responses[i].id);
+                }
+            }
+        }
+
+        window.location.reload();
+    }
+
+    const createEvent = async (data: any) => {
+        setNewElement(0);
+        let emails = [];
+        let emailAllowedUser: any = [];
+
+        let title = eventContent.current[0];
+        let date = eventContent.current[1];
+
+        await CreateEvent(date, title);
+
+        window.location.reload();
+    }
+
+    // Submit form
     const handleCreate = (event: any) => {
 
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        if (newElement === 0)
-            takeInfo(data);
-        else
-            createNote(data);
-
-        setIsFirstChecked(!isFirstChecked);
+        if (newElement === 0) {
+            whoAdd.current = takeInfo(data);
+            setIsFirstChecked(!isFirstChecked);
+        }else{
+            switch(whoAdd.current) {
+                case 'N': createNote(data);
+                        break;
+                case 'L':  createList(data);
+                        break;
+                case 'E': createEvent(data);
+                        break;
+            }
+        }
     }
 
     return (
@@ -231,6 +332,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                       }}>
                                     <CardContent sx={{m: -1}}>
                                         <TextField
+                                            type='text'
                                             inputProps={{
                                                 sx: {color: '#442926 !important'}
                                             }}
@@ -244,13 +346,15 @@ function SimpleDialog(props: SimpleDialogProps) {
                                                 },
                                                 marginLeft: '-15px',
                                             }}
-                                            placeholder='Note Title'>
+                                            placeholder='Note Title'
+                                            name='noteTitle'>
                                         </TextField>
 
                                         <hr className='littleSeparationLine'></hr>
 
                                         <TextField
                                             multiline
+                                            type='text'
                                             rows={8}
                                             placeholder='Content here...'
                                             inputProps={{
@@ -266,6 +370,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                                     fontSize: '20px !important'
                                                 }
                                             }}
+                                            name='noteBody'
                                         />
                                     </CardContent>
                                 </Card>
@@ -283,6 +388,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                       }}>
                                     <CardContent sx={{m: -1}}>
                                         <TextField
+                                            type='text'
                                             inputProps={{
                                                 sx: {color: '#442926 !important'}
                                             }}
@@ -296,7 +402,8 @@ function SimpleDialog(props: SimpleDialogProps) {
                                                 },
                                                 marginLeft: '-15px',
                                             }}
-                                            placeholder='Event'>
+                                            placeholder='Event'
+                                            name='eventTitle'>
                                         </TextField>
 
                                         <hr className='littleSeparationLine'></hr>
@@ -377,6 +484,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                   }}>
                                 <CardContent sx={{m: -1}}>
                                     <TextField
+                                        type='text'
                                         inputProps={{
                                             sx: {color: '#442926 !important'}
                                         }}
@@ -390,7 +498,8 @@ function SimpleDialog(props: SimpleDialogProps) {
                                             },
                                             marginLeft: '-15px',
                                         }}
-                                        placeholder='List Title'>
+                                        placeholder='List Title'
+                                        name='listTitle'>
                                     </TextField>
 
                                     <hr className='littleSeparationLine'></hr>
@@ -436,6 +545,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                                     }}
                                                     value={listElements}
                                                     type='text'
+                                                    name={'email'+index}
                                                     onChange={(e) => handleChangeListElements(index, e.target.value)}
                                                 />
                                                 <Button onClick={() => handleRemoveListElements(index)}
@@ -556,7 +666,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                         {isFirstChecked ?
                             <Button
                                 endIcon={<NavigateNextIcon sx={{height: '25px', width: '25px', color: '#201a19'}}/>}
-                                onClick={() => setIsFirstChecked(!isFirstChecked)}
+                                
                                 sx={{
                                     fontFamily: 'Roboto Bold',
                                     height: '60px',
@@ -574,6 +684,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     ':hover': {backgroundColor: '#dab887'}
                                 }}
                                 variant="contained"
+                                type="submit"
                             >Next</Button> : ''}
 
                         {!isFirstChecked ?
@@ -598,7 +709,6 @@ function SimpleDialog(props: SimpleDialogProps) {
 
                         {!isFirstChecked ?
                             <Button
-                                onClick={() => setIsFirstChecked(!isFirstChecked)}
                                 sx={{
                                     fontFamily: 'Roboto Bold',
                                     height: '60px',
@@ -616,6 +726,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     ':hover': {backgroundColor: '#c2a46f'}
                                 }}
                                 variant="contained"
+                                type="submit"
                             >Done</Button> : ''}
                     </Grid>
                 </form>

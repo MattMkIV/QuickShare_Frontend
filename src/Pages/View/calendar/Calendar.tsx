@@ -14,12 +14,21 @@ import { useNavigate } from "react-router-dom";
 
 function Calendar() {
     const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().getFullYear() + '-' + (new Date().getMonth() + 1 + '-' + new Date().getDate())));
-    const [eventi, setEventi] = useState<any>();
+    const [eventi , setEventi] = useState<any>([]);
     let jwtError = false;
     const navigate = useNavigate();
     const isXsScreen = useMediaQuery('(max-width: 600px)');
     const isLgScreen = useMediaQuery('(max-width: 1200px)');
 
+    const takeCurrentDate = () => {
+        const currentDate = new Date();
+
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); 
+        const day = String(currentDate.getDate()).padStart(2, '0');
+
+        return `${year}-${month}-${day}`;
+    }
 
     useEffect(() => {
         const check = async () => {
@@ -28,9 +37,15 @@ function Calendar() {
         }
 
         const TakeEvents = async () => {
-            let day:any = localStorage.getItem("DaySelected");
+
+            let day:any;
+            day = localStorage.getItem("DaySelected");
+
+            if(day === null)
+                day = takeCurrentDate();
+
             let response:any = await TakeEvent(day);
-            console.log(response);
+
             setEventi(response);
         }
 
@@ -55,7 +70,7 @@ function Calendar() {
         localStorage.setItem("DaySelected", finalData);
         window.location.reload();
     }
-
+    
     //Render
     return (
         <>
@@ -112,11 +127,16 @@ function Calendar() {
                             overflowY: 'auto',
                         }}>
                         
-                        <List sx={{width: '100%'}}>
-                            {eventi.map((value:any, index:any) => {
-                                <CalendarEvent key={index} index={index} value={value}/>
-                            })}
-                        </List>
+                            <h1>RISULTATI:</h1>
+                                
+                            <List sx={{width: '100%'}}>
+                                {eventi.length === 0 ? <h1>Nessun evento presente</h1> : (
+                                    eventi.map((evento:any, index:any) => (
+                                        <CalendarEvent key={index} value={evento} index={index}/>
+                                    ))
+                                )}
+                            </List>
+                                
                                     
                         </Box>
                     </Grid>

@@ -264,46 +264,47 @@ export async function DeleteList(listId) {
     return false;
 }
 
-// // Create Note
-// export async function CreateNote(title, body) {
+// Create List
+export async function CreateList(title) {
 
-//     let responseData;
-//     let jwt = localStorage.getItem("jwt");
-//     let jwtDecode = jose.decodeJwt(jwt);
-//     let UserId = jwtDecode.user_id;
+    let responseData;
+    let jwt = localStorage.getItem("jwt");
+    let jwtDecode = jose.decodeJwt(jwt);
+    let UserId = jwtDecode.user_id;
 
-//     await axios.post(urls.serverURL + '/note/' + UserId, {
+    await axios.post(urls.serverURL + '/list/' + UserId, {
 
-//         "title": title.toString(),
-//         "body": body.toString(),
-//     }, {
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     }).then(response => {
-//         responseData = response.data;
-//     }).catch(function (error) {
-//         if (error.response) {
-//             // The request was made and the server responded with a status code
-//             let responseStatus = parseInt(error.response.status);
-//             if (responseStatus === 401 || responseStatus === 400) {
-//                 console.log("Errore 401 or 400: Bad Request");
-//                 console.log(error);
-//                 return [true];
-//             } else if (responseStatus === 409) {
-//                 console.log("Errore 409: Conflict! Utente gia registrato");
-//                 return [true];
-//             }
+        "title": title.toString(),
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then(response => {
+        responseData = response.data;
+    }).catch(function (error) {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            let responseStatus = parseInt(error.response.status);
+            if (responseStatus === 401 || responseStatus === 400) {
+                console.log("Errore 401 or 400: Bad Request");
+                console.log(error);
+                return [true];
+            } else if (responseStatus === 409) {
+                console.log("Errore 409: Conflict! Utente gia registrato");
+                return [true];
+            }
 
-//         } else if (error.request) {
-//             console.log("Errore 500: Errore server");
-//             return [true];
-//         } else {
-//             // Something happened in setting up the request that triggered an Error
-//             console.log('Errore:', error.message);
-//             return [true];
-//         }
-//     });
+        } else if (error.request) {
+            console.log("Errore 500: Errore server");
+            return [true];
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Errore:', error.message);
+            return [true];
+        }
+    });
 
-//     return [false, responseData];
-// }
+    return [false, responseData];
+}
+
+

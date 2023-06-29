@@ -3,6 +3,7 @@ import {Grid, Grow, IconButton, List, ListItem, Typography} from "@mui/material"
 import * as React from "react";
 import {useEffect, useState} from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteEvent } from "../../Utils/calendar_service";
 
 interface Props {
     value:any,
@@ -10,13 +11,11 @@ interface Props {
 }
 
 function CalendarEvent({index, value}:Props) {
-    const [items, setItems] = React.useState([0,1,2,3,4,5]);
 
+    const handleDelete = async (index: any) => {
 
-    const handleDelete = (index: number) => {
-        const newItems = [...items];
-        newItems.splice(index, 1);
-        setItems(newItems);
+        await DeleteEvent(index.calendar_id);
+        window.location.reload();
     };
 
     /************************* Handle trash animations *************************/
@@ -74,7 +73,11 @@ function CalendarEvent({index, value}:Props) {
                         fontFamily: 'Roboto Light',
                         fontSize: '26px'
                     }}
-                    >{"23lksg23 gerg  ergherherh"}</Typography>
+                    >
+                    
+                    {value.title}
+                    
+                    </Typography>
                 </Box>
             </ListItem>
         </>
