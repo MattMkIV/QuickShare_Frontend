@@ -78,7 +78,7 @@ function Notes() {
 
                         <Grid item className='cardSliderHomePage'>
                             <Stack spacing={5} direction="row">
-                                {list.map((n: any, i: any) => (
+                                {list.slice().reverse().map((n: any, i: any) => (
                                     <ListsCardLayout key={i} title={n.title} list_id={n.list_id}
                                                      create_date={n.create_date} allowed={n.allowed}/>
                                 ))}
