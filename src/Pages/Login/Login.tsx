@@ -32,6 +32,7 @@ function Login() {
         check();
     }, []);
 
+    //Style
     document.body.style.backgroundImage = 'url("LoginBackground.png")';
 
     return (
@@ -43,7 +44,7 @@ function Login() {
                      height: '600px',
                      borderRadius: '22px',
                      backdropFilter: 'blur(11px)',
-                     background: 'rgba(14, 14, 14, 0.43)',
+                     background: 'rgba(44,44,44,0.52)',
                      WebkitBackdropFilter: 'blur(11px)',
                      boxShadow: 24,
                      cursor: 'default'
@@ -77,7 +78,7 @@ function Login() {
                         borderColor: '#dfc38c'
                     }}/>
 
-                <InputLogin firstLabel={"Username"} secondLabel={"Password"}/>
+                <InputLogin firstLabel={"Username*"} secondLabel={"Password*"}/>
             </Box>
         </>
     );

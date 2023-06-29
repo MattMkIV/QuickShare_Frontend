@@ -556,7 +556,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                                             borderRadius: '22px',
                                                             marginTop: '4px',
                                                             marginLeft: '10px',
-                                                            boxShadow: 4,
+                                                            boxShadow: 3,
                                                             ':hover': {backgroundColor: '#9f3a3c'}
                                                         }}
                                                         disableRipple>
@@ -623,7 +623,6 @@ function SimpleDialog(props: SimpleDialogProps) {
                                                 },
                                                 '&:hover fieldset': {
                                                     borderColor: '#3f2e04',
-                                                    boxShadow: 12,
                                                 },
                                                 '&.Mui-focused fieldset': {
                                                     borderColor: '#3f2e04',

@@ -36,7 +36,7 @@ function MyMessageComponent({message}: Props) {
                             fontSize: '16px !important',
                         },
                         '& .Mui-disabled': {
-                            color: '#201a19'
+                            color: '#5e4f4e'
                         },
                         width: '80%',
                         backgroundColor: '#ede0de',

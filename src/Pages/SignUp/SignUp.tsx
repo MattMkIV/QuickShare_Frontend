@@ -22,7 +22,7 @@ function SignUp() {
                      height: '600px',
                      borderRadius: '22px',
                      backdropFilter: 'blur(11px)',
-                     background: 'rgba(14, 14, 14, 0.43)',
+                     background: 'rgba(44,44,44,0.52)',
                      WebkitBackdropFilter: 'blur(11px)',
                      boxShadow: 24,
                  }}>
@@ -60,12 +60,12 @@ function SignUp() {
                     }}/>
 
                 <Registration
-                    firstLabel={"Name"}
-                    secondLabel={"Surname"}
-                    thirdLabel={"Username"}
-                    fourthLabel={"Email"}
-                    fifthLabel={"Password"}
-                    sixthLabel={"Confirm Password"}/>
+                    firstLabel={"Name*"}
+                    secondLabel={"Surname*"}
+                    thirdLabel={"Username*"}
+                    fourthLabel={"Email*"}
+                    fifthLabel={"Password*"}
+                    sixthLabel={"Confirm Password*"}/>
             </Box>
         </>
     );

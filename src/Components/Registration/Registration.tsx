@@ -111,12 +111,12 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                     pt: 4,
                 }}>
 
-
                 <TextField
                     error={ErrorInput}
                     type='text'
                     id='Name'
                     placeholder={firstLabel}
+                    onChange={() => setErrorInput(false)}
                     sx={{
                         '& .MuiInput-underline': {
                             borderBottomColor: 'transparent',
@@ -132,6 +132,11 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                             '&.Mui-focused fieldset': {
                                 borderColor: '#dfc38c',
                                 borderWidth: '2px',
+                            },
+                            '&.Mui-error fieldset': {
+                                borderColor: '#920609',
+                                borderWidth: 2,
+                                boxShadow: '0 0 7px red',
                             },
                         },
                         '& .MuiInputBase-input': {
@@ -149,6 +154,7 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                     type='text'
                     id='Surname'
                     placeholder={secondLabel}
+                    onChange={() => setErrorInput(false)}
                     sx={{
                         '& .MuiInput-underline': {
                             borderBottomColor: 'transparent',
@@ -164,6 +170,11 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                             '&.Mui-focused fieldset': {
                                 borderColor: '#dfc38c',
                                 borderWidth: '2px',
+                            },
+                            '&.Mui-error fieldset': {
+                                borderColor: '#920609',
+                                borderWidth: 2,
+                                boxShadow: '0 0 7px red',
                             },
                         },
                         '& .MuiInputBase-input': {
@@ -182,6 +193,7 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                     type='text'
                     id='Username'
                     placeholder={thirdLabel}
+                    onChange={() => setErrorInput(false)}
                     sx={{
                         '& .MuiInput-underline': {
                             borderBottomColor: 'transparent',
@@ -197,6 +209,11 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                             '&.Mui-focused fieldset': {
                                 borderColor: '#dfc38c',
                                 borderWidth: '2px',
+                            },
+                            '&.Mui-error fieldset': {
+                                borderColor: '#920609',
+                                borderWidth: 2,
+                                boxShadow: '0 0 7px red',
                             },
                         },
                         '& .MuiInputBase-input': {
@@ -251,12 +268,12 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                         pt: 4,
                     }}>
 
-
                     <TextField
                         error={ErrorInput}
                         id='Email'
                         type='text'
                         placeholder={fourthLabel}
+                        onChange={() => setErrorInput(false)}
                         sx={{
                             '& .MuiInput-underline': {
                                 borderBottomColor: 'transparent',
@@ -272,6 +289,11 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                                 '&.Mui-focused fieldset': {
                                     borderColor: '#dfc38c',
                                     borderWidth: '2px',
+                                },
+                                '&.Mui-error fieldset': {
+                                    borderColor: '#920609',
+                                    borderWidth: 2,
+                                    boxShadow: '0 0 7px red',
                                 },
                             },
                             '& .MuiInputBase-input': {
@@ -289,6 +311,7 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                         type='password'
                         id='Password'
                         placeholder={fifthLabel}
+                        onChange={() => setErrorInput(false)}
                         sx={{
                             '& .MuiInput-underline': {
                                 borderBottomColor: 'transparent',
@@ -304,6 +327,11 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                                 '&.Mui-focused fieldset': {
                                     borderColor: '#dfc38c',
                                     borderWidth: '2px',
+                                },
+                                '&.Mui-error fieldset': {
+                                    borderColor: '#920609',
+                                    borderWidth: 2,
+                                    boxShadow: '0 0 7px red',
                                 },
                             },
                             '& .MuiInputBase-input': {
@@ -322,6 +350,7 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                         type='password'
                         id='Repeat Password'
                         placeholder={sixthLabel}
+                        onChange={() => setErrorInput(false)}
                         sx={{
                             '& .MuiInput-underline': {
                                 borderBottomColor: 'transparent',
@@ -337,6 +366,11 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                                 '&.Mui-focused fieldset': {
                                     borderColor: '#dfc38c',
                                     borderWidth: '2px',
+                                },
+                                '&.Mui-error fieldset': {
+                                    borderColor: '#920609',
+                                    borderWidth: 2,
+                                    boxShadow: '0 0 7px red',
                                 },
                             },
                             '& .MuiInputBase-input': {
@@ -391,6 +425,14 @@ function Registration(this: any, {firstLabel, secondLabel, thirdLabel, fourthLab
                             }}>Signup</Button>
                     </Box>
                 </Box> : ''}
+
+            <Typography sx={{
+                fontFamily: 'Roboto Light',
+                fontSize: '13px',
+                color: '#E9DEDC',
+                marginLeft: '40px',
+                marginTop: '15px'
+            }}>*Required fields</Typography>
         </>
     )
         ;

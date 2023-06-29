@@ -134,7 +134,12 @@ function Calendar() {
                             }}>Events:</Typography>
 
                             <List sx={{width: '100%'}}>
-                                {eventi.length === 0 ? <h1>Nessun evento presente</h1> : (
+                                {eventi.length === 0 ? <Typography sx={{
+                                    fontFamily: 'Roboto Bold',
+                                    fontSize: '35px',
+                                    color: '#f5ddda',
+                                    marginTop: '20px'
+                                }}>No Events</Typography> : (
                                     eventi.map((evento: any, index: any) => (
                                         <CalendarEvent key={index} value={evento} index={index}/>
                                     ))

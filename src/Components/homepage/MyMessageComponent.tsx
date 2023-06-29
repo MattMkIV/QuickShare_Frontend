@@ -14,7 +14,6 @@ function MyMessageComponent({message}:Props) {
             <Box sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end'}}>
                 <TextField
                     multiline
-                    inputProps={{sx: {color: '#3F2E04 !important',},}}
                     sx={{
                         '& .MuiOutlinedInput-notchedOutline': {
                             border: 'none',
@@ -24,7 +23,7 @@ function MyMessageComponent({message}:Props) {
                             fontSize: '16px !important',
                         },
                         '& .Mui-disabled': {
-                            color: '#442926'
+                            color: '#574423 !important'
                         },
                         width: '80%',
                         backgroundColor: '#DFC38C',

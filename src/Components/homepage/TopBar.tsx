@@ -187,7 +187,9 @@ function TopBar() {
                             aria-haspopup="true"
                             sx={{marginRight: '10px'}}>
 
-                            <Avatar sx={{backgroundColor: '#008fdb', boxShadow: 12}}>M</Avatar>
+                            <LightTooltip TransitionComponent={Zoom} title='Log-Out' sx={{marginTop: '0'}}>
+                                <Avatar sx={{backgroundColor: '#008fdb', boxShadow: 12}}>M</Avatar>
+                            </LightTooltip>
                         </IconButton>
                     </Grid>
                 </Grid>
@@ -221,7 +223,7 @@ function TopBar() {
             >
 
                 <Grid sx={{marginTop: '2px'}}>
-                    <Stack sx={{height: '516px', marginBottom: '10px', overflowY: 'scroll'}} spacing={2}
+                    <Stack sx={{height: '516px', marginBottom: '10px', overflowY: 'scroll', pb: 2}} spacing={2}
                            direction="column">
                         {messages.map((message: any, index: any) => (
                             message.fk_user_creator === userId ?

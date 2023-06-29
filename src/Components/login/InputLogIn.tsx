@@ -92,6 +92,11 @@ function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
                                 borderColor: '#dfc38c',
                                 borderWidth: '2px',
                             },
+                            '&.Mui-error fieldset': {
+                                borderColor: '#920609',
+                                borderWidth: 2,
+                                boxShadow: '0 0 7px red',
+                            },
                         },
                         '& .MuiInputBase-input': {
                             borderRadius: '25px',
@@ -123,6 +128,11 @@ function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
                                 borderColor: '#dfc38c',
                                 borderWidth: '2px',
                             },
+                            '&.Mui-error fieldset': {
+                                borderColor: '#920609',
+                                borderWidth: 2,
+                                boxShadow: '0 0 7px red',
+                            },
                         },
                         '& .MuiInputBase-input': {
                             borderRadius: '25px',
@@ -135,6 +145,14 @@ function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
                     }}
                     name="password"
                 />
+                <Box sx={{display: 'flex', justifyContent: 'flex-start', width: '81%'}}>
+                    <Typography sx={{
+                        fontFamily: 'Roboto Light',
+                        fontSize: '13px',
+                        color: '#E9DEDC',
+                        marginTop: '15px'
+                    }}>*Required fields</Typography>
+                </Box>
 
                 <Box sx={{
                     width: '100%',
@@ -142,7 +160,7 @@ function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    marginTop: '60px',
+                    marginTop: '40px',
                 }}>
                     <Button
                         disableRipple
