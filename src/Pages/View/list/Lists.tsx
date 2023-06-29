@@ -4,10 +4,10 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import '../home/Home.css'
 import './Lists.css'
-import ListsCardLayout from '../../../Components/homepage/ListsCardLayout'
 import {useNavigate} from "react-router-dom";
 import {checkJwt} from "../../../Utils/AuthService";
 import {TakeList} from "../../../Utils/list_service";
+import ListsCardLayout from '../../../Components/homepage/ListsCardLayout'
 
 function Notes() {
 
@@ -80,7 +80,7 @@ function Notes() {
                             <Stack spacing={5} direction="row">
                                 {list.map((n: any, i: any) => (
                                     <ListsCardLayout key={i} title={n.title} list_id={n.list_id}
-                                                     create_date={n.create_date} allowed={n.allowed}></ListsCardLayout>
+                                                     create_date={n.create_date} allowed={n.allowed}/>
                                 ))}
                             </Stack>
                         </Grid>

@@ -13,7 +13,6 @@ function TopBar() {
     //Variable declaration
 
     //Functions
-
     const handleChange = () => {
     };
 
