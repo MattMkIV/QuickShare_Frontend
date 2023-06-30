@@ -26,13 +26,51 @@ function Home() {
         const takeLists = async () => {
             let response: any = await TakeList();
 
-            setLists(response);
+            let allLists = [];
+            let currentDate = [];
+            let previusDate = "0000-00-00";
+
+            for (let i = 0; i < response.length; i++) {
+                if (previusDate === response[i].create_date) {
+                    currentDate.push(response[i]);
+                    previusDate = response[i].create_date;
+                } else {
+                    if (i !== 0)
+                        allLists.push(currentDate);
+
+                    currentDate = [];
+                    currentDate.push(response[i]);
+                    previusDate = response[i].create_date;
+                }
+            }
+            allLists.push(currentDate);
+
+            setLists(allLists);
         }
 
         const takeNotes = async () => {
             let response: any = await TakeNote();
 
-            setNotes(response);
+            let allNotes = [];
+            let currentDate = [];
+            let previusDate = "0000-00-00";
+
+            for (let i = 0; i < response.length; i++) {
+                if (previusDate === response[i].create_date) {
+                    currentDate.push(response[i]);
+                    previusDate = response[i].create_date;
+                } else {
+                    if (i !== 0)
+                        allNotes.push(currentDate);
+
+                    currentDate = [];
+                    currentDate.push(response[i]);
+                    previusDate = response[i].create_date;
+                }
+            }
+            allNotes.push(currentDate);
+
+            setNotes(allNotes);
         }
 
         check();
@@ -50,9 +88,12 @@ function Home() {
 
                 <Grid className='cardSliderHomePage'>
                     <Stack direction="row" spacing={5}>
-                        {notes.slice(0, 10).map((n: any, index: any) => (
-                            <CardLayout key={index} title={n.title} noteId={n.note_id} createData={n.create_date}
-                                        body={n.body} allowed={n.allowed}></CardLayout>
+                        {notes.map((note: any, index: any) => (
+                            note.slice(0, 10).reverse().map((n: any, i: any) => (
+                                <CardLayout key={index} title={n.title} noteId={n.note_id}
+                                            createData={n.create_date}
+                                            body={n.body} allowed={n.allowed}></CardLayout>
+                            ))
                         ))}
                     </Stack>
                 </Grid>
@@ -65,9 +106,12 @@ function Home() {
 
                 <Grid className='cardSliderHomePage'>
                     <Stack direction="row" spacing={5}>
-                        {lists.slice(0, 10).map((n: any, i: any) => (
-                            <ListsCardLayout key={i} title={n.title} list_id={n.list_id} create_date={n.create_date}
-                                             allowed={n.allowed}></ListsCardLayout>
+                        {lists.map((list: any, index: any) => (
+                            list.slice(0, 10).reverse().map((n: any, i: any) => (
+                                <ListsCardLayout key={i} title={n.title} list_id={n.list_id}
+                                                 create_date={n.create_date}
+                                                 allowed={n.allowed}></ListsCardLayout>
+                            ))
                         ))}
                     </Stack>
                 </Grid>

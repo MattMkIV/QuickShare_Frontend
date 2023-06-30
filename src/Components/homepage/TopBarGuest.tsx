@@ -135,6 +135,7 @@ function TopBarGuest() {
                             height: '120px',
                             borderRadius: '22px',
                             backgroundColor: '#a08c8a',
+                            overflowY: 'hidden'
                         }
                     }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
                 >

@@ -3,8 +3,11 @@ import './App.css';
 //Components
 import Login from './Pages/Login/Login';
 import Home from './Pages/View/home/Home';
+import HomeGuest from './Pages/View/home/HomeGuest';
 import SignUp from './Pages/SignUp/SignUp';
 import HomepageGuest from "./Pages/homepage/HomepageGuest";
+import NotesGuest from "./Pages/View/notes/NotesGuest";
+import ListsGuest from "./Pages/View/list/ListsGuest";
 
 //Other
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
@@ -33,9 +36,9 @@ function App() {
                     <Route index path="/homepage/calendar" element={<Homepage componentToRender={Calendar}/>}/>
                     <Route index path="/homepage/accountbalance" element={<Homepage componentToRender={AccountBalance}/>}/>
 
-                    <Route index path="/homepageGuest" element={<HomepageGuest componentToRender={Home}/>}/>
-                    <Route index path="/homepageGuest/notes" element={<HomepageGuest componentToRender={Notes}/>}/>
-                    <Route index path="/homepageGuest/lists" element={<HomepageGuest componentToRender={Lists}/>}/>
+                    <Route index path="/homepageGuest" element={<HomepageGuest componentToRender={HomeGuest}/>}/>
+                    <Route index path="/homepageGuest/notes" element={<HomepageGuest componentToRender={NotesGuest}/>}/>
+                    <Route index path="/homepageGuest/lists" element={<HomepageGuest componentToRender={ListsGuest}/>}/>
                 </Routes>
             </BrowserRouter>
         </>

@@ -1,7 +1,7 @@
 import {Box, Button, CardContent, Grow, IconButton, Menu, Slide, TextField, Typography} from "@mui/material";
 import Card from "@mui/material/Card";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import InfoIcon from '@mui/icons-material/Info';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -9,6 +9,9 @@ import './NoteCardLayout.css'
 import Grid from "@mui/material/Grid";
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
+import {useNavigate} from "react-router-dom";
+import {TakeUserInfoAll} from "../../Utils/AuthService";
+import {DeleteNote, UpdateNote} from "../../Utils/note_service";
 
 interface Props {
     title: any,
@@ -19,6 +22,22 @@ interface Props {
 }
 
 const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) => {
+
+    const formRef = React.useRef<any>(null);
+    const [titleNote, setTitle] = useState(title);
+    const [bodyNote, setBody] = useState(body);
+    const [userInfo, setUserInfo] = useState<any>([]);
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        const takeUserInfo = async () => {
+            let response: any = await TakeUserInfoAll(allowed);
+            setUserInfo(response);
+        }
+
+        takeUserInfo();
+    }, []);
+
     /************************* Handle notes MouseEnter & MouseExit *************************/
     const [isHovered, setIsHovered] = React.useState(false);
 
@@ -48,13 +67,16 @@ const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) 
         setIsEditable(true);
     };
 
-    const handleConfirmClick = () => {
-        // Aggiungi qui la logica per confermare la modifica
-        setIsEditable(false);
+    const handleConfirmClick: any = async (noteId: any) => {
+        let isError = await UpdateNote(titleNote, bodyNote, null, noteId);
+
+        if (isError)
+            console.log("Errore aggiornamento nota");
+
+        window.location.reload();
     };
 
     const handleCloseClick = () => {
-        // Aggiungi qui la logica per confermare la modifica
         setIsEditable(false);
     };
 
@@ -71,6 +93,24 @@ const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) 
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    // metodo eliminazione nota
+    const deleteNote: any = async (noteId: any) => {
+
+        let isError = await DeleteNote(noteId);
+
+        window.location.reload();
+    }
+
+    // aggiornamento testi
+    const handleChangeTitle = (event: any) => {
+        setTitle(event.target.value);
+    };
+
+
+    const handleChangeBody = (event: any) => {
+        setBody(event.target.value);
+    }
 
     /************************* Dynamic scaling components *************************/
     const [isMenuOpen, setMenuOpen] = useState(false);
@@ -109,7 +149,9 @@ const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) 
                             },
                             marginLeft: '-14px',
                         }}
-                        defaultValue='PROVA TITOLO MOLTO LUNGO'
+                        type='text'
+                        value={titleNote}
+                        onChange={handleChangeTitle}
                         onClick={handleTextFieldClick}>
                     </TextField>
 
@@ -129,6 +171,9 @@ const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) 
                             '& fieldset': {border: 'none'},
                             '& .MuiInputBase-input': {fontFamily: 'Roboto Light', fontSize: '20px !important'}
                         }}
+                        type='text'
+                        value={bodyNote}
+                        onChange={handleChangeBody}
                         onClick={handleTextFieldClick}
                     />
 
@@ -152,7 +197,7 @@ const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) 
                             </Grow>
 
                             <Grow in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={600}>
-                                <IconButton onClick={handleConfirmClick}
+                                <IconButton onClick={() => handleConfirmClick(noteId)}
                                             sx={{
                                                 backgroundColor: '#65cc8f',
                                                 ':hover': {backgroundColor: '#58b27f'},
@@ -241,7 +286,7 @@ const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) 
                                                 marginLeft: '10px',
                                                 color: '#3f2e04'
                                             }}>
-                                    19/03/2021
+                                    {createData}
                                 </Typography>
                             </Menu>
 
@@ -296,6 +341,7 @@ const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) 
                                         height: '103px',
                                         borderRadius: '22px',
                                         backgroundColor: '#ffb4aa',
+                                        overflowY: 'hidden'
                                     }
                                 }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
                             >
@@ -338,7 +384,8 @@ const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) 
                                             marginLeft: '20px',
                                             marginTop: '10px',
                                             ':hover': {backgroundColor: '#7e0508'}
-                                        }} disableRipple>Yes</Button>
+                                        }} disableRipple
+                                                onClick={() => deleteNote(noteId)}>Yes</Button>
                                     </Grid>
                                 </Box>
                             </Menu>

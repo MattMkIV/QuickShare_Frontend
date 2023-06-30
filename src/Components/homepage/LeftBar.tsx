@@ -12,18 +12,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {
-    Box,
-    CardContent,
-    Dialog,
-    DialogContent,
-    Fab,
-    Grow,
-    IconButton,
-    Slide,
-    TextField,
-    Typography
-} from "@mui/material";
+import {Box, CardContent, Dialog, DialogContent, IconButton, Slide, TextField, Typography} from "@mui/material";
 
 //CSS
 import './LeftBar.css';
@@ -34,15 +23,11 @@ import {useNavigate} from "react-router-dom";
 import Card from "@mui/material/Card";
 import {TakeUserInfoAll, TakeUserInfoByEmail} from '../../Utils/AuthService';
 import {CreateNote, UpdateNote} from '../../Utils/note_service';
-import {DatePicker} from '@mui/x-date-pickers';
-import {DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, {Dayjs} from 'dayjs';
-import { CreateElementList, CreateList, UpdateList } from '../../Utils/list_service';
-import { CreateEvent } from '../../Utils/calendar_service';
-
-
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+import {CreateElementList, CreateList, UpdateList} from '../../Utils/list_service';
+import {CreateEvent} from '../../Utils/calendar_service';
 
 export interface SimpleDialogProps {
     open: boolean;
@@ -52,17 +37,15 @@ export interface SimpleDialogProps {
 
 function SimpleDialog(props: SimpleDialogProps) {
 
-    const [titleNote, setTitle] = useState('Insert Title');
-    const [bodyNote, setBody] = useState('');
     const [newElement, setNewElement] = useState(0);
     const {onClose, selectedValue, open} = props;
     const [selectedCard, setSelectedCard] = useState(null);
     const [isFirstChecked, setIsFirstChecked] = useState(true);
     const [textFields, setTextFields] = useState<string[]>([]);
     const [isHovered, setIsHovered] = React.useState(false);
-    const noteContent = useRef<any>(new Array());
-    const listContent = useRef<any>(new Array());
-    const eventContent = useRef<any>(new Array());
+    const noteContent = useRef<any>([]);
+    const listContent = useRef<any>([]);
+    const eventContent = useRef<any>([]);
     const whoAdd = useRef<any>('');
 
     const handleClose = () => {
@@ -134,24 +117,12 @@ function SimpleDialog(props: SimpleDialogProps) {
         }, 300);
     }
 
-    const handleAddClick = () => {
-        // Aggiungi qui la logica per confermare la modifica
-    };
-
 
     const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
 
-    const handleChangeTitle = (event: any) => {
-        setTitle(event.target.value);
-    };
-
-    const handleChangeBody = (event: any) => {
-        setBody(event.target.value);
-    };
-
     // Insert new elemnt
     const takeInfo = (data: any) => {
-        
+
         // Take note info
         noteContent.current.push(data.get('noteTitle'));
         noteContent.current.push(data.get('noteBody'));
@@ -159,7 +130,7 @@ function SimpleDialog(props: SimpleDialogProps) {
         // Take list info
         listContent.current.push(data.get('listTitle'));
         let listItems = [];
-          
+
         for (let i = 0; i < listElements.length; i++) {
             listItems.push(data.get('email' + i));
         }
@@ -170,26 +141,26 @@ function SimpleDialog(props: SimpleDialogProps) {
         eventContent.current.push(data.get('eventTitle'));
 
         // Format date
-        let dataCreazione:any = value;
+        let dataCreazione: any = value;
         let dataFormattata;
 
-        if(dataCreazione.$M+1 < 10){
-            dataFormattata = dataCreazione.$y+"-0"+(dataCreazione.$M+1)+"-"+dataCreazione.$D;
-        }else{
-            dataFormattata = dataCreazione.$y+"-"+(dataCreazione.$M+1)+"-"+dataCreazione.$D;
+        if (dataCreazione.$M + 1 < 10) {
+            dataFormattata = dataCreazione.$y + "-0" + (dataCreazione.$M + 1) + "-" + dataCreazione.$D;
+        } else {
+            dataFormattata = dataCreazione.$y + "-" + (dataCreazione.$M + 1) + "-" + dataCreazione.$D;
         }
 
         eventContent.current.push(dataFormattata);
 
         setNewElement(1);
 
-        if(noteContent.current[0] !== '' && noteContent.current[1] !== '')
+        if (noteContent.current[0] !== '' && noteContent.current[1] !== '')
             return 'N';
-    
-        if(listContent.current[0] !== '')
+
+        if (listContent.current[0] !== '')
             return 'L';
 
-        if(eventContent.current[0] !== '')
+        if (eventContent.current[0] !== '')
             return 'E';
     }
 
@@ -217,8 +188,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                 let response: any = await TakeUserInfoAll(emailAllowedUser);
 
                 for (let i = 0; i < response.length; i++) {
-                    console.log(noteCreatedInfo[1].note_id);
-                    let isError = await UpdateNote(title, body, response[i].id, noteCreatedInfo[1].note_id);
+                    await UpdateNote(title, body, response[i].id, noteCreatedInfo[1].note_id);
                 }
             }
         }
@@ -257,7 +227,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                 let responses: any = await TakeUserInfoAll(emailAllowedUser);
 
                 for (let i = 0; i < responses.length; i++) {
-                    let isError = await UpdateList(listCreatedInfo[1].list_id, title, responses[i].id);
+                    await UpdateList(listCreatedInfo[1].list_id, title, responses[i].id);
                 }
             }
         }
@@ -267,8 +237,6 @@ function SimpleDialog(props: SimpleDialogProps) {
 
     const createEvent = async (data: any) => {
         setNewElement(0);
-        let emails = [];
-        let emailAllowedUser: any = [];
 
         let title = eventContent.current[0];
         let date = eventContent.current[1];
@@ -287,14 +255,17 @@ function SimpleDialog(props: SimpleDialogProps) {
         if (newElement === 0) {
             whoAdd.current = takeInfo(data);
             setIsFirstChecked(!isFirstChecked);
-        }else{
-            switch(whoAdd.current) {
-                case 'N': createNote(data);
-                        break;
-                case 'L':  createList(data);
-                        break;
-                case 'E': createEvent(data);
-                        break;
+        } else {
+            switch (whoAdd.current) {
+                case 'N':
+                    createNote(data);
+                    break;
+                case 'L':
+                    createList(data);
+                    break;
+                case 'E':
+                    createEvent(data);
+                    break;
             }
         }
     }
@@ -545,7 +516,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                                     }}
                                                     value={listElements}
                                                     type='text'
-                                                    name={'email'+index}
+                                                    name={'email' + index}
                                                     onChange={(e) => handleChangeListElements(index, e.target.value)}
                                                 />
                                                 <Button onClick={() => handleRemoveListElements(index)}
@@ -599,7 +570,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                         <Box sx={{
                             width: '100%',
                             height: '400px',
-                            overflowY: 'scroll',
+                            overflowY: 'hide',
                             borderRadius: '22px',
                             backgroundColor: '#d8c2be',
                             marginTop: '5px',
@@ -665,7 +636,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                         {isFirstChecked ?
                             <Button
                                 endIcon={<NavigateNextIcon sx={{height: '25px', width: '25px', color: '#201a19'}}/>}
-                                
+
                                 sx={{
                                     fontFamily: 'Roboto Bold',
                                     height: '60px',
@@ -739,7 +710,7 @@ function LeftBar({
                  }: any) {
     //Variable declaration
     const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+    const [selectedValue, setSelectedValue] = React.useState('');
 
     const handleClickOpen = () => {
         setOpen(true);

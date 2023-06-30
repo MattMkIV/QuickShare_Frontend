@@ -215,6 +215,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                             '& fieldset': {border: 'none'},
                             '& .MuiInputBase-input': {fontFamily: 'Roboto Light', fontSize: '20px !important'}
                         }}
+                        type='text'
                         value={bodyNote}
                         onChange={handleChangeBody}
                         onClick={handleTextFieldClick}
@@ -355,7 +356,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                     height: '248px',
                                     borderRadius: '22px',
                                     backgroundColor: '#d9b267',
-                                    overflowY: 'scroll',
+                                    overflowY: 'hidden',
                                     pl: 1.2, pr: 1.2, pt: 1.2
                                 }}>
                                     {userInfo.map((user: any, index: any) => (
@@ -462,7 +463,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         borderRadius: '22px',
                                         backgroundColor: '#eaa79d',
                                         pl: 1.2, pr: 1.2, pt: 1.2,
-                                        overflowY: 'scroll',
+                                        overflowY: 'hidden',
                                     }}>
                                         {textFields.map((textField, index) => (
                                             <div key={index} style={{display: 'flex'}}>
@@ -524,7 +525,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         display: 'flex',
                                         justifyContent: 'flex-end',
                                         alignContent: 'center',
-                                        pr: 1.2
+                                        pr: 1.2,
                                     }}>
                                         <Button sx={{
                                             border: 1,
@@ -604,6 +605,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         height: '103px',
                                         borderRadius: '22px',
                                         backgroundColor: '#ffb4aa',
+                                        overflowY: 'hidden'
                                     }
                                 }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
                             >

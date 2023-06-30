@@ -225,7 +225,7 @@ function TopBar() {
                 <Grid sx={{marginTop: '2px'}}>
                     <Stack sx={{height: '516px', marginBottom: '10px', overflowY: 'scroll', pb: 2}} spacing={2}
                            direction="column">
-                        {messages.map((message: any, index: any) => (
+                        {messages.slice().reverse().map((message: any) => (
                             message.fk_user_creator === userId ?
                                 <MyMessageComponent message={message.message}/>
                                 :
@@ -318,6 +318,7 @@ function TopBar() {
                         height: '120px',
                         borderRadius: '22px',
                         backgroundColor: '#a08c8a',
+                        overflowY: 'hidden'
                     }
                 }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
             >

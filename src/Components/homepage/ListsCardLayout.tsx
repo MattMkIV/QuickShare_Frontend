@@ -24,7 +24,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CheckIcon from '@mui/icons-material/Check';
 import {TakeUserInfoAll, TakeUserInfoByEmail} from '../../Utils/AuthService';
 import {CreateElementList, DeleteList, UpdateList} from '../../Utils/list_service';
-import {UpdateNote} from "../../Utils/note_service";
 
 interface Props {
     list_id: any,
@@ -32,6 +31,7 @@ interface Props {
     create_date: any,
     allowed: any
 }
+
 function ListCardLayout({list_id, title, create_date, allowed}: Props) {
 
     const [userInfo, setUserInfo] = useState<any>([]);
@@ -124,8 +124,6 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
             console.log("Errore aggiornamento lista");
 
         window.location.reload();
-
-        setIsEditable(false);
     };
 
     const handleCloseClick = () => {
@@ -138,7 +136,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
 
     /************************* Menù pop up functions *************************/
 
-    //const [selectedItem, setSelectedItem] = useState(Home);
+        //const [selectedItem, setSelectedItem] = useState(Home);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
     const [menuId, setMenuId] = useState<string | undefined>(undefined);
@@ -206,8 +204,8 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                             type='text'
                             defaultValue={title}
                             onChange={handleChangeTitle}
-                            onClick={handleTextFieldClick}
-                        ></TextField>
+                            onClick={handleTextFieldClick}>
+                        </TextField>
                         <Grow in={isHovered || isMenuOpen} mountOnEnter unmountOnExit timeout={400}>
                             <IconButton
                                 sx={{
@@ -251,6 +249,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                     width: '276px',
                                     backgroundColor: '#dedede',
                                     borderRadius: '22px',
+                                    overflowY: 'hidden',
                                 },
                             }}
                             sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
@@ -266,7 +265,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                 height: '190px',
                                 borderRadius: '22px',
                                 backgroundColor: '#c4bfc4',
-                                overflowY: 'scroll',
+                                overflowY: 'hidden',
                                 pl: 1.2, pr: 1.2, pt: 1.2
                             }}>
                                 <form onSubmit={addListElement}>
@@ -305,7 +304,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                         name='newListItem'
                                         placeholder='New element'
                                     />
-                                    <Button sx={{
+                                    <Button type="submit" sx={{
                                         border: 1,
                                         backgroundColor: '#8fb677',
                                         minWidth: '40px',
@@ -314,8 +313,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                         borderRadius: '22px',
                                         borderColor: '#7a9a65',
                                         ':hover': {backgroundColor: '#7a9a65'}
-                                    }}
-                                            type="submit">
+                                    }}>
                                         <CheckIcon sx={{color: '#201a19'}}/>
                                     </Button>
                                 </form>
@@ -328,7 +326,8 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                     <Box sx={{
                         height: (isHovered || isMenuOpen || retardTransition) ? '270px' : '350px',
                         marginTop: '7px',
-                        overflowY: 'scroll'
+                        overflowY: 'scroll',
+                        scrollbarColor: 'red !important'
                     }}>
                         <ListsCheckBoxComponent listId={list_id}></ListsCheckBoxComponent>
                     </Box>
@@ -467,7 +466,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                     height: '248px',
                                     borderRadius: '22px',
                                     backgroundColor: '#d9b267',
-                                    overflowY: 'scroll',
+                                    overflowY: 'hidden',
                                     pl: 1.2, pr: 1.2, pt: 1.2
                                 }}>
                                     {userInfo.map((user: any, index: any) => (
@@ -573,7 +572,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                         borderRadius: '22px',
                                         backgroundColor: '#eaa79d',
                                         pl: 1.2, pr: 1.2, pt: 1.2,
-                                        overflowY: 'scroll',
+                                        overflowY: 'hidden',
                                     }}>
                                         {textFields.map((textField, index) => (
                                             <div key={index} style={{display: 'flex'}}>
@@ -715,6 +714,7 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                                         height: '103px',
                                         borderRadius: '22px',
                                         backgroundColor: '#ffb4aa',
+                                        overflowY: 'hidden'
                                     }
                                 }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
                             >

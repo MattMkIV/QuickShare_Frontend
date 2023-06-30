@@ -45,6 +45,7 @@ function Notes() {
 
             setLists(allLists);
         }
+
         check();
         takeLists();
     }, []);

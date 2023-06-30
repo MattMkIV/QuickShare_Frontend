@@ -18,8 +18,8 @@ function LogoGuest(this: any, {navigateHome}: props) {
 
     //Functions
     const handleClick = () => {
-        localStorage.setItem('section', 'home')
-        navigate("/homepage");
+        localStorage.setItem('section', 'homeGuest')
+        navigate("/homepageGuest");
 
         window.location.reload();
     };

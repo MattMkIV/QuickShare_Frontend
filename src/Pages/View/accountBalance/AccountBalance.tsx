@@ -289,12 +289,12 @@ function AccountBalance() {
                 }}>
                     <Box sx={{
                         width: '900px', height: '50px', borderRadius: '50px', backgroundColor: '#ffdad5',
-                        overflowX: 'scroll', display: 'flex', alignContent: 'center', justifyContent: 'left',
+                        overflowX: 'hidden', display: 'flex', alignContent: 'center', justifyContent: 'left',
                         boxShadow: 10,
                     }}>
                         <List component={Stack} direction="row" sx={{
                             width: '100%', marginLeft: '3px',
-                            marginRight: '3px'
+                            marginRight: '3px',
                         }}>
                             {months.map((letter, index) => (
                                 <Box sx={{width: '100%', display: 'flex', alignContent: 'center'}}>
