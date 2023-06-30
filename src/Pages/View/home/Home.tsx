@@ -9,6 +9,7 @@ import {useNavigate} from 'react-router-dom';
 import {checkJwt} from '../../../Utils/AuthService';
 import {TakeList} from '../../../Utils/list_service';
 import {TakeNote} from '../../../Utils/note_service';
+import { TakeUserId } from '../../../Utils/message_service';
 
 function Home() {
 
@@ -20,7 +21,15 @@ function Home() {
     useEffect(() => {
         const check = async () => {
             jwtError = await checkJwt();
-            if (jwtError) navigate("/");
+
+            if (!jwtError) {
+    
+                let userId = await TakeUserId();
+                if (userId === 28) 
+                    navigate("/");
+                
+            }else 
+                navigate("/");
         }
 
         const takeLists = async () => {
