@@ -117,7 +117,6 @@ function SimpleDialog(props: SimpleDialogProps) {
         }, 300);
     }
 
-
     const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
 
     // Insert new elemnt
@@ -479,7 +478,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                         sx={{
                                             height: isHovered || retardTransition ? '250px' : '320px',
                                             marginTop: '7px',
-                                            overflowY: 'scroll',
+                                            overflowY: 'auto',
                                         }}>
                                         {listElements.map((listElements, index) => (
                                             <Grid key={index}>

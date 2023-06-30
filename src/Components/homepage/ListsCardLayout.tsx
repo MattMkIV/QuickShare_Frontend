@@ -326,8 +326,8 @@ function ListCardLayout({list_id, title, create_date, allowed}: Props) {
                     <Box sx={{
                         height: (isHovered || isMenuOpen || retardTransition) ? '270px' : '350px',
                         marginTop: '7px',
-                        overflowY: 'scroll',
-                        scrollbarColor: 'red !important'
+                        overflowY: 'auto',
+
                     }}>
                         <ListsCheckBoxComponent listId={list_id}></ListsCheckBoxComponent>
                     </Box>

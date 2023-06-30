@@ -10,7 +10,7 @@
     margin-left: 25px !important;
     margin-right: 25px !important;
     display: flex !important;
-    overflow-x: scroll !important;
+    overflow-x: auto !important;
 }
 
 .cardSlider {

@@ -13,7 +13,10 @@ import {checkJwt} from "../../../Utils/AuthService";
 import {useNavigate} from "react-router-dom";
 
 function Calendar() {
-    const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().getFullYear() + '-' + (new Date().getMonth() + 1 + '-' + new Date().getDate())));
+    const defaultDate = localStorage.getItem("DaySelected");
+    const defaultValue = defaultDate !== null ? dayjs(defaultDate) : dayjs(new Date().getFullYear() + '-' + (new Date().getMonth() + 1 + '-' + new Date().getDate()));
+
+    const [value, setValue] = React.useState<Dayjs | null>(defaultValue);
     const [eventi, setEventi] = useState<any>([]);
     let jwtError = false;
     const navigate = useNavigate();
@@ -46,7 +49,10 @@ function Calendar() {
 
             let response: any = await TakeEvent(day);
 
-            setEventi(response);
+            if(response === undefined)
+                console.log('ciao cio')
+            else
+                setEventi(response);
         }
 
         check();
@@ -62,10 +68,8 @@ function Calendar() {
         let dateArray = formattedDate.split(",")[0].split("/");
         let finalData;
 
-        if (parseInt(dateArray[1]) < 10)
-            finalData = `${dateArray[2]}-0${dateArray[1]}-${dateArray[0]}`;
-        else
-            finalData = `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`;
+
+        finalData = `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`;
 
         localStorage.setItem("DaySelected", finalData);
         window.location.reload();
