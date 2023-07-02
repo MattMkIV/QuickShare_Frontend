@@ -1,24 +1,12 @@
-import {Box, Button, CardContent, Divider, Grow, IconButton, Menu, Slide, TextField, Typography} from "@mui/material";
+import {TextField} from "@mui/material";
 import Card from "@mui/material/Card";
 import * as React from "react";
-import {useEffect, useState} from "react";
-import InfoIcon from '@mui/icons-material/Info';
-import ShareIcon from '@mui/icons-material/Share';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import './NoteCardLayout.css'
-
+import {useState} from "react";
 import './NoteCardLayout.css'
 import Grid from "@mui/material/Grid";
-import DoneIcon from '@mui/icons-material/Done';
-import CloseIcon from '@mui/icons-material/Close';
-import {DeleteNote, UpdateNote} from "../../Utils/note_service";
-import {TakeUserInfoAll, TakeUserInfoByEmail} from "../../Utils/AuthService";
-import {useNavigate} from "react-router-dom";
-import { DeleteEvent } from "../../Utils/calendar_service";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs, {Dayjs} from "dayjs";
+import dayjs from "dayjs";
 
 interface Props {
     value: any,

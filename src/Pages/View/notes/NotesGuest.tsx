@@ -78,8 +78,9 @@ function NotesGuest() {
                         <Grid item className='cardSliderHomePage'>
                             <Stack spacing={5} direction="row">
                                 {note.slice().reverse().map((n: any, i: any) => (
-                                    <CardLayoutGuest key={i} title={n.title} noteId={n.note_id} createData={n.create_date}
-                                                body={n.body} allowed={n.allowed}/>
+                                    <CardLayoutGuest key={i} title={n.title} noteId={n.note_id}
+                                                     createData={n.create_date}
+                                                     body={n.body} allowed={n.allowed}/>
                                 ))}
                             </Stack>
                         </Grid>

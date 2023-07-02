@@ -10,8 +10,8 @@ import './TopBar.css';
 import React, {useEffect, useRef, useState} from 'react';
 import Avatar from "@mui/material/Avatar";
 import LoginIcon from "@mui/icons-material/Login";
-import { TakeUserInfoFromJwt, checkJwt } from "../../Utils/AuthService";
-import { useNavigate } from "react-router-dom";
+import {TakeUserInfoFromJwt} from "../../Utils/AuthService";
+import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
@@ -25,9 +25,9 @@ function TopBarGuest() {
     const [isSearchRender, setSearchRender] = useState(false)
 
     useEffect(() => {
-        
+
         const takeUserData = async () => {
-            let response:any = await TakeUserInfoFromJwt();
+            let response: any = await TakeUserInfoFromJwt();
             setUserInfo(response[0]);
         }
 
@@ -43,7 +43,7 @@ function TopBarGuest() {
 
         searchBar();
         takeUserData();
-    },[]);
+    }, []);
 
     const logOut = () => {
         localStorage.clear();
@@ -143,7 +143,8 @@ function TopBarGuest() {
                                         overflow: 'hidden',
                                         ':hover': {backgroundColor: '#c5aa7c'}
                                     }}
-                                    startIcon={<HighlightOffIcon sx={{color: '#3f2e04', width: '23px', height: '23px'}}/>}
+                                    startIcon={<HighlightOffIcon
+                                        sx={{color: '#3f2e04', width: '23px', height: '23px'}}/>}
                                     onClick={backClick} disableRipple>
                                 <span
                                     style={{
@@ -238,7 +239,7 @@ function TopBarGuest() {
                                 marginRight: '5px',
                                 ':hover': {backgroundColor: '#800507', cursor: 'pointer'}
                             }}
-                            onClick = {() => logOut()}>
+                            onClick={() => logOut()}>
                             <Grid container>
                                 <LoginIcon
                                     sx={{color: 'white', marginTop: '5px', marginLeft: '18px'}}></LoginIcon>

@@ -49,7 +49,7 @@ function Calendar() {
 
             let response: any = await TakeEvent(day);
 
-            if(response !== undefined)
+            if (response !== undefined)
                 setEventi(response);
         }
 
@@ -142,8 +142,8 @@ function Calendar() {
                                     color: '#f5ddda',
                                     marginTop: '20px'
                                 }}>No Events</Typography> : (
-                                    eventi.map((evento: any, index: any) => (
-                                        <CalendarEvent key={index} value={evento} index={index}/>
+                                    eventi.map((event: any, index: any) => (
+                                        <CalendarEvent key={index} value={event} index={index}/>
                                     ))
                                 )}
                             </List>

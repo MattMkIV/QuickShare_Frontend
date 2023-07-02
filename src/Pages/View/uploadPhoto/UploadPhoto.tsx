@@ -3,46 +3,42 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Grid from "@mui/material/Grid";
 import * as React from "react";
-import {useState} from "react";
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import {useEffect, useState} from "react";
 import './UploadPhoto.css'
 import Button from "@mui/material/Button";
-import {styled} from "@mui/material/styles";
-import {Alert, Divider, Fab, Grow, Menu, Snackbar, TextField, Typography} from "@mui/material";
+import {Divider, Fab, Grow, Menu, TextField, Typography} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from "@mui/icons-material/Info";
 import ShareIcon from "@mui/icons-material/Share";
-import { useEffect, useRef} from 'react';
-import { useNavigate } from 'react-router-dom';
-import { checkJwt, TakeUserInfoAll, TakeUserInfoByEmail } from '../../../Utils/AuthService';
-import { AddAllowedPhoto, AddPhoto, DeleteImage, TakeImage } from '../../../Utils/image_service';
+import {useNavigate} from 'react-router-dom';
+import {checkJwt, TakeUserInfoAll, TakeUserInfoByEmail} from '../../../Utils/AuthService';
+import {AddAllowedPhoto, AddPhoto, DeleteImage, TakeImage} from '../../../Utils/image_service';
 import AddIcon from "@mui/icons-material/Add";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import {Buffer} from 'buffer';
 
 function UploadPhoto() {
-    
+
     const [hoveredIndex, setHoveredIndex] = useState(-1);
     let jwtError = false;
     let navigate = useNavigate();
     const [photos, setPhotos] = useState<any>([]);
     const [open, setOpen] = useState(false);
     const [clickedImage, setClickedImage] = useState();
-    
+
     useEffect(() => {
         const check = async () => {
             jwtError = await checkJwt();
-            if(jwtError) navigate("/");
+            if (jwtError) navigate("/");
         }
 
         const takePhotos = async () => {
-            let response:any = await TakeImage();
+            let response: any = await TakeImage();
             let photoInfo = [];
-            
+
             for (let i = 0; i < response.length; i++) {
                 var element = response[i];
                 let userInfo = await TakeUserInfoAll(element.allowed);
-                
+
                 let all = {
                     "image_id": response[i].image_id,
                     "image_name": response[i].data,
@@ -54,7 +50,7 @@ function UploadPhoto() {
             }
 
             setPhotos(photoInfo);
-        }   
+        }
 
         check();
         takePhotos();
@@ -69,27 +65,27 @@ function UploadPhoto() {
     };
 
     const deleteImage = async (imageId: any) => {
-        console.log("IMAGE ID: "+imageId);
+        console.log("IMAGE ID: " + imageId);
         let isError = await DeleteImage(imageId);
         window.location.reload();
     }
 
     const addAllowed = async (event: any) => {
 
-        let emailAllowedUser:any = [];
+        let emailAllowedUser: any = [];
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         //Take Value
 
-        for(let i=0; i < textFields.length; i++) {
-            let response:any = await TakeUserInfoByEmail(data.get('email'+i));
+        for (let i = 0; i < textFields.length; i++) {
+            let response: any = await TakeUserInfoByEmail(data.get('email' + i));
             emailAllowedUser.push(response.id);
         }
-        
-        let response:any = await TakeUserInfoAll(emailAllowedUser);
+
+        let response: any = await TakeUserInfoAll(emailAllowedUser);
         let imageId = data.get('image_id');
 
-        for(let i=0; i < response.length; i++) {
+        for (let i = 0; i < response.length; i++) {
             let isError = await AddAllowedPhoto(imageId, response[i].id);
         }
 
@@ -167,7 +163,7 @@ function UploadPhoto() {
                         cols={3}
                         gap={8}
                         sx={{marginTop: '20px', marginLeft: '25px', marginRight: '25px', alignItems: 'center'}}>
-                        {photos.map((photo:any, index:any) => (
+                        {photos.map((photo: any, index: any) => (
                             <ImageListItem
                                 key={index}
                                 onMouseEnter={() => handleMouseEnter(index)}
@@ -180,7 +176,7 @@ function UploadPhoto() {
                                     src={`${photo.image_name}`}
                                     //srcSet={`${photo.image_name}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                 />
-                                
+
                                 <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={100}>
                                     <Fab sx={{
                                         position: 'absolute', bottom: '15px', right: '15px', backgroundColor: '#ffb4aa',
@@ -264,12 +260,12 @@ function UploadPhoto() {
                                                 marginTop: '10px',
                                                 ':hover': {backgroundColor: '#7e0508'}
                                             }} disableRipple
-                                            onClick={() => deleteImage(photo.image_id)}>Yes</Button>
+                                                    onClick={() => deleteImage(photo.image_id)}>Yes</Button>
                                         </Grid>
                                     </Box>
                                 </Menu>
 
-                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={200} >
+                                <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={200}>
                                     <Fab sx={{
                                         position: 'absolute', bottom: '15px', right: '90px', backgroundColor: '#e7bdb7',
                                         ':hover': {backgroundColor: '#e3ada5'}
@@ -312,7 +308,7 @@ function UploadPhoto() {
                                             overflowY: 'hidden'
                                         }
                                     }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
-                                >   
+                                >
                                     <form onSubmit={addAllowed}>
                                         <Typography sx={{
                                             fontFamily: 'Roboto Black',
@@ -362,7 +358,7 @@ function UploadPhoto() {
                                                             marginBottom: 1.2
                                                         }}
                                                         placeholder='Email'
-                                                        name={'email'+index}
+                                                        name={'email' + index}
                                                     />
                                                     <input type="hidden" name="image_id" value={photo.image_id}/>
                                                     <Button onClick={() => handleRemoveTextField(index)}
@@ -377,7 +373,8 @@ function UploadPhoto() {
                                                                 ':hover': {backgroundColor: '#9f3a3c'}
                                                             }}
                                                             disableRipple>
-                                                        <DeleteIcon sx={{height: '15px', width: '15px', color: '#ffb4aa'}}/>
+                                                        <DeleteIcon
+                                                            sx={{height: '15px', width: '15px', color: '#ffb4aa'}}/>
                                                     </Button>
                                                 </div>
                                             ))}
@@ -414,7 +411,7 @@ function UploadPhoto() {
                                                 ':hover': {backgroundColor: '#c7ad7b'},
                                                 color: '#201a19',
                                             }} disableRipple
-                                            type="submit">
+                                                    type="submit">
                                                 Share!
                                             </Button>
                                         </Grid>
@@ -513,38 +510,38 @@ function UploadPhoto() {
                                         overflowY: 'auto',
                                         pl: 1.2, pr: 1.2, pt: 1.2
                                     }}>
-                                        {photo.allowed.map((user:any, index:any) => (
+                                        {photo.allowed.map((user: any, index: any) => (
                                             <TextField key={index} inputProps={{
                                                 sx: {color: '#3f2e04 !important'}
                                             }}
-                                                    sx={{
-                                                        '& .MuiInput-underline': {
-                                                            borderBottomColor: 'transparent',
-                                                        },
-                                                        '& .MuiOutlinedInput-root': {
-                                                            '& fieldset': {
-                                                                borderColor: '#3f2e04',
-                                                                borderRadius: '18px',
-                                                            },
-                                                            '&:hover fieldset': {
-                                                                borderColor: '#3f2e04',
-                                                            },
-                                                            '&.Mui-focused fieldset': {
-                                                                borderColor: 'transparent',
-                                                            },
-                                                        },
-                                                        '& .MuiInputBase-input': {
-                                                            fontFamily: 'Roboto Regular',
-                                                            fontSize: '15px !important',
-                                                            height: '5px',
-                                                            width: '202px',
-                                                            borderRadius: '18px',
-                                                            boxShadow: 4,
-                                                        },
-                                                        marginBottom: 1.2
-                                                    }}
-                                                    defaultValue={user.email}
-                                                    disabled>
+                                                       sx={{
+                                                           '& .MuiInput-underline': {
+                                                               borderBottomColor: 'transparent',
+                                                           },
+                                                           '& .MuiOutlinedInput-root': {
+                                                               '& fieldset': {
+                                                                   borderColor: '#3f2e04',
+                                                                   borderRadius: '18px',
+                                                               },
+                                                               '&:hover fieldset': {
+                                                                   borderColor: '#3f2e04',
+                                                               },
+                                                               '&.Mui-focused fieldset': {
+                                                                   borderColor: 'transparent',
+                                                               },
+                                                           },
+                                                           '& .MuiInputBase-input': {
+                                                               fontFamily: 'Roboto Regular',
+                                                               fontSize: '15px !important',
+                                                               height: '5px',
+                                                               width: '202px',
+                                                               borderRadius: '18px',
+                                                               boxShadow: 4,
+                                                           },
+                                                           marginBottom: 1.2
+                                                       }}
+                                                       defaultValue={user.email}
+                                                       disabled>
                                             </TextField>
                                         ))}
                                     </Box>
