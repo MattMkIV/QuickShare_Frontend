@@ -9,6 +9,7 @@ import {useNavigate} from 'react-router-dom';
 import {checkJwt} from '../../../Utils/AuthService';
 import {TakeList} from '../../../Utils/list_service';
 import {TakeNote} from '../../../Utils/note_service';
+import {Search} from "../../../Utils/search_service";
 
 function HomeGuest() {
 
@@ -16,6 +17,9 @@ function HomeGuest() {
     let navigate = useNavigate();
     const [lists, setLists] = useState<any>([]);
     const [notes, setNotes] = useState<any>([]);
+    const [renderHomePage, setRenderHomePage] = useState(true);
+    const [notesFiltered, setNotesFiltered] = useState<any>([]);
+    const [listsFiltered, setListsFiltered] = useState<any>([]);
 
     useEffect(() => {
         const check = async () => {
@@ -73,49 +77,115 @@ function HomeGuest() {
             setNotes(allNotes);
         }
 
+        const searchRender = async () => {
+            let renderHomePageStored = localStorage.getItem('isSearchRender')
+
+            if (renderHomePageStored === 'false')
+                setRenderHomePage(true);
+            else
+                setRenderHomePage(false);
+
+            let notesFilter: any = await Search(localStorage.getItem('searchResult'), 'notes')
+            setNotesFiltered(notesFilter)
+
+            let listsFilter: any = await Search(localStorage.getItem('searchResult'), 'lists')
+            setListsFiltered(listsFilter)
+        }
+
         check();
-        takeLists();
-        takeNotes();
+        if (localStorage.getItem('isSearchRender') === 'true') {
+            searchRender();
+        } else {
+            takeLists();
+            takeNotes();
+        }
     }, []);
 
     //Render
     return (
         <>
-            <Box className='homeBox'>
-                <Grid container>
-                    <h1 className='titleSection'>Most Recent Notes:</h1>
-                </Grid>
+            {!renderHomePage ?
+                (<Box className='homeBox'>
+                    {(notesFiltered !== undefined && notesFiltered.length !== 0) ?
+                        (<>
+                            <Grid container>
+                                <h1 className='titleSection'>Notes found:</h1>
+                            </Grid>
 
-                <Grid className='cardSliderHomePage'>
-                    <Stack direction="row" spacing={5}>
-                        {notes.map((note: any, index: any) => (
-                            note.slice(0, 10).reverse().map((n: any, i: any) => (
-                                <CardLayoutGuest key={index} title={n.title} noteId={n.note_id}
-                                                 createData={n.create_date}
-                                                 body={n.body} allowed={n.allowed}/>
-                            ))
-                        ))}
-                    </Stack>
-                </Grid>
+                            <Grid className='cardSliderHomePage'>
+                                <Stack direction="row" spacing={5}>
+                                    {(notesFiltered.slice().reverse().map((n: any, i: any) => (
+                                            <CardLayoutGuest key={i} title={n.title} noteId={n.note_id}
+                                                             createData={n.create_date}
+                                                             body={n.body} allowed={n.allowed}/>
+                                        ))
+                                    )}
+                                </Stack>
+                            </Grid>
 
-                <hr className='lineCentralContent'></hr>
+                            {listsFiltered.length !== 0 ?
+                                <hr className='lineCentralContent'></hr>
+                                : ''}
+                        </>)
 
-                <Grid container>
-                    <h1 className='titleSection'>Most Recent Lists:</h1>
-                </Grid>
+                        : ''}
 
-                <Grid className='cardSliderHomePage'>
-                    <Stack direction="row" spacing={5}>
-                        {lists.map((list: any, index: any) => (
-                            list.slice(0, 10).reverse().map((n: any, i: any) => (
-                                <ListsCardLayoutGuest key={i} title={n.title} list_id={n.list_id}
-                                                      create_date={n.create_date}
-                                                      allowed={n.allowed}/>
-                            ))
-                        ))}
-                    </Stack>
-                </Grid>
-            </Box>
+                    {(listsFiltered !== undefined && listsFiltered.length !== 0) ?
+                        (<>
+                            <Grid container>
+                                <h1 className='titleSection'>Lists found:</h1>
+                            </Grid>
+
+                            <Grid className='cardSliderHomePage'>
+                                <Stack direction="row" spacing={5}>
+                                    {(listsFiltered.slice().reverse().map((n: any, i: any) => (
+                                            <ListsCardLayoutGuest key={i} title={n.title} list_id={n.list_id}
+                                                                  create_date={n.create_date}
+                                                                  allowed={n.allowed}/>
+                                        ))
+                                    )}
+                                </Stack>
+                            </Grid>
+                        </>)
+                        : ''}
+                </Box>)
+                :
+                (<Box className='homeBox'>
+                    <Grid container>
+                        <h1 className='titleSection'>Most Recent Notes:</h1>
+                    </Grid>
+
+                    <Grid className='cardSliderHomePage'>
+                        <Stack direction="row" spacing={5}>
+                            {notes.map((note: any, index: any) => (
+                                note.slice(0, 10).reverse().map((n: any, i: any) => (
+                                    <CardLayoutGuest key={index} title={n.title} noteId={n.note_id}
+                                                     createData={n.create_date}
+                                                     body={n.body} allowed={n.allowed}></CardLayoutGuest>
+                                ))
+                            ))}
+                        </Stack>
+                    </Grid>
+
+                    <hr className='lineCentralContent'></hr>
+
+                    <Grid container>
+                        <h1 className='titleSection'>Most Recent Lists:</h1>
+                    </Grid>
+
+                    <Grid className='cardSliderHomePage'>
+                        <Stack direction="row" spacing={5}>
+                            {lists.map((list: any, index: any) => (
+                                list.slice(0, 10).reverse().map((n: any, i: any) => (
+                                    <ListsCardLayoutGuest key={i} title={n.title} list_id={n.list_id}
+                                                          create_date={n.create_date}
+                                                          allowed={n.allowed}></ListsCardLayoutGuest>
+                                ))
+                            ))}
+                        </Stack>
+                    </Grid>
+                </Box>)
+            };
         </>
     );
 }

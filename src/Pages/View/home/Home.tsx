@@ -3,18 +3,15 @@ import {useEffect, useState} from 'react';
 import './Home.css'
 import CalendarCardLayout from "../../../Components/homepage/CalendarCardLayout";
 import Grid from "@mui/material/Grid";
-import {Box, ListItem, Stack, Typography} from "@mui/material";
+import {Box, Stack} from "@mui/material";
 import CardLayout from '../../../Components/homepage/NoteCardLayout'
 import ListsCardLayout from '../../../Components/homepage/ListsCardLayout'
-import {Await, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {checkJwt} from '../../../Utils/AuthService';
 import {TakeList} from '../../../Utils/list_service';
 import {TakeNote} from '../../../Utils/note_service';
 import {TakeUserId} from '../../../Utils/message_service';
-import {Simulate} from "react-dom/test-utils";
-import contextMenu = Simulate.contextMenu;
 import {Search} from "../../../Utils/search_service";
-import {lightGreen} from "@mui/material/colors";
 
 function Home() {
 
@@ -23,7 +20,6 @@ function Home() {
     const [lists, setLists] = useState<any>([]);
     const [notes, setNotes] = useState<any>([]);
     const [renderHomePage, setRenderHomePage] = useState(true);
-
     const [notesFiltered, setNotesFiltered] = useState<any>([]);
     const [listsFiltered, setListsFiltered] = useState<any>([]);
     const [eventsFiltered, setEventsFiltered] = useState<any>([]);
@@ -185,10 +181,6 @@ function Home() {
                                     )}
                                 </Stack>
                             </Grid>
-
-                            {eventsFiltered.length !== 0 ?
-                                <hr className='lineCentralContent'></hr>
-                                : ''}
                         </>)
                         : ''}
                 </Box>)

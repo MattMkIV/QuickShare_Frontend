@@ -212,7 +212,7 @@ function ListCardLayoutGuest({list_id, title, create_date, allowed}: Props) {
                                 height: '190px',
                                 borderRadius: '22px',
                                 backgroundColor: '#c4bfc4',
-                                overflowY: 'hidden',
+                                overflowY: 'auto',
                                 pl: 1.2, pr: 1.2, pt: 1.2
                             }}>
                                 <form onSubmit={addListElement}>
@@ -273,7 +273,7 @@ function ListCardLayoutGuest({list_id, title, create_date, allowed}: Props) {
                     <Box sx={{
                         height: (isHovered || isMenuOpen || retardTransition) ? '270px' : '350px',
                         marginTop: '7px',
-                        overflowY: 'scroll'
+                        overflowY: 'auto'
                     }}>
                         <ListsCheckBoxComponent listId={list_id}></ListsCheckBoxComponent>
                     </Box>

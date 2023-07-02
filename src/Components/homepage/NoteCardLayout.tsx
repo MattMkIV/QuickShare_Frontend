@@ -310,7 +310,7 @@ const NoteCardLayout = ({title, noteId, createData, body, allowed}: Props) => {
                                         height: '320px',
                                         borderRadius: '22px',
                                         backgroundColor: '#dfc38c',
-                                        overflowY: 'hidden'
+                                        overflowY: 'auto'
                                     }
                                 }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
                             >

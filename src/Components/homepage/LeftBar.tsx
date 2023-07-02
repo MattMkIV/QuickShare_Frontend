@@ -726,7 +726,6 @@ function LeftBar({
 
     const handleItemClick = (item: string) => {
         let stateRender = localStorage.getItem('isSearchRender');
-        console.log(stateRender)
         if (stateRender === 'false') {
             localStorage.setItem('section', item);
             setSelectedItem(item);

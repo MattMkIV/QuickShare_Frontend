@@ -99,11 +99,6 @@ function SimpleDialog(props: SimpleDialogProps) {
     }
 
 
-    const handleAddClick = () => {
-        // Aggiungi qui la logica per confermare la modifica
-    };
-
-
     const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
 
     const handleChangeTitle = (event: any) => {
@@ -308,7 +303,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                                     sx={{
                                         height: isHovered || retardTransition ? '250px' : '320px',
                                         marginTop: '7px',
-                                        overflowY: 'scroll',
+                                        overflowY: 'auto',
                                     }}>
                                     {listElements.map((listElements, index) => (
                                         <Grid key={index}>
@@ -435,8 +430,26 @@ function LeftBarGuest({
     const [selectedItem, setSelectedItem] = useState(localStorage.getItem('section') || 'homeGuest');
 
     const handleItemClick = (item: string) => {
-        localStorage.setItem('section', item);
-        setSelectedItem(item);
+        let stateRender = localStorage.getItem('isSearchRender');
+        if (stateRender === 'false') {
+            localStorage.setItem('section', item);
+            setSelectedItem(item);
+
+            switch (item) {
+                case ('homeGuest') : {
+                    navigate("/homepageGuest");
+                    break;
+                }
+                case ('notes') : {
+                    navigate("/homepageGuest/notes");
+                    break;
+                }
+                case ('lists') : {
+                    navigate("/homepageGuest/lists");
+                    break;
+                }
+            }
+        }
     };
 
     //Function
@@ -477,7 +490,6 @@ function LeftBarGuest({
 
                 <List sx={{width: '100%', color: 'white'}}>
                     <ListItem className='noPaddingTopBottom' onClick={function (event) {
-                        navigate("/homepageGuest");
                         handleItemClick("homeGuest");
                     }}>
                         <ListItemButton
@@ -498,7 +510,6 @@ function LeftBarGuest({
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={function (event) {
-                        navigate("/homepageGuest/notes");
                         handleItemClick("notes");
                     }}>
                         <ListItemButton
@@ -519,7 +530,6 @@ function LeftBarGuest({
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={function (event) {
-                        navigate("/homepageGuest/lists");
                         handleItemClick("lists");
                     }}>
                         <ListItemButton

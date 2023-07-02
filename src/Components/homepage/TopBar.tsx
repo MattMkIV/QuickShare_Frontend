@@ -31,7 +31,6 @@ import SendIcon from "@mui/icons-material/Send";
 import {useNavigate} from "react-router-dom";
 import {checkJwt, TakeUserInfoByEmail, TakeUserInfoFromJwt} from "../../Utils/AuthService";
 import {CreateMessage, TakeMessages, TakeUserId, UpdateMessage} from "../../Utils/message_service";
-import {Search} from '../../Utils/search_service'
 import LoginIcon from "@mui/icons-material/Login";
 
 function TopBar() {
@@ -44,6 +43,8 @@ function TopBar() {
     const [userId, setUserId] = useState<any>();
     let jwtError = false;
     let navigate = useNavigate();
+    const searchValueRef = useRef('');
+    const [isSearchRender, setSearchRender] = useState(false)
 
     //Functions
     const handleClose = () => {
@@ -132,8 +133,6 @@ function TopBar() {
         },
     }));
 
-    const searchValueRef = useRef('');
-    const [isSearchRender, setSearchRender] = useState(false)
     const handleChange = () => {
         localStorage.setItem('searchResult', searchValueRef.current)
         localStorage.setItem('isSearchRender', 'true')
