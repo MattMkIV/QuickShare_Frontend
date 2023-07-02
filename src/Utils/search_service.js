@@ -74,6 +74,9 @@ export async function Search(searchText, type) {
             });
             break;
         }
+        default : {
+            break;
+        }
     }
     return responseData;
 

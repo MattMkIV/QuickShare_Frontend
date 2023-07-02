@@ -22,8 +22,6 @@ function UploadPhoto() {
     let jwtError = false;
     let navigate = useNavigate();
     const [photos, setPhotos] = useState<any>([]);
-    const [open, setOpen] = useState(false);
-    const [clickedImage, setClickedImage] = useState();
 
     useEffect(() => {
         const check = async () => {
@@ -65,8 +63,8 @@ function UploadPhoto() {
     };
 
     const deleteImage = async (imageId: any) => {
-        console.log("IMAGE ID: " + imageId);
-        let isError = await DeleteImage(imageId);
+        await DeleteImage(imageId);
+
         window.location.reload();
     }
 
@@ -85,9 +83,8 @@ function UploadPhoto() {
         let response: any = await TakeUserInfoAll(emailAllowedUser);
         let imageId = data.get('image_id');
 
-        for (let i = 0; i < response.length; i++) {
-            let isError = await AddAllowedPhoto(imageId, response[i].id);
-        }
+        for (let i = 0; i < response.length; i++)
+            await AddAllowedPhoto(imageId, response[i].id);
 
         window.location.reload();
     }
@@ -128,23 +125,11 @@ function UploadPhoto() {
             reader.readAsDataURL(file);
             reader.onloadend = async function (e) {
                 imageBase64 = reader.result;
-                console.log(imageBase64);
-                let isError = await AddPhoto(imageBase64);
+                await AddPhoto(imageBase64);
+
                 window.location.reload();
             };
         }
-    };
-
-    const handleClickAlert = () => {
-        setOpen(true);
-    };
-
-    const handleCloseAlert = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
     };
 
     //Render
@@ -169,12 +154,10 @@ function UploadPhoto() {
                                 onMouseEnter={() => handleMouseEnter(index)}
                                 onMouseLeave={handleMouseLeave}>
                                 <img
+                                    alt='Uploaded'
                                     loading="lazy"
                                     className='masonryImageStyle'
-                                    // src={`${photo.image_name}?w=248&fit=crop&auto=format`}
-                                    // srcSet={`${photo.image_name}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                     src={`${photo.image_name}`}
-                                    //srcSet={`${photo.image_name}?w=248&fit=crop&auto=format&dpr=2 2x`}
                                 />
 
                                 <Grow in={hoveredIndex === index} mountOnEnter unmountOnExit timeout={100}>
@@ -562,8 +545,7 @@ function UploadPhoto() {
                             backgroundColor: '#ba1a1a',
                             ':hover': {backgroundColor: '#690003', transform: 'scale(1.1)'}
                         }}
-                        disableRipple
-                        onClick={handleClickAlert}>
+                        disableRipple>
 
                         <FileUploadIcon sx={{color: '#ffdad5', height: '30px', width: '30px'}}/>
 

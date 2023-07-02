@@ -71,7 +71,6 @@ function InputLogin(this: any, {firstLabel, secondLabel}: Props) {
                     pt: 4,
                 }}
             >
-
                 <TextField
                     error={ErrorInput}
                     type='text'
