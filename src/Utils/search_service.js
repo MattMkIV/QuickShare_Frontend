@@ -34,7 +34,7 @@ export async function Search(searchText, type) {
         }
 
         case 'lists' : {
-            await axios.get(urls.serverURL + '/search/lists' + UserId + '/' + searchText, {
+            await axios.get(urls.serverURL + '/search/lists/' + UserId + '/' + searchText, {
                 'text': searchText,
             }, {
                 headers: {
@@ -55,7 +55,7 @@ export async function Search(searchText, type) {
         }
 
         case 'events' : {
-            await axios.get(urls.serverURL + '/search/events' + UserId + '/' + searchText, {
+            await axios.get(urls.serverURL + '/search/events/' + UserId + '/' + searchText, {
                 'text': searchText,
             }, {
                 headers: {

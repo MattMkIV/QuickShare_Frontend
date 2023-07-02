@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import './Home.css'
+import CalendarCardLayout from "../../../Components/homepage/CalendarCardLayout";
 import Grid from "@mui/material/Grid";
 import {Box, ListItem, Stack, Typography} from "@mui/material";
 import CardLayout from '../../../Components/homepage/NoteCardLayout'
@@ -13,6 +14,7 @@ import {TakeUserId} from '../../../Utils/message_service';
 import {Simulate} from "react-dom/test-utils";
 import contextMenu = Simulate.contextMenu;
 import {Search} from "../../../Utils/search_service";
+import {lightGreen} from "@mui/material/colors";
 
 function Home() {
 
@@ -24,7 +26,7 @@ function Home() {
 
     const [notesFiltered, setNotesFiltered] = useState<any>([]);
     const [listsFiltered, setListsFiltered] = useState<any>([]);
-    const [eventsFilteres, seteventsFiltered] = useState<any>([]);
+    const [eventsFiltered, setEventsFiltered] = useState<any>([]);
 
     useEffect(() => {
         const check = async () => {
@@ -93,17 +95,19 @@ function Home() {
         const searchRender = async () => {
             let renderHomePageStored = localStorage.getItem('isSearchRender')
 
-            // Pijo le note
-            let notesFiltered : any = await Search(localStorage.getItem('searchResult'), 'notes')
-
-            console.log(notesFiltered)
-
-
             if (renderHomePageStored === 'false')
                 setRenderHomePage(true);
             else
                 setRenderHomePage(false);
 
+            let notesFilter: any = await Search(localStorage.getItem('searchResult'), 'notes')
+            setNotesFiltered(notesFilter)
+
+            let listsFilter: any = await Search(localStorage.getItem('searchResult'), 'lists')
+            setListsFiltered(listsFilter)
+
+            let eventsFilter: any = await Search(localStorage.getItem('searchResult'), 'events')
+            setEventsFiltered(eventsFilter)
         }
 
         check();
@@ -120,43 +124,73 @@ function Home() {
         <>
             {!renderHomePage ?
                 (<Box className='homeBox'>
-                    <Grid container>
-                        <h1 className='titleSection'>Items found:</h1>
-                    </Grid>
+                    {(notesFiltered !== undefined && notesFiltered.length !== 0) ?
+                        (<>
+                            <Grid container>
+                                <h1 className='titleSection'>Notes found:</h1>
+                            </Grid>
 
-                    <Grid className='cardSliderHomePage'>
-                        <Stack direction="row" spacing={5}>
-                            {notesFiltered !== undefined ?
-                                (notesFiltered.map((note: any, index: any) => (
-                                    notesFiltered.slice(0, 10).reverse().map((n: any, i: any) => (
-                                        <CardLayout key={index} title={n.title} noteId={n.note_id}
-                                                         createData={n.create_date}
-                                                         body={n.body} allowed={n.allowed}></CardLayout>
-                                    ))
-                                )))
+                            <Grid className='cardSliderHomePage'>
+                                <Stack direction="row" spacing={5}>
+                                    {(notesFiltered.slice().reverse().map((n: any, i: any) => (
+                                            <CardLayout key={i} title={n.title} noteId={n.note_id}
+                                                        createData={n.create_date}
+                                                        body={n.body} allowed={n.allowed}/>
+                                        ))
+                                    )}
+                                </Stack>
+                            </Grid>
+
+                            {listsFiltered.length !== 0 ?
+                                <hr className='lineCentralContent'></hr>
                                 : ''}
-                        </Stack>
-                    </Grid>
+                        </>)
 
-                    <hr className='lineCentralContent'></hr>
+                        : ''}
 
-                    <Grid container>
-                        <h1 className='titleSection'>Most Recent Lists:</h1>
-                    </Grid>
+                    {(listsFiltered !== undefined && listsFiltered.length !== 0) ?
+                        (<>
+                            <Grid container>
+                                <h1 className='titleSection'>Lists found:</h1>
+                            </Grid>
 
-                    <Grid className='cardSliderHomePage'>
-                        <Stack direction="row" spacing={5}>
-                            {listsFiltered !== undefined ?
-                                (listsFiltered.map((note: any, index: any) => (
-                                    listsFiltered.slice(0, 10).reverse().map((n: any, i: any) => (
-                                        <ListsCardLayout key={i} title={n.title} list_id={n.list_id}
-                                                         create_date={n.create_date}
-                                                         allowed={n.allowed}></ListsCardLayout>
-                                    ))
-                                )))
+                            <Grid className='cardSliderHomePage'>
+                                <Stack direction="row" spacing={5}>
+                                    {(listsFiltered.slice().reverse().map((n: any, i: any) => (
+                                            <ListsCardLayout key={i} title={n.title} list_id={n.list_id}
+                                                             create_date={n.create_date}
+                                                             allowed={n.allowed}/>
+                                        ))
+                                    )}
+                                </Stack>
+                            </Grid>
+
+                            {eventsFiltered.length !== 0 ?
+                                <hr className='lineCentralContent'></hr>
                                 : ''}
-                        </Stack>
-                    </Grid>
+                        </>)
+                        : ''}
+
+                    {(eventsFiltered !== undefined && eventsFiltered.length !== 0) ?
+                        (<>
+                            <Grid container>
+                                <h1 className='titleSection'>Lists found:</h1>
+                            </Grid>
+
+                            <Grid className='cardSliderHomePage'>
+                                <Stack direction="row" spacing={5}>
+                                    {(eventsFiltered.slice().reverse().map((n: any, i: any) => (
+                                            <CalendarCardLayout key={i} index={i} value={n.title} date={n.date}/>
+                                        ))
+                                    )}
+                                </Stack>
+                            </Grid>
+
+                            {eventsFiltered.length !== 0 ?
+                                <hr className='lineCentralContent'></hr>
+                                : ''}
+                        </>)
+                        : ''}
                 </Box>)
                 :
                 (<Box className='homeBox'>

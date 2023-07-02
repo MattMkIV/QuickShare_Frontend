@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Grid from '@mui/material/Grid';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 //Component
 import Logo from '../logo/Logo';
 import MyMessageComponent from '../homepage/MyMessageComponent'
@@ -205,14 +205,27 @@ function TopBar() {
                                     backgroundColor: '#dfc38c',
                                     color: '#3f2e04',
                                     borderRadius: '22px',
-                                    width: '110px',
+                                    minWidth: '80px',
+                                    maxWidth: '200px',
                                     fontFamily: 'Roboto Bold',
                                     fontSize: '16px',
                                     boxShadow: 4,
+                                    padding: 2,
+                                    overflow: 'hidden',
                                     ':hover': {backgroundColor: '#c5aa7c'}
                                 }}
-                                startIcon={<ArrowBackIosIcon sx={{color: '#3f2e04', width: '23px', height: '23px'}}/>}
-                                onClick={backClick} disableRipple>Back</Button>)}
+                                startIcon={<HighlightOffIcon sx={{color: '#3f2e04', width: '23px', height: '23px'}}/>}
+                                onClick={backClick} disableRipple>
+                                <span
+                                    style={{
+                                        display: 'inline-block',
+                                        maxWidth: 'calc(100% - 24px)', // Considerando la larghezza dell'icona di avvio
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap',
+                                    }}>
+                                    {localStorage.getItem('searchResult')}
+                                </span></Button>)}
                     </Grid>
 
                     <Grid wrap='nowrap' sx={{

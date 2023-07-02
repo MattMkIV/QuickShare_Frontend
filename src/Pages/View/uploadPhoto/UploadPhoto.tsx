@@ -221,6 +221,7 @@ function UploadPhoto() {
                                             height: '103px',
                                             borderRadius: '22px',
                                             backgroundColor: '#ffb4aa',
+                                            overflowY: 'hidden',
                                         }
                                     }} sx={{backgroundColor: 'rgba(0,0,0,0.44)'}}
                                 >
@@ -326,7 +327,7 @@ function UploadPhoto() {
                                             borderRadius: '22px',
                                             backgroundColor: '#eaa79d',
                                             pl: 1.2, pr: 1.2, pt: 1.2,
-                                            overflowY: 'scroll',
+                                            overflowY: 'auto',
                                         }}>
                                             {textFields.map((textField, index) => (
                                                 <div key={index} style={{display: 'flex'}}>
@@ -509,7 +510,7 @@ function UploadPhoto() {
                                         height: '248px',
                                         borderRadius: '22px',
                                         backgroundColor: '#d9b267',
-                                        overflowY: 'scroll',
+                                        overflowY: 'auto',
                                         pl: 1.2, pr: 1.2, pt: 1.2
                                     }}>
                                         {photo.allowed.map((user:any, index:any) => (

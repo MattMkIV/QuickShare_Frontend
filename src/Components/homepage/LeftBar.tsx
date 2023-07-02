@@ -725,8 +725,39 @@ function LeftBar({
     const [selectedItem, setSelectedItem] = useState(localStorage.getItem('section') || 'home');
 
     const handleItemClick = (item: string) => {
-        localStorage.setItem('section', item);
-        setSelectedItem(item);
+        let stateRender = localStorage.getItem('isSearchRender');
+        console.log(stateRender)
+        if (stateRender === 'false') {
+            localStorage.setItem('section', item);
+            setSelectedItem(item);
+
+            switch (item) {
+                case ('home') : {
+                    navigate("/homepage");
+                    break;
+                }
+                case ('notes') : {
+                    navigate("/homepage/notes");
+                    break;
+                }
+                case ('lists') : {
+                    navigate("/homepage/lists");
+                    break;
+                }
+                case ('calendar') : {
+                    navigate("/homepage/calendar");
+                    break;
+                }
+                case ('photo') : {
+                    navigate("/homepage/photo");
+                    break;
+                }
+                case ('account balance') : {
+                    navigate("/homepage/accountbalance");
+                    break;
+                }
+            }
+        }
     };
 
     return (
@@ -759,7 +790,6 @@ function LeftBar({
 
                 <List sx={{width: '100%', color: 'white'}}>
                     <ListItem className='noPaddingTopBottom' onClick={function (event) {
-                        navigate("/homepage");
                         handleItemClick("home");
                     }}>
                         <ListItemButton
@@ -777,7 +807,6 @@ function LeftBar({
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={function (event) {
-                        navigate("/homepage/notes");
                         handleItemClick("notes");
                     }}>
                         <ListItemButton
@@ -795,7 +824,6 @@ function LeftBar({
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={function (event) {
-                        navigate("/homepage/lists");
                         handleItemClick("lists");
                     }}>
                         <ListItemButton
@@ -813,7 +841,6 @@ function LeftBar({
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={function (event) {
-                        navigate("/homepage/photo");
                         handleItemClick("photo");
                     }}>
                         <ListItemButton
@@ -831,7 +858,6 @@ function LeftBar({
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={function (event) {
-                        navigate("/homepage/calendar");
                         handleItemClick("calendar");
                     }}>
                         <ListItemButton
@@ -849,7 +875,6 @@ function LeftBar({
                         </ListItemButton>
                     </ListItem>
                     <ListItem className='noPaddingTopBottom' onClick={function (event) {
-                        navigate("/homepage/accountbalance");
                         handleItemClick("account balance");
                     }}>
                         <ListItemButton
