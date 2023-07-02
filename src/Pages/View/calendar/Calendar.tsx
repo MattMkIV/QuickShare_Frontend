@@ -49,9 +49,7 @@ function Calendar() {
 
             let response: any = await TakeEvent(day);
 
-            if(response === undefined)
-                console.log('ciao cio')
-            else
+            if(response !== undefined)
                 setEventi(response);
         }
 

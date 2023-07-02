@@ -61,8 +61,6 @@ export async function checkJwt() {
     let jwtError = false;
 
     if (jwt) {
-        console.log("JWT presente.");
-
         const claims = jose.decodeJwt(jwt);
         const actualTime = parseInt(Date.now() / 1000);
 

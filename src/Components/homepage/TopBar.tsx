@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Grid from '@mui/material/Grid';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 //Component
 import Logo from '../logo/Logo';
 import MyMessageComponent from '../homepage/MyMessageComponent'
@@ -21,7 +22,7 @@ import OtherMessageComponent from '../homepage/OtherMessageComponent'
 //CSS
 import './TopBar.css';
 //Other
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import Avatar from "@mui/material/Avatar";
 import {styled} from "@mui/material/styles";
@@ -30,6 +31,7 @@ import SendIcon from "@mui/icons-material/Send";
 import {useNavigate} from "react-router-dom";
 import {checkJwt, TakeUserInfoByEmail, TakeUserInfoFromJwt} from "../../Utils/AuthService";
 import {CreateMessage, TakeMessages, TakeUserId, UpdateMessage} from "../../Utils/message_service";
+import {Search} from '../../Utils/search_service'
 import LoginIcon from "@mui/icons-material/Login";
 
 function TopBar() {
@@ -44,9 +46,6 @@ function TopBar() {
     let navigate = useNavigate();
 
     //Functions
-    const handleChange = () => {
-    };
-
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -72,7 +71,18 @@ function TopBar() {
             setUserId(user_id);
         }
 
+        const searchBar = () => {
+            let renderHomePageStored = localStorage.getItem('isSearchRender')
+
+            if (renderHomePageStored === 'true')
+                setSearchRender(true)
+
+            else
+                setSearchRender(false)
+        }
+
         check();
+        searchBar();
         takeUserData();
         takeMessage();
     }, []);
@@ -122,6 +132,26 @@ function TopBar() {
         },
     }));
 
+    const searchValueRef = useRef('');
+    const [isSearchRender, setSearchRender] = useState(false)
+    const handleChange = () => {
+        localStorage.setItem('searchResult', searchValueRef.current)
+        localStorage.setItem('isSearchRender', 'true')
+
+        window.location.reload();
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.keyCode === 13)
+            handleChange();
+    };
+
+    const backClick = () => {
+        localStorage.setItem('isSearchRender', 'false')
+
+        window.location.reload();
+    }
+
     return (
         <>
             <React.Fragment>
@@ -131,38 +161,58 @@ function TopBar() {
                     <Logo navigateHome={true}/>
 
                     <Grid lg={7} md={7} xs={9}>
-                        <TextField
-                            placeholder="Search"
-                            onClick={handleChange}
-                            InputProps={{
-                                endAdornment: <SearchIcon sx={{color: '#F4B7AD'}}/>,
-                            }}
-                            sx={{
-                                '& .MuiInput-underline': {
-                                    borderBottomColor: 'transparent',
-                                },
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#F4B7AD',
+                        {!isSearchRender ? (
+                            <TextField
+                                placeholder="Search"
+                                onKeyDown={handleKeyDown}
+                                onChange={(event) => {
+                                    searchValueRef.current = event.target.value;
+                                }}
+                                type='search'
+                                InputProps={{
+                                    endAdornment: <SearchIcon sx={{color: '#F4B7AD'}}/>,
+                                }}
+                                sx={{
+                                    '& .MuiInput-underline': {
+                                        borderBottomColor: 'transparent',
+                                    },
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: '#F4B7AD',
+                                            borderRadius: '25px',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: '#F4B7AD',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#F4B7AD',
+                                            borderWidth: '2px',
+                                        },
+                                    },
+                                    '& .MuiInputBase-input': {
                                         borderRadius: '25px',
+                                        fontFamily: 'Roboto Regular',
+                                        fontSize: '17px !important',
+                                        height: '20px',
                                     },
-                                    '&:hover fieldset': {
-                                        borderColor: '#F4B7AD',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#F4B7AD',
-                                        borderWidth: '2px',
-                                    },
-                                },
-                                '& .MuiInputBase-input': {
-                                    borderRadius: '25px',
-                                    fontFamily: 'Roboto Regular',
-                                    fontSize: '17px !important',
-                                    height: '20px',
-                                },
-                                width: '80%',
-                                marginLeft: isMdScreen ? '15px' : isXsScreen ? '15px' : '0',
-                            }}/>
+                                    width: '80%',
+                                    marginLeft: isMdScreen ? '15px' : isXsScreen ? '15px' : '0',
+                                }}/>) : (
+                            <Button
+                                sx={{
+                                    height: '55px',
+                                    top: '2px',
+                                    backgroundColor: '#dfc38c',
+                                    color: '#3f2e04',
+                                    borderRadius: '22px',
+                                    width: '110px',
+                                    fontFamily: 'Roboto Bold',
+                                    fontSize: '16px',
+                                    boxShadow: 4,
+                                    ':hover': {backgroundColor: '#c5aa7c'}
+                                }}
+                                startIcon={<ArrowBackIosIcon sx={{color: '#3f2e04', width: '23px', height: '23px'}}/>}
+                                onClick={backClick} disableRipple>Back</Button>)}
                     </Grid>
 
                     <Grid wrap='nowrap' sx={{
