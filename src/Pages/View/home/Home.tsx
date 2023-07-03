@@ -12,6 +12,7 @@ import {TakeList} from '../../../Utils/list_service';
 import {TakeNote} from '../../../Utils/note_service';
 import {TakeUserId} from '../../../Utils/message_service';
 import {Search} from "../../../Utils/search_service";
+import {lightGreen} from "@mui/material/colors";
 
 function Home() {
 
@@ -181,6 +182,13 @@ function Home() {
                                     )}
                                 </Stack>
                             </Grid>
+<<<<<<< Updated upstream
+=======
+
+                            {eventsFiltered.length !== 0 ?
+                                <hr className='lineCentralContent'></hr>
+                                : ''}
+>>>>>>> Stashed changes
                         </>)
                         : ''}
                 </Box>)
