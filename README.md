@@ -1,11 +1,21 @@
-## QUICKSHARE 
-    Corso: Tecnologie Web
-    Autori: Mattia Lazzarini, Andrea Grassi
+# Quick.Share
 
-## Dipendenze 
+**Corso**: Tecnologie Web <br/>
+**Autori**: Mattia Lazzarini, Andrea Grassi <br/>
 
-    Librerie utilizzare nel progetto:
+Questo modulo contiene la parte Front-end del progetto
 
+## Indice:
+ - Dipendenza
+ - Deployment del Front-end
+
+### 1. Dipendenze
+Pre-requisiti:
+- **Node.js**: 20.0.0
+- **npm**: 9.6.4
+
+Librerie utilizzare nel progetto:
+```
     @emotion/react: 11.11.1
     @emotion/styled: 11.11.0
     @fontsource/roboto: 4.5.8
@@ -33,10 +43,21 @@
     styled-components: 5.3.10
     typescript: 4.9.5
     web-vitals: 2.1.4
+```
 
-    Le dipendenze sopra elencate sono installabili tramite il comando `npm i`.
+Le dipendenze sopra elencate sono installabili tramite il comando:
+```
+npm i
+```
 
-## Avvio progetti
+### 2. Deployment del Front-end
 
-    Per poter avviare il progetto, occorre digitare il comando `npm start`.
-    Una volta avviato il server, l'applicazione sarà disponibile al seguente link http://localhost:3000.
+Per poter avviare il progetto, occorre digitare il comando:
+```
+npm start
+```
+
+Una volta avviato il server, l'applicazione sarà disponibile al seguente link:
+```
+http://localhost:3000
+```
