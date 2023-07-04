@@ -78,6 +78,7 @@ const NoteCardLayoutGuest = ({title, noteId, createData, body, allowed}: Props) 
 
     const handleCloseClick = () => {
         setIsEditable(false);
+        window.location.reload();
     };
 
     /************************* Menù pop up functions *************************/

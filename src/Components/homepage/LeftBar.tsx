@@ -726,7 +726,12 @@ function LeftBar({
 
     const handleItemClick = (item: string) => {
         let stateRender = localStorage.getItem('isSearchRender');
+<<<<<<< Updated upstream
         if (stateRender === 'false' || stateRender === null) {
+=======
+        console.log(stateRender)
+        if (stateRender === 'false') {
+>>>>>>> Stashed changes
             localStorage.setItem('section', item);
             setSelectedItem(item);
 
