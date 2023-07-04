@@ -1,0 +1,43 @@
+/*------------------- Input ------------------*/
+.username,
+.password {
+    width: 60%;
+    display: flex;
+    align-items: flex-end;
+    color: darkgrey !important;
+    margin: 20px 20% 0 20% !important;
+}
+
+input,
+select,
+textarea {
+    color: #EBDCD4 !important;
+    font-size: 16px !important;
+}
+
+.inputStyle {
+    width: 80%;
+    margin-left: 10% !important;
+    margin-top: 20px !important;
+    margin-right: 10% !important;
+}
+
+.inputStyleName,
+.inputStyleSurname {
+    width: 95%;
+    margin-top: 20px !important;
+}
+
+.inputStyleName {
+    margin-right: 5% !important;
+}
+
+.inputStyleSurname {
+    margin-left: 5% !important;
+}
+
+/*------------------- Button ------------------*/
+.buttonSignup:hover {
+    background-color: #920609 !important;
+    cursor: pointer;
+}

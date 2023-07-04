@@ -1,0 +1,50 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+@font-face {
+  font-family: "Logo Font";
+  src: local("Logo Font"), url("./Fonts/NeonSans.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Regular";
+  src: local("Roboto Regular"), url("./Fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Bold";
+  src: local("Roboto Bold"), url("./Fonts/Roboto-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Light";
+  src: local("Roboto Light"), url("./Fonts/Roboto-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Black";
+  src: local("Roboto Black"), url("./Fonts/Roboto-Black.ttf") format("truetype");
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Roboto Regular";
+  background-color: #201a19;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  -moz-user-select: none;
+  /* Firefox */
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* Internet Explorer */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
+}

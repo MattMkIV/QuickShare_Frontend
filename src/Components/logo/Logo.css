@@ -1,0 +1,12 @@
+/*------------------- Logo Quickshare -----------------------*/
+.logo {
+    width: 40px !important;
+    position: absolute !important;
+    margin-left: 10px !important;
+    margin-top: 9px !important;
+}
+
+.logo:hover,
+.siteNameHome:hover {
+    cursor: pointer;
+}

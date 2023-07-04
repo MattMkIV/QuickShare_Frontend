@@ -1,0 +1,11 @@
+/*------------------- SearchBar -----------------------*/
+.lineHomepage {
+    width: 100%;
+    border-color: #545454;
+    position: absolute !important;
+    margin-top: 71px !important;
+}
+
+.exitBox:hover {
+    cursor: pointer;
+}

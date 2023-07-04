@@ -1,0 +1,39 @@
+.leftBarGrid {
+    margin-top: 30px !important;
+    margin-right: 20px !important;
+}
+
+/*----------------- List --------------------*/
+.icon {
+    margin-left: 10px;
+    margin-right: 13px;
+}
+
+.noPaddingTopBottom {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+}
+
+.noPaddingTopBottom:hover {
+    background-color: transparent;
+}
+
+.clickAnimation {
+    margin-left: -16px !important;
+    border-radius: 0 22px 22px 0 !important;
+    margin-right: -16px !important;
+}
+
+.selected {
+    background-color: #e7bdb7 !important;
+    color: #442926 !important;
+}
+
+/*----------------- New menu --------------------*/
+
+.littleSeparationLine {
+    width: 242px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    border-color: #a08c8a !important;
+}

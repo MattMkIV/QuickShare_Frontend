@@ -1,0 +1,25 @@
+.cardsLayout {
+    width: 290px;
+    height: 420px;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+    border-radius: 15px !important;
+    background-color: #ede0de !important;
+}
+
+.calendarLayout {
+    width: 260px !important;
+    height: 120px !important;
+    margin-top: 10px !important;
+    background-color: #ede0de !important;
+    border-radius: 15px !important;
+    margin-bottom: 20px !important;
+}
+
+/*------------------------------ Title of the card ------------------------------*/
+.separationLine {
+    width: 272px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    border-color: #a08c8a !important;
+}
