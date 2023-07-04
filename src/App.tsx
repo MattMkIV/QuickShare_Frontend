@@ -19,6 +19,7 @@ import ConfirmRegistration from './Pages/SignUp/ConfirmRegistration';
 import Calendar from "./Pages/View/calendar/Calendar";
 import AccountBalance from "./Pages/View/accountBalance/AccountBalance";
 
+
 function App() {
 
     //Variable declaration

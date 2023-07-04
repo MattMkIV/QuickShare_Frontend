@@ -182,13 +182,10 @@ function Home() {
                                     )}
                                 </Stack>
                             </Grid>
-<<<<<<< Updated upstream
-=======
 
                             {eventsFiltered.length !== 0 ?
                                 <hr className='lineCentralContent'></hr>
                                 : ''}
->>>>>>> Stashed changes
                         </>)
                         : ''}
                 </Box>)
