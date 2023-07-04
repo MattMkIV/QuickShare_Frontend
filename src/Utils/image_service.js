@@ -101,8 +101,6 @@ export async function AddPhoto(imageBase64) {
     let jwtDecode = jose.decodeJwt(jwt);
     let UserId = jwtDecode.user_id;
 
-    console.log(imageBase64);
-
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 
     await axios.post(urls.serverURL + '/image/' + UserId, {
